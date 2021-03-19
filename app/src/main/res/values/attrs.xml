@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NavigateView">
+        <attr name="app_title" format="string" />
+        <attr name="app_iconStart" format="reference" />
+        <attr name="app_describe" format="string" />
+    </declare-styleable>
+</resources>
