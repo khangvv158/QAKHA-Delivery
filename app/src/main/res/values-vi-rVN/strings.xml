@@ -85,4 +85,7 @@
     <string name="or_sign_in_with">Hoặc đăng nhập với</string>
     <string name="don_t_have_an_account">Chưa có tài khoản ?</string>
     <string name="favorite">Yêu thích</string>
+    <string name="tab_product_order">Sản phẩm</string>
+    <string name="tab_review">Đánh giá</string>
+    <string name="tab_information">Thông tin</string>
 </resources>

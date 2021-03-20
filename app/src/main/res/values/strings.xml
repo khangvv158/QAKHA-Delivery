@@ -93,4 +93,7 @@
     <string name="or_sign_in_with">or sign in with</string>
     <string name="don_t_have_an_account">Don’t have an account?</string>
     <string name="favorite">Favorite</string>
+    <string name="tab_product_order">Product Order</string>
+    <string name="tab_review">Review</string>
+    <string name="tab_information">Information</string>
 </resources>

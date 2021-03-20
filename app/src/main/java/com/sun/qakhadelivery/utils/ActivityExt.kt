@@ -9,6 +9,13 @@ fun AppCompatActivity.addFragment(fragment: Fragment, id: Int) {
     }
 }
 
+fun AppCompatActivity.addFragmentBackStack(fragment: Fragment, id: Int) {
+    supportFragmentManager.inTransaction {
+        add(id, fragment)
+        addToBackStack(null)
+    }
+}
+
 fun AppCompatActivity.replaceFragment(fragment: Fragment, id: Int) {
     supportFragmentManager.inTransaction {
         replace(id, fragment)
