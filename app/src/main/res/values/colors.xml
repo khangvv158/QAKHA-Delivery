@@ -58,6 +58,7 @@
     <color name="colorSlateGray">#6E7F8D</color>
 
     <color name="colorLightTransparentGray">#54D3D3D3</color>
+    <color name="colorBackgroundApplication">#F8F5F2</color>
     <color name="colorLightGray">#EFEFEF</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorAlabaster">#fafafa</color>
