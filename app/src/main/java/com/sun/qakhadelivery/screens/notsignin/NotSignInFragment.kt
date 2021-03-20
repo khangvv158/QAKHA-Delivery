@@ -6,14 +6,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.screens.signin.SignInFragment
+import com.sun.qakhadelivery.utils.addFragment
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_not_sign_in.*
 
 class NotSignInFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_not_sign_in, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        handleEvents()
+    }
+
+    private fun handleEvents() {
+        authenticationButton.setOnClickListener {
+            addFragment(SignInFragment.newInstance(), R.id.containerView)
+        }
     }
 
     companion object {
