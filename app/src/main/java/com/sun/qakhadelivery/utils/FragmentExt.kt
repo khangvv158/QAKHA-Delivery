@@ -10,21 +10,21 @@ inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Fragmen
 }
 
 fun Fragment.addFragment(fragment: Fragment, id: Int) {
-    fragmentManager?.inTransaction {
+    parentFragmentManager.inTransaction {
         add(id, fragment)
         addToBackStack(null)
     }
 }
 
 fun Fragment.replaceFragment(fragment: Fragment, id: Int) {
-    fragmentManager?.inTransaction {
+    parentFragmentManager.inTransaction {
         replace(id, fragment)
         addToBackStack(null)
     }
 }
 
 fun Fragment.removeFragment(fragment: Fragment) {
-    fragmentManager?.inTransaction { remove(fragment) }
+    parentFragmentManager.inTransaction { remove(fragment) }
 }
 
 fun Fragment.upperString(id: Int) = getText(id).toString().toUpperCase(Locale.getDefault())
