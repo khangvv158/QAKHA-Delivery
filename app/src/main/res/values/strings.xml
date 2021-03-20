@@ -92,4 +92,5 @@
     <string name="not_found_product">No product found for result searching</string>
     <string name="or_sign_in_with">or sign in with</string>
     <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="favorite">Favorite</string>
 </resources>
