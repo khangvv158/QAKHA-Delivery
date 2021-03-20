@@ -84,4 +84,5 @@
     <string name="not_found_product">Không tìm thấy sản phẩm</string>
     <string name="or_sign_in_with">Hoặc đăng nhập với</string>
     <string name="don_t_have_an_account">Chưa có tài khoản ?</string>
+    <string name="favorite">Yêu thích</string>
 </resources>

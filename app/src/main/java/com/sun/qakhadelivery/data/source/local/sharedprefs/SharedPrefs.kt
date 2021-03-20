@@ -1,3 +1,5 @@
+@file:Suppress("UNCHECKED_CAST")
+
 package com.sun.qakhadelivery.data.source.local.sharedprefs
 
 import android.content.Context
@@ -11,11 +13,11 @@ interface SharedPrefs {
     fun clearKey(key: String)
 }
 
-class SharedPrefsImpl(context: Context) : SharedPrefs {
+class SharedPrefsImpl private constructor(context: Context) : SharedPrefs {
 
     private var sharedPreferences: SharedPreferences = context.getSharedPreferences(
-            SharedPrefsKey.PREF_NAME,
-            Context.MODE_PRIVATE
+        SharedPrefsKey.PREF_NAME,
+        Context.MODE_PRIVATE
     )
 
     override fun <T> get(key: String, clazz: Class<T>): T {
@@ -50,5 +52,18 @@ class SharedPrefsImpl(context: Context) : SharedPrefs {
         val editor = sharedPreferences.edit()
         editor.remove(key)
         editor.apply()
+    }
+
+    companion object {
+
+        @Volatile
+        private var instance: SharedPrefsImpl? = null
+
+        fun getInstance(context: Context): SharedPrefsImpl =
+            instance ?: synchronized(this) {
+                instance ?: SharedPrefsImpl(context).also {
+                    instance = it
+                }
+            }
     }
 }

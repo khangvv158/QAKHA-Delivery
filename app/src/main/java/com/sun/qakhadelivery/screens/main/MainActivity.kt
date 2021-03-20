@@ -6,6 +6,8 @@ import android.os.Handler
 import android.view.WindowManager
 import android.widget.Toast
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.screens.container.ContainerFragment
+import com.sun.qakhadelivery.utils.addFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setFlags()
+        initViews()
     }
 
     override fun onBackPressed() {
@@ -23,9 +26,9 @@ class MainActivity : AppCompatActivity() {
         } else if (!doubleBackPressed) {
             this.doubleBackPressed = true
             Toast.makeText(
-                    this,
-                    getString(R.string.back_again_to_exit),
-                    Toast.LENGTH_SHORT
+                this,
+                getString(R.string.back_again_to_exit),
+                Toast.LENGTH_SHORT
             ).show()
             Handler().postDelayed(Runnable { doubleBackPressed = false }, 2000)
             return
@@ -35,10 +38,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initViews() {
+        addFragment(ContainerFragment.newInstance(), R.id.containerView)
+    }
+
     private fun setFlags() {
         window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         supportActionBar?.hide()
     }
