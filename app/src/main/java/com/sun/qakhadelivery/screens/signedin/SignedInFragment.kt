@@ -7,11 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
 
-class SignedInFragment : Fragment() {
+class SignedInFragment : Fragment(), SignedInContract.View {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_signed_in, container, false)
     }

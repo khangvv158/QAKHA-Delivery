@@ -2,10 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:id="@+id/groupProfile">
         <item
-            android:id="@+id/voucherItemMenu"
-            android:icon="@drawable/ic_voucher"
-            android:title="@string/vouchers" />
-        <item
             android:id="@+id/payItemMenu"
             android:icon="@drawable/ic_pay"
             android:title="@string/pay" />
