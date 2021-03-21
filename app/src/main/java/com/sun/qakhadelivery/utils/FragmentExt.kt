@@ -3,6 +3,7 @@ package com.sun.qakhadelivery.utils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.sun.qakhadelivery.R
 import java.util.*
 
 inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> FragmentTransaction) {
@@ -11,6 +12,22 @@ inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Fragmen
 
 fun Fragment.addFragment(fragment: Fragment, id: Int) {
     parentFragmentManager.inTransaction {
+        add(id, fragment)
+        addToBackStack(null)
+    }
+}
+
+fun Fragment.addFragmentFadeAnim(fragment: Fragment, id: Int) {
+    parentFragmentManager.inTransaction {
+        setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+        add(id, fragment)
+        addToBackStack(null)
+    }
+}
+
+fun Fragment.addFragmentSlideAnim(fragment: Fragment, id: Int) {
+    parentFragmentManager.inTransaction {
+        setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
         add(id, fragment)
         addToBackStack(null)
     }
