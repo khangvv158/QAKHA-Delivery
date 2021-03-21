@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.screens.signin.SignInFragment
-import com.sun.qakhadelivery.utils.addFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import com.sun.qakhadelivery.utils.addFragmentSlideAnim
 import kotlinx.android.synthetic.main.fragment_not_sign_in.*
 
 class NotSignInFragment : Fragment() {
@@ -27,7 +26,7 @@ class NotSignInFragment : Fragment() {
 
     private fun handleEvents() {
         authenticationButton.setOnClickListener {
-            addFragment(SignInFragment.newInstance(), R.id.containerView)
+            addFragmentSlideAnim(SignInFragment.newInstance(), R.id.containerView)
         }
     }
 

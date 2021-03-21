@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.screens.signup.SignUpFragment
-import com.sun.qakhadelivery.utils.addFragment
+import com.sun.qakhadelivery.utils.addFragmentSlideAnim
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 class SignInFragment : Fragment(), SignInContract.View {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_sign_in, container, false)
     }
@@ -29,7 +29,7 @@ class SignInFragment : Fragment(), SignInContract.View {
             parentFragmentManager.popBackStack()
         }
         textViewSignUp.setOnClickListener {
-            addFragment(SignUpFragment.newInstance(), R.id.containerView)
+            addFragmentSlideAnim(SignUpFragment.newInstance(), R.id.containerView)
         }
     }
 
