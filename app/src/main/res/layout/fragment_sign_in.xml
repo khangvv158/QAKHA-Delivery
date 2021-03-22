@@ -42,8 +42,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/logo"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintDimensionRatio="123:47"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.77"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewIllustration"
@@ -60,7 +60,7 @@
         app:boxCornerRadiusTopEnd="@dimen/dp_10"
         app:boxCornerRadiusTopStart="@dimen/dp_10"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="280:50"
+        app:layout_constraintDimensionRatio="331:60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -70,7 +70,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="@dimen/dp_50" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -85,18 +85,17 @@
         app:boxCornerRadiusTopEnd="@dimen/dp_10"
         app:boxCornerRadiusTopStart="@dimen/dp_10"
         app:endIconMode="password_toggle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="280:50"
+        app:errorEnabled="true"
+        app:layout_constraintDimensionRatio="331:78"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48"
+        app:layout_constraintTop_toBottomOf="@+id/emailTextInputLayout"
         app:layout_constraintWidth_percent="0.8">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="@dimen/dp_50"
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,23 +109,24 @@
         app:layout_constraintHorizontal_bias="0.138"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout"
-        app:layout_constraintVertical_bias="0.057" />
+        app:layout_constraintVertical_bias="0.058" />
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/loginButton"
+        android:id="@+id/signInButton"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="329dp"
-        android:layout_height="59dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:text="@string/title_sign_in"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/sp_18"
         app:backgroundTint="@color/colorCarrotOrange"
         app:cornerRadius="@dimen/dp_10"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="280:50"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634"
+        app:layout_constraintVertical_bias="0.637"
         app:layout_constraintWidth_percent="0.8" />
 
     <TextView
@@ -136,9 +136,10 @@
         android:text="@string/or_sign_in_with"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintTop_toBottomOf="@+id/signInButton"
+        app:layout_constraintVertical_bias="0.114" />
 
     <TextView
         android:id="@+id/textViewSignUp"
@@ -152,7 +153,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
+        app:layout_constraintVertical_bias="0.934" />
 
     <TextView
         android:id="@+id/textViewTitleOne"
@@ -161,10 +162,9 @@
         android:text="@string/don_t_have_an_account"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.854" />
+        app:layout_constraintVertical_bias="0.871" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageViewLoginGoogle"
