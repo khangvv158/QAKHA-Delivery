@@ -13,7 +13,7 @@ interface SignRepository {
     fun signIn(
             email: String,
             password: String,
-            passwordConfirmation: String): Observable<TokenAccess>
+    ): Observable<TokenAccess>
 }
 
 class SignRepositoryImpl private constructor(
@@ -24,17 +24,15 @@ class SignRepositoryImpl private constructor(
     private val client = RetrofitClient.getInstance(context).create(SignAPI::class.java)
 
     override fun signIn(email: String,
-                        password: String,
-                        passwordConfirmation: String
+                        password: String
     ): Observable<TokenAccess> =
             client.signIn(
                     Credential(
                             email,
-                            password,
-                            passwordConfirmation
+                            password
                     )
-            ).apply {
-                sharedPrefs.put(SharedPrefsKey.TOKEN_KEY, blockingSingle())
+            ).doOnNext {
+                sharedPrefs.put(SharedPrefsKey.TOKEN_KEY, it)
             }
 
     companion object {
