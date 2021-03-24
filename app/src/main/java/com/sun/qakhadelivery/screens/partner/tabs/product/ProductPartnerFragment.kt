@@ -25,6 +25,7 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        handleEvent()
     }
 
     override fun onStart() {
@@ -47,7 +48,20 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
         productPartnerRecyclerView.adapter = adapter
     }
 
+    private fun handleEvent() {
+        adapter.setOnClickAddToCart {
+            parentFragmentManager.setFragmentResult(
+                KEY_REQUEST,
+                Bundle().apply {
+                    putParcelable(EXTRA_PRODUCT, it)
+                }
+            )
+        }
+    }
+
     companion object {
+        const val KEY_REQUEST = "KEY_REQUEST"
+        const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
 
         fun newInstance() = ProductPartnerFragment()
     }

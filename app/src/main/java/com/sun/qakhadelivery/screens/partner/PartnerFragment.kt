@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import com.bumptech.glide.Glide
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.data.model.Product
 import com.sun.qakhadelivery.screens.partner.adaper.PartnerPagerAdapter
+import com.sun.qakhadelivery.screens.partner.cart.CartFragment
 import com.sun.qakhadelivery.screens.partner.tabs.information.InfoPartnerFragment
 import com.sun.qakhadelivery.screens.partner.tabs.product.ProductPartnerFragment
 import com.sun.qakhadelivery.screens.partner.tabs.review.ReviewFragment
@@ -22,6 +27,7 @@ class PartnerFragment : Fragment(), PartnerContract.View {
             requireContext()
         )
     }
+    private val cartBottomSheet by lazy { CartFragment() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,6 +73,29 @@ class PartnerFragment : Fragment(), PartnerContract.View {
     private fun handleEvent() {
         backButton.setOnClickListener {
             parentFragmentManager.popBackStack()
+        }
+        setFragmentResultListener(ProductPartnerFragment.KEY_REQUEST) { _, bundle ->
+            bundle.getParcelable<Product>(ProductPartnerFragment.EXTRA_PRODUCT)?.let { product ->
+                cartBottomSheet.apply {
+                    addProduct(product)
+                }
+            }
+        }
+        cartFloatButton.setOnClickListener {
+            if (!cartBottomSheet.isAdded) {
+                cartBottomSheet.show(childFragmentManager, cartBottomSheet::class.java.simpleName)
+            }
+        }
+        cartBottomSheet.setOnCountListener {
+            updateCounter(it)
+        }
+    }
+
+    private fun updateCounter(counter: Int) {
+        val shake: Animation = AnimationUtils.loadAnimation(context, R.anim.animation_shake)
+        counterCartTextView.apply {
+            text = counter.toString()
+            startAnimation(shake)
         }
     }
 

@@ -103,8 +103,11 @@ class CustomRecyclerView {
             return mItems.indexOf(item)
         }
 
-        fun <T : Item> getItemPosition(position: Int): T {
-            return mItems[position] as T
+        fun <T : Item> getItemPosition(position: Int): T? {
+            if (mItems.size > 0 && position > -1) {
+                return mItems[position] as T
+            }
+            return null
         }
 
         fun clearItems() {
