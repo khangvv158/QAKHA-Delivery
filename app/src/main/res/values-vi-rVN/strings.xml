@@ -57,7 +57,7 @@
     <string name="title_no_order_yet">Những đơn hàng đã được xác nhận, đang được chuẩn bị và giao đi đều sẽ được hiển thị ở đây để bạn có thể theo dõi.</string>
     <string name="no_orders_yet">Chưa đặt món rồi nè bạn ơi?</string>
     <string name="shipping">Đang chuyển</string>
-    <string name="checkout">Kiểm tra thanh toán</string>
+    <string name="checkout">Thanh toán</string>
     <string name="place_order">Đặt hàng</string>
     <string name="delivery_fee">Phí giao hàng</string>
     <string name="item_total">Tổng cộng hàng</string>
@@ -88,4 +88,9 @@
     <string name="tab_product_order">Sản phẩm</string>
     <string name="tab_review">Đánh giá</string>
     <string name="tab_information">Thông tin</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="clear">Xoá hết</string>
+    <string name="messenger_clear_cart">Bạn có muốn xóa giỏ hàng này không</string>
+    <string name="dialog_yes">Đồng ý</string>
+    <string name="dialog_no">Từ chối</string>
 </resources>

@@ -13,6 +13,12 @@ inline fun FragmentManager.inTransaction(func: FragmentTransaction.() -> Fragmen
 fun Fragment.addFragment(fragment: Fragment, id: Int) {
     parentFragmentManager.inTransaction {
         add(id, fragment)
+    }
+}
+
+fun Fragment.addFragmentBackStack(fragment: Fragment, id: Int) {
+    parentFragmentManager.inTransaction {
+        add(id, fragment)
         addToBackStack(null)
     }
 }

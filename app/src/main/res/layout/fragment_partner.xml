@@ -144,4 +144,38 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/floatButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/dp_15"
+        android:layout_marginBottom="@dimen/dp_15">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/cartFloatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorCarrotOrange"
+            android:src="@drawable/ic_cart"
+            app:elevation="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorWhite" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/counterCartTextView"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_2"
+            android:background="@drawable/border_circle_text"
+            android:elevation="@dimen/dp_15"
+            android:gravity="center"
+            android:text="@string/default_counter_cart"
+            android:textColor="@color/colorCarrotOrange"
+            android:textSize="@dimen/sp_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

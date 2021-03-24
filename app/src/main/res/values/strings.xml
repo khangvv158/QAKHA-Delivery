@@ -96,4 +96,10 @@
     <string name="tab_product_order">Product Order</string>
     <string name="tab_review">Review</string>
     <string name="tab_information">Information</string>
+    <string name="default_counter_cart" translatable="false">0</string>
+    <string name="cart">Cart</string>
+    <string name="clear">Clear</string>
+    <string name="messenger_clear_cart">Do you want delete this cart</string>
+    <string name="dialog_yes">Yes</string>
+    <string name="dialog_no">No</string>
 </resources>
