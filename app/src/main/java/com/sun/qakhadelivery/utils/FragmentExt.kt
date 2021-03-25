@@ -57,3 +57,7 @@ fun Fragment.removeFragment(fragment: Fragment) {
 }
 
 fun Fragment.upperString(id: Int) = getText(id).toString().toUpperCase(Locale.getDefault())
+
+fun Fragment.hideKeyboard() {
+    view?.let { activity?.hideKeyboard(it) }
+}

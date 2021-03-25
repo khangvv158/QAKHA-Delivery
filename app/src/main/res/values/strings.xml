@@ -103,4 +103,5 @@
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
     <string name="sign_up_success">Sign up Success</string>
+    <string name="you_cannot_sign_in_with_this_account">You cannot sign in with this account</string>
 </resources>

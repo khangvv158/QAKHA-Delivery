@@ -7,57 +7,62 @@ import com.sun.qakhadelivery.data.source.remote.RetrofitClient
 import com.sun.qakhadelivery.data.source.remote.SignAPI
 import com.sun.qakhadelivery.data.source.remote.schema.request.Credential
 import com.sun.qakhadelivery.data.source.remote.schema.request.Register
+import com.sun.qakhadelivery.utils.Constants
 import io.reactivex.rxjava3.core.Observable
 
 interface SignRepository {
 
     fun signIn(
-            email: String,
-            password: String,
+        email: String,
+        password: String,
     ): Observable<TokenAccess>
 
     fun signUp(
-            email: String,
-            password: String,
-            passwordConfirmation: String,
-            phoneNumber: String,
-            name: String
+        email: String,
+        password: String,
+        passwordConfirmation: String,
+        phoneNumber: String,
+        name: String
     ): Observable<Boolean>
 }
 
 class SignRepositoryImpl private constructor(
-        private val sharedPrefs: SharedPrefs
+    private val sharedPrefs: SharedPrefs
 ) : SignRepository {
 
     private val client = RetrofitClient.getInstance().create(SignAPI::class.java)
 
-    override fun signIn(email: String,
-                        password: String
+    override fun signIn(
+        email: String,
+        password: String
     ): Observable<TokenAccess> =
-            client.signIn(
-                    Credential(
-                            email,
-                            password
-                    )
-            ).doOnNext {
+        client.signIn(
+            Credential(
+                email,
+                password
+            )
+        ).doOnNext {
+            if (it.role == Constants.ROLE_MEMBER) {
                 sharedPrefs.put(SharedPrefsKey.TOKEN_KEY, it)
             }
+        }
 
     override fun signUp(
-            email: String,
-            password: String,
-            passwordConfirmation: String,
-            phoneNumber: String,
-            name: String): Observable<Boolean> =
-            client.signUp(
-                    Register(
-                            email,
-                            password,
-                            passwordConfirmation,
-                            phoneNumber,
-                            name
-                    )
+        email: String,
+        password: String,
+        passwordConfirmation: String,
+        phoneNumber: String,
+        name: String
+    ): Observable<Boolean> =
+        client.signUp(
+            Register(
+                email,
+                password,
+                passwordConfirmation,
+                phoneNumber,
+                name
             )
+        )
 
     companion object {
 
@@ -65,12 +70,12 @@ class SignRepositoryImpl private constructor(
         private var instance: SignRepositoryImpl? = null
 
         fun getInstance(
-                sharedPrefs: SharedPrefs,
+            sharedPrefs: SharedPrefs,
         ): SignRepositoryImpl =
-                instance ?: synchronized(this) {
-                    instance ?: SignRepositoryImpl(sharedPrefs).also {
-                        instance = it
-                    }
+            instance ?: synchronized(this) {
+                instance ?: SignRepositoryImpl(sharedPrefs).also {
+                    instance = it
                 }
+            }
     }
 }
