@@ -94,4 +94,5 @@
     <string name="dialog_yes">Đồng ý</string>
     <string name="dialog_no">Từ chối</string>
     <string name="sign_up_success">Đăng ký thành công</string>
+    <string name="you_cannot_sign_in_with_this_account">Bạn không thể đăng nhập bằng tài khoản này</string>
 </resources>

@@ -13,22 +13,23 @@ import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.screens.signup.SignUpFragment
 import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.utils.addFragmentSlideAnim
+import com.sun.qakhadelivery.utils.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 class SignInFragment : Fragment(), SignInContract.View {
 
     private val presenter by lazy {
         SignInPresenter(
-                SignRepositoryImpl.getInstance(
-                        SharedPrefsImpl.getInstance(requireContext())
-                )
+            SignRepositoryImpl.getInstance(
+                SharedPrefsImpl.getInstance(requireContext())
+            )
         )
     }
     private var onSignInSuccessListener: OnSignInSuccessListener? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_sign_in, container, false)
     }
@@ -53,6 +54,14 @@ class SignInFragment : Fragment(), SignInContract.View {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
+    override fun onSignInRoleFailure() {
+        Toast.makeText(
+            context,
+            getString(R.string.you_cannot_sign_in_with_this_account),
+            Toast.LENGTH_LONG
+        ).show()
+    }
+
     fun registerSignInSuccessListener(onSignInSuccessListener: OnSignInSuccessListener) {
         this.onSignInSuccessListener = onSignInSuccessListener
     }
@@ -66,6 +75,7 @@ class SignInFragment : Fragment(), SignInContract.View {
             addFragmentSlideAnim(SignUpFragment.newInstance(), R.id.containerView)
         }
         signInButton.setOnClickListener {
+            hideKeyboard()
             presenter.signIn(emailEditText.text.toString(), passwordEditText.text.toString())
         }
 
@@ -78,6 +88,9 @@ class SignInFragment : Fragment(), SignInContract.View {
             emailTextInputLayout.error = null
             emailTextInputLayout.isErrorEnabled = false
             false
+        }
+        containerViewSignIn.setOnClickListener {
+            hideKeyboard()
         }
     }
 

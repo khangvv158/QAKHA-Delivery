@@ -9,6 +9,7 @@ interface SignInContract {
         fun onSignInSuccess()
         fun onSignInFailure(message: String)
         fun onError(message: String)
+        fun onSignInRoleFailure()
     }
 
     interface Presenter : BasePresenter<View> {
