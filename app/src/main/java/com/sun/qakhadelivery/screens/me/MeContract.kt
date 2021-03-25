@@ -4,7 +4,12 @@ import com.sun.qakhadelivery.utils.BasePresenter
 
 interface MeContract {
 
-    interface View
+    interface View {
+        fun onCheckSignedInSuccess()
+        fun onCheckSignedInFailure()
+    }
 
-    interface Presenter : BasePresenter<View>
+    interface Presenter : BasePresenter<View> {
+        fun checkSignedIn()
+    }
 }
