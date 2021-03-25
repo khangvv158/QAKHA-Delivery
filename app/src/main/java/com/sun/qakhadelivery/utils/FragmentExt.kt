@@ -42,6 +42,12 @@ fun Fragment.addFragmentSlideAnim(fragment: Fragment, id: Int) {
 fun Fragment.replaceFragment(fragment: Fragment, id: Int) {
     parentFragmentManager.inTransaction {
         replace(id, fragment)
+    }
+}
+
+fun Fragment.replaceFragmentBackStack(fragment: Fragment, id: Int) {
+    parentFragmentManager.inTransaction {
+        replace(id, fragment)
         addToBackStack(null)
     }
 }

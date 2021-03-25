@@ -35,6 +35,11 @@ class NotSignInFragment : Fragment(), OnSignInSuccessListener {
         this.onSignInSuccessListener = onSignInSuccessListener
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        onSignInSuccessListener = null
+    }
+
     private fun handleEvents() {
         authenticationButton.setOnClickListener {
             addFragmentSlideAnim(SignInFragment.newInstance().apply {
