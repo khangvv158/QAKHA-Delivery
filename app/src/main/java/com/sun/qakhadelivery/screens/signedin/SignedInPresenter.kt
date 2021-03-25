@@ -19,7 +19,7 @@ class SignedInPresenter(
                 .subscribe({
                     view?.onGetUserSuccess(it)
                 }, {
-                    view?.onGetUserFailure()
+                    view?.onError(it.localizedMessage)
                 })
         compositeDisposable.add(disposable)
     }
@@ -31,10 +31,11 @@ class SignedInPresenter(
 
     override fun onStart() = Unit
 
-    override fun onStop() = Unit
+    override fun onStop() {
+        compositeDisposable.clear()
+    }
 
     override fun setView(view: SignedInContract.View?) {
         this.view = view
-        compositeDisposable.clear()
     }
 }

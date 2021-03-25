@@ -102,4 +102,5 @@
     <string name="messenger_clear_cart">Do you want delete this cart</string>
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
+    <string name="sign_up_success">Sign up Success</string>
 </resources>
