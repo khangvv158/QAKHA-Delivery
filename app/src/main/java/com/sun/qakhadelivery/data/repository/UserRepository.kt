@@ -1,6 +1,6 @@
 package com.sun.qakhadelivery.data.repository
 
-import android.content.Context
+import com.sun.qakhadelivery.data.model.TokenAccess
 import com.sun.qakhadelivery.data.model.User
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefs
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsKey
@@ -14,13 +14,12 @@ interface UserRepository {
 }
 
 class UserRepositoryImpl private constructor(
-        context: Context,
         private val sharedPrefs: SharedPrefs
 ) : UserRepository {
 
-    private val client = RetrofitClient.getInstance(context).create(UserAPI::class.java)
+    private val client = RetrofitClient.getInstance().create(UserAPI::class.java)
 
-    override fun getUser(): Observable<User> = client.getUser()
+    override fun getUser(): Observable<User> = client.getUser(sharedPrefs.get(SharedPrefsKey.TOKEN_KEY, TokenAccess::class.java).token)
 
     override fun signOut() {
         sharedPrefs.clearKey(SharedPrefsKey.TOKEN_KEY)
@@ -30,9 +29,9 @@ class UserRepositoryImpl private constructor(
 
         private var instance: UserRepositoryImpl? = null
 
-        fun getInstance(context: Context, sharedPrefs: SharedPrefs): UserRepositoryImpl =
+        fun getInstance(sharedPrefs: SharedPrefs): UserRepositoryImpl =
                 instance ?: synchronized(this) {
-                    instance ?: UserRepositoryImpl(context, sharedPrefs).also {
+                    instance ?: UserRepositoryImpl(sharedPrefs).also {
                         instance = it
                     }
                 }

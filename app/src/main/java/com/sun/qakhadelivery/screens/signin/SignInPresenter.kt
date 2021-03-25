@@ -36,10 +36,11 @@ class SignInPresenter(private val repository: SignRepository) : SignInContract.P
 
     override fun onStart() = Unit
 
-    override fun onStop() = Unit
+    override fun onStop(){
+        compositeDisposable.clear()
+    }
 
     override fun setView(view: SignInContract.View?) {
-        compositeDisposable.clear()
         this.view = view
     }
 }

@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.User
 import com.sun.qakhadelivery.data.repository.UserRepositoryImpl
@@ -18,7 +17,6 @@ class SignedInFragment : Fragment(), SignedInContract.View {
 
     private val presenter by lazy {
         SignedInPresenter(UserRepositoryImpl.getInstance(
-                requireContext(),
                 SharedPrefsImpl.getInstance(requireContext())
         ))
     }
@@ -48,7 +46,8 @@ class SignedInFragment : Fragment(), SignedInContract.View {
     }
 
     override fun onSignOutSuccess() {
-        onGetUserFailureListener?.onGetUserError()
+        activity?.finish()
+        activity?.startActivity(activity?.intent)
     }
 
     override fun onError(message: String) {

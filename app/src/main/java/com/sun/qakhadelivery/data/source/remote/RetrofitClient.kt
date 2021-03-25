@@ -1,28 +1,15 @@
 package com.sun.qakhadelivery.data.source.remote
 
-import android.content.Context
 import com.google.gson.GsonBuilder
-import com.sun.qakhadelivery.data.model.TokenAccess
-import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
-import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsKey
 import com.sun.qakhadelivery.utils.Constants
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitClient private constructor(context: Context) {
+class RetrofitClient private constructor() {
 
     private var baseRetrofit: Retrofit = Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
-            .client(
-                    OkHttpClient.Builder()
-                            .addInterceptor(
-                                    OAuthInterceptor(SharedPrefsImpl.getInstance(context)
-                                            .get(SharedPrefsKey.TOKEN_KEY, TokenAccess::class.java))
-                            )
-                            .build()
-            )
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
@@ -36,9 +23,9 @@ class RetrofitClient private constructor(context: Context) {
         @Volatile
         private var instance: RetrofitClient? = null
 
-        fun getInstance(context: Context) =
+        fun getInstance() =
                 instance ?: synchronized(this) {
-                    instance ?: RetrofitClient(context).also {
+                    instance ?: RetrofitClient().also {
                         instance = it
                     }
                 }

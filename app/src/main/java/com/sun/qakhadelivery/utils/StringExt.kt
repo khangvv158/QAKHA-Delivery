@@ -42,6 +42,6 @@ fun String.validWithPattern(pattern: Pattern): Boolean {
     return pattern.matcher(toLowerCase()).find()
 }
 
-fun String.validWithPattern(regex: String): Boolean {
+fun String.validWithRegex(regex: String): Boolean {
     return Pattern.compile(regex).matcher(this).find()
 }

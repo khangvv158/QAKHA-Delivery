@@ -20,7 +20,6 @@ class SignInFragment : Fragment(), SignInContract.View {
     private val presenter by lazy {
         SignInPresenter(
                 SignRepositoryImpl.getInstance(
-                        requireContext(),
                         SharedPrefsImpl.getInstance(requireContext())
                 )
         )
@@ -41,8 +40,8 @@ class SignInFragment : Fragment(), SignInContract.View {
     }
 
     override fun onSignInSuccess() {
-        parentFragmentManager.popBackStack()
         onSignInSuccessListener?.onSignInSuccess()
+        parentFragmentManager.popBackStack()
     }
 
     override fun onSignInFailure(message: String) {
