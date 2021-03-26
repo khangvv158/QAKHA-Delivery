@@ -18,4 +18,8 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
+
+    <style name="TextInputLayoutError" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/sp_11</item>
+    </style>
 </resources>
