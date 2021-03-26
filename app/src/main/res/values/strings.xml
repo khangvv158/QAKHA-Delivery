@@ -104,4 +104,12 @@
     <string name="dialog_no">No</string>
     <string name="sign_up_success">Sign up Success</string>
     <string name="you_cannot_sign_in_with_this_account">You cannot sign in with this account</string>
+    <string name="description_validate_password">At least 6 characters, 1 uppercase - lowercase letter and a number</string>
+    <string name="password_cant_be_blank">Password can\'t be blank</string>
+    <string name="email_is_invalid">Email is invalid</string>
+    <string name="email_cant_be_blank">Email can\'t be blank</string>
+    <string name="description_validate_confirmation_password">Password confirmation doesn\'t match Password</string>
+    <string name="name_cant_be_blank">Name can\'t be blank</string>
+    <string name="phone_number_is_too_short">Phone number is too short (minimum is 10 characters)</string>
+    <string name="phone_number_is_invalid">Phone number is invalid</string>
 </resources>

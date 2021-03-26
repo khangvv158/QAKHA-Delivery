@@ -95,4 +95,12 @@
     <string name="dialog_no">Từ chối</string>
     <string name="sign_up_success">Đăng ký thành công</string>
     <string name="you_cannot_sign_in_with_this_account">Bạn không thể đăng nhập bằng tài khoản này</string>
+    <string name="description_validate_password">Ít nhất 6 ký tự, bao gồm 1 chữ hoa, 1 chữ thường và một số</string>
+    <string name="password_cant_be_blank">Mật khẩu không được để trống</string>
+    <string name="email_is_invalid">Email không chính xác </string>
+    <string name="email_cant_be_blank">Email không được để trống</string>
+    <string name="description_validate_confirmation_password">Mật khẩu xác nhận không khớp với Mật khẩu</string>
+    <string name="name_cant_be_blank">Tên tài khoản không được để trống</string>
+    <string name="phone_number_is_too_short">Số điện thoại quá ngắn (tối thiểu là 10 ký tự)</string>
+    <string name="phone_number_is_invalid">Số điện thoại không chính xác</string>
 </resources>
