@@ -112,4 +112,11 @@
     <string name="name_cant_be_blank">Name can\'t be blank</string>
     <string name="phone_number_is_too_short">Phone number is too short (minimum is 10 characters)</string>
     <string name="phone_number_is_invalid">Phone number is invalid</string>
+    <string name="enter_security_code">Enter security code</string>
+    <string name="enter_code">Security Code</string>
+    <string name="please_check_your_emails_for_a_message_with_your_code_your_code_is_5_numbers_long">Please check your emails for a message with your code. Your code is 5 numbers long</string>
+    <string name="title_new_password">Create a new password that is at least 6 characters, 1 uppercase letter, 1 lowercase letter and a number</string>
+    <string name="choose_a_new_password">Choose a new password</string>
+    <string name="new_password">New password</string>
+    <string name="new_password_confirm">New password confirm</string>
 </resources>

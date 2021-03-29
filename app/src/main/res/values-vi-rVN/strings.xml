@@ -103,4 +103,11 @@
     <string name="name_cant_be_blank">Tên tài khoản không được để trống</string>
     <string name="phone_number_is_too_short">Số điện thoại quá ngắn (tối thiểu là 10 ký tự)</string>
     <string name="phone_number_is_invalid">Số điện thoại không chính xác</string>
+    <string name="enter_security_code">Nhập mã bảo mật</string>
+    <string name="enter_code">Mã bảo mật</string>
+    <string name="please_check_your_emails_for_a_message_with_your_code_your_code_is_5_numbers_long">Vui lòng kiểm tra email của bạn để tìm tin nhắn có mã của bạn. Mã của bạn dài 5 số</string>
+    <string name="title_new_password">Tạo mật khẩu mới phải có ít nhất 6 ký tự, 1 ký tự viết hoa, 1 ký tự viết thường và một số</string>
+    <string name="choose_a_new_password">Chọn một mật khẩu mới</string>
+    <string name="new_password">Mật khẩu mới</string>
+    <string name="new_password_confirm">Xác nhận mật khẩu mới</string>
 </resources>
