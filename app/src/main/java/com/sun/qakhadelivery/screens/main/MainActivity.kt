@@ -1,10 +1,15 @@
 package com.sun.qakhadelivery.screens.main
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.view.MotionEvent
+import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatEditText
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.screens.container.ContainerFragment
 import com.sun.qakhadelivery.utils.addFragment
@@ -38,6 +43,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun dispatchTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_UP) {
+            currentFocus?.let {
+                if (it is AppCompatEditText) {
+                    hideKeyboard(it)
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event)
+    }
+
     private fun initViews() {
         addFragment(ContainerFragment.newInstance(), R.id.containerView)
     }
@@ -48,5 +64,11 @@ class MainActivity : AppCompatActivity() {
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         supportActionBar?.hide()
+    }
+
+    private fun hideKeyboard(view: View) {
+        val inputMethodManager =
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

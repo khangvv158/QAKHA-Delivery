@@ -110,4 +110,7 @@
     <string name="choose_a_new_password">Chọn một mật khẩu mới</string>
     <string name="new_password">Mật khẩu mới</string>
     <string name="new_password_confirm">Xác nhận mật khẩu mới</string>
+    <string name="to_payment">Thanh toán</string>
+    <string name="add_voucher">Nhập voucher</string>
+    <string name="cash">Tiền mặt</string>
 </resources>
