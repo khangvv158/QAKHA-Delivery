@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:id="@+id/containerViewSignUp"
-    android:clickable="true"
-    android:focusable="true"
     tools:context=".screens.signup.SignUpFragment">
 
     <ImageView
