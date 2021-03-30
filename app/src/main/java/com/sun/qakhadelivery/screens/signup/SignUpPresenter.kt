@@ -3,6 +3,8 @@ package com.sun.qakhadelivery.screens.signup
 import com.google.gson.Gson
 import com.sun.qakhadelivery.data.model.MessageError
 import com.sun.qakhadelivery.data.repository.SignRepository
+import com.sun.qakhadelivery.data.source.remote.schema.request.EmailRequest
+import com.sun.qakhadelivery.data.source.remote.schema.request.PhoneRequest
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -40,6 +42,32 @@ class SignUpPresenter(private val signRepository: SignRepository) : SignUpContra
                             view?.onError(it.localizedMessage)
                         }
                     }
+                })
+        compositeDisposable.add(disposable)
+    }
+
+    override fun checkEmailIsExist(email: String) {
+        val disposable = signRepository.checkEmail(EmailRequest(email))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    if (it) {
+                        view?.onCheckEmailIsExistSuccess()
+                    }
+                }, {
+                    view?.onCheckEmailIsExistFailure()
+                })
+        compositeDisposable.add(disposable)
+    }
+
+    override fun checkPhoneNumberIsExist(phoneNumber: String) {
+        val disposable = signRepository.checkPhoneNumber(PhoneRequest(phoneNumber))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    view?.onCheckPhoneNumberIsExistSuccess()
+                }, {
+                    view?.onCheckPhoneNumberIsExistFailure()
                 })
         compositeDisposable.add(disposable)
     }

@@ -8,6 +8,10 @@ interface SignUpContract {
 
         fun onSignUpSuccess()
         fun onSignUpFailure(message: String)
+        fun onCheckEmailIsExistSuccess()
+        fun onCheckEmailIsExistFailure()
+        fun onCheckPhoneNumberIsExistSuccess()
+        fun onCheckPhoneNumberIsExistFailure()
         fun onError(message: String)
     }
 
@@ -19,5 +23,7 @@ interface SignUpContract {
                    phoneNumber: String,
                    name: String
         )
+        fun checkEmailIsExist(email: String)
+        fun checkPhoneNumberIsExist(phoneNumber: String)
     }
 }

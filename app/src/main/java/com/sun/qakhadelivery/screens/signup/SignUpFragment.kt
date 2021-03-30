@@ -1,8 +1,6 @@
 package com.sun.qakhadelivery.screens.signup
 
 import android.os.Bundle
-import android.util.Log
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +11,7 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.utils.Regex
+import com.sun.qakhadelivery.utils.afterTextChanged
 import com.sun.qakhadelivery.utils.hideKeyboard
 import com.sun.qakhadelivery.utils.validWithRegex
 import kotlinx.android.synthetic.main.fragment_sign_up.*
@@ -26,6 +25,8 @@ class SignUpFragment : Fragment(), SignUpContract.View {
                 )
         )
     }
+    private var emailIsExist = false
+    private var phoneNumberIsExist = false
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -41,11 +42,30 @@ class SignUpFragment : Fragment(), SignUpContract.View {
     }
 
     override fun onSignUpSuccess() {
+        clearEditText()
         Toast.makeText(context, getString(R.string.sign_up_success), Toast.LENGTH_LONG).show()
     }
 
     override fun onSignUpFailure(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    override fun onCheckEmailIsExistSuccess() {
+        emailIsExist = true
+    }
+
+    override fun onCheckEmailIsExistFailure() {
+        emailTextInputLayout.error = getString(R.string.email_is_already_exists_in_database)
+        emailIsExist = false
+    }
+
+    override fun onCheckPhoneNumberIsExistSuccess() {
+        phoneNumberIsExist = true
+    }
+
+    override fun onCheckPhoneNumberIsExistFailure() {
+        phoneNumberTextInputLayout.error = getString(R.string.Phone_umber_is_already_exists_in_database)
+        phoneNumberIsExist = false
     }
 
     override fun onError(message: String) {
@@ -68,7 +88,9 @@ class SignUpFragment : Fragment(), SignUpContract.View {
                     checkPassword &&
                     checkPasswordConfirmation &&
                     checkUserName &&
-                    checkPhoneNumber
+                    checkPhoneNumber &&
+                    emailIsExist &&
+                    phoneNumberIsExist
             ) {
                 hideKeyboard()
                 presenter.signUp(
@@ -78,10 +100,51 @@ class SignUpFragment : Fragment(), SignUpContract.View {
                         phoneNumberEditText.text.toString(),
                         nameEditText.text.toString()
                 )
+                emailIsExist = false
+                phoneNumberIsExist = false
             }
-            containerViewSignUp.setOnClickListener {
-                hideKeyboard()
+        }
+        containerViewSignUp.setOnClickListener {
+            hideKeyboard()
+        }
+        handleEventsAfterTextChanged()
+        handleEventsKeyBoard()
+    }
+
+    private fun handleEventsAfterTextChanged() {
+        emailEditText.afterTextChanged {
+            if (validateEmail(it)) {
+                presenter.checkEmailIsExist(it)
             }
+        }
+        phoneNumberEditText.afterTextChanged {
+            if (validatePhoneNumber(it)) {
+                presenter.checkPhoneNumberIsExist(it)
+            }
+        }
+    }
+
+    private fun handleEventsKeyBoard() {
+        emailEditText.setOnEditorActionListener { view, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_GO ||
+                    actionId == EditorInfo.IME_ACTION_DONE
+            ) {
+                if (validateEmail(view.text.toString())) {
+                    presenter.checkEmailIsExist(view.text.toString())
+                    true
+                }
+            }
+            false
+        }
+        phoneNumberEditText.setOnEditorActionListener { view, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_GO ||
+                    actionId == EditorInfo.IME_ACTION_DONE) {
+                if (validatePhoneNumber(view.text.toString())) {
+                    presenter.checkPhoneNumberIsExist(view.text.toString())
+                    true
+                }
+            }
+            false
         }
     }
 
@@ -152,6 +215,14 @@ class SignUpFragment : Fragment(), SignUpContract.View {
             phoneNumberTextInputLayout.error = null
             true
         }
+    }
+
+    private fun clearEditText() {
+        emailEditText.text = null
+        passwordEditText.text = null
+        confirmPasswordEditText.text = null
+        nameEditText.text = null
+        phoneNumberEditText.text = null
     }
 
     companion object {
