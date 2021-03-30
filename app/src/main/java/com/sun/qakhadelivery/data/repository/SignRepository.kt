@@ -1,14 +1,12 @@
 package com.sun.qakhadelivery.data.repository
 
+import com.sun.qakhadelivery.data.model.MessageResponse
 import com.sun.qakhadelivery.data.model.TokenAccess
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefs
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsKey
 import com.sun.qakhadelivery.data.source.remote.RetrofitClient
 import com.sun.qakhadelivery.data.source.remote.SignAPI
-import com.sun.qakhadelivery.data.source.remote.schema.request.Credential
-import com.sun.qakhadelivery.data.source.remote.schema.request.EmailRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.PhoneRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.Register
+import com.sun.qakhadelivery.data.source.remote.schema.request.*
 import com.sun.qakhadelivery.utils.Constants
 import io.reactivex.rxjava3.core.Observable
 
@@ -30,6 +28,10 @@ interface SignRepository {
     fun checkEmail(emailRequest: EmailRequest): Observable<Boolean>
 
     fun checkPhoneNumber(phoneRequest: PhoneRequest): Observable<Boolean>
+
+    fun forgotPassword(emailRequest: EmailRequest): Observable<MessageResponse>
+
+    fun resetPasswordByVerificationCode(resetPasswordRequest: ResetPasswordRequest): Observable<MessageResponse>
 }
 
 class SignRepositoryImpl private constructor(
@@ -75,6 +77,13 @@ class SignRepositoryImpl private constructor(
 
     override fun checkPhoneNumber(phoneRequest: PhoneRequest): Observable<Boolean> =
             client.checkPhoneNumber(phoneRequest)
+
+    override fun forgotPassword(emailRequest: EmailRequest): Observable<MessageResponse> =
+            client.forgotPassword(emailRequest)
+
+    override fun resetPasswordByVerificationCode(
+            resetPasswordRequest: ResetPasswordRequest
+    ): Observable<MessageResponse> = client.resetPasswordByVerificationCode(resetPasswordRequest)
 
     companion object {
 

@@ -5,7 +5,7 @@ object Constants {
     const val DEFAULT_AMOUNT = 1
     const val DEFAULT_PRICE = 0.0
     const val SPACE_STRING = " "
-    const val BASE_URL = "https://c5c4606cebe0.ngrok.io/api/v1/"
+    const val BASE_URL = "https://a80d203621d2.ngrok.io/api/v1/"
     const val TOKEN_TYPE = "Bearer "
     const val CONTENT_TYPE = "Content-Type"
     const val CONTENT_TYPE_VALUE = "application/json"

@@ -1,4 +1,4 @@
-package com.sun.qakhadelivery.screens.forgotpassword.newpassword
+package com.sun.qakhadelivery.screens.forgotpassword.resetpassword
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
