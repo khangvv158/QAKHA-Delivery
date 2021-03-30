@@ -1,7 +1,7 @@
 package com.sun.qakhadelivery.screens.signup
 
 import com.google.gson.Gson
-import com.sun.qakhadelivery.data.model.MessageError
+import com.sun.qakhadelivery.data.model.MessageResponse
 import com.sun.qakhadelivery.data.repository.SignRepository
 import com.sun.qakhadelivery.data.source.remote.schema.request.EmailRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.PhoneRequest
@@ -36,7 +36,7 @@ class SignUpPresenter(private val signRepository: SignRepository) : SignUpContra
                         try {
                             view?.onSignUpFailure(Gson().fromJson(
                                     it.response()?.errorBody()?.string(),
-                                    MessageError::class.java
+                                    MessageResponse::class.java
                             ).message)
                         } catch (e: Exception) {
                             view?.onError(it.localizedMessage)

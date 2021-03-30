@@ -1,7 +1,7 @@
 package com.sun.qakhadelivery.screens.signin
 
 import com.google.gson.Gson
-import com.sun.qakhadelivery.data.model.MessageError
+import com.sun.qakhadelivery.data.model.MessageResponse
 import com.sun.qakhadelivery.data.repository.SignRepository
 import com.sun.qakhadelivery.utils.Constants
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -30,7 +30,7 @@ class SignInPresenter(private val repository: SignRepository) : SignInContract.P
                         view?.onSignInFailure(
                             Gson().fromJson(
                                 it.response()?.errorBody()?.string(),
-                                MessageError::class.java
+                                MessageResponse::class.java
                             ).message
                         )
                     } catch (e: Exception) {

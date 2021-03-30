@@ -1,10 +1,8 @@
 package com.sun.qakhadelivery.data.source.remote
 
+import com.sun.qakhadelivery.data.model.MessageResponse
 import com.sun.qakhadelivery.data.model.TokenAccess
-import com.sun.qakhadelivery.data.source.remote.schema.request.Credential
-import com.sun.qakhadelivery.data.source.remote.schema.request.EmailRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.PhoneRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.Register
+import com.sun.qakhadelivery.data.source.remote.schema.request.*
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -22,4 +20,12 @@ interface SignAPI {
 
     @POST("check_phone_number")
     fun checkPhoneNumber(@Body phoneRequest: PhoneRequest): Observable<Boolean>
+
+    @POST("passwords/forgot")
+    fun forgotPassword(@Body emailRequest: EmailRequest): Observable<MessageResponse>
+
+    @POST("passwords/reset")
+    fun resetPasswordByVerificationCode(
+            @Body resetPasswordRequest: ResetPasswordRequest
+    ): Observable<MessageResponse>
 }
