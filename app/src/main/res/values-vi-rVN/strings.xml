@@ -113,4 +113,7 @@
     <string name="to_payment">Thanh toán</string>
     <string name="add_voucher">Nhập voucher</string>
     <string name="cash">Tiền mặt</string>
+    <string name="verification_code">Mã xác thực</string>
+    <string name="email_is_already_exists_in_database">Email đã tồn tại</string>
+    <string name="Phone_umber_is_already_exists_in_database">Số điện thoại đã tồn tại</string>
 </resources>
