@@ -119,7 +119,7 @@ class CartAdapter : CustomRecyclerView.Adapter<CartViewHolder>(arrayListOf()),
         this.listener = listener
     }
 
-    abstract class OnClickCartListener {
+    interface OnClickCartListener {
 
         interface Cart {
 

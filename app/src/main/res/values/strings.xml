@@ -119,4 +119,8 @@
     <string name="choose_a_new_password">Choose a new password</string>
     <string name="new_password">New password</string>
     <string name="new_password_confirm">New password confirm</string>
+    <string name="to_payment">To Pay</string>
+    <string name="add_voucher">Add Voucher</string>
+    <string name="paypal" translatable="false">PayPal</string>
+    <string name="cash">Cash</string>
 </resources>
