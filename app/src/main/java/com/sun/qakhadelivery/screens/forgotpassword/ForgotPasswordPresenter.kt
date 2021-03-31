@@ -16,7 +16,7 @@ class ForgotPasswordPresenter(private val signRepository: SignRepository) : Forg
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    view?.onForgotPasswordSuccess()
+                    view?.onForgotPasswordSuccess(email)
                 }, {
                     view?.onForgotPasswordFailure()
                 })
@@ -25,7 +25,9 @@ class ForgotPasswordPresenter(private val signRepository: SignRepository) : Forg
 
     override fun onStart() = Unit
 
-    override fun onStop() = Unit
+    override fun onStop() {
+        compositeDisposable.clear()
+    }
 
     override fun setView(view: ForgotPasswordContract.View?) {
         this.view = view
