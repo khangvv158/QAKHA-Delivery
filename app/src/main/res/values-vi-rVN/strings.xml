@@ -117,4 +117,9 @@
     <string name="email_is_already_exists_in_database">Email đã tồn tại</string>
     <string name="Phone_umber_is_already_exists_in_database">Số điện thoại đã tồn tại</string>
     <string name="email_address_not_found_please_check_and_try_again">Không tìm thấy địa chỉ email. Vui lòng kiểm tra và thử lại</string>
+    <string name="token_not_present">Không có mã token </string>
+    <string name="create_a_new_password_successfully">Tạo mới mật khẩu thành công</string>
+    <string name="code_not_valid_or_expired_try_generating_a_new_code">Mã không hợp lệ hoặc hết hạn. Hãy thử tạo một mã mới.</string>
+    <string name="generating_code">Lấy lại mã</string>
+    <string name="try_generating_a_new_code">Thử tạo mã mới?</string>
 </resources>

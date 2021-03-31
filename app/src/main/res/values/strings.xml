@@ -127,4 +127,9 @@
     <string name="email_is_already_exists_in_database">Email is already exists in database</string>
     <string name="Phone_umber_is_already_exists_in_database">Phone number is already exists in database</string>
     <string name="email_address_not_found_please_check_and_try_again">Email address not found. Please check and try again</string>
+    <string name="token_not_present">Token not present</string>
+    <string name="create_a_new_password_successfully">Create a new password successfully</string>
+    <string name="code_not_valid_or_expired_try_generating_a_new_code">Code not valid or expired. Try generating a new code</string>
+    <string name="generating_code">generating code</string>
+    <string name="try_generating_a_new_code">Try generating a new code?</string>
 </resources>

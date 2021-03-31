@@ -1,6 +1,6 @@
 package com.sun.qakhadelivery.data.repository
 
-import com.sun.qakhadelivery.data.model.MessageResponse
+import com.sun.qakhadelivery.data.source.remote.schema.response.MessageResponse
 import com.sun.qakhadelivery.data.model.TokenAccess
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefs
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsKey

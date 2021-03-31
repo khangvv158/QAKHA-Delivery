@@ -1,7 +1,7 @@
 package com.sun.qakhadelivery.screens.signup
 
 import com.google.gson.Gson
-import com.sun.qakhadelivery.data.model.MessageResponse
+import com.sun.qakhadelivery.data.source.remote.schema.response.MessageResponse
 import com.sun.qakhadelivery.data.repository.SignRepository
 import com.sun.qakhadelivery.data.source.remote.schema.request.EmailRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.PhoneRequest

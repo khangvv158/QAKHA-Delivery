@@ -1,7 +1,7 @@
 package com.sun.qakhadelivery.screens.signin
 
 import com.google.gson.Gson
-import com.sun.qakhadelivery.data.model.MessageResponse
+import com.sun.qakhadelivery.data.source.remote.schema.response.MessageResponse
 import com.sun.qakhadelivery.data.repository.SignRepository
 import com.sun.qakhadelivery.utils.Constants
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

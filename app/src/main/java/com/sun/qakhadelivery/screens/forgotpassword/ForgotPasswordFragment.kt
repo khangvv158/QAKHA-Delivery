@@ -10,10 +10,7 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.screens.forgotpassword.resetpassword.ResetPasswordFragment
-import com.sun.qakhadelivery.utils.Regex
-import com.sun.qakhadelivery.utils.addFragmentBackStack
-import com.sun.qakhadelivery.utils.hideKeyboard
-import com.sun.qakhadelivery.utils.validWithRegex
+import com.sun.qakhadelivery.utils.*
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
 
 class ForgotPasswordFragment : Fragment(), ForgotPasswordContract.View {
@@ -37,8 +34,8 @@ class ForgotPasswordFragment : Fragment(), ForgotPasswordContract.View {
         handleEvents()
     }
 
-    override fun onForgotPasswordSuccess() {
-        addFragmentBackStack(ResetPasswordFragment.newInstance(), R.id.containerView)
+    override fun onForgotPasswordSuccess(email: String) {
+        replaceFragment(ResetPasswordFragment.newInstance(email), R.id.containerView)
     }
 
     override fun onForgotPasswordFailure() {

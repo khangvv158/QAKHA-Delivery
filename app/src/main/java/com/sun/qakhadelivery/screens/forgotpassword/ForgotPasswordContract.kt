@@ -5,7 +5,7 @@ import com.sun.qakhadelivery.utils.BasePresenter
 interface ForgotPasswordContract {
 
     interface View {
-        fun onForgotPasswordSuccess()
+        fun onForgotPasswordSuccess(email: String)
         fun onForgotPasswordFailure()
         fun onError(message: String)
     }

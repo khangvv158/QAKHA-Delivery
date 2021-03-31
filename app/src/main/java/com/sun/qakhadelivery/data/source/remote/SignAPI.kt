@@ -1,6 +1,6 @@
 package com.sun.qakhadelivery.data.source.remote
 
-import com.sun.qakhadelivery.data.model.MessageResponse
+import com.sun.qakhadelivery.data.source.remote.schema.response.MessageResponse
 import com.sun.qakhadelivery.data.model.TokenAccess
 import com.sun.qakhadelivery.data.source.remote.schema.request.*
 import io.reactivex.rxjava3.core.Observable
