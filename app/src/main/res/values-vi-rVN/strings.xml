@@ -122,4 +122,5 @@
     <string name="code_not_valid_or_expired_try_generating_a_new_code">Mã không hợp lệ hoặc hết hạn. Hãy thử tạo một mã mới.</string>
     <string name="generating_code">Lấy lại mã</string>
     <string name="try_generating_a_new_code">Thử tạo mã mới?</string>
+    <string name="delivering_to">GIAO HÀNG ĐẾN :</string>
 </resources>

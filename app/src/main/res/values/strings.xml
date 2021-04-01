@@ -132,4 +132,5 @@
     <string name="code_not_valid_or_expired_try_generating_a_new_code">Code not valid or expired. Try generating a new code</string>
     <string name="generating_code">generating code</string>
     <string name="try_generating_a_new_code">Try generating a new code?</string>
+    <string name="delivering_to">DELIVERING TO :</string>
 </resources>

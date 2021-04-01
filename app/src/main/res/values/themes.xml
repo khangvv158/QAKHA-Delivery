@@ -22,4 +22,11 @@
     <style name="TextInputLayoutError" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/sp_11</item>
     </style>
+
+    <style name="ThemeOverlay.search" parent="AppTheme">
+        <!-- Text color -->
+        <item name="android:editTextColor">@color/colorCarrotOrange</item>
+        <!-- Hint text color -->
+        <item name="android:textColorHint">@color/colorGray_light</item>
+    </style>
 </resources>
