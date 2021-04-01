@@ -79,4 +79,7 @@ dependencies {
 
     /* Fragment Container View */
     implementation 'androidx.fragment:fragment-ktx:1.3.0'
+
+    /* PageIndicator View */
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
 }
