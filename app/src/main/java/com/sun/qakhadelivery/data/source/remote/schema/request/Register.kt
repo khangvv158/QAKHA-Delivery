@@ -7,5 +7,6 @@ data class Register(
         @SerializedName("password") val password: String,
         @SerializedName("password_confirmation") val password_confirmation: String,
         @SerializedName("phone_number") val phone_number: String,
-        @SerializedName("name") val name: String
+        @SerializedName("name") val name: String,
+        @SerializedName("type_user") var typeUser: String = "1"
 )
