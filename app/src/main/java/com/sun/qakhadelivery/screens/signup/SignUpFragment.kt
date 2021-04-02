@@ -219,10 +219,15 @@ class SignUpFragment : Fragment(), SignUpContract.View {
 
     private fun clearEditText() {
         emailEditText.text = null
+        emailTextInputLayout.error = null
         passwordEditText.text = null
+        passwordTextInputLayout.error = null
         confirmPasswordEditText.text = null
+        confirmPasswordTextInputLayout.error = null
         nameEditText.text = null
+        nameTextInputLayout.error = null
         phoneNumberEditText.text = null
+        phoneNumberTextInputLayout.error = null
     }
 
     companion object {
