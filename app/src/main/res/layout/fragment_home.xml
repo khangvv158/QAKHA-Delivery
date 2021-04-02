@@ -105,7 +105,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_160"
-        android:background="@color/colorWhite">
+        android:background="@color/colorWhileSmoke">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -145,8 +145,8 @@
                     app:piv_dynamicCount="true"
                     app:piv_interactiveAnimation="true"
                     app:piv_radius="@dimen/dp_3"
-                    app:piv_selectedColor="@color/colorWhite"
-                    app:piv_unselectedColor="@color/colorGray_light"
+                    app:piv_selectedColor="@color/colorCarrotOrange"
+                    app:piv_unselectedColor="@color/colorAltoGray"
                     app:piv_viewPager="@id/viewPagerAdvertisement" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -154,6 +154,9 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="@dimen/dp_20"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintDimensionRatio="411:59"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -176,7 +179,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/viewPagerPartner"
