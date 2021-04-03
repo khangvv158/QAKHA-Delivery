@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
-import com.sun.qakhadelivery.screens.home.adapter.QueryPartnerAdapter
+import com.sun.qakhadelivery.screens.home.adapter.QueryPartnerPageAdapter
 import com.sun.qakhadelivery.screens.home.adapter.SliderAdapter
 import com.sun.qakhadelivery.screens.home.adapter.TypePartnerAdapter
 import com.sun.qakhadelivery.screens.home.adapter.TypePartnerRecyclerViewOnClickListener
@@ -21,6 +21,7 @@ import com.sun.qakhadelivery.screens.home.tabs.nearby.NearbyFragment
 import com.sun.qakhadelivery.screens.home.tabs.topsales.TopSaleFragment
 import com.sun.qakhadelivery.widget.recyclerview.item.TypePartnerItem
 import kotlinx.android.synthetic.main.fragment_home.*
+import org.greenrobot.eventbus.EventBus
 import java.util.*
 
 class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnClickListener {
@@ -32,8 +33,8 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     private val sliderAdapter: SliderAdapter by lazy {
         SliderAdapter()
     }
-    private val queryPartnerAdapter: QueryPartnerAdapter by lazy {
-        QueryPartnerAdapter(childFragmentManager, requireContext())
+    private val queryPartnerAdapter: QueryPartnerPageAdapter by lazy {
+        QueryPartnerPageAdapter(childFragmentManager, requireContext())
     }
     private val presenter by lazy {
         HomePresenter(PartnerRepositoryImpl.getInstance())
@@ -57,6 +58,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     }
 
     override fun onItemClickListener(typePartner: TypePartner) {
+        EventBus.getDefault().post(typePartner)
     }
 
     override fun onGetTypesSuccess(types: MutableList<TypePartner>) {
@@ -120,7 +122,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
 
     companion object {
 
-        private const val OFF_SCREEN_PAGE_LIMIT = 1
+        private const val OFF_SCREEN_PAGE_LIMIT = 4
 
         fun newInstance() = HomeFragment()
     }

@@ -11,12 +11,14 @@ import com.sun.qakhadelivery.screens.home.tabs.nearby.NearbyFragment
 import com.sun.qakhadelivery.screens.home.tabs.topsales.TopSaleFragment
 import com.sun.qakhadelivery.utils.Constants
 
-class QueryPartnerAdapter(
-    manager: FragmentManager,
-    private val context: Context,
-    private val fragments: MutableList<Fragment> = arrayListOf()
-) : FragmentPagerAdapter(manager) {
-
+class QueryPartnerPageAdapter(
+        manager: FragmentManager,
+        private val context: Context,
+        private val fragments: MutableList<Fragment> = arrayListOf()
+) : FragmentPagerAdapter(
+        manager,
+        BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+) {
     override fun getCount() = fragments.size
 
     override fun getItem(position: Int) = fragments[position]

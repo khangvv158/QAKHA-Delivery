@@ -16,9 +16,9 @@
             android:id="@+id/imageViewPartner"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/colorGray_light"
+            android:background="@color/colorWhileSmoke"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="81:87"
+            app:layout_constraintDimensionRatio="81:97"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.022"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +41,7 @@
             app:layout_constraintWidth_percent="0.03" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewAddress"
+            android:id="@+id/textViewNamePartner"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:ellipsize="end"
@@ -102,7 +102,7 @@
             app:layout_constraintWidth_percent="0.03" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewRate"
+            android:id="@+id/textViewRatePartner"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:gravity="center|left"
