@@ -123,4 +123,7 @@
     <string name="generating_code">Lấy lại mã</string>
     <string name="try_generating_a_new_code">Thử tạo mã mới?</string>
     <string name="delivering_to">GIAO HÀNG ĐẾN :</string>
+    <string name="all">Tất cả</string>
+    <string name="nearby">Gần nhất</string>
+    <string name="best_rated">Đánh giá</string>
 </resources>

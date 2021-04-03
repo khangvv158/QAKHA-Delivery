@@ -29,4 +29,9 @@
         <!-- Hint text color -->
         <item name="android:textColorHint">@color/colorGray_light</item>
     </style>
+
+    <style name="cornerImageView10percent" parent="AppTheme">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10%</item>
+    </style>
 </resources>
