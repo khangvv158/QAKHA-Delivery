@@ -133,4 +133,7 @@
     <string name="generating_code">generating code</string>
     <string name="try_generating_a_new_code">Try generating a new code?</string>
     <string name="delivering_to">DELIVERING TO :</string>
+    <string name="all">All</string>
+    <string name="nearby">Nearby</string>
+    <string name="best_rated">Best rated</string>
 </resources>
