@@ -26,17 +26,13 @@ class AllFragment : Fragment(), AllContract.View, OnItemRecyclerViewClickListene
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_all, container, false)
+        EventBus.getDefault().register(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
         initData()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        EventBus.getDefault().register(this)
     }
 
     override fun onDestroyView() {
@@ -104,6 +100,8 @@ class AllFragment : Fragment(), AllContract.View, OnItemRecyclerViewClickListene
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun eventBusGetTypePartner(typePartner: TypePartner) {
         Log.e("typeP", typePartner.name)
+        idType = typePartner.id
+        initData()
         getPartnerByIdType(typePartner.id)
     }
 

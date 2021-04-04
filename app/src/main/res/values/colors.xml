@@ -119,4 +119,5 @@
     <color name="ColorRedBrick">#E84C4F</color>
     <color name="colorCarrotOrange">#F7941D</color>
     <color name="colorWhileSmoke">#F6F6F6</color>
+    <color name="colorCarrotOrangeLight">#FBC584</color>
 </resources>
