@@ -33,6 +33,10 @@ class QueryPartnerPageAdapter(
         }
     }
 
+    override fun getItemPosition(`object`: Any): Int {
+        return POSITION_NONE
+    }
+
     fun addFragment(fragment: Fragment) {
         fragments.add(fragment)
     }
