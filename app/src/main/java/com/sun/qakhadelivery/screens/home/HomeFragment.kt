@@ -99,6 +99,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
 
     private fun initTypeData() {
         presenter.getTypes()
+        typePartnerAdapter.addItem(TypePartnerItem(TypePartner(-1, "All")))
         typePartnerAdapter.addItem(TypePartnerItem(TypePartner(0, "Food")))
         typePartnerAdapter.addItem(TypePartnerItem(TypePartner(1, "Street food")))
         typePartnerAdapter.addItem(TypePartnerItem(TypePartner(2, "Cake")))

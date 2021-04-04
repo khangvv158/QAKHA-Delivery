@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#FBC584"
+    android:background="@color/colorCarrotOrangeLight"
     android:layout_height="match_parent"
     tools:context=".screens.home.tabs.all.AllFragment">
 
@@ -11,7 +11,7 @@
         android:id="@+id/recyclerViewPartnerAll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FBC584"
+        android:background="@color/colorCarrotOrangeLight"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"

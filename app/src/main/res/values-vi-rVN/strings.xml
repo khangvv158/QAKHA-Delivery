@@ -126,4 +126,5 @@
     <string name="all">Tất cả</string>
     <string name="nearby">Gần nhất</string>
     <string name="best_rated">Đánh giá</string>
+    <string name="detail">Chi tiết</string>
 </resources>
