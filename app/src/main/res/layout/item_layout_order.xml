@@ -4,8 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_150"
     android:layout_marginLeft="@dimen/dp_10"
-    android:layout_marginTop="@dimen/dp_10"
+    android:layout_marginTop="@dimen/dp_5"
+    android:layout_marginBottom="@dimen/dp_5"
     android:layout_marginRight="@dimen/dp_10"
+    android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +18,7 @@
             android:id="@+id/imageViewShipping"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/delivery_illustratio"
+            android:background="@drawable/delivery_illustration"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="85:97"
             app:layout_constraintEnd_toEndOf="parent"
@@ -130,13 +132,13 @@
             android:gravity="center|left"
             android:text="đ"
             android:textSize="@dimen/sp_10"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewPrice"
             app:layout_constraintDimensionRatio="20:12"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="0.02"
             app:layout_constraintStart_toEndOf="@+id/textViewPrice"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.551"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAddressPartner"
+            app:layout_constraintVertical_bias="0.0"
             app:layout_constraintWidth_percent="0.055" />
 
         <androidx.appcompat.widget.AppCompatTextView
