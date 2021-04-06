@@ -127,4 +127,11 @@
     <string name="nearby">Gần nhất</string>
     <string name="best_rated">Đánh giá</string>
     <string name="detail">Chi tiết</string>
+    <string name="order_detail">Chi tiết đơn hàng</string>
+    <string name="shipping_fee">Chi phí giao hàng</string>
+    <string name="subtotal">Tổng phí</string>
+    <string name="total">Tổng cộng</string>
+    <string name="vnd">đ</string>
+    <string name="feedback">Đánh giá</string>
+    <string name="minus">-</string>
 </resources>
