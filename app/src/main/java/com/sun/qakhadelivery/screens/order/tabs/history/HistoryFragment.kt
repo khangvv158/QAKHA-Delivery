@@ -12,6 +12,8 @@ import com.sun.qakhadelivery.data.model.Event
 import com.sun.qakhadelivery.data.model.Order
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.screens.order.tabs.history.adapter.HistoryAdapter
+import com.sun.qakhadelivery.screens.orderdetail.OrderDetailFragment
+import com.sun.qakhadelivery.utils.addFragmentBackStack
 import kotlinx.android.synthetic.main.fragment_history.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -110,6 +112,7 @@ class HistoryFragment : Fragment() {
         event.apply {
             if (keyEvent == HistoryAdapter.EVENT_HISTORY) {
                 Log.e("history:", obj.id.toString())
+                addFragmentBackStack(OrderDetailFragment.newInstance(),R.id.containerView)
             }
         }
     }

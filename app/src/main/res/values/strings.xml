@@ -137,4 +137,11 @@
     <string name="nearby">Nearby</string>
     <string name="best_rated">Best rated</string>
     <string name="detail">Detail</string>
+    <string name="order_detail">Order detail</string>
+    <string name="shipping_fee">Shipping fee</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="total">Total</string>
+    <string name="vnd">đ</string>
+    <string name="feedback">feedback</string>
+    <string name="minus">-</string>
 </resources>
