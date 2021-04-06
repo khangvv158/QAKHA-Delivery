@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Product(
-    @SerializedName("id") val id: Int ,
+    @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String = DEFAULT_STRING,
     @SerializedName("price") val price: Float = DEFAULT_FLOAT,
     @SerializedName("description") val description: String = DEFAULT_STRING,

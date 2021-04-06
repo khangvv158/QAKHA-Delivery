@@ -10,12 +10,14 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.screens.home.HomeFragment.Companion.BUNDLE_PARTNER
 import com.sun.qakhadelivery.screens.partner.tabs.product.adapter.CategoriesAdapter
+import com.sun.qakhadelivery.screens.signin.SignInFragment
+import com.sun.qakhadelivery.utils.UserUtils
+import com.sun.qakhadelivery.utils.addFragmentSlideAnim
 import kotlinx.android.synthetic.main.fragment_product_order.*
 
 class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
 
     private val adapter by lazy { CategoriesAdapter() }
-    private val presenter by lazy { ProductPartnerPresenter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,11 +31,6 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
         initViews()
         initData()
         handleEvent()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        presenter.setView(this@ProductPartnerFragment)
     }
 
     private fun initViews() {
@@ -52,18 +49,23 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
 
     private fun handleEvent() {
         adapter.setOnClickAddToCart {
-            parentFragment?.setFragmentResult(
-                KEY_REQUEST,
-                Bundle().apply {
-                    putParcelable(EXTRA_PRODUCT, it)
-                }
-            )
+            UserUtils.workWithSignIn(requireContext(), {
+                parentFragment?.setFragmentResult(KEY_REQUEST_PARTNER,
+                    Bundle().apply {
+                        putParcelable(BUNDLE_PRODUCT, it)
+                    })
+            }, {
+                parentFragment?.addFragmentSlideAnim(
+                    SignInFragment.newInstance(),
+                    R.id.containerView
+                )
+            })
         }
     }
 
     companion object {
-        const val KEY_REQUEST = "KEY_REQUEST"
-        const val EXTRA_PRODUCT = "EXTRA_PRODUCT"
+        const val BUNDLE_PRODUCT = "EXTRA_PRODUCT"
+        const val KEY_REQUEST_PARTNER = "KEY_REQUEST_PARTNER"
 
         fun newInstance() = ProductPartnerFragment()
     }

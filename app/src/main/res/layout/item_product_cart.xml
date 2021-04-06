@@ -63,7 +63,7 @@
             android:backgroundTint="@color/colorCarrotOrange"
             app:layout_constraintBottom_toBottomOf="@+id/increaseButton"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/amountTextView"
+            app:layout_constraintEnd_toStartOf="@+id/quantityTextView"
             app:layout_constraintTop_toTopOf="@+id/increaseButton"
             app:layout_constraintWidth_percent="0.065" />
 
@@ -78,7 +78,7 @@
             app:layout_constraintTop_toTopOf="@+id/priceProductTextView" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/amountTextView"
+            android:id="@+id/quantityTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_5"
