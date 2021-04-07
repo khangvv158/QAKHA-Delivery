@@ -10,8 +10,8 @@ import android.view.ViewGroup
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Event
 import com.sun.qakhadelivery.data.model.Order
-import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.screens.order.tabs.shipping.adapter.ShippingAdapter
+import com.sun.qakhadelivery.utils.getOrderShipping
 import kotlinx.android.synthetic.main.fragment_shipping.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -49,58 +49,7 @@ class ShippingFragment : Fragment() {
     }
 
     private fun initData() {
-        val ds = mutableListOf<Order>().apply {
-            add(Order(
-                    0,
-                    "",
-                    "4 - 4 - 2021",
-                    Partner(0, "Kichi Coffer & Drink", "K63 Phạm văn nghị , Đà Nẵng", "", 4.5f, "", "", "", "", "", null, null),
-                    0,
-                    10.000f))
-            add(Order(
-                    1,
-                    "",
-                    "4 - 4 - 2021",
-                    Partner(0, "Kichi Coffer & Drink", "K63 Phạm văn nghị , Đà Nẵng", "", 4.5f, "", "", "", "", "", null, null),
-                    0,
-                    10.000f))
-            add(Order(
-                    2,
-                    "",
-                    "4 - 4 - 2021",
-                    Partner(0, "Kichi Coffer & Drink", "K63 Phạm văn nghị , Đà Nẵng", "", 4.5f, "", "", "", "", "", null, null),
-                    0,
-                    10.000f))
-            add(Order(
-                    3,
-                    "",
-                    "4 - 4 - 2021",
-                    Partner(0, "Kichi Coffer & Drink", "K63 Phạm văn nghị , Đà Nẵng", "", 4.5f, "", "", "", "", "", null, null),
-                    0,
-                    10.000f))
-            add(Order(
-                    4,
-                    "",
-                    "4 - 4 - 2021",
-                    Partner(0, "Kichi Coffer & Drink", "K63 Phạm văn nghị , Đà Nẵng", "", 4.5f, "", "", "", "", "", null, null),
-                    0,
-                    10.000f))
-            add(Order(
-                    5,
-                    "",
-                    "4 - 4 - 2021",
-                    Partner(0, "Kichi Coffer & Drink", "K63 Phạm văn nghị , Đà Nẵng", "", 4.5f, "", "", "", "", "", null, null),
-                    0,
-                    10.000f))
-            add(Order(
-                    6,
-                    "",
-                    "4 - 4 - 2021",
-                    Partner(0, "Kichi Coffer & Drink", "K63 Phạm văn nghị , Đà Nẵng", "", 4.5f, "", "", "", "", "", null, null),
-                    0,
-                    10.000f))
-        }
-        shippingAdapter.updateData(ds)
+        shippingAdapter.updateData(getOrderShipping())
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

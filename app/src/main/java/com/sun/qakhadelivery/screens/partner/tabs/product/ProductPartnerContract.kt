@@ -7,7 +7,6 @@ interface ProductPartnerContract {
 
     interface Presenter : BasePresenter<View>{
 
-        fun getMenus()
     }
 
     interface View {

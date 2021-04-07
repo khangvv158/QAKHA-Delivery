@@ -30,10 +30,7 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
 
     override fun onStart() {
         super.onStart()
-        presenter.run {
-            setView(this@ProductPartnerFragment)
-            getMenus()
-        }
+        presenter.setView(this@ProductPartnerFragment)
     }
 
     override fun onGetMenusSuccess(products: MutableList<Product>) {
