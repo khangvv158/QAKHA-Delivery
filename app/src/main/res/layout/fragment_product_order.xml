@@ -7,12 +7,12 @@
     tools:context=".screens.partner.tabs.product.ProductPartnerFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/productPartnerRecyclerView"
+        android:id="@+id/categoryRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/dp_10"
         android:clipToPadding="false"
-        android:paddingBottom="@dimen/dp_160"
+        android:paddingBottom="@dimen/dp_90"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -4,9 +4,9 @@ import android.view.ViewGroup
 import com.sun.qakhadelivery.data.model.Product
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.ProductItem
-import com.sun.qakhadelivery.widget.recyclerview.viewholder.MenuViewHolder
+import com.sun.qakhadelivery.widget.recyclerview.viewholder.ProductViewHolder
 
-class MenuAdapter : CustomRecyclerView.Adapter<MenuViewHolder>(mutableListOf()) {
+class ProductAdapter : CustomRecyclerView.Adapter<ProductViewHolder>(mutableListOf()) {
 
     private var onClickAddToCart: ((Product) -> Unit)? = null
     private var onClickItemListener: ((Product) -> Unit)? = null
@@ -15,7 +15,7 @@ class MenuAdapter : CustomRecyclerView.Adapter<MenuViewHolder>(mutableListOf()) 
         parent: ViewGroup,
         viewType: Int
     ): CustomRecyclerView.ViewHolder<*> {
-        return MenuViewHolder(parent).apply {
+        return ProductViewHolder(parent).apply {
             setOnClickViewHolder({
                 onClickAddToCart?.let { func ->
                     func(getItems<ProductItem>()[it].product)
@@ -28,7 +28,7 @@ class MenuAdapter : CustomRecyclerView.Adapter<MenuViewHolder>(mutableListOf()) 
         }
     }
 
-    fun updateMenu(products: List<Product>) {
+    fun updateProduct(products: List<Product>) {
         addItems(products.map {
             ProductItem(it)
         })

@@ -5,14 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import com.sun.qakhadelivery.R
-import com.sun.qakhadelivery.data.model.Product
-import com.sun.qakhadelivery.screens.partner.tabs.product.adapter.MenuAdapter
+import com.sun.qakhadelivery.data.model.Partner
+import com.sun.qakhadelivery.screens.home.HomeFragment.Companion.BUNDLE_PARTNER
+import com.sun.qakhadelivery.screens.partner.tabs.product.adapter.CategoriesAdapter
 import kotlinx.android.synthetic.main.fragment_product_order.*
 
 class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
 
-    private val adapter by lazy { MenuAdapter() }
+    private val adapter by lazy { CategoriesAdapter() }
     private val presenter by lazy { ProductPartnerPresenter() }
 
     override fun onCreateView(
@@ -25,6 +27,7 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
+        initData()
         handleEvent()
     }
 
@@ -33,21 +36,23 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
         presenter.setView(this@ProductPartnerFragment)
     }
 
-    override fun onGetMenusSuccess(products: MutableList<Product>) {
-        adapter.updateMenu(products)
-    }
-
     private fun initViews() {
         initRecyclerView()
     }
 
     private fun initRecyclerView() {
-        productPartnerRecyclerView.adapter = adapter
+        categoryRecyclerView.adapter = adapter
+    }
+
+    private fun initData() {
+        arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
+            adapter.updateCategory(it.categories)
+        }
     }
 
     private fun handleEvent() {
         adapter.setOnClickAddToCart {
-            parentFragmentManager.setFragmentResult(
+            parentFragment?.setFragmentResult(
                 KEY_REQUEST,
                 Bundle().apply {
                     putParcelable(EXTRA_PRODUCT, it)
