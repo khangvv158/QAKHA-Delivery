@@ -24,6 +24,7 @@ class OrderDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initData()
+        handleEvents()
     }
 
     private fun initView() {
@@ -31,6 +32,12 @@ class OrderDetailFragment : Fragment() {
     }
 
     private fun initData() {
+    }
+
+    private fun handleEvents() {
+        imageViewBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
 
     companion object {

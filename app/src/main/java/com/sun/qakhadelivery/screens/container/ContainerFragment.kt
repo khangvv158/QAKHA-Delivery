@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.ViewPager
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.screens.container.adapter.ContainerPagerAdapter
-import com.sun.qakhadelivery.screens.favorite.FavoriteFragment
 import com.sun.qakhadelivery.screens.home.HomeFragment
 import com.sun.qakhadelivery.screens.me.MeFragment
 import com.sun.qakhadelivery.screens.order.OrderFragment
@@ -22,7 +21,6 @@ class ContainerFragment : Fragment() {
     }
     private val homeFragment = HomeFragment.newInstance()
     private val orderFragment = OrderFragment.newInstance()
-    private val favoriteFragment = FavoriteFragment.newInstance()
     private val meFragment = MeFragment.newInstance()
 
     override fun onCreateView(
@@ -46,7 +44,6 @@ class ContainerFragment : Fragment() {
         adapter.apply {
             addFragment(homeFragment)
             addFragment(orderFragment)
-            addFragment(favoriteFragment)
             addFragment(meFragment)
         }
     }
@@ -81,10 +78,6 @@ class ContainerFragment : Fragment() {
                 }
                 R.id.item_menu_nav_order -> {
                     containerViewPager.currentItem = TypeMenu.ORDER.ordinal
-                    true
-                }
-                R.id.item_menu_nav_favorite -> {
-                    containerViewPager.currentItem = TypeMenu.FAVORITE.ordinal
                     true
                 }
                 R.id.item_menu_nav_me -> {

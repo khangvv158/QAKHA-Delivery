@@ -11,11 +11,6 @@
         android:title="@string/order" />
 
     <item
-        android:id="@+id/item_menu_nav_favorite"
-        android:icon="@drawable/ic_favorite_check"
-        android:title="@string/favorite" />
-
-    <item
         android:id="@+id/item_menu_nav_me"
         android:icon="@drawable/ic_me"
         android:title="@string/me" />

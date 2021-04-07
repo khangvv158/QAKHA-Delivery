@@ -3,8 +3,6 @@ package com.sun.qakhadelivery.screens.home.adapter
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
