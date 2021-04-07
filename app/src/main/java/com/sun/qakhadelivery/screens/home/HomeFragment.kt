@@ -108,11 +108,11 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
 
     private fun initSliderData() {
         dataSlider.apply {
-            ContextCompat.getDrawable(requireContext(), R.drawable.background_partner)
+            ContextCompat.getDrawable(requireContext(), R.drawable.banner_food_1)
                     ?.let { add(it) }
-            ContextCompat.getDrawable(requireContext(), R.drawable.background_partner)
+            ContextCompat.getDrawable(requireContext(), R.drawable.banner_food_2)
                     ?.let { add(it) }
-            ContextCompat.getDrawable(requireContext(), R.drawable.background_partner)
+            ContextCompat.getDrawable(requireContext(), R.drawable.banner_food_3)
                     ?.let { add(it) }
             ContextCompat.getDrawable(requireContext(), R.drawable.background_partner)
                     ?.let { add(it) }

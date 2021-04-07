@@ -42,10 +42,23 @@ class NotSignInFragment : Fragment(), OnSignInSuccessListener {
 
     private fun handleEvents() {
         authenticationButton.setOnClickListener {
-            addFragmentSlideAnim(SignInFragment.newInstance().apply {
-                registerSignInSuccessListener(this@NotSignInFragment)
-            }, R.id.containerView)
+            navigateSignIn()
         }
+        navMe.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.payItemMenu -> navigateSignIn()
+                R.id.addressItemMenu -> navigateSignIn()
+                R.id.inviteFriendsItemMenu -> navigateSignIn()
+                R.id.helpCenterItemMenu -> navigateSignIn()
+            }
+            true
+        }
+    }
+
+    private fun navigateSignIn() {
+        addFragmentSlideAnim(SignInFragment.newInstance().apply {
+            registerSignInSuccessListener(this@NotSignInFragment)
+        }, R.id.containerView)
     }
 
     companion object {
