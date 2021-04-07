@@ -10,20 +10,21 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.bumptech.glide.Glide
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.Product
+import com.sun.qakhadelivery.screens.home.HomeFragment
 import com.sun.qakhadelivery.screens.partner.adaper.PartnerPagerAdapter
 import com.sun.qakhadelivery.screens.partner.cart.CartFragment
 import com.sun.qakhadelivery.screens.partner.tabs.information.InfoPartnerFragment
 import com.sun.qakhadelivery.screens.partner.tabs.product.ProductPartnerFragment
 import com.sun.qakhadelivery.screens.partner.tabs.review.ReviewFragment
-import jp.wasabeef.glide.transformations.BlurTransformation
 import kotlinx.android.synthetic.main.fragment_partner.*
 
 class PartnerFragment : Fragment(), PartnerContract.View {
 
     private val pagerAdapter by lazy {
         PartnerPagerAdapter(
-            parentFragmentManager,
+            childFragmentManager,
             requireContext()
         )
     }
@@ -49,10 +50,15 @@ class PartnerFragment : Fragment(), PartnerContract.View {
     }
 
     private fun initData() {
-        Glide.with(this)
-            .load(R.drawable.background_partner)
-            .transform(BlurTransformation(3, 2))
-            .into(partnerImageView)
+        arguments?.getParcelable<Partner>(HomeFragment.BUNDLE_PARTNER)?.let {
+            Glide.with(requireContext())
+                .load(it.image.imageUrl)
+                .error(R.drawable.background_partner_blur)
+                .into(partnerImageView)
+            titlePartnerTextView.text = it.name
+            addressPartnerTextView.text = it.address
+            ratePartnerTextView.text = it.rate.toString()
+        }
     }
 
     private fun initTabLayout() {
@@ -63,7 +69,7 @@ class PartnerFragment : Fragment(), PartnerContract.View {
         partnerViewPager.apply {
             offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
             adapter = pagerAdapter.apply {
-                addFragment(ProductPartnerFragment.newInstance())
+                addFragment(ProductPartnerFragment.newInstance().also { it.arguments = arguments })
                 addFragment(ReviewFragment.newInstance())
                 addFragment(InfoPartnerFragment.newInstance())
             }

@@ -21,7 +21,6 @@ class TypePartnerAdapter : CustomRecyclerView.Adapter<TypePartnerViewHolder>(arr
     }
 
     fun updateData(typePartners: MutableList<TypePartner>) {
-        mItems.clear()
         addItems(typePartners.map {
             TypePartnerItem(it)
         })

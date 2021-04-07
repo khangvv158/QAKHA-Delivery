@@ -22,7 +22,6 @@ import com.sun.qakhadelivery.screens.home.tabs.topsales.TopSaleFragment
 import com.sun.qakhadelivery.widget.recyclerview.item.TypePartnerItem
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.greenrobot.eventbus.EventBus
-import java.util.*
 
 class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnClickListener {
 
@@ -76,13 +75,13 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
 
     private fun initPagerView() {
         viewPagerPartner.apply {
+            offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
             adapter = queryPartnerAdapter.apply {
                 addFragment(AllFragment.newInstance())
                 addFragment(NearbyFragment.newInstance())
                 addFragment(TopSaleFragment.newInstance())
                 addFragment(BestRatedFragment.newInstance())
             }
-            offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
         }
     }
 
@@ -97,13 +96,8 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     }
 
     private fun initTypeData() {
-        presenter.getTypes()
         typePartnerAdapter.addItem(TypePartnerItem(TypePartner(-1, "All")))
-        typePartnerAdapter.addItem(TypePartnerItem(TypePartner(0, "Food")))
-        typePartnerAdapter.addItem(TypePartnerItem(TypePartner(1, "Street food")))
-        typePartnerAdapter.addItem(TypePartnerItem(TypePartner(2, "Cake")))
-        typePartnerAdapter.addItem(TypePartnerItem(TypePartner(3, "Noodle")))
-        typePartnerAdapter.addItem(TypePartnerItem(TypePartner(4, "Pho")))
+        presenter.getTypes()
     }
 
     private fun initSliderData() {
@@ -121,7 +115,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     }
 
     companion object {
-
+        const val BUNDLE_PARTNER = "BUNDLE_PARTNER"
         private const val OFF_SCREEN_PAGE_LIMIT = 4
 
         fun newInstance() = HomeFragment()
