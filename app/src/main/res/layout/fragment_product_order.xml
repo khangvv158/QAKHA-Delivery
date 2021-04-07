@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:paddingHorizontal="@dimen/dp_10"
         android:clipToPadding="false"
-        android:paddingBottom="@dimen/dp_90"
+        android:paddingBottom="@dimen/dp_160"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

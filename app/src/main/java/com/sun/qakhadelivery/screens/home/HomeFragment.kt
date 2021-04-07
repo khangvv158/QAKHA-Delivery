@@ -72,7 +72,6 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     private fun initSliderView() {
         presenter.setView(this@HomeFragment)
         viewPagerAdvertisement.adapter = sliderAdapter
-
     }
 
     private fun initPagerView() {

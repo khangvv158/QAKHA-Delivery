@@ -61,12 +61,12 @@ class PartnerFragment : Fragment(), PartnerContract.View {
 
     private fun initViewPager() {
         partnerViewPager.apply {
+            offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
             adapter = pagerAdapter.apply {
                 addFragment(ProductPartnerFragment.newInstance())
                 addFragment(ReviewFragment.newInstance())
                 addFragment(InfoPartnerFragment.newInstance())
             }
-            offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
         }
     }
 
@@ -100,6 +100,7 @@ class PartnerFragment : Fragment(), PartnerContract.View {
     }
 
     companion object {
+        const val BUNDLE_PARTNER = "BUNDLE_PARTNER"
         private const val OFF_SCREEN_PAGE_LIMIT = 3
 
         fun newInstance() = PartnerFragment()

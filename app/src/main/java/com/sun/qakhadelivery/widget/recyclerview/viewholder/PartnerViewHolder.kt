@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.utils.loadUrl
+import com.sun.qakhadelivery.utils.setOnSafeClickListener
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.PartnerItem
 import kotlinx.android.synthetic.main.item_layout_partner.view.*
@@ -22,7 +23,7 @@ class PartnerViewHolder(viewGroup: ViewGroup)
     }
 
     fun registerItemViewHolderListener(listener: (Int) -> Unit) {
-        itemView.setOnClickListener {
+        itemView.setOnSafeClickListener {
             listener(adapterPosition)
         }
     }

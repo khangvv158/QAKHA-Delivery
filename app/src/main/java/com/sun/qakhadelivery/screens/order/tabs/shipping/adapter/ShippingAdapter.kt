@@ -1,6 +1,5 @@
 package com.sun.qakhadelivery.screens.order.tabs.shipping.adapter
 
-import android.util.Log
 import android.view.ViewGroup
 import com.sun.qakhadelivery.data.model.Event
 import com.sun.qakhadelivery.data.model.Order
@@ -24,7 +23,6 @@ class ShippingAdapter : CustomRecyclerView.Adapter<ShippingViewHolder>(arrayList
     fun updateData(orders: MutableList<Order>) {
         mItems.clear()
         addItems(orders.map {
-            Log.e("data", it.id.toString())
             ShippingItem(it)
         })
         notifyDataSetChanged()

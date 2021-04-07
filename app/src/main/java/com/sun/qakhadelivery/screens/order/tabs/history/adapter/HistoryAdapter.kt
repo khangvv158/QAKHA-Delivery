@@ -1,6 +1,5 @@
 package com.sun.qakhadelivery.screens.order.tabs.history.adapter
 
-import android.util.Log
 import android.view.ViewGroup
 import com.sun.qakhadelivery.data.model.Event
 import com.sun.qakhadelivery.data.model.Order
@@ -26,7 +25,6 @@ class HistoryAdapter : CustomRecyclerView.Adapter<HistoryViewHolder>(arrayListOf
     fun updateData(orders: MutableList<Order>) {
         mItems.clear()
         addItems(orders.map {
-            Log.e("data", it.id.toString())
             HistoryItem(it)
         })
         notifyDataSetChanged()
