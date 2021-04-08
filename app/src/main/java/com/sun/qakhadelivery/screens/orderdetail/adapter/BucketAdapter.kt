@@ -18,4 +18,12 @@ class BucketAdapter : CustomRecyclerView.Adapter<BucketViewHolder>(arrayListOf()
             BucketItem(it)
         })
     }
+
+    fun geSubtotalPrice(): Float {
+        var subTotal = 0f
+        getItems<BucketItem>().forEach {
+            subTotal += it.cart.product.price * it.cart.amount
+        }
+        return subTotal
+    }
 }
