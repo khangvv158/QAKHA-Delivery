@@ -1,43 +1,28 @@
 package com.sun.qakhadelivery.screens.home.adapter
 
+import android.content.Context
 import android.graphics.drawable.Drawable
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.viewpager.widget.PagerAdapter
+import com.asksira.loopingviewpager.LoopingPagerAdapter
 import com.bumptech.glide.Glide
-import com.google.android.material.imageview.ShapeableImageView
 import com.sun.qakhadelivery.R
+import kotlinx.android.synthetic.main.item_layout_slider.view.*
 
-class SliderAdapter : PagerAdapter() {
+class SliderAdapter(
+    context: Context,
+    private val list: MutableList<Drawable>,
+    isInfinite: Boolean
+) :
+    LoopingPagerAdapter<Drawable>(context, list, isInfinite) {
 
-    private val sliders = mutableListOf<Drawable>()
-
-    override fun getCount() = sliders.size
-
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object`
+    override fun inflateView(viewType: Int, container: ViewGroup, listPosition: Int): View {
+        return LayoutInflater.from(context)
+            .inflate(R.layout.item_layout_slider, container, false)
     }
 
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val imageView = ShapeableImageView(container.context).apply {
-            shapeAppearanceModel = this.shapeAppearanceModel.toBuilder().setAllCornerSizes(
-                    resources.getDimension(R.dimen.dp_6)
-            ).build()
-        }
-        Glide.with(container.context).load(sliders[position]).centerCrop().into(imageView)
-        container.addView(imageView)
-        return imageView
-    }
-
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView(`object` as View)
-    }
-
-    fun updateSlider(sliders: MutableList<Drawable>) {
-        sliders.let {
-            this.sliders.clear()
-            this.sliders.addAll(it)
-            notifyDataSetChanged()
-        }
+    override fun bindView(convertView: View, listPosition: Int, viewType: Int) {
+        Glide.with(context).load(list[listPosition]).centerCrop().into(convertView.imageViewSlider)
     }
 }
