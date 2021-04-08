@@ -133,4 +133,8 @@
     <string name="total">Tổng cộng</string>
     <string name="vnd">đ</string>
     <string name="feedback">Đánh giá</string>
+    <string name="enable_gps_service">Bật dịch vụ GPS</string>
+    <string name="content_location">Ứng dụng này muốn thay đổi cài đặt thiết bị của bạn bằng cách sử dụng GPS, Wi-Fi và mạng di động cho vị trí của bạn</string>
+    <string name="turn_on">Bật</string>
+    <string name="play_services_did_not_installed">Dịch vụ Play chưa được cài đặt!</string>
 </resources>
