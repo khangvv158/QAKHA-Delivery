@@ -143,4 +143,8 @@
     <string name="total">Total</string>
     <string name="vnd">đ</string>
     <string name="feedback">feedback</string>
+    <string name="enable_gps_service">Enable GPS SERVICE</string>
+    <string name="content_location">This app wants to change your device settings use GPS,Wi-Fi and cell networks for your location</string>
+    <string name="turn_on">Turn On</string>
+    <string name="play_services_did_not_installed">Play Services did not installed!</string>
 </resources>
