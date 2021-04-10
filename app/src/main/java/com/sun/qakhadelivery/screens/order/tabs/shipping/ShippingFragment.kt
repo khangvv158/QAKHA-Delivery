@@ -2,7 +2,6 @@ package com.sun.qakhadelivery.screens.order.tabs.shipping
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,8 +32,10 @@ class ShippingFragment : Fragment() {
         EventBus.getDefault().unregister(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_shipping, container, false)
     }
 
@@ -56,7 +57,7 @@ class ShippingFragment : Fragment() {
     fun onRecyclerViewShippingClick(event: Event<Order>) {
         event.apply {
             if (keyEvent == ShippingAdapter.EVENT_SHIPPING) {
-                Log.e("shipping:", obj.id.toString())
+                //no-op
             }
         }
     }

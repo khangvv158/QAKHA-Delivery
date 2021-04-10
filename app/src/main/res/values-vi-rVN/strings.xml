@@ -137,4 +137,6 @@
     <string name="content_location">Ứng dụng này muốn thay đổi cài đặt thiết bị của bạn bằng cách sử dụng GPS, Wi-Fi và mạng di động cho vị trí của bạn</string>
     <string name="turn_on">Bật</string>
     <string name="play_services_did_not_installed">Dịch vụ Play chưa được cài đặt!</string>
+    <string name="see_detail">Xem chi tiết</string>
+    <string name="your_order_is_being_delivered">Đơn hàng của bạn đang được giao…</string>
 </resources>

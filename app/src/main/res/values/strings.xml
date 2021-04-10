@@ -147,4 +147,6 @@
     <string name="content_location">This app wants to change your device settings use GPS,Wi-Fi and cell networks for your location</string>
     <string name="turn_on">Turn On</string>
     <string name="play_services_did_not_installed">Play Services did not installed!</string>
+    <string name="see_detail">See detail</string>
+    <string name="your_order_is_being_delivered">Your order is being delivered…</string>
 </resources>
