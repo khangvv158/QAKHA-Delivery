@@ -1,33 +1,42 @@
-package com.sun.qakhadelivery.screens.partner
+package com.sun.qakhadelivery.screens.partner.cart
 
 import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.data.model.Product
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
+import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
 import com.sun.qakhadelivery.utils.BasePresenter
 
-interface PartnerContract {
+interface CartContract {
 
     interface Presenter : BasePresenter<View> {
 
-        fun getCart(partnerId: Int, products: MutableList<Product>)
+        fun getCart(partnerId: Int, productItems: MutableList<Product>)
 
         fun createCart(cartRequest: CartRequest, products: MutableList<Product>)
 
         fun updateCart(cartRequest: CartRequest, products: MutableList<Product>)
+
+        fun removeCart(removeCartRequest: RemoveCartRequest, products: MutableList<Product>)
+
+        fun clearCart(partnerId: Int)
     }
 
     interface View {
 
         fun onSuccessGetCart(carts: MutableList<Cart>)
 
-        fun onSuccessCreateCart(carts: MutableList<Cart>)
-
         fun onSuccessUpdateCart(carts: MutableList<Cart>)
+
+        fun onSuccessClearCart()
+
+        fun onSuccessRemoveCart(carts: MutableList<Cart>)
 
         fun onErrorGetCart(exception: String)
 
-        fun onErrorCreateCart(exception: String)
-
         fun onErrorUpdateCart(exception: String)
+
+        fun onErrorRemoveCart(exception: String)
+
+        fun onErrorClearCart(exception: String)
     }
 }

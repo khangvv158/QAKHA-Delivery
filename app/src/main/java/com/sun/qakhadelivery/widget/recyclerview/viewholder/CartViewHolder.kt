@@ -5,14 +5,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.sun.qakhadelivery.R
-import com.sun.qakhadelivery.data.model.Cart
+import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
+import com.sun.qakhadelivery.utils.Constants.DEFAULT_QUANTITY
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.CartItem
 import kotlinx.android.synthetic.main.item_product_cart.view.*
-import kotlinx.android.synthetic.main.item_product_cart.view.describeProductTextView
-import kotlinx.android.synthetic.main.item_product_cart.view.priceProductTextView
-import kotlinx.android.synthetic.main.item_product_cart.view.productImageView
-import kotlinx.android.synthetic.main.item_product_cart.view.titleProductTextView
 
 class CartViewHolder(viewGroup: ViewGroup) :
     CustomRecyclerView.ViewHolder<CartItem>(newInstance(viewGroup)) {
@@ -26,20 +23,29 @@ class CartViewHolder(viewGroup: ViewGroup) :
             titleProductTextView.text = item.cart.product.name
             describeProductTextView.text = item.cart.product.description
             priceProductTextView.text = item.cart.product.price.toString()
-            amountTextView.text = item.cart.amount.toString()
+            quantityTextView.text = item.cart.quantity.toString()
         }
     }
 
-    fun setOnClickListener(listener: OnClickCartViewHolderListener) {
+    fun setOnClickListener(
+        cartItems: MutableList<CartItem>,
+        listener: OnClickCartViewHolderListener
+    ) {
         with(itemView) {
             increaseButton.setOnClickListener {
-                listener.increase(adapterPosition) { cart ->
-                    amountTextView.text = cart.amount.toString()
+                cartItems[adapterPosition].cart.apply {
+                    quantity += DEFAULT_QUANTITY
+                    listener.increase(CartRequest(product.id, quantity, partnerId))
                 }
             }
             decreaseButton.setOnClickListener {
-                listener.decrease(adapterPosition) { cart ->
-                    amountTextView.text = cart.amount.toString()
+                cartItems[adapterPosition].cart.apply {
+                    if (quantity > 1) {
+                        quantity -= DEFAULT_QUANTITY
+                        listener.decrease(CartRequest(product.id, quantity, partnerId))
+                    } else {
+                        listener.remove(CartRequest(product.id, quantity, partnerId))
+                    }
                 }
             }
         }
@@ -47,9 +53,11 @@ class CartViewHolder(viewGroup: ViewGroup) :
 
     interface OnClickCartViewHolderListener {
 
-        fun increase(position: Int, callback: (Cart) -> Unit)
+        fun increase(cartRequest: CartRequest)
 
-        fun decrease(position: Int, callback: (Cart) -> Unit)
+        fun decrease(cartRequest: CartRequest)
+
+        fun remove(cartRequest: CartRequest)
     }
 
     companion object {

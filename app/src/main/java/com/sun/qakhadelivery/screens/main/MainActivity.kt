@@ -13,7 +13,6 @@ import androidx.appcompat.widget.AppCompatEditText
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.screens.container.ContainerFragment
 import com.sun.qakhadelivery.utils.addFragment
-import org.greenrobot.eventbus.EventBus
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,13 +27,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {
-            supportFragmentManager.popBackStack()
+            super.onBackPressed()
         } else if (!doubleBackPressed) {
             this.doubleBackPressed = true
             Toast.makeText(
-                    this,
-                    getString(R.string.back_again_to_exit),
-                    Toast.LENGTH_SHORT
+                this,
+                getString(R.string.back_again_to_exit),
+                Toast.LENGTH_SHORT
             ).show()
             Handler().postDelayed(Runnable { doubleBackPressed = false }, 2000)
             return
@@ -61,15 +60,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun setFlags() {
         window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
         supportActionBar?.hide()
     }
 
     private fun hideKeyboard(view: View) {
         val inputMethodManager =
-                getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

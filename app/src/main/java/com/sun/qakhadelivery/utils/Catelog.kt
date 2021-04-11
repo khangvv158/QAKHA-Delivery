@@ -97,7 +97,7 @@ fun getCategory(): MutableList<Category> {
 
 fun getBucket(): MutableList<Cart> {
     return mutableListOf<Cart>().apply {
-        add(Cart(Product(1, "Coffee", 25000f, "", 1, Image("")), 2))
-        add(Cart(Product(1, "Matcha cookie", 25000f, "", 1, Image("")), 2))
+        add(Cart(Product(1, "Coffee", 25000f, "", 1, Image("")), 2,1))
+        add(Cart(Product(1, "Matcha cookie", 25000f, "", 1, Image("")), 2,1))
     }
 }
