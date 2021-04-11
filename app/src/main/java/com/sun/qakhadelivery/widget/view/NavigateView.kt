@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.RelativeLayout
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.utils.Constants
-import com.sun.qakhadelivery.utils.loadUrl
+import com.sun.qakhadelivery.extensions.loadUrl
 import kotlinx.android.synthetic.main.item_layout_navigate_view.view.*
 
 class NavigateView : RelativeLayout {

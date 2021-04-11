@@ -10,7 +10,7 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.User
 import com.sun.qakhadelivery.data.repository.UserRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
-import com.sun.qakhadelivery.utils.loadUrl
+import com.sun.qakhadelivery.extensions.loadUrl
 import kotlinx.android.synthetic.main.fragment_signed_in.*
 
 class SignedInFragment : Fragment(), SignedInContract.View {

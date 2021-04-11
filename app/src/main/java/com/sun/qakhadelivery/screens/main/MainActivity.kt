@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.screens.container.ContainerFragment
-import com.sun.qakhadelivery.utils.addFragment
+import com.sun.qakhadelivery.extensions.addFragment
 
 class MainActivity : AppCompatActivity() {
 

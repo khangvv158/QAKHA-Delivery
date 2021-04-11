@@ -11,9 +11,9 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.utils.Regex
-import com.sun.qakhadelivery.utils.afterTextChanged
-import com.sun.qakhadelivery.utils.hideKeyboard
-import com.sun.qakhadelivery.utils.validWithRegex
+import com.sun.qakhadelivery.extensions.afterTextChanged
+import com.sun.qakhadelivery.extensions.hideKeyboard
+import com.sun.qakhadelivery.extensions.validWithRegex
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 class SignUpFragment : Fragment(), SignUpContract.View {

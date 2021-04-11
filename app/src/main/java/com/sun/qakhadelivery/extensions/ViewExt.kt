@@ -1,4 +1,4 @@
-package com.sun.qakhadelivery.utils
+package com.sun.qakhadelivery.extensions
 
 import android.os.SystemClock
 import android.view.View

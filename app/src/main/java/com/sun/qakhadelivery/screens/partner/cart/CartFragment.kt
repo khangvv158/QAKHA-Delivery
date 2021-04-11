@@ -2,7 +2,6 @@ package com.sun.qakhadelivery.screens.partner.cart
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +16,8 @@ import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
 import com.sun.qakhadelivery.screens.partner.PartnerFragment.Companion.BUNDLE_PARTNER
 import com.sun.qakhadelivery.screens.partner.cart.adapter.CartAdapter
-import com.sun.qakhadelivery.utils.gone
-import com.sun.qakhadelivery.utils.show
+import com.sun.qakhadelivery.extensions.gone
+import com.sun.qakhadelivery.extensions.show
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : BottomSheetDialogFragment(),
@@ -115,6 +114,7 @@ class CartFragment : BottomSheetDialogFragment(),
     override fun onSuccessRemoveCart(carts: MutableList<Cart>) {
         cartAdapter.updateProducts(carts)
         enableInteraction()
+        if (cartAdapter.mItems.isEmpty()) dismiss()
     }
 
     override fun onErrorGetCart(exception: String) {

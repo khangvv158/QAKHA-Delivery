@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
@@ -14,7 +15,6 @@ import com.sun.qakhadelivery.screens.home.tabs.all.adapter.AllPartnerAdapter
 import com.sun.qakhadelivery.screens.partner.PartnerFragment
 import com.sun.qakhadelivery.screens.partner.PartnerFragment.Companion.BUNDLE_PARTNER
 import com.sun.qakhadelivery.utils.OnItemRecyclerViewClickListener
-import com.sun.qakhadelivery.utils.addFragmentBackStack
 import kotlinx.android.synthetic.main.fragment_all.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe

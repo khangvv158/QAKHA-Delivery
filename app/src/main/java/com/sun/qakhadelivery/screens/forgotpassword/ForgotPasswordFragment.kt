@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.sun.qakhadelivery.extensions.hideKeyboard
+import com.sun.qakhadelivery.extensions.replaceFragment
+import com.sun.qakhadelivery.extensions.validWithRegex
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl

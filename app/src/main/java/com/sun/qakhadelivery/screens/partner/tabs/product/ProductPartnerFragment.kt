@@ -12,7 +12,7 @@ import com.sun.qakhadelivery.screens.home.HomeFragment.Companion.BUNDLE_PARTNER
 import com.sun.qakhadelivery.screens.partner.tabs.product.adapter.CategoriesAdapter
 import com.sun.qakhadelivery.screens.signin.SignInFragment
 import com.sun.qakhadelivery.utils.UserUtils
-import com.sun.qakhadelivery.utils.addFragmentSlideAnim
+import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
 import kotlinx.android.synthetic.main.fragment_product_order.*
 
 class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {

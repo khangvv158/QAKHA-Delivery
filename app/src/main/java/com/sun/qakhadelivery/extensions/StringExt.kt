@@ -1,4 +1,4 @@
-package com.sun.qakhadelivery.utils
+package com.sun.qakhadelivery.extensions
 
 import java.text.ParseException
 import java.text.SimpleDateFormat
