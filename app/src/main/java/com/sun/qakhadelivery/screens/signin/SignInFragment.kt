@@ -13,9 +13,8 @@ import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.screens.forgotpassword.ForgotPasswordFragment
 import com.sun.qakhadelivery.screens.signup.SignUpFragment
 import com.sun.qakhadelivery.utils.Constants
-import com.sun.qakhadelivery.utils.addFragmentBackStack
-import com.sun.qakhadelivery.utils.addFragmentSlideAnim
-import com.sun.qakhadelivery.utils.hideKeyboard
+import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
+import com.sun.qakhadelivery.extensions.hideKeyboard
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 class SignInFragment : Fragment(), SignInContract.View {

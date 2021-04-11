@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.screens.signin.OnSignInSuccessListener
 import com.sun.qakhadelivery.screens.signin.SignInFragment
-import com.sun.qakhadelivery.utils.addFragmentSlideAnim
+import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
 import kotlinx.android.synthetic.main.fragment_not_sign_in.*
 
 class NotSignInFragment : Fragment(), OnSignInSuccessListener {

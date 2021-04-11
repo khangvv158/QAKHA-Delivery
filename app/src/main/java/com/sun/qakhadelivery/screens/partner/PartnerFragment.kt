@@ -12,6 +12,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import com.bumptech.glide.Glide
+import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.data.model.Partner
@@ -19,6 +20,9 @@ import com.sun.qakhadelivery.data.model.Product
 import com.sun.qakhadelivery.data.repository.CartRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
+import com.sun.qakhadelivery.extensions.gone
+import com.sun.qakhadelivery.extensions.setOnSafeClickListener
+import com.sun.qakhadelivery.extensions.show
 import com.sun.qakhadelivery.screens.home.HomeFragment
 import com.sun.qakhadelivery.screens.partner.adaper.PartnerPagerAdapter
 import com.sun.qakhadelivery.screens.partner.cart.CartFragment
@@ -220,6 +224,11 @@ class PartnerFragment : Fragment(), PartnerContract.View {
     }
 
     private fun updateQuantity() {
+        if (carts.size < DEFAULT_QUANTITY) {
+            floatButtonLayout.gone()
+        } else {
+            floatButtonLayout.show()
+        }
         val shake: Animation = AnimationUtils.loadAnimation(context, R.anim.animation_shake)
         counterCartTextView.apply {
             text = carts.map { it.quantity }.sum().toString()

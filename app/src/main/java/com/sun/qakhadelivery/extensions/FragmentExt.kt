@@ -1,4 +1,4 @@
-package com.sun.qakhadelivery.utils
+package com.sun.qakhadelivery.extensions
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

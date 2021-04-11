@@ -29,7 +29,6 @@ class CartAdapter :
 
     override fun decrease(cartRequest: CartRequest) {
         listener?.decrease(cartRequest)
-        if (mItems.isEmpty()) listener?.finish()
     }
 
     override fun remove(cartRequest: CartRequest) {
@@ -41,7 +40,6 @@ class CartAdapter :
         addItems(carts.map {
             CartItem(it)
         })
-        if (mItems.isEmpty()) listener?.finish()
         calculatorListener?.setOnListener(geSubtotalPrice())
     }
 

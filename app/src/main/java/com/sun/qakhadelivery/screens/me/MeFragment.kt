@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.extensions.replaceFragment
 import com.sun.qakhadelivery.screens.notsignin.NotSignInFragment
 import com.sun.qakhadelivery.screens.signedin.OnGetUserFailureListener
 import com.sun.qakhadelivery.screens.signedin.SignedInFragment
 import com.sun.qakhadelivery.screens.signin.OnSignInSuccessListener
-import com.sun.qakhadelivery.utils.replaceFragment
 
 class MeFragment : Fragment(), MeContract.View,
         OnSignInSuccessListener, OnGetUserFailureListener {

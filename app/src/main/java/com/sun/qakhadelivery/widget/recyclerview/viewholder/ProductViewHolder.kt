@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.sun.qakhadelivery.R
-import com.sun.qakhadelivery.utils.setOnSafeClickListener
+import com.sun.qakhadelivery.extensions.setOnSafeClickListener
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.ProductItem
 import kotlinx.android.synthetic.main.item_product_partner.view.*
