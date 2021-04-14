@@ -2,11 +2,11 @@ package com.sun.qakhadelivery.data.source.remote.schema.response
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.sun.qakhadelivery.data.model.ProductCart
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class CartResponse(
-    @SerializedName("product_id") val productId: Int,
-    @SerializedName("quantity") val quantity: Int,
-    @SerializedName("partner_id") val partnerId: Int
+    @SerializedName("carts") val products: MutableList<ProductCart>,
+    @SerializedName("total_price_cart") val total: Float,
 ) : Parcelable

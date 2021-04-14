@@ -14,20 +14,17 @@ import com.sun.qakhadelivery.data.repository.CartRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
+import com.sun.qakhadelivery.extensions.*
+import com.sun.qakhadelivery.screens.checkout.CheckoutFragment
 import com.sun.qakhadelivery.screens.partner.PartnerFragment.Companion.BUNDLE_PARTNER
 import com.sun.qakhadelivery.screens.partner.cart.adapter.CartAdapter
-import com.sun.qakhadelivery.extensions.gone
-import com.sun.qakhadelivery.extensions.show
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : BottomSheetDialogFragment(),
-    CartAdapter.OnClickCartListener.CalculatorListener,
     CartContract.View {
 
     private val cartAdapter by lazy {
-        CartAdapter().apply {
-            setOnChangeListener(this@CartFragment)
-        }
+        CartAdapter()
     }
     private val presenter by lazy {
         CartPresenter(
@@ -133,7 +130,7 @@ class CartFragment : BottomSheetDialogFragment(),
         enableInteraction()
     }
 
-    override fun setOnListener(total: Float) {
+    override fun onUpdateTotalPrice(total: Float) {
         totalTextView?.text = total.toString()
     }
 
@@ -151,6 +148,13 @@ class CartFragment : BottomSheetDialogFragment(),
                     presenter.clearCart(it.id)
                 }
             }
+        }
+        checkoutButton.setOnSafeClickListener {
+            dismiss()
+            parentFragment?.addFragmentBackStack(
+                CheckoutFragment.newInstance(arguments),
+                R.id.containerView
+            )
         }
     }
 
@@ -180,10 +184,12 @@ class CartFragment : BottomSheetDialogFragment(),
 
     private fun disableInteraction() {
         loadingProgress?.show()
+        checkoutButton?.disable()
     }
 
     private fun enableInteraction() {
         loadingProgress?.gone()
+        checkoutButton?.enable()
     }
 
     interface CallbackCart {

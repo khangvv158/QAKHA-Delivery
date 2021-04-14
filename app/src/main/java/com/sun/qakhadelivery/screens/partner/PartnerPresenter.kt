@@ -15,7 +15,7 @@ class PartnerPresenter(private val cartRepository: CartRepository) : PartnerCont
 
     override fun getCart(partnerId: Int, products: MutableList<Product>) {
         val disposable = cartRepository.getCart(partnerId).map { cartResponses ->
-            cartResponses.mapNotNull { response ->
+            cartResponses.products.mapNotNull { response ->
                 products.find { response.productId == it.id }?.let {
                     Cart(it, response.quantity, response.partnerId)
                 }
@@ -32,15 +32,16 @@ class PartnerPresenter(private val cartRepository: CartRepository) : PartnerCont
     }
 
     override fun createCart(cartRequest: CartRequest, products: MutableList<Product>) {
-        val disposable = cartRepository.createCart(cartRequest).map { cartResponses ->
-            cartResponses.mapNotNull { response ->
-                products.find { response.productId == it.id }?.let {
-                    Cart(it, response.quantity, response.partnerId)
-                }
-            }.toMutableList()
-        }
+        val disposable = cartRepository.createCart(cartRequest)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .map { cartResponses ->
+                cartResponses.products.mapNotNull { response ->
+                    products.find { response.productId == it.id }?.let { products ->
+                        Cart(products, response.quantity, response.partnerId)
+                    }
+                }.toMutableList()
+            }
             .subscribe({
                 view?.onSuccessCreateCart(it)
             }, {
@@ -50,15 +51,16 @@ class PartnerPresenter(private val cartRepository: CartRepository) : PartnerCont
     }
 
     override fun updateCart(cartRequest: CartRequest, products: MutableList<Product>) {
-        val disposable = cartRepository.updateCart(cartRequest).map { cartResponses ->
-            cartResponses.mapNotNull { response ->
-                products.find { response.productId == it.id }?.let {
-                    Cart(it, response.quantity, response.partnerId)
-                }
-            }.toMutableList()
-        }
+        val disposable = cartRepository.updateCart(cartRequest)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .map { cartResponses ->
+                cartResponses.products.mapNotNull { response ->
+                    products.find { response.productId == it.id }?.let { products ->
+                        Cart(products, response.quantity, response.partnerId)
+                    }
+                }.toMutableList()
+            }
             .subscribe({
                 view?.onSuccessUpdateCart(it)
             }, {

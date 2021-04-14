@@ -10,7 +10,7 @@ interface CartContract {
 
     interface Presenter : BasePresenter<View> {
 
-        fun getCart(partnerId: Int, productItems: MutableList<Product>)
+        fun getCart(partnerId: Int, products: MutableList<Product>)
 
         fun createCart(cartRequest: CartRequest, products: MutableList<Product>)
 
@@ -38,5 +38,7 @@ interface CartContract {
         fun onErrorRemoveCart(exception: String)
 
         fun onErrorClearCart(exception: String)
+
+        fun onUpdateTotalPrice(total: Float)
     }
 }
