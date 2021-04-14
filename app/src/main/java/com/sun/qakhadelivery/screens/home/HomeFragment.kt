@@ -118,7 +118,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
             try {
                 currentLatLng = LatLng(it.latitude, it.longitude)
             } catch (e: Exception) {
-                showDialogEnableGPS()
+
             }
         }
     }

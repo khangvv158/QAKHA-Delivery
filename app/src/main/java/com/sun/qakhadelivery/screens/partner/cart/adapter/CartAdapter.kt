@@ -7,12 +7,10 @@ import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.CartItem
 import com.sun.qakhadelivery.widget.recyclerview.viewholder.CartViewHolder
 
-class CartAdapter :
-    CustomRecyclerView.Adapter<CartViewHolder>(arrayListOf()),
+class CartAdapter : CustomRecyclerView.Adapter<CartViewHolder>(arrayListOf()),
     CartViewHolder.OnClickCartViewHolderListener {
 
     private var listener: OnClickCartListener.CartListener? = null
-    private var calculatorListener: OnClickCartListener.CalculatorListener? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -40,17 +38,11 @@ class CartAdapter :
         addItems(carts.map {
             CartItem(it)
         })
-        calculatorListener?.setOnListener(geSubtotalPrice())
     }
 
     fun clearProducts() {
         clearItems()
         if (mItems.isEmpty()) listener?.finish()
-        calculatorListener?.setOnListener(geSubtotalPrice())
-    }
-
-    fun setOnChangeListener(listener: OnClickCartListener.CalculatorListener) {
-        calculatorListener = listener
     }
 
     fun setOnClickCartListener(listener: OnClickCartListener.CartListener) {
@@ -59,10 +51,6 @@ class CartAdapter :
 
     fun getCarts(): MutableList<Cart> {
         return getItems<CartItem>().map { it.cart }.toMutableList()
-    }
-
-    private fun geSubtotalPrice(): Float {
-        return getItems<CartItem>().map { it.cart.quantity * it.cart.product.price }.sum()
     }
 
     interface OnClickCartListener {
@@ -76,11 +64,6 @@ class CartAdapter :
             fun remove(cartRequest: CartRequest)
 
             fun finish()
-        }
-
-        interface CalculatorListener {
-
-            fun setOnListener(total: Float)
         }
     }
 }

@@ -13,13 +13,13 @@ import io.reactivex.rxjava3.core.Observable
 
 interface CartRepository {
 
-    fun getCart(partnerId: Int): Observable<MutableList<CartResponse>>
+    fun getCart(partnerId: Int): Observable<CartResponse>
 
-    fun createCart(cartRequest: CartRequest): Observable<MutableList<CartResponse>>
+    fun createCart(cartRequest: CartRequest): Observable<CartResponse>
 
-    fun removeCart(removeCartRequest: RemoveCartRequest): Observable<MutableList<CartResponse>>
+    fun removeCart(removeCartRequest: RemoveCartRequest): Observable<CartResponse>
 
-    fun updateCart(cartRequest: CartRequest): Observable<MutableList<CartResponse>>
+    fun updateCart(cartRequest: CartRequest): Observable<CartResponse>
 
     fun clearCart(partnerId: Int): Completable
 }
@@ -30,28 +30,28 @@ class CartRepositoryImpl private constructor(
 
     private val client = RetrofitClient.getInstance().create(CartAPI::class.java)
 
-    override fun getCart(partnerId: Int): Observable<MutableList<CartResponse>> {
+    override fun getCart(partnerId: Int): Observable<CartResponse> {
         return client.getCart(
             partnerId,
             sharedPrefs.get(SharedPrefsKey.TOKEN_KEY, TokenAccess::class.java).token
         )
     }
 
-    override fun createCart(cartRequest: CartRequest): Observable<MutableList<CartResponse>> {
+    override fun createCart(cartRequest: CartRequest): Observable<CartResponse>{
         return client.createCart(
             cartRequest,
             sharedPrefs.get(SharedPrefsKey.TOKEN_KEY, TokenAccess::class.java).token
         )
     }
 
-    override fun removeCart(removeCartRequest: RemoveCartRequest): Observable<MutableList<CartResponse>> {
+    override fun removeCart(removeCartRequest: RemoveCartRequest): Observable<CartResponse> {
         return client.removeCart(
             removeCartRequest,
             sharedPrefs.get(SharedPrefsKey.TOKEN_KEY, TokenAccess::class.java).token
         )
     }
 
-    override fun updateCart(cartRequest: CartRequest): Observable<MutableList<CartResponse>> {
+    override fun updateCart(cartRequest: CartRequest): Observable<CartResponse> {
         return client.updateCart(
             cartRequest,
             sharedPrefs.get(SharedPrefsKey.TOKEN_KEY, TokenAccess::class.java).token

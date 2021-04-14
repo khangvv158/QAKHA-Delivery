@@ -15,25 +15,25 @@ interface CartAPI {
     fun getCart(
         @Query(PARTNER_ID) partnerId: Int,
         @Header(AUTHORIZATION) token: String?
-    ): Observable<MutableList<CartResponse>>
+    ): Observable<CartResponse>
 
     @POST("carts")
     fun createCart(
         @Body cartRequest: CartRequest,
         @Header(AUTHORIZATION) token: String?
-    ): Observable<MutableList<CartResponse>>
+    ): Observable<CartResponse>
 
     @HTTP(method = "DELETE", hasBody = true, path = "carts")
     fun removeCart(
         @Body removeCartRequest: RemoveCartRequest,
         @Header(AUTHORIZATION) token: String?
-    ): Observable<MutableList<CartResponse>>
+    ): Observable<CartResponse>
 
     @PUT("carts")
     fun updateCart(
         @Body cartRequest: CartRequest,
         @Header(AUTHORIZATION) token: String?
-    ): Observable<MutableList<CartResponse>>
+    ): Observable<CartResponse>
 
     @DELETE("clear_cart")
     fun clearCart(

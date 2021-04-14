@@ -19,6 +19,14 @@ fun View.isVisible(): Boolean {
     return visibility == View.VISIBLE
 }
 
+fun View.enable() {
+    isEnabled = true
+}
+
+fun View.disable() {
+    isEnabled = false
+}
+
 fun View.setOnSafeClickListener(interval: Int = 1000, func: (View) -> Unit) {
     var timeLeft = 0L
     setOnClickListener {
