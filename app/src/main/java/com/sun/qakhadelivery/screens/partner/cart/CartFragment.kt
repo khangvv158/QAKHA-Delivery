@@ -11,6 +11,7 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.repository.CartRepositoryImpl
+import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
@@ -28,7 +29,8 @@ class CartFragment : BottomSheetDialogFragment(),
     }
     private val presenter by lazy {
         CartPresenter(
-            CartRepositoryImpl.getInstance(
+            CartRepositoryImpl.getInstance(),
+            TokenRepositoryImpl.getInstance(
                 SharedPrefsImpl.getInstance(requireContext())
             )
         )

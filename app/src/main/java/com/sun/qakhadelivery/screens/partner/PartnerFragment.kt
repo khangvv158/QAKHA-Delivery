@@ -18,6 +18,7 @@ import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.Product
 import com.sun.qakhadelivery.data.repository.CartRepositoryImpl
+import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
 import com.sun.qakhadelivery.extensions.gone
@@ -44,7 +45,8 @@ class PartnerFragment : Fragment(), PartnerContract.View {
     }
     private val presenter by lazy {
         PartnerPresenter(
-            CartRepositoryImpl.getInstance(
+            CartRepositoryImpl.getInstance(),
+            TokenRepositoryImpl.getInstance(
                 SharedPrefsImpl.getInstance(requireContext())
             )
         )
