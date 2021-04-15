@@ -13,6 +13,8 @@ import androidx.appcompat.widget.AppCompatEditText
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.screens.container.ContainerFragment
 import com.sun.qakhadelivery.extensions.addFragment
+import com.sun.qakhadelivery.extensions.addFragmentBackStack
+import com.sun.qakhadelivery.screens.checkout.CheckoutFragment
 
 class MainActivity : AppCompatActivity() {
 
