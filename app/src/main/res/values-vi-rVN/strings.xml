@@ -144,4 +144,9 @@
     <string name="delete_address">Xóa địa chỉ</string>
     <string name="delete">Xóa</string>
     <string name="delete_address_successfully">Xóa địa chỉ thành công</string>
+    <string name="choose_address">Chọn địa chỉ</string>
+    <string name="choose_your_address">Hãy chọn địa chỉ của bạn</string>
+    <string name="waiting_for_location">Không thể lấy địa chỉ</string>
+    <string name="create_address_successfully">Tạo địa chỉ thành công</string>
+    <string name="update_address_successfully">Cập nhật địa chỉ thành công</string>
 </resources>

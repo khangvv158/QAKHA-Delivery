@@ -10,11 +10,6 @@ import com.sun.qakhadelivery.R
 
 class GoogleMapHelper {
 
-    /**
-     * @param latLng in which position to Zoom the camera.
-     * @return the [CameraUpdate] with Zoom and Tilt level added with the given position.
-     */
-
     fun buildCameraUpdate(latLng: LatLng): CameraUpdate {
         val cameraPosition = CameraPosition.Builder()
             .target(latLng)
@@ -24,13 +19,12 @@ class GoogleMapHelper {
         return CameraUpdateFactory.newCameraPosition(cameraPosition)
     }
 
-    /**
-     * @param position where to draw the [com.google.android.gms.maps.model.Marker]
-     * @return the [MarkerOptions] with given properties added to it.
-     */
+    fun getNormalMarkerOptions(position: LatLng): MarkerOptions {
+        return MarkerOptions().position(position)
+    }
 
     fun getDriverMarkerOptions(position: LatLng): MarkerOptions {
-        val options = getMarkerOptions(R.drawable.background_search, position)
+        val options = getMarkerOptions(R.drawable.delivery_man, position)
         options.flat(true)
         return options
     }
