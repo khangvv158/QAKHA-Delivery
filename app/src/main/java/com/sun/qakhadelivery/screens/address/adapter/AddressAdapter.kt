@@ -20,6 +20,11 @@ class AddressAdapter : CustomRecyclerView.Adapter<AddressViewHolder>(arrayListOf
                     listener?.onItemClickListener(address)
                 }
             }
+            registerOnLongClickItem {
+                getItemPosition<AddressItem>(adapterPosition)?.address?.let { address ->
+                    listener?.onItemLongClickListener(address)
+                }
+            }
         }
     }
 

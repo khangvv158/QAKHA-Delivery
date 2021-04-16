@@ -8,6 +8,8 @@ import com.sun.qakhadelivery.utils.Constants.DEFAULT_STRING
 interface TokenRepository {
 
     fun getToken(): String
+
+    fun clearToken()
 }
 
 class TokenRepositoryImpl private constructor(
@@ -22,6 +24,10 @@ class TokenRepositoryImpl private constructor(
         } else {
             DEFAULT_STRING
         }
+    }
+
+    override fun clearToken() {
+        sharedPrefs.clearKey(SharedPrefsKey.TOKEN_KEY)
     }
 
     companion object {

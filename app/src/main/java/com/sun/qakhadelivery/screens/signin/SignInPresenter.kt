@@ -19,7 +19,7 @@ class SignInPresenter(private val repository: SignRepository) : SignInContract.P
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                if (it.role == Constants.ROLE_MEMBER) {
+                if (it.role == Constants.ROLE_MEMBER || it.role == Constants.ROLE_ADMIN) {
                     view?.onSignInSuccess()
                 } else {
                     view?.onSignInRoleFailure()
