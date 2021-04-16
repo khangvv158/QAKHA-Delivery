@@ -149,6 +149,9 @@ class ChooseAddressFragment : Fragment(), ChooseAddressContract.View {
                 )
             }
         }
+        imageViewBack.setOnClickListener {
+            back()
+        }
     }
 
     private fun animateCamera(latLng: LatLng) {
