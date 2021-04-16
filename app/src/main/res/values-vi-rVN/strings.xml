@@ -139,4 +139,6 @@
     <string name="play_services_did_not_installed">Dịch vụ Play chưa được cài đặt!</string>
     <string name="see_detail">Xem chi tiết</string>
     <string name="your_order_is_being_delivered">Đơn hàng của bạn đang được giao…</string>
+    <string name="create_address">Tạo địa chỉ</string>
+    <string name="saved">Đã lưu</string>
 </resources>

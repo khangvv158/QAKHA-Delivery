@@ -149,4 +149,6 @@
     <string name="play_services_did_not_installed">Play Services did not installed!</string>
     <string name="see_detail">See detail</string>
     <string name="your_order_is_being_delivered">Your order is being delivered…</string>
+    <string name="create_address">Create address</string>
+    <string name="saved">Saved</string>
 </resources>
