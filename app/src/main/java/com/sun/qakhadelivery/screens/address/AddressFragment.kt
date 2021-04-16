@@ -1,7 +1,6 @@
 package com.sun.qakhadelivery.screens.address
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +11,18 @@ import com.sun.qakhadelivery.data.model.Address
 import com.sun.qakhadelivery.data.repository.AddressRepositoryImpl
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
+import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.extensions.showDialogWithListener
 import com.sun.qakhadelivery.screens.address.adapter.AddressAdapter
 import com.sun.qakhadelivery.screens.address.adapter.AddressAdapterOnClickListener
+import com.sun.qakhadelivery.screens.chooseaddress.ChooseAddressFragment
+import com.sun.qakhadelivery.screens.chooseaddress.OnChooseAddressListener
 import com.sun.qakhadelivery.utils.IPositiveNegativeListener
 import kotlinx.android.synthetic.main.fragment_address.*
 
-class AddressFragment : Fragment(), AddressAdapterOnClickListener, AddressContract.View {
+class AddressFragment : Fragment(), AddressAdapterOnClickListener, AddressContract.View,
+    OnChooseAddressListener {
 
     private val adapter: AddressAdapter by lazy {
         AddressAdapter()
@@ -47,7 +51,7 @@ class AddressFragment : Fragment(), AddressAdapterOnClickListener, AddressContra
     }
 
     override fun onItemClickListener(address: Address) {
-        Log.e("address", address.name)
+        navigateChooseAddress(address)
     }
 
     override fun onItemLongClickListener(address: Address) {
@@ -66,11 +70,15 @@ class AddressFragment : Fragment(), AddressAdapterOnClickListener, AddressContra
     }
 
     override fun onDeleteAddressSuccess() {
-        Toast.makeText(
-            requireContext(),
-            getString(R.string.delete_address_successfully),
-            Toast.LENGTH_SHORT
-        ).show()
+        makeText(getString(R.string.delete_address_successfully))
+        presenter.getAddresses()
+    }
+
+    override fun onCreateAddressSuccess() {
+        presenter.getAddresses()
+    }
+
+    override fun onUpdateAddressSuccess() {
         presenter.getAddresses()
     }
 
@@ -93,9 +101,25 @@ class AddressFragment : Fragment(), AddressAdapterOnClickListener, AddressContra
         imageViewBack.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
+        navAddress.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.item_menu_nav_address -> navigateChooseAddress(null)
+            }
+            true
+        }
+    }
+
+    private fun navigateChooseAddress(address: Address?) {
+        addFragmentSlideAnim(
+            ChooseAddressFragment.newInstance(address).apply {
+                registerOnChooseAddressListener(this@AddressFragment)
+            },
+            R.id.containerView
+        )
     }
 
     companion object {
         fun newInstance() = AddressFragment()
     }
+
 }

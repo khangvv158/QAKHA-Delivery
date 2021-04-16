@@ -154,4 +154,9 @@
     <string name="delete_address">Delete address</string>
     <string name="delete">Delete</string>
     <string name="delete_address_successfully">Delete address successfully</string>
+    <string name="choose_address">Choose Address</string>
+    <string name="choose_your_address">Choose your address</string>
+    <string name="waiting_for_location">Waiting for Location</string>
+    <string name="create_address_successfully">Create address successfully</string>
+    <string name="update_address_successfully">Update address successfully</string>
 </resources>

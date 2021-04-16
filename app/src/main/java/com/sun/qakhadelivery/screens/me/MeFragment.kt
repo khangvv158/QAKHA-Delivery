@@ -14,15 +14,15 @@ import com.sun.qakhadelivery.screens.signedin.SignedInFragment
 import com.sun.qakhadelivery.screens.signin.OnSignInSuccessListener
 
 class MeFragment : Fragment(), MeContract.View,
-        OnSignInSuccessListener, OnGetUserFailureListener {
+    OnSignInSuccessListener, OnGetUserFailureListener {
 
     private val presenter by lazy {
         MePresenter(SharedPrefsImpl.getInstance(requireContext()))
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_me, container, false)
     }
