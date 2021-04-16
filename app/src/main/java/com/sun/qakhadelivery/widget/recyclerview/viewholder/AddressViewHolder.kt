@@ -18,7 +18,16 @@ class AddressViewHolder(viewGroup: ViewGroup) :
     }
 
     fun registerOnClickItem(listener: (View) -> Unit) {
-        listener(itemView)
+        itemView.setOnClickListener {
+            listener(it)
+        }
+    }
+
+    fun registerOnLongClickItem(listener: (View) -> Unit) {
+        itemView.setOnLongClickListener {
+            listener(it)
+            true
+        }
     }
 
     companion object {

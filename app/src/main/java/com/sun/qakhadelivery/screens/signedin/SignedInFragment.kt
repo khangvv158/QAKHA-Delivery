@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.User
+import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.repository.UserRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.extensions.addFragmentBackStack
@@ -19,7 +20,8 @@ class SignedInFragment : Fragment(), SignedInContract.View {
 
     private val presenter by lazy {
         SignedInPresenter(
-            UserRepositoryImpl.getInstance(
+            UserRepositoryImpl.getInstance(),
+            TokenRepositoryImpl.getInstance(
                 SharedPrefsImpl.getInstance(requireContext())
             )
         )

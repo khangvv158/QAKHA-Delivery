@@ -5,4 +5,5 @@ import com.sun.qakhadelivery.data.model.Address
 interface AddressAdapterOnClickListener {
 
     fun onItemClickListener(address: Address)
+    fun onItemLongClickListener(address: Address)
 }

@@ -141,4 +141,7 @@
     <string name="your_order_is_being_delivered">Đơn hàng của bạn đang được giao…</string>
     <string name="create_address">Tạo địa chỉ</string>
     <string name="saved">Đã lưu</string>
+    <string name="delete_address">Xóa địa chỉ</string>
+    <string name="delete">Xóa</string>
+    <string name="delete_address_successfully">Xóa địa chỉ thành công</string>
 </resources>

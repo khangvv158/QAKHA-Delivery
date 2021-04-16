@@ -151,4 +151,7 @@
     <string name="your_order_is_being_delivered">Your order is being delivered…</string>
     <string name="create_address">Create address</string>
     <string name="saved">Saved</string>
+    <string name="delete_address">Delete address</string>
+    <string name="delete">Delete</string>
+    <string name="delete_address_successfully">Delete address successfully</string>
 </resources>

@@ -50,7 +50,7 @@ class SignRepositoryImpl private constructor(
                             password
                     )
             ).doOnNext {
-                if (it.role == Constants.ROLE_MEMBER) {
+                if (it.role == Constants.ROLE_MEMBER || it.role == Constants.ROLE_ADMIN) {
                     sharedPrefs.put(SharedPrefsKey.TOKEN_KEY, it)
                 }
             }
