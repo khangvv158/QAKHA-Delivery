@@ -43,7 +43,7 @@ class SignedInFragment : Fragment(), SignedInContract.View {
     }
 
     override fun onGetUserSuccess(user: User) {
-        user.image?.let { imageViewAvatar.loadUrl(it) }
+        user.image?.imageUrl?.let { imageViewAvatar.loadUrl(it) }
         textViewName.text = user.name
     }
 

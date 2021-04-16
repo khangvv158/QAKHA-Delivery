@@ -67,7 +67,7 @@ fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }
 
-fun Fragment.back(){
+fun Fragment.back() {
     this.parentFragmentManager.popBackStack()
 }
 

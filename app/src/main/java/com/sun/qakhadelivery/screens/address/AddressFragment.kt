@@ -50,6 +50,11 @@ class AddressFragment : Fragment(), AddressAdapterOnClickListener, AddressContra
         handleEvents()
     }
 
+    override fun onStop() {
+        presenter.onStop()
+        super.onStop()
+    }
+
     override fun onItemClickListener(address: Address) {
         navigateChooseAddress(address)
     }
@@ -83,7 +88,7 @@ class AddressFragment : Fragment(), AddressAdapterOnClickListener, AddressContra
     }
 
     override fun onError(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        makeText(message)
     }
 
     private fun initViews() {
