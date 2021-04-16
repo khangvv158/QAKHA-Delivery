@@ -10,21 +10,25 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.User
 import com.sun.qakhadelivery.data.repository.UserRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.extensions.loadUrl
+import com.sun.qakhadelivery.screens.address.AddressFragment
 import kotlinx.android.synthetic.main.fragment_signed_in.*
 
 class SignedInFragment : Fragment(), SignedInContract.View {
 
     private val presenter by lazy {
-        SignedInPresenter(UserRepositoryImpl.getInstance(
+        SignedInPresenter(
+            UserRepositoryImpl.getInstance(
                 SharedPrefsImpl.getInstance(requireContext())
-        ))
+            )
+        )
     }
     private var onGetUserFailureListener: OnGetUserFailureListener? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_signed_in, container, false)
     }
@@ -71,6 +75,22 @@ class SignedInFragment : Fragment(), SignedInContract.View {
         signOutButton.setOnClickListener {
             presenter.signOut()
         }
+        navProfile.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.payItemMenu -> {
+                }
+                R.id.addressItemMenu -> navigateAddress()
+                R.id.inviteFriendsItemMenu -> {
+                }
+                R.id.helpCenterItemMenu -> {
+                }
+            }
+            true
+        }
+    }
+
+    private fun navigateAddress() {
+        addFragmentBackStack(AddressFragment.newInstance(), R.id.containerView)
     }
 
     companion object {
