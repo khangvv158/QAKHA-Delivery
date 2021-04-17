@@ -149,4 +149,9 @@
     <string name="waiting_for_location">Không thể lấy địa chỉ</string>
     <string name="create_address_successfully">Tạo địa chỉ thành công</string>
     <string name="update_address_successfully">Cập nhật địa chỉ thành công</string>
+    <string name="apply">Áp dụng</string>
+    <string name="usage">Sử dụng</string>
+    <string name="voucher">Mã giảm giá</string>
+    <string name="notification_voucher_selection">Vui lòng chọn một voucher</string>
+    <string name="input_voucher">Nhập mã giảm giá</string>
 </resources>

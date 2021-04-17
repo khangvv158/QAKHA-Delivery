@@ -1,6 +1,7 @@
 package com.sun.qakhadelivery.screens.main
 
 import android.content.Context
+import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
 import android.view.MotionEvent
@@ -11,10 +12,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import com.sun.qakhadelivery.R
-import com.sun.qakhadelivery.screens.container.ContainerFragment
 import com.sun.qakhadelivery.extensions.addFragment
-import com.sun.qakhadelivery.extensions.addFragmentBackStack
-import com.sun.qakhadelivery.screens.checkout.CheckoutFragment
+import com.sun.qakhadelivery.screens.container.ContainerFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -46,10 +45,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
-        if (event.action == MotionEvent.ACTION_UP) {
+        if (event.action == MotionEvent.ACTION_DOWN) {
             currentFocus?.let {
                 if (it is AppCompatEditText) {
-                    hideKeyboard(it)
+                    val outRect = Rect()
+                    it.getGlobalVisibleRect(outRect)
+                    if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                        it.clearFocus()
+                        hideKeyboard(it)
+                    }
                 }
             }
         }

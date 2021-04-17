@@ -196,9 +196,15 @@
                     android:layout_height="0dp"
                     android:background="@drawable/border_circle_text"
                     android:backgroundTint="@color/colorWhileSmoke"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/sf_compact_display_regular"
+                    android:inputType="textNoSuggestions"
                     android:paddingHorizontal="@dimen/dp_10"
                     android:singleLine="true"
+                    android:textColor="@color/colorGray_light"
                     android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/titleVoucherTextView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHeight_percent="0.7"
@@ -540,4 +546,13 @@
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/loadingProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/circle_shape"
+        android:theme="@style/circleProgress"
+        android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -159,4 +159,10 @@
     <string name="waiting_for_location">Waiting for Location</string>
     <string name="create_address_successfully">Create address successfully</string>
     <string name="update_address_successfully">Update address successfully</string>
+    <string name="apply">Apply</string>
+    <string name="usage">Usage</string>
+    <string name="voucher">Voucher</string>
+    <string name="hsd" translatable="false">HSD :</string>
+    <string name="notification_voucher_selection">Please select a voucher</string>
+    <string name="input_voucher">Input voucher</string>
 </resources>

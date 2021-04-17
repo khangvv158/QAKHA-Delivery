@@ -7,10 +7,10 @@ import java.util.*
 
 @Parcelize
 data class Voucher(
-    @SerializedName("id") val id: String,
+    @SerializedName("id") val id: Int,
     @SerializedName("code") val code: String,
     @SerializedName("discount") val discount: Float,
-    @SerializedName("condition") val condition: String,
+    @SerializedName("condition") val condition: Float,
     @SerializedName("expiry_date") val expiryDate: Date,
     @SerializedName("usage_limit") val usageLimit: Int,
     @SerializedName("description") val description: String,

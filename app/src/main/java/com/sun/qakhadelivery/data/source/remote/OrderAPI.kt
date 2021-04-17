@@ -19,7 +19,7 @@ interface OrderAPI {
 
     @GET(ORDER_PATH + VOUCHERS)
     fun showVoucher(
-        @Body voucherRequest: VoucherRequest,
+        @Query(Constants.PARTNER_ID) partnerId: Int,
         @Header(Constants.AUTHORIZATION) token: String?
     ): Observable<MutableList<Voucher>>
 
@@ -39,6 +39,7 @@ interface OrderAPI {
     @POST(ORDER_PATH + VOUCHER)
     fun createOrder(@Header(Constants.AUTHORIZATION) token: String?)
 
+    //To do late
     @POST(ORDER_PATH + DISTANCE)
     fun calculateDistance(
         @Body distanceRequest: DistanceRequest,
