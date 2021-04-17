@@ -15,8 +15,10 @@ class PartnerViewHolder(viewGroup: ViewGroup) :
 
     override fun bind(item: PartnerItem) {
         with(itemView) {
-            Glide.with(context).load(item.partner.image.imageUrl).centerCrop()
-                .placeholder(R.drawable.ic_placehoder_product).into(imageViewPartner)
+            Glide.with(context).load(item.partner.image.imageUrl)
+                .centerCrop()
+                .placeholder(R.drawable.ic_placehoder_product)
+                .into(imageViewPartner)
             textViewNamePartner?.text = item.partner.name
             textViewAddressPartner?.text = item.partner.address
             textViewRatePartner?.text = item.partner.rate.toString()

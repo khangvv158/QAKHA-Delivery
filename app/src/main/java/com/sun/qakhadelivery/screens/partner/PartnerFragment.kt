@@ -74,10 +74,7 @@ class PartnerFragment : Fragment(), PartnerContract.View {
         presenter.setView(this@PartnerFragment)
         UserUtils.workWithSignIn(requireContext()) {
             arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
-                val products = it.categories
-                    .flatMap { category -> category.products }
-                    .toMutableList()
-                presenter.getCart(it.id, products)
+                presenter.getCart(it.id, it.getProducts())
             }
         }
     }

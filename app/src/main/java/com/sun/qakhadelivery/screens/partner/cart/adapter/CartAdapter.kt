@@ -3,6 +3,7 @@ package com.sun.qakhadelivery.screens.partner.cart.adapter
 import android.view.ViewGroup
 import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
+import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.CartItem
 import com.sun.qakhadelivery.widget.recyclerview.viewholder.CartViewHolder
@@ -29,8 +30,8 @@ class CartAdapter : CustomRecyclerView.Adapter<CartViewHolder>(arrayListOf()),
         listener?.decrease(cartRequest)
     }
 
-    override fun remove(cartRequest: CartRequest) {
-        listener?.remove(cartRequest)
+    override fun remove(removeCartRequest: RemoveCartRequest) {
+        listener?.remove(removeCartRequest)
     }
 
     fun updateProducts(carts: MutableList<Cart>) {
@@ -61,7 +62,7 @@ class CartAdapter : CustomRecyclerView.Adapter<CartViewHolder>(arrayListOf()),
 
             fun decrease(cartRequest: CartRequest)
 
-            fun remove(cartRequest: CartRequest)
+            fun remove(removeCartRequest: RemoveCartRequest)
 
             fun finish()
         }

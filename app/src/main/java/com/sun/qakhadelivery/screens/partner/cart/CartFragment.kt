@@ -54,38 +54,8 @@ class CartFragment : BottomSheetDialogFragment(),
         super.onStart()
         presenter.setView(this@CartFragment)
         arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
-            val products = it.categories
-                .flatMap { category -> category.products }
-                .toMutableList()
-            presenter.getCart(it.id, products)
-            cartAdapter.setOnClickCartListener(object :
-                CartAdapter.OnClickCartListener.CartListener {
-
-                override fun increase(cartRequest: CartRequest) {
-                    presenter.updateCart(cartRequest, products)
-                    disableInteraction()
-                }
-
-                override fun decrease(cartRequest: CartRequest) {
-                    presenter.updateCart(cartRequest, products)
-                    disableInteraction()
-                }
-
-                override fun remove(cartRequest: CartRequest) {
-                    presenter.removeCart(
-                        RemoveCartRequest(
-                            cartRequest.partner_id,
-                            cartRequest.product_id
-                        ),
-                        products
-                    )
-                    disableInteraction()
-                }
-
-                override fun finish() {
-                    dismiss()
-                }
-            })
+            presenter.getCart(it.id, it.getProducts())
+            disableInteraction()
         }
     }
 
@@ -157,6 +127,30 @@ class CartFragment : BottomSheetDialogFragment(),
                 CheckoutFragment.newInstance(arguments),
                 R.id.containerView
             )
+        }
+        arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
+            cartAdapter.setOnClickCartListener(object :
+                CartAdapter.OnClickCartListener.CartListener {
+
+                override fun increase(cartRequest: CartRequest) {
+                    presenter.updateCart(cartRequest, it.getProducts())
+                    disableInteraction()
+                }
+
+                override fun decrease(cartRequest: CartRequest) {
+                    presenter.updateCart(cartRequest, it.getProducts())
+                    disableInteraction()
+                }
+
+                override fun remove(removeCartRequest: RemoveCartRequest) {
+                    presenter.removeCart(removeCartRequest, it.getProducts())
+                    disableInteraction()
+                }
+
+                override fun finish() {
+                    dismiss()
+                }
+            })
         }
     }
 

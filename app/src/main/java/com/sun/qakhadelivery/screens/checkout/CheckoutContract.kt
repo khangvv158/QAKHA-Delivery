@@ -2,9 +2,11 @@ package com.sun.qakhadelivery.screens.checkout
 
 import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.data.model.Product
+import com.sun.qakhadelivery.data.model.Voucher
 import com.sun.qakhadelivery.data.source.remote.schema.request.ApplyVoucher
-import com.sun.qakhadelivery.data.source.remote.schema.request.DistanceRequest
+import com.sun.qakhadelivery.data.source.remote.schema.request.VoucherCancel
 import com.sun.qakhadelivery.data.source.remote.schema.response.ApplyVoucherResponse
+import com.sun.qakhadelivery.data.source.remote.schema.response.CancelVoucherResponse
 import com.sun.qakhadelivery.utils.BasePresenter
 
 interface CheckoutContract {
@@ -17,9 +19,17 @@ interface CheckoutContract {
 
         fun onSuccessApplyVoucher(applyVoucherResponse: ApplyVoucherResponse)
 
-        fun onErrorApplyVoucher(exception: String)
+        fun onSuccessCancelVouchers(cancelVoucherResponse: CancelVoucherResponse)
+
+        fun onSuccessGetVouchers(vouchers: MutableList<Voucher>)
 
         fun onUpdateTotalPrice(total: Float)
+
+        fun onErrorApplyVoucher(exception: String)
+
+        fun onErrorGetVouchers(exception: String)
+
+        fun onErrorCancelVouchers(exception: String)
     }
 
     interface Presenter : BasePresenter<View> {
@@ -28,6 +38,8 @@ interface CheckoutContract {
 
         fun applyVoucher(applyVoucher: ApplyVoucher)
 
-        fun calculatorPrice(distanceRequest: DistanceRequest)
+        fun cancelVoucher(voucherCancel: VoucherCancel)
+
+        fun getVouchers(partnerId: Int)
     }
 }

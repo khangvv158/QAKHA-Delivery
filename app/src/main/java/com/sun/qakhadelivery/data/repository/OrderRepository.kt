@@ -6,18 +6,20 @@ import com.sun.qakhadelivery.data.source.remote.RetrofitClient
 import com.sun.qakhadelivery.data.source.remote.schema.request.ApplyVoucher
 import com.sun.qakhadelivery.data.source.remote.schema.request.DistanceRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.VoucherCancel
-import com.sun.qakhadelivery.data.source.remote.schema.request.VoucherRequest
-import com.sun.qakhadelivery.data.source.remote.schema.response.CancelVoucherResponse
 import com.sun.qakhadelivery.data.source.remote.schema.response.ApplyVoucherResponse
+import com.sun.qakhadelivery.data.source.remote.schema.response.CancelVoucherResponse
 import io.reactivex.rxjava3.core.Observable
 
 interface OrderRepository {
 
-    fun showVoucher(voucherRequest: VoucherRequest, token: String): Observable<MutableList<Voucher>>
+    fun showVoucher(partnerId: Int, token: String): Observable<MutableList<Voucher>>
 
     fun applyVoucher(apply: ApplyVoucher, token: String): Observable<ApplyVoucherResponse>
 
-    fun cancelVoucher(VoucherCancel: VoucherCancel, token: String): Observable<CancelVoucherResponse>
+    fun cancelVoucher(
+        VoucherCancel: VoucherCancel,
+        token: String
+    ): Observable<CancelVoucherResponse>
 
     fun createOrder()
 
@@ -29,10 +31,10 @@ class OrderRepositoryImpl private constructor() : OrderRepository {
     private val client = RetrofitClient.getInstance().create(OrderAPI::class.java)
 
     override fun showVoucher(
-        voucherRequest: VoucherRequest,
+        partnerId: Int,
         token: String
     ): Observable<MutableList<Voucher>> {
-        return client.showVoucher(voucherRequest, token)
+        return client.showVoucher(partnerId, token)
     }
 
     override fun applyVoucher(
@@ -50,10 +52,11 @@ class OrderRepositoryImpl private constructor() : OrderRepository {
     }
 
     override fun createOrder() {
+        //todo late
     }
 
     override fun calculateDistance(distanceRequest: DistanceRequest, token: String) {
-        client.calculateDistance(distanceRequest, token)
+        //todo late
     }
 
     companion object {

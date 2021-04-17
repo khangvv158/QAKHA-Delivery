@@ -6,7 +6,7 @@ import com.sun.qakhadelivery.data.repository.CartRepository
 import com.sun.qakhadelivery.data.repository.OrderRepository
 import com.sun.qakhadelivery.data.repository.TokenRepository
 import com.sun.qakhadelivery.data.source.remote.schema.request.ApplyVoucher
-import com.sun.qakhadelivery.data.source.remote.schema.request.DistanceRequest
+import com.sun.qakhadelivery.data.source.remote.schema.request.VoucherCancel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -41,7 +41,7 @@ class CheckoutPresenter(
     }
 
     override fun applyVoucher(applyVoucher: ApplyVoucher) {
-        orderRepository.applyVoucher(applyVoucher, tokenRepository.getToken())
+        val disposable = orderRepository.applyVoucher(applyVoucher, tokenRepository.getToken())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -49,9 +49,31 @@ class CheckoutPresenter(
             }, {
                 view?.onErrorApplyVoucher(it.message.toString())
             })
+        compositeDisposable.add(disposable)
     }
 
-    override fun calculatorPrice(distanceRequest: DistanceRequest) {
+    override fun cancelVoucher(voucherCancel: VoucherCancel) {
+        val disposable = orderRepository.cancelVoucher(voucherCancel, tokenRepository.getToken())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                view?.onSuccessCancelVouchers(it)
+            }, {
+                view?.onErrorCancelVouchers(it.message.toString())
+            })
+        compositeDisposable.add(disposable)
+    }
+
+    override fun getVouchers(partnerId: Int) {
+        val disposable = orderRepository.showVoucher(partnerId, tokenRepository.getToken())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                view?.onSuccessGetVouchers(it)
+            }, {
+                view?.onErrorGetVouchers(it.message.toString())
+            })
+        compositeDisposable.add(disposable)
     }
 
     override fun onStart() = Unit

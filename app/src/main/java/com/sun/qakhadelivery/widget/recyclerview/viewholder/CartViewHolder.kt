@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
+import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
 import com.sun.qakhadelivery.utils.Constants.DEFAULT_QUANTITY
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.CartItem
@@ -44,7 +45,7 @@ class CartViewHolder(viewGroup: ViewGroup) :
                         quantity -= DEFAULT_QUANTITY
                         listener.decrease(CartRequest(product.id, quantity, partnerId))
                     } else {
-                        listener.remove(CartRequest(product.id, quantity, partnerId))
+                        listener.remove(RemoveCartRequest(product.id, partnerId))
                     }
                 }
             }
@@ -57,7 +58,7 @@ class CartViewHolder(viewGroup: ViewGroup) :
 
         fun decrease(cartRequest: CartRequest)
 
-        fun remove(cartRequest: CartRequest)
+        fun remove(removeCartRequest: RemoveCartRequest)
     }
 
     companion object {

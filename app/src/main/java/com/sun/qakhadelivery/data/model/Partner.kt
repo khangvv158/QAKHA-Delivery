@@ -21,4 +21,9 @@ data class Partner(
     @SerializedName("latitude") val latitude: Float?,
     @SerializedName("longitude") val longitude: Float?,
     @SerializedName("categories") val categories: MutableList<Category>
-) : Parcelable
+) : Parcelable {
+
+    fun getProducts(): MutableList<Product> {
+        return categories.flatMap { category -> category.products }.toMutableList()
+    }
+}
