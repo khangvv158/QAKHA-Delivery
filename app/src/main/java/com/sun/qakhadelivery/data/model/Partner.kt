@@ -18,8 +18,8 @@ data class Partner(
     @SerializedName("timeOpen") val timeOpen: String = DEFAULT_STRING,
     @SerializedName("timeClose") val timeClose: String = DEFAULT_STRING,
     @SerializedName("status") val status: String = DEFAULT_STRING,
-    @SerializedName("latitude") val latitude: Float?,
-    @SerializedName("longitude") val longitude: Float?,
+    @SerializedName("latitude") val latitude: Float = DEFAULT_FLOAT,
+    @SerializedName("longitude") val longitude: Float = DEFAULT_FLOAT,
     @SerializedName("categories") val categories: MutableList<Category>
 ) : Parcelable {
 

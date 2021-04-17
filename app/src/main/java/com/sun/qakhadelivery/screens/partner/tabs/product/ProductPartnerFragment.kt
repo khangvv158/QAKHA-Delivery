@@ -67,6 +67,8 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
         const val BUNDLE_PRODUCT = "EXTRA_PRODUCT"
         const val KEY_REQUEST_PARTNER = "KEY_REQUEST_PARTNER"
 
-        fun newInstance() = ProductPartnerFragment()
+        fun newInstance(bundle: Bundle?) = ProductPartnerFragment().apply {
+            arguments = bundle
+        }
     }
 }

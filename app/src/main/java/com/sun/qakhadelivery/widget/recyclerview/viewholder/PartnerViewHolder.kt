@@ -3,8 +3,8 @@ package com.sun.qakhadelivery.widget.recyclerview.viewholder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.extensions.loadUrl
 import com.sun.qakhadelivery.extensions.setOnSafeClickListener
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.PartnerItem
@@ -15,10 +15,7 @@ class PartnerViewHolder(viewGroup: ViewGroup) :
 
     override fun bind(item: PartnerItem) {
         with(itemView) {
-            Glide.with(context).load(item.partner.image.imageUrl)
-                .centerCrop()
-                .placeholder(R.drawable.ic_placehoder_product)
-                .into(imageViewPartner)
+            imageViewPartner.loadUrl(item.partner.image.imageUrl)
             textViewNamePartner?.text = item.partner.name
             textViewAddressPartner?.text = item.partner.address
             textViewRatePartner?.text = item.partner.rate.toString()

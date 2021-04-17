@@ -165,4 +165,7 @@
     <string name="hsd" translatable="false">HSD :</string>
     <string name="notification_voucher_selection">Please select a voucher</string>
     <string name="input_voucher">Input voucher</string>
+    <string name="time_open">Time Open :</string>
+    <string name="time_close">Time Close :</string>
+    <string name="status">Status :</string>
 </resources>

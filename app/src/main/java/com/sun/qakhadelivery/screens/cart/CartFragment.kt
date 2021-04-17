@@ -1,4 +1,4 @@
-package com.sun.qakhadelivery.screens.partner.cart
+package com.sun.qakhadelivery.screens.cart
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -18,7 +18,7 @@ import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.checkout.CheckoutFragment
 import com.sun.qakhadelivery.screens.partner.PartnerFragment.Companion.BUNDLE_PARTNER
-import com.sun.qakhadelivery.screens.partner.cart.adapter.CartAdapter
+import com.sun.qakhadelivery.screens.cart.adapter.CartAdapter
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : BottomSheetDialogFragment(),

@@ -12,7 +12,6 @@ import com.sun.qakhadelivery.data.model.Order
 import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.screens.order.tabs.history.adapter.HistoryAdapter
 import com.sun.qakhadelivery.screens.orderdetail.OrderDetailFragment
-import com.sun.qakhadelivery.utils.getOrderHistory
 import kotlinx.android.synthetic.main.fragment_history.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -52,7 +51,6 @@ class HistoryFragment : Fragment() {
     }
 
     private fun initData() {
-        historyAdapter.updateData(getOrderHistory())
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
