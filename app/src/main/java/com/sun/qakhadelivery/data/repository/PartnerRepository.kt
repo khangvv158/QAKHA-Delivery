@@ -1,5 +1,6 @@
 package com.sun.qakhadelivery.data.repository
 
+import com.sun.qakhadelivery.data.model.Feedback
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.source.remote.PartnerApi
@@ -14,6 +15,8 @@ interface PartnerRepository {
     fun getPartners(): Observable<MutableList<Partner>>
 
     fun getPartnersByIdType(idType: Int): Observable<MutableList<Partner>>
+
+    fun getFeedbackByIdPartner(idPartner: Int): Observable<Feedback>
 }
 
 class PartnerRepositoryImpl : PartnerRepository {
@@ -24,8 +27,11 @@ class PartnerRepositoryImpl : PartnerRepository {
 
     override fun getPartners(): Observable<MutableList<Partner>> = client.getPartners()
 
-    override fun getPartnersByIdType(idType : Int): Observable<MutableList<Partner>>
-    = client.getPartnersByIdType(idType)
+    override fun getPartnersByIdType(idType: Int): Observable<MutableList<Partner>> =
+        client.getPartnersByIdType(idType)
+
+    override fun getFeedbackByIdPartner(idPartner: Int): Observable<Feedback> =
+        client.getFeedbackByIdPartner(idPartner)
 
     companion object {
 
