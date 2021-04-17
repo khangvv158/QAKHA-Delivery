@@ -18,6 +18,8 @@ class ReviewFragment : Fragment() {
 
     companion object {
 
-        fun newInstance() = ReviewFragment()
+        fun newInstance(bundle: Bundle?) = ReviewFragment().apply {
+            arguments = bundle
+        }
     }
 }

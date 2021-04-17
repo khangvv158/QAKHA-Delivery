@@ -152,6 +152,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         arguments?.run {
             putParcelable(VOUCHER_BUNDLE, null)
             getParcelable<Partner>(BUNDLE_PARTNER)?.let { partner ->
+                textViewNamePartner.text = partner.name
                 presenter.run {
                     setView(this@CheckoutFragment)
                     getCart(partner.id, partner.getProducts())

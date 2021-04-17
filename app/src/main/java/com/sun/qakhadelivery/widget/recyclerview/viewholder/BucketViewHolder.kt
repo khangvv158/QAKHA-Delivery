@@ -10,11 +10,11 @@ import com.sun.qakhadelivery.widget.recyclerview.item.BucketItem
 import kotlinx.android.synthetic.main.item_layout_bucket.view.*
 
 class BucketViewHolder(viewGroup: ViewGroup) :
-        CustomRecyclerView.ViewHolder<BucketItem>(newInstance(viewGroup)) {
+    CustomRecyclerView.ViewHolder<BucketItem>(newInstance(viewGroup)) {
 
     override fun bind(item: BucketItem) {
         with(itemView) {
-            imageViewProduct?.loadUrl("https://i.pinimg.com/564x/0a/e3/72/0ae37284e96d4740527887f1b051bb8f.jpg")
+            imageViewProduct?.loadUrl(item.cart.product.image.imageUrl)
             textViewNameProduct?.text = item.cart.product.name
             textViewQuantityProduct?.text = item.cart.quantity.toString()
             textViewPriceProduct?.text = item.cart.product.price.toString()
@@ -25,7 +25,7 @@ class BucketViewHolder(viewGroup: ViewGroup) :
 
         fun newInstance(viewGroup: ViewGroup): View {
             return LayoutInflater.from(viewGroup.context)
-                    .inflate(R.layout.item_layout_bucket, viewGroup, false)
+                .inflate(R.layout.item_layout_bucket, viewGroup, false)
         }
     }
 }

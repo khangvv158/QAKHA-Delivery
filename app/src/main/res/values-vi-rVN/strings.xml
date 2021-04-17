@@ -154,4 +154,7 @@
     <string name="voucher">Mã giảm giá</string>
     <string name="notification_voucher_selection">Vui lòng chọn một voucher</string>
     <string name="input_voucher">Nhập mã giảm giá</string>
+    <string name="time_open">Mở cửa :</string>
+    <string name="time_close">Đóng cửa :</string>
+    <string name="status">Trạng thái :</string>
 </resources>

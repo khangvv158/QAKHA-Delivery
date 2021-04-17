@@ -1,4 +1,4 @@
-package com.sun.qakhadelivery.screens.partner.cart
+package com.sun.qakhadelivery.screens.cart
 
 import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.data.model.Product

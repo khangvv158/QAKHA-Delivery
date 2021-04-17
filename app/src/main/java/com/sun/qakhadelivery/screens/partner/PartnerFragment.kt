@@ -11,8 +11,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
-import com.bumptech.glide.Glide
-import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.data.model.Partner
@@ -21,12 +19,10 @@ import com.sun.qakhadelivery.data.repository.CartRepositoryImpl
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
-import com.sun.qakhadelivery.extensions.gone
-import com.sun.qakhadelivery.extensions.setOnSafeClickListener
-import com.sun.qakhadelivery.extensions.show
+import com.sun.qakhadelivery.extensions.*
+import com.sun.qakhadelivery.screens.cart.CartFragment
 import com.sun.qakhadelivery.screens.home.HomeFragment
 import com.sun.qakhadelivery.screens.partner.adaper.PartnerPagerAdapter
-import com.sun.qakhadelivery.screens.partner.cart.CartFragment
 import com.sun.qakhadelivery.screens.partner.tabs.information.InfoPartnerFragment
 import com.sun.qakhadelivery.screens.partner.tabs.product.ProductPartnerFragment
 import com.sun.qakhadelivery.screens.partner.tabs.review.ReviewFragment
@@ -121,13 +117,10 @@ class PartnerFragment : Fragment(), PartnerContract.View {
 
     private fun initData() {
         arguments?.getParcelable<Partner>(HomeFragment.BUNDLE_PARTNER)?.let {
-            Glide.with(requireContext())
-                .load(it.image.imageUrl)
-                .error(R.drawable.background_partner_blur)
-                .into(partnerImageView)
+            partnerImageView.loadUrl(it.image.imageUrl)
             titlePartnerTextView.text = it.name
-            addressPartnerTextView.text = it.address
             ratePartnerTextView.text = it.rate.toString()
+            statusTextView.text = it.status
         }
         cartBottomSheet.arguments = arguments
     }
@@ -140,9 +133,9 @@ class PartnerFragment : Fragment(), PartnerContract.View {
         partnerViewPager.apply {
             offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
             adapter = pagerAdapter.apply {
-                addFragment(ProductPartnerFragment.newInstance().also { it.arguments = arguments })
-                addFragment(ReviewFragment.newInstance())
-                addFragment(InfoPartnerFragment.newInstance())
+                addFragment(ProductPartnerFragment.newInstance(arguments))
+                addFragment(ReviewFragment.newInstance(arguments))
+                addFragment(InfoPartnerFragment.newInstance(arguments))
             }
         }
     }

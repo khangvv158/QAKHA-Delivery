@@ -3,8 +3,8 @@ package com.sun.qakhadelivery.widget.recyclerview.viewholder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.extensions.loadUrl
 import com.sun.qakhadelivery.extensions.setOnSafeClickListener
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.ProductItem
@@ -15,10 +15,7 @@ class ProductViewHolder(viewGroup: ViewGroup) :
 
     override fun bind(item: ProductItem) {
         with(itemView) {
-            Glide.with(itemView)
-                .load(item.product.image.imageUrl)
-                .placeholder(R.drawable.ic_placehoder_product)
-                .into(productImageView)
+            productImageView.loadUrl(item.product.image.imageUrl)
             titleProductTextView.text = item.product.name
             describeProductTextView.text = item.product.description
             priceProductTextView.text = item.product.price.toString()

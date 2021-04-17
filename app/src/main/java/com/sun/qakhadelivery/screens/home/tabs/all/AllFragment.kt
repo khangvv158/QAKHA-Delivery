@@ -5,15 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
+import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.extensions.gone
-import com.sun.qakhadelivery.extensions.isVisible
 import com.sun.qakhadelivery.extensions.show
 import com.sun.qakhadelivery.screens.home.tabs.all.adapter.AllPartnerAdapter
 import com.sun.qakhadelivery.screens.partner.PartnerFragment
@@ -69,7 +67,9 @@ class AllFragment : Fragment(),
         adapter.updateData(partners)
     }
 
-    override fun onErrorGetPartners(exception: String) = Unit
+    override fun onErrorGetPartners(exception: String) {
+        loadingProgress.gone()
+    }
 
     override fun onSuccessGetPartnersById(partners: MutableList<Partner>) {
         loadingProgress.gone()

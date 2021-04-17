@@ -1,4 +1,4 @@
-package com.sun.qakhadelivery.screens.partner.cart.adapter
+package com.sun.qakhadelivery.screens.cart.adapter
 
 import android.view.ViewGroup
 import com.sun.qakhadelivery.data.model.Cart

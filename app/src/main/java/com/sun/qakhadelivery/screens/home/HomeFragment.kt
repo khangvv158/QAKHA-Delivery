@@ -23,7 +23,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
-import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.screens.home.adapter.QueryPartnerPageAdapter
 import com.sun.qakhadelivery.screens.home.adapter.SliderAdapter
 import com.sun.qakhadelivery.screens.home.adapter.TypePartnerAdapter
@@ -38,7 +37,6 @@ import com.sun.qakhadelivery.utils.IPositiveNegativeListener
 import com.sun.qakhadelivery.utils.LocationHelper
 import com.sun.qakhadelivery.widget.recyclerview.item.TypePartnerItem
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.indicatorView
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.greenrobot.eventbus.EventBus
 import java.util.*
@@ -129,7 +127,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
         locationProviderClient.lastLocation.addOnSuccessListener {
             try {
                 currentLatLng = LatLng(it.latitude, it.longitude)
-                Log.e("location ",currentLatLng.toString())
+                Log.e("location ", currentLatLng.toString())
             } catch (e: Exception) {
             }
         }
@@ -194,7 +192,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
                 ?.let { add(it) }
             ContextCompat.getDrawable(requireContext(), R.drawable.banner_food_3)
                 ?.let { add(it) }
-            ContextCompat.getDrawable(requireContext(), R.drawable.background_partner)
+            ContextCompat.getDrawable(requireContext(), R.drawable.banner_food_4)
                 ?.let { add(it) }
         }
     }

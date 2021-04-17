@@ -3,10 +3,10 @@ package com.sun.qakhadelivery.widget.recyclerview.viewholder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
+import com.sun.qakhadelivery.extensions.loadUrl
 import com.sun.qakhadelivery.utils.Constants.DEFAULT_QUANTITY
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.CartItem
@@ -17,10 +17,7 @@ class CartViewHolder(viewGroup: ViewGroup) :
 
     override fun bind(item: CartItem) {
         with(itemView) {
-            Glide.with(itemView)
-                .load(item.cart.product.image.imageUrl)
-                .placeholder(R.drawable.ic_placehoder_product)
-                .into(productImageView)
+            productImageView.loadUrl(item.cart.product.image.imageUrl)
             titleProductTextView.text = item.cart.product.name
             describeProductTextView.text = item.cart.product.description
             priceProductTextView.text = item.cart.product.price.toString()

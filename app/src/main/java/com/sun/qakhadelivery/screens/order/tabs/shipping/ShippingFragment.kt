@@ -10,7 +10,6 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Event
 import com.sun.qakhadelivery.data.model.Order
 import com.sun.qakhadelivery.screens.order.tabs.shipping.adapter.ShippingAdapter
-import com.sun.qakhadelivery.utils.getOrderShipping
 import kotlinx.android.synthetic.main.fragment_shipping.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -50,7 +49,6 @@ class ShippingFragment : Fragment() {
     }
 
     private fun initData() {
-        shippingAdapter.updateData(getOrderShipping())
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
