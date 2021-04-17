@@ -29,9 +29,9 @@ class ChooseAddressPresenter(
         compositeDisposable.add(disposable)
     }
 
-    override fun updateAddress(name: String, latitude: Double, longitude: Double) {
+    override fun updateAddress(name: String, latitude: Double, longitude: Double, idAddress: Int) {
         val disposable = addressRepository.updateAddress(
-            AddressRequest(name, latitude.toFloat(), longitude.toFloat()),
+            AddressRequest(name, latitude.toFloat(), longitude.toFloat()), idAddress,
             tokenRepository.getToken()
         ).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -4,8 +4,10 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.location.Geocoder
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
+import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.screens.home.adapter.QueryPartnerPageAdapter
 import com.sun.qakhadelivery.screens.home.adapter.SliderAdapter
 import com.sun.qakhadelivery.screens.home.adapter.TypePartnerAdapter
@@ -30,6 +33,7 @@ import com.sun.qakhadelivery.screens.home.tabs.bestrated.BestRatedFragment
 import com.sun.qakhadelivery.screens.home.tabs.nearby.NearbyFragment
 import com.sun.qakhadelivery.screens.home.tabs.topsales.TopSaleFragment
 import com.sun.qakhadelivery.screens.main.MainActivity
+import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.utils.IPositiveNegativeListener
 import com.sun.qakhadelivery.utils.LocationHelper
 import com.sun.qakhadelivery.widget.recyclerview.item.TypePartnerItem
@@ -37,6 +41,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.indicatorView
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.greenrobot.eventbus.EventBus
+import java.util.*
 
 class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnClickListener {
 
@@ -54,11 +59,14 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     private val locationProviderClient: FusedLocationProviderClient by lazy {
         LocationServices.getFusedLocationProviderClient(requireContext())
     }
+    private val geo: Geocoder by lazy {
+        Geocoder(requireContext(), Locale.getDefault())
+    }
     private var currentLatLng = LatLng(0.0, 0.0)
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
@@ -97,8 +105,12 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
 
     private fun checkPermission() {
         if (!LocationHelper.isPlayServicesAvailable(requireContext())) {
-            Toast.makeText(requireContext(), getString(R.string.play_services_did_not_installed), Toast.LENGTH_SHORT)
-                    .show()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.play_services_did_not_installed),
+                Toast.LENGTH_SHORT
+            )
+                .show()
         } else getLocationLast()
     }
 
@@ -106,9 +118,9 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     private fun getLocationLast() {
         if (!LocationHelper.isHaveLocationPermission(requireContext())) {
             ActivityCompat.requestPermissions(
-                    activity as MainActivity,
-                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
+                activity as MainActivity,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
             )
             return
         }
@@ -117,24 +129,24 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
         locationProviderClient.lastLocation.addOnSuccessListener {
             try {
                 currentLatLng = LatLng(it.latitude, it.longitude)
+                Log.e("location ",currentLatLng.toString())
             } catch (e: Exception) {
-
             }
         }
     }
 
     private fun showDialogEnableGPS() {
         LocationHelper.showPositiveDialogWithListener(
-                requireContext(),
-                getString(R.string.enable_gps_service),
-                getString(R.string.content_location),
-                object : IPositiveNegativeListener {
-                    override fun onPositive() {
-                        startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
-                    }
-                },
-                getString(R.string.turn_on),
-                false
+            requireContext(),
+            getString(R.string.enable_gps_service),
+            getString(R.string.content_location),
+            object : IPositiveNegativeListener {
+                override fun onPositive() {
+                    startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+                }
+            },
+            getString(R.string.turn_on),
+            false
         )
     }
 
@@ -149,10 +161,10 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
             val highlighter = View(requireContext())
             highlighter.layoutParams = FrameLayout.LayoutParams(16, 2)
             highlighter.setBackgroundColor(
-                    ContextCompat.getColor(
-                            requireContext(),
-                            R.color.colorWhite
-                    )
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorWhite
+                )
             )
             highlighter
         }
@@ -160,10 +172,10 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
             val unselected = View(requireContext())
             unselected.layoutParams = LinearLayout.LayoutParams(16, 2)
             unselected.setBackgroundColor(
-                    ContextCompat.getColor(
-                            requireContext(),
-                            R.color.colorWhite
-                    )
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.colorWhite
+                )
             )
             unselected.alpha = 0.4f
             unselected
@@ -177,13 +189,13 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     private fun initSliderData() {
         dataSlider.apply {
             ContextCompat.getDrawable(requireContext(), R.drawable.banner_food_1)
-                    ?.let { add(it) }
+                ?.let { add(it) }
             ContextCompat.getDrawable(requireContext(), R.drawable.banner_food_2)
-                    ?.let { add(it) }
+                ?.let { add(it) }
             ContextCompat.getDrawable(requireContext(), R.drawable.banner_food_3)
-                    ?.let { add(it) }
+                ?.let { add(it) }
             ContextCompat.getDrawable(requireContext(), R.drawable.background_partner)
-                    ?.let { add(it) }
+                ?.let { add(it) }
         }
     }
 
@@ -194,7 +206,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     }
 
     private fun initTypeData() {
-        typePartnerAdapter.addItem(TypePartnerItem(TypePartner(-1, "All")))
+        typePartnerAdapter.addItem(TypePartnerItem(TypePartner(Constants.ID_PARTNER_ALL, "All")))
         presenter.getTypes()
     }
 

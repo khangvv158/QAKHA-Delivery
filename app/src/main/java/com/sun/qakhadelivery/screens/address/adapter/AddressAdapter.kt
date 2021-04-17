@@ -29,9 +29,11 @@ class AddressAdapter : CustomRecyclerView.Adapter<AddressViewHolder>(arrayListOf
     }
 
     fun updateData(addresses: MutableList<Address>) {
+        clearItems()
         addItems(addresses.map {
             AddressItem(it)
         })
+        notifyDataSetChanged()
     }
 
     fun registerListener(listener: AddressAdapterOnClickListener) {

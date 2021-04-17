@@ -126,5 +126,4 @@ class AddressFragment : Fragment(), AddressAdapterOnClickListener, AddressContra
     companion object {
         fun newInstance() = AddressFragment()
     }
-
 }

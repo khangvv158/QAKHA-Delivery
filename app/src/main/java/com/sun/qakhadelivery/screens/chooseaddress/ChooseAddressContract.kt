@@ -14,6 +14,6 @@ interface ChooseAddressContract {
     interface Presenter : BasePresenter<View> {
 
         fun createAddress(name: String, latitude: Double, longitude: Double)
-        fun updateAddress(name: String, latitude: Double, longitude: Double)
+        fun updateAddress(name: String, latitude: Double, longitude: Double, idAddress: Int)
     }
 }

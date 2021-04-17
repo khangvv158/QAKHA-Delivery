@@ -4,6 +4,7 @@ import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.source.remote.PartnerApi
 import com.sun.qakhadelivery.data.source.remote.RetrofitClient
+import com.sun.qakhadelivery.data.source.remote.schema.request.TypeRequest
 import io.reactivex.rxjava3.core.Observable
 
 interface PartnerRepository {
@@ -11,6 +12,8 @@ interface PartnerRepository {
     fun getTypes(): Observable<MutableList<TypePartner>>
 
     fun getPartners(): Observable<MutableList<Partner>>
+
+    fun getPartnersByIdType(idType: Int): Observable<MutableList<Partner>>
 }
 
 class PartnerRepositoryImpl : PartnerRepository {
@@ -20,6 +23,9 @@ class PartnerRepositoryImpl : PartnerRepository {
     override fun getTypes(): Observable<MutableList<TypePartner>> = client.getTypesPartner()
 
     override fun getPartners(): Observable<MutableList<Partner>> = client.getPartners()
+
+    override fun getPartnersByIdType(idType : Int): Observable<MutableList<Partner>>
+    = client.getPartnersByIdType(idType)
 
     companion object {
 
