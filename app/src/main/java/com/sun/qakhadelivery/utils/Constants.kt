@@ -19,4 +19,6 @@ object Constants {
     const val VOUCHERS = "vouchers"
     const val DISTANCE = "calc_distance"
     const val ID_PARTNER_ALL = -1
+    const val INPUT_FORMAT_DATE = "yyyy-MM-dd'T'HH:mm:ssZ"
+    const val OUTPUT_FORMAT_DATE = "dd-MM-yyyy HH:mm"
 }

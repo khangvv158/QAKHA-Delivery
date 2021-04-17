@@ -1,12 +1,10 @@
 package com.sun.qakhadelivery.data.source.remote
 
+import com.sun.qakhadelivery.data.model.Feedback
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
-import com.sun.qakhadelivery.data.source.remote.schema.request.TypeRequest
 import io.reactivex.rxjava3.core.Observable
-import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.HTTP
 import retrofit2.http.Query
 
 interface PartnerApi {
@@ -19,4 +17,7 @@ interface PartnerApi {
 
     @GET("types/partners")
     fun getPartnersByIdType(@Query("type_id") idType: Int): Observable<MutableList<Partner>>
+
+    @GET("feedbacks/partner")
+    fun getFeedbackByIdPartner(@Query("partner_id") idPartner: Int): Observable<Feedback>
 }
