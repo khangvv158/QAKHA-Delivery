@@ -142,11 +142,14 @@ class ChooseAddressFragment : Fragment(), ChooseAddressContract.View {
                     positionClickable.longitude
                 )
             } else {
-                presenter.updateAddress(
-                    nameAddressEditText.text.toString(),
-                    positionClickable.latitude,
-                    positionClickable.longitude
-                )
+                addressUser?.let {
+                    presenter.updateAddress(
+                        nameAddressEditText.text.toString(),
+                        positionClickable.latitude,
+                        positionClickable.longitude,
+                        it.idAddress
+                    )
+                }
             }
         }
         imageViewBack.setOnClickListener {

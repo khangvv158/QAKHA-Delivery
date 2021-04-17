@@ -5,15 +5,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
+import com.sun.qakhadelivery.extensions.gone
+import com.sun.qakhadelivery.extensions.isVisible
+import com.sun.qakhadelivery.extensions.show
 import com.sun.qakhadelivery.screens.home.tabs.all.adapter.AllPartnerAdapter
 import com.sun.qakhadelivery.screens.partner.PartnerFragment
 import com.sun.qakhadelivery.screens.partner.PartnerFragment.Companion.BUNDLE_PARTNER
+import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_all.*
 import org.greenrobot.eventbus.EventBus
@@ -60,10 +65,16 @@ class AllFragment : Fragment(),
     }
 
     override fun onSuccessGetPartners(partners: MutableList<Partner>) {
+        loadingProgress.gone()
         adapter.updateData(partners)
     }
 
     override fun onErrorGetPartners(exception: String) = Unit
+
+    override fun onSuccessGetPartnersById(partners: MutableList<Partner>) {
+        loadingProgress.gone()
+        adapter.updateData(partners)
+    }
 
     private fun initViews() {
         recyclerViewPartnerAll.adapter = adapter.apply {
@@ -75,12 +86,19 @@ class AllFragment : Fragment(),
         presenter.run {
             setView(this@AllFragment)
             getPartners()
+            loadingProgress.show()
         }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun eventBusGetTypePartner(typePartner: TypePartner) {
-        //no-op
+        if (typePartner.id != Constants.ID_PARTNER_ALL) {
+            presenter.getPartnersByIdType(typePartner.id)
+            loadingProgress.show()
+        } else {
+            presenter.getPartners()
+            loadingProgress.show()
+        }
     }
 
     override fun onItemClickListener(item: Partner?) {

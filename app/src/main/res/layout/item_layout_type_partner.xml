@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/dp_10"
     android:layout_marginTop="@dimen/dp_10"
+    android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/dp_10"
     app:cardElevation="@dimen/dp_1"
     app:cardUseCompatPadding="true">

@@ -8,6 +8,8 @@ interface AllContract {
     interface Presenter : BasePresenter<View> {
 
         fun getPartners()
+
+        fun getPartnersByIdType(idType: Int)
     }
 
     interface View {
@@ -15,5 +17,7 @@ interface AllContract {
         fun onSuccessGetPartners(partners: MutableList<Partner>)
 
         fun onErrorGetPartners(exception: String)
+
+        fun onSuccessGetPartnersById(partners: MutableList<Partner>)
     }
 }
