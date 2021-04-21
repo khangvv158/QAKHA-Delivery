@@ -66,7 +66,7 @@
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
+                android:id="@+id/addressLayout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_120"
                 android:background="@color/colorWhite"
@@ -88,7 +88,7 @@
                     app:layout_constraintVertical_bias="0.12" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewAddress"
+                    android:id="@+id/addressTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
@@ -134,7 +134,7 @@
                     app:layout_constraintVertical_bias="0.542" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewPhoneNumber"
+                    android:id="@+id/phoneNumberTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -143,12 +143,12 @@
                     android:textColor="@color/colorDustyGray"
                     android:textSize="@dimen/sp_10"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textViewUserName"
+                    app:layout_constraintStart_toEndOf="@+id/userNameTextView"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.72" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewUserName"
+                    android:id="@+id/userNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
@@ -170,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_10"
                 android:background="@color/colorWhite"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+                app:layout_constraintTop_toBottomOf="@+id/addressLayout">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewNamePartner"
@@ -346,7 +346,7 @@
                     app:layout_constraintVertical_bias="0.335" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewPriceShippingFee"
+                    android:id="@+id/priceShippingFeeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"

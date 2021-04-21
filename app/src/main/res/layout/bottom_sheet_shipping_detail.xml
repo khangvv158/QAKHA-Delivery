@@ -151,10 +151,10 @@
                     app:layout_constraintVertical_bias="0.277" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewAddress"
+                    android:id="@+id/addressTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginStart="@dimen/dp_10"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="@color/colorDustyGray"
@@ -183,7 +183,7 @@
                     app:layout_constraintVertical_bias="0.934" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewPhoneNumber"
+                    android:id="@+id/phoneNumberTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -192,15 +192,15 @@
                     android:textColor="@color/colorDustyGray"
                     android:textSize="@dimen/sp_12"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textViewUserName"
+                    app:layout_constraintStart_toEndOf="@+id/userNameTextView"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.719" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewUserName"
+                    android:id="@+id/userNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginStart="@dimen/dp_10"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="@color/colorDustyGray"
@@ -387,7 +387,7 @@
                     app:layout_constraintVertical_bias="0.335" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewPriceShippingFee"
+                    android:id="@+id/priceShippingFeeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"

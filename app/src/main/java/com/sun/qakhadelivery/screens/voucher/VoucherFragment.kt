@@ -8,9 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Voucher
-import com.sun.qakhadelivery.screens.checkout.CheckoutFragment.Companion.TOTAL_BUNDLE
-import com.sun.qakhadelivery.screens.checkout.CheckoutFragment.Companion.VOUCHERS_BUNDLE
-import com.sun.qakhadelivery.screens.checkout.CheckoutFragment.Companion.VOUCHER_BUNDLE
+import com.sun.qakhadelivery.screens.checkout.CheckoutFragment.Companion.BUNDLE_TOTAL
+import com.sun.qakhadelivery.screens.checkout.CheckoutFragment.Companion.BUNDLE_VOUCHER
+import com.sun.qakhadelivery.screens.checkout.CheckoutFragment.Companion.BUNDLE_VOUCHERS
 import com.sun.qakhadelivery.screens.voucher.adapter.VoucherAdapter
 import com.sun.qakhadelivery.widget.recyclerview.item.VoucherItem
 import kotlinx.android.synthetic.main.fragment_voucher.*
@@ -40,12 +40,12 @@ class VoucherFragment : Fragment() {
     private fun initViews() {
         voucherRecyclerView.adapter = adapter
         arguments?.run {
-            getParcelableArrayList<Voucher>(VOUCHERS_BUNDLE)?.let {
-                getFloat(TOTAL_BUNDLE).let { total ->
+            getParcelableArrayList<Voucher>(BUNDLE_VOUCHERS)?.let {
+                getFloat(BUNDLE_TOTAL).let { total ->
                     adapter.updateDataWithCondition(it, total)
                 }
             }
-            getParcelable<VoucherItem>(VOUCHER_BUNDLE)?.let {
+            getParcelable<VoucherItem>(BUNDLE_VOUCHER)?.let {
                 adapter.selectedVoucher(it)
                 voucherSelected = it
             }

@@ -4,12 +4,12 @@ import android.annotation.SuppressLint
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -121,17 +121,21 @@ class ChooseAddressFragment : Fragment(), ChooseAddressContract.View {
                 markerFlagLocation =
                     googleMap.addMarker(googleMapHelper.getNormalMarkerOptions(it))
             } else {
-                markerFlagLocation!!.position = it
+                markerFlagLocation?.position = it
             }
             positionClickable = it
-            val addresses: List<Address> = geo.getFromLocation(it.latitude, it.longitude, 1)
-            if (addresses.isNotEmpty()) {
-                nameAddressEditText.setText(
-                    addresses[0].getAddressLine(0),
-                    TextView.BufferType.EDITABLE
-                )
-            } else {
-                makeText(getString(R.string.waiting_for_location))
+            try {
+                val addresses: List<Address> = geo.getFromLocation(it.latitude, it.longitude, 1)
+                if (addresses.isNotEmpty()) {
+                    nameAddressEditText.setText(
+                        addresses[0].getAddressLine(0),
+                        TextView.BufferType.EDITABLE
+                    )
+                } else {
+                    makeText(getString(R.string.waiting_for_location))
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
         buttonSave.setOnClickListener {
