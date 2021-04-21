@@ -157,4 +157,10 @@
     <string name="time_open">Mở cửa :</string>
     <string name="time_close">Đóng cửa :</string>
     <string name="status">Trạng thái :</string>
+    <string name="edit">Sửa</string>
+    <string name="notification">Thông báo</string>
+    <string name="notification_choose_address">Vui lòng chọn địa chỉ !</string>
+    <string name="notification_address_order">Thêm địa chỉ để đặt hàng</string>
+    <string name="answer_ok">Đồng ý</string>
+    <string name="notification_choose_payment">Vui lòng chọn thanh toán phương thức</string>
 </resources>

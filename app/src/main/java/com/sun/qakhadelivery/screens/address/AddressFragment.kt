@@ -1,11 +1,10 @@
 package com.sun.qakhadelivery.screens.address
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Address
 import com.sun.qakhadelivery.data.repository.AddressRepositoryImpl
@@ -20,6 +19,7 @@ import com.sun.qakhadelivery.screens.chooseaddress.ChooseAddressFragment
 import com.sun.qakhadelivery.screens.chooseaddress.OnChooseAddressListener
 import com.sun.qakhadelivery.utils.IPositiveNegativeListener
 import kotlinx.android.synthetic.main.fragment_address.*
+import org.greenrobot.eventbus.EventBus
 
 class AddressFragment : Fragment(), AddressAdapterOnClickListener, AddressContract.View,
     OnChooseAddressListener {
@@ -56,6 +56,11 @@ class AddressFragment : Fragment(), AddressAdapterOnClickListener, AddressContra
     }
 
     override fun onItemClickListener(address: Address) {
+        EventBus.getDefault().post(address)
+        parentFragmentManager.popBackStack()
+    }
+
+    override fun onEditItemClickListener(address: Address) {
         navigateChooseAddress(address)
     }
 

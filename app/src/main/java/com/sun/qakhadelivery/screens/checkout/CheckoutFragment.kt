@@ -1,35 +1,43 @@
 package com.sun.qakhadelivery.screens.checkout
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
-import com.sun.qakhadelivery.data.model.Cart
-import com.sun.qakhadelivery.data.model.Partner
-import com.sun.qakhadelivery.data.model.Voucher
+import com.sun.qakhadelivery.data.model.*
 import com.sun.qakhadelivery.data.repository.CartRepositoryImpl
 import com.sun.qakhadelivery.data.repository.OrderRepositoryImpl
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
+import com.sun.qakhadelivery.data.repository.UserRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.request.ApplyVoucher
+import com.sun.qakhadelivery.data.source.remote.schema.request.DistanceRequest
+import com.sun.qakhadelivery.data.source.remote.schema.request.OrderRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.VoucherCancel
 import com.sun.qakhadelivery.data.source.remote.schema.response.ApplyVoucherResponse
 import com.sun.qakhadelivery.data.source.remote.schema.response.CancelVoucherResponse
-import com.sun.qakhadelivery.extensions.addFragmentBackStack
-import com.sun.qakhadelivery.extensions.gone
-import com.sun.qakhadelivery.extensions.isVisible
-import com.sun.qakhadelivery.extensions.show
+import com.sun.qakhadelivery.data.source.remote.schema.response.DistanceResponse
+import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
+import com.sun.qakhadelivery.extensions.*
+import com.sun.qakhadelivery.screens.address.AddressFragment
 import com.sun.qakhadelivery.screens.orderdetail.adapter.BucketAdapter
 import com.sun.qakhadelivery.screens.voucher.VoucherFragment
 import com.sun.qakhadelivery.utils.Constants.DEFAULT_STRING
+import com.sun.qakhadelivery.utils.IPositiveNegativeListener
+import com.sun.qakhadelivery.utils.LocationHelper
 import com.sun.qakhadelivery.widget.recyclerview.item.ChoiceVoucherState
 import com.sun.qakhadelivery.widget.recyclerview.item.VoucherItem
+import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.fragment_checkout.*
+import kotlinx.android.synthetic.main.fragment_checkout.loadingProgress
+import kotlinx.android.synthetic.main.item_layout_voucher.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -45,7 +53,8 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
             OrderRepositoryImpl.getInstance(),
             TokenRepositoryImpl.getInstance(
                 SharedPrefsImpl.getInstance(requireContext())
-            )
+            ),
+            UserRepositoryImpl.getInstance()
         )
     }
 
@@ -68,8 +77,9 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         presenter.run {
             setView(this@CheckoutFragment)
             arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
-                presenter.getVouchers(it.id)
+                getVouchers(it.id)
             }
+            getUserInfo()
         }
         EventBus.getDefault().register(this)
     }
@@ -82,24 +92,84 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
 
     override fun onSuccessGetCart(carts: MutableList<Cart>) {
         adapter.updateData(carts)
+        arguments?.run {
+            getParcelable<Partner>(BUNDLE_PARTNER)?.let { partner ->
+                getParcelable<Address>(BUNDLE_ADDRESS)?.let { address ->
+                    addressTextView.text = address.name
+                    presenter.calculatorDistance(
+                        distanceRequest = DistanceRequest(
+                            partner.id,
+                            address.latitude,
+                            address.longitude
+                        )
+                    )
+                }
+            }
+        }
     }
 
     override fun onSuccessApplyVoucher(applyVoucherResponse: ApplyVoucherResponse) {
         voucherEditText.setText(applyVoucherResponse.voucher.code)
         textViewPriceDiscount.text = applyVoucherResponse.voucher.discount.toString()
+        arguments?.getFloat(BUNDLE_TOTAL).also {
+            if (it != null) {
+                val total = it - applyVoucherResponse.subtotal
+                setTotal(total)
+            } else {
+                setTotal(applyVoucherResponse.totalAfterDiscount)
+            }
+        }
         enableInteraction()
     }
 
     override fun onSuccessCancelVouchers(cancelVoucherResponse: CancelVoucherResponse) {
         textViewPriceDiscount.text = DEFAULT_STRING
         voucherEditText.setText(DEFAULT_STRING)
-        arguments?.putParcelable(VOUCHER_BUNDLE, null)
+        arguments?.run {
+            setTotal(getFloat(BUNDLE_TOTAL))
+            putParcelable(BUNDLE_VOUCHER, null)
+        }
         enableInteraction()
     }
 
     override fun onUpdateTotalPrice(total: Float) {
         textViewPriceSubtotal.text = total.toString()
-        arguments?.putFloat(TOTAL_BUNDLE, total)
+        arguments?.putFloat(BUNDLE_TOTAL, total)
+    }
+
+    override fun onSuccessGetVouchers(vouchers: MutableList<Voucher>) {
+        arguments?.putParcelableArrayList(BUNDLE_VOUCHERS, ArrayList<Parcelable>(vouchers))
+        enableInteraction()
+    }
+
+    override fun onSuccessGetUser(user: User) {
+        userNameTextView.text = user.name
+        phoneNumberTextView.text = user.phoneNumber
+        arguments?.putParcelable(BUNDLE_USER, user)
+        enableInteraction()
+    }
+
+    @SuppressLint("SetTextI18n")
+    override fun onSuccessDistance(distanceResponse: DistanceResponse) {
+        priceShippingFeeTextView.text = distanceResponse.shipping_fee.toString()
+        distanceTextView.text = "(${distanceResponse.distance} ${getString(R.string.distance)})"
+        arguments?.run {
+            getFloat(BUNDLE_TOTAL).let {
+                val total = distanceResponse.shipping_fee + it
+                setTotal(total)
+                putFloat(BUNDLE_TOTAL, total)
+            }
+            putParcelable(BUNDLE_DISTANCE, distanceResponse)
+        }
+        enableInteraction()
+    }
+
+    override fun onSuccessCreateOrder(orderResponse: OrderResponse) {
+        enableInteraction()
+    }
+
+    override fun onErrorGetUser(exception: String) {
+        enableInteraction()
     }
 
     override fun onErrorGetVouchers(exception: String) {
@@ -111,7 +181,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
     }
 
     override fun onErrorApplyVoucher(exception: String) {
-        arguments?.putParcelable(VOUCHER_BUNDLE, null)
+        arguments?.putParcelable(BUNDLE_VOUCHER, null)
         enableInteraction()
     }
 
@@ -119,8 +189,11 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         enableInteraction()
     }
 
-    override fun onSuccessGetVouchers(vouchers: MutableList<Voucher>) {
-        arguments?.putParcelableArrayList(VOUCHERS_BUNDLE, ArrayList<Parcelable>(vouchers))
+    override fun onErrorCalculatorDistance(exception: String) {
+        enableInteraction()
+    }
+
+    override fun onErrorCreateOrder(exception: String) {
         enableInteraction()
     }
 
@@ -132,7 +205,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
                     presenter.applyVoucher(ApplyVoucher(voucherItem.voucher.code, it.id))
                     disableInteraction()
                 }
-                putParcelable(VOUCHER_BUNDLE, voucherItem)
+                putParcelable(BUNDLE_VOUCHER, voucherItem)
             }
         } else {
             arguments?.run {
@@ -144,13 +217,26 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageAddress(address: Address) {
+        addressTextView.text = address.name
+        arguments?.run {
+            putParcelable(BUNDLE_ADDRESS, address)
+            getParcelable<Partner>(BUNDLE_PARTNER)?.let {
+                presenter.calculatorDistance(
+                    distanceRequest = DistanceRequest(it.id, address.latitude, address.longitude)
+                )
+            }
+        }
+    }
+
     private fun initViews() {
         recyclerViewBucket.adapter = adapter
     }
 
     private fun initData() {
         arguments?.run {
-            putParcelable(VOUCHER_BUNDLE, null)
+            putParcelable(BUNDLE_VOUCHER, null)
             getParcelable<Partner>(BUNDLE_PARTNER)?.let { partner ->
                 textViewNamePartner.text = partner.name
                 presenter.run {
@@ -180,6 +266,66 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
                     }
                 }
             })
+        addressLayout.setOnSafeClickListener {
+            addFragmentBackStack(AddressFragment.newInstance(), R.id.containerView)
+        }
+        arguments?.getParcelable<Address>(BUNDLE_ADDRESS).also {
+            if (it == null) {
+                showDialogRequireAddress()
+            }
+        }
+        paymentGroupRadio.setOnCheckedChangeListener { _, checkedId ->
+            placeOrderCardView.setOnSafeClickListener {
+                when (checkedId) {
+                    R.id.cashRadioButton -> {
+                        createOrderWithTypeCheckout(TypeCheckout.CASH.value)
+                    }
+                    R.id.coinsRadioButton -> {
+                        createOrderWithTypeCheckout(TypeCheckout.COINS.value)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun createOrderWithTypeCheckout(type: String) {
+        arguments?.run {
+            if (getParcelable<Address>(BUNDLE_ADDRESS) == null) {
+                Toast.makeText(
+                    context,
+                    getString(R.string.notification_choose_address),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            getParcelable<Partner>(BUNDLE_PARTNER)?.let { partner ->
+                getParcelable<User>(BUNDLE_USER)?.let { user ->
+                    getParcelable<Address>(BUNDLE_ADDRESS)?.let { address ->
+                        getParcelable<DistanceResponse>(BUNDLE_DISTANCE)?.let { distance ->
+                            OrderRequest(user, address, partner, distance, type).also {
+                                presenter.createOrder(it)
+                                disableInteraction()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showDialogRequireAddress() {
+        LocationHelper.showPositiveDialogWithListener(
+            requireContext(),
+            getString(R.string.notification),
+            getString(R.string.notification_address_order),
+            object : IPositiveNegativeListener {
+
+                override fun onPositive() {
+                    addFragmentBackStack(AddressFragment.newInstance(), R.id.containerView)
+                }
+            },
+            getString(R.string.answer_ok),
+            false
+        )
     }
 
     private fun disableInteraction() {
@@ -195,11 +341,19 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
 
+    private fun setTotal(total: Float) {
+        totalPlaceOrderTextView.text = total.toString()
+        textViewPriceTotal.text = total.toString()
+    }
+
     companion object {
         const val BUNDLE_PARTNER = "BUNDLE_PARTNER"
-        const val VOUCHER_BUNDLE = "VOUCHER_BUNDLE"
-        const val VOUCHERS_BUNDLE = "VOUCHERS_BUNDLE"
-        const val TOTAL_BUNDLE = "TOTAL_BUNDLE"
+        const val BUNDLE_VOUCHER = "BUNDLE_VOUCHER"
+        const val BUNDLE_VOUCHERS = "BUNDLE_VOUCHERS"
+        const val BUNDLE_TOTAL = "BUNDLE_TOTAL"
+        const val BUNDLE_USER = "BUNDLE_USER"
+        const val BUNDLE_ADDRESS = "BUNDLE_ADDRESS"
+        const val BUNDLE_DISTANCE = "BUNDLE_DISTANCE "
 
         fun newInstance(bundle: Bundle?) = CheckoutFragment().apply {
             arguments = bundle

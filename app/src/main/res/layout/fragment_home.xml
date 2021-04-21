@@ -34,7 +34,7 @@
                 app:layout_constraintWidth_percent="0.4" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/textViewAddress"
+                android:id="@+id/addressTextView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:ellipsize="end"
@@ -62,7 +62,7 @@
                 app:layout_constraintDimensionRatio="7:11"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/textViewAddress"
+                app:layout_constraintStart_toEndOf="@+id/addressTextView"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.375"
                 app:layout_constraintWidth_percent="0.02" />

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.extensions.setOnSafeClickListener
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.AddressItem
 import kotlinx.android.synthetic.main.item_layout_address.view.*
@@ -13,13 +14,16 @@ class AddressViewHolder(viewGroup: ViewGroup) :
 
     override fun bind(item: AddressItem) {
         with(itemView) {
-            textViewAddress.text = item.address.name
+            addressTextView.text = item.address.name
         }
     }
 
-    fun registerOnClickItem(listener: (View) -> Unit) {
+    fun registerOnClickItem(editListener: (View) -> Unit, listener: () -> Unit) {
         itemView.setOnClickListener {
-            listener(it)
+            listener()
+        }
+        itemView.editAddressTextView.setOnSafeClickListener {
+            editListener(it)
         }
     }
 

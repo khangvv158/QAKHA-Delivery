@@ -15,11 +15,15 @@ class AddressAdapter : CustomRecyclerView.Adapter<AddressViewHolder>(arrayListOf
         viewType: Int
     ): CustomRecyclerView.ViewHolder<*> {
         return AddressViewHolder(parent).apply {
-            registerOnClickItem {
+            registerOnClickItem({
+                getItemPosition<AddressItem>(adapterPosition)?.address?.let { address ->
+                    listener?.onEditItemClickListener(address)
+                }
+            }, {
                 getItemPosition<AddressItem>(adapterPosition)?.address?.let { address ->
                     listener?.onItemClickListener(address)
                 }
-            }
+            })
             registerOnLongClickItem {
                 getItemPosition<AddressItem>(adapterPosition)?.address?.let { address ->
                     listener?.onItemLongClickListener(address)
