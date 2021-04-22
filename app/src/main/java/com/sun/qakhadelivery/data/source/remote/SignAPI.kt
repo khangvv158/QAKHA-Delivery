@@ -13,7 +13,7 @@ interface SignAPI {
     fun signIn(@Body parameterName: Credential): Observable<TokenAccess>
 
     @POST("sign_up")
-    fun signUp(@Body register: Register): Observable<Boolean>
+    fun signUp(@Body register: Register): Observable<MessageResponse>
 
     @POST("check_email")
     fun checkEmail(@Body emailRequest: EmailRequest): Observable<Boolean>
@@ -26,6 +26,11 @@ interface SignAPI {
 
     @POST("passwords/reset")
     fun resetPasswordByVerificationCode(
-            @Body resetPasswordRequest: ResetPasswordRequest
+        @Body resetPasswordRequest: ResetPasswordRequest
+    ): Observable<MessageResponse>
+
+    @POST("activated_account")
+    fun activateAccount(
+        @Body activateRequest: ActivateRequest
     ): Observable<MessageResponse>
 }

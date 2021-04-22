@@ -10,6 +10,7 @@ import androidx.core.os.bundleOf
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.utils.Regex
 import com.sun.qakhadelivery.extensions.validWithRegex
 import kotlinx.android.synthetic.main.fragment_reset_password.*
@@ -50,6 +51,7 @@ class ResetPasswordFragment : Fragment(), ResetPasswordContract.View {
     }
 
     override fun onGeneratingCodeSuccess() {
+        makeText(getString(R.string.generating_code))
     }
 
     override fun onGeneratingCodeFailure() {
@@ -67,7 +69,7 @@ class ResetPasswordFragment : Fragment(), ResetPasswordContract.View {
             if (validatePassword && validateVerificationCode) {
                 presenter.resetPassword(
                         editTextNewPassword.text.toString(),
-                        editTextVerificationCode.text.toString()
+                        editTextVerificationCode.text.toString().trim()
                 )
             }
         }
