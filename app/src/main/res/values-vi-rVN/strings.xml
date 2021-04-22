@@ -163,4 +163,8 @@
     <string name="notification_address_order">Thêm địa chỉ để đặt hàng</string>
     <string name="answer_ok">Đồng ý</string>
     <string name="notification_choose_payment">Vui lòng chọn thanh toán phương thức</string>
+    <string name="please_check_your_emails_for_a_message_with_your_code">Vui lòng kiểm tra email của bạn để tìm tin nhắn có mã của bạn.</string>
+    <string name="content_activate_failure">Mã kích hoạt không hợp lệ. Vui lòng kiểm tra và thử lại.</string>
+    <string name="content_activate_success">Tài khoản này đã được kích hoạt. Bạn có thể đăng nhập QAKHA Delivery</string>
+    <string name="activate_account">Kích hoạt tài khoản</string>
 </resources>

@@ -175,4 +175,8 @@
     <string name="answer_ok">OK</string>
     <string name="distance" translatable="false">Km</string>
     <string name="notification_choose_payment">Please choose payment method</string>
+    <string name="please_check_your_emails_for_a_message_with_your_code">Please check your emails for a message with your code</string>
+    <string name="content_activate_failure">The activation code is invalid. Please check and try again.</string>
+    <string name="content_activate_success">This account has been activated. You can sign-in in QAKHA Delivery</string>
+    <string name="activate_account">Activate account</string>
 </resources>
