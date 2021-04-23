@@ -6,6 +6,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 class RemoveCartRequest(
-    @SerializedName("partner_id") val partner_id: Int,
-    @SerializedName("product_id") val product_id: Int
+    @SerializedName("product_id") val product_id: Int,
+    @SerializedName("partner_id") val partner_id: Int
 ) : Parcelable

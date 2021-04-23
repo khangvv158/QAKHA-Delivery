@@ -4,7 +4,6 @@ import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
 import com.sun.qakhadelivery.data.source.remote.schema.response.CartResponse
 import com.sun.qakhadelivery.utils.Constants.AUTHORIZATION
-import com.sun.qakhadelivery.utils.Constants.PARTNER_ID
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
@@ -13,7 +12,7 @@ interface CartAPI {
 
     @GET("cart")
     fun getCart(
-        @Query(PARTNER_ID) partnerId: Int,
+        @Query("partner_id") partnerId: Int,
         @Header(AUTHORIZATION) token: String?
     ): Observable<CartResponse>
 
@@ -37,7 +36,7 @@ interface CartAPI {
 
     @DELETE("clear_cart")
     fun clearCart(
-        @Query(PARTNER_ID) partnerId: Int,
+        @Query("partner_id") partnerId: Int,
         @Header(AUTHORIZATION) token: String?
     ): Completable
 }

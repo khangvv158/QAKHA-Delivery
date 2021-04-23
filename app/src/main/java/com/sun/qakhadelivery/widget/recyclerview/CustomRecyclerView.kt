@@ -68,6 +68,14 @@ class CustomRecyclerView {
             notifyItemRangeInserted(mItems.size - items.size, items.size)
         }
 
+        fun <T : Item> updateItems(items: List<T>) {
+            mItems.run {
+                clear()
+                addAll(items)
+            }
+            notifyDataSetChanged()
+        }
+
         fun <T : Item> addItem(items: T) {
             mItems.add(items)
             notifyItemInserted(mItems.size - 1)

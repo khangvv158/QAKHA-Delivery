@@ -171,4 +171,9 @@
     <string name="notification_order_chanel">Notification Order Chanel</string>
     <string name="complete_delivery">Hoàn tất việc giao hàng</string>
     <string name="the_order_has_been_successfully_delivered">Đơn hàng đã được giao thành công</string>
+    <string name="food">Đồ Ăn</string>
+    <string name="order_id">Mã đơn hàng</string>
+    <string name="payment_method">Phương thức thanh toán</string>
+    <string name="driver">Người giao</string>
+    <string name="time">Thời gian</string>
 </resources>

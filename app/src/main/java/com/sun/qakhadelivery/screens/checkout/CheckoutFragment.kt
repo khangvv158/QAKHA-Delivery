@@ -27,7 +27,7 @@ import com.sun.qakhadelivery.data.source.remote.schema.response.DistanceResponse
 import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.address.AddressFragment
-import com.sun.qakhadelivery.screens.orderdetail.adapter.BucketAdapter
+import com.sun.qakhadelivery.screens.checkout.adapter.BucketAdapter
 import com.sun.qakhadelivery.screens.shippingdetail.OnOrderDone
 import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment
 import com.sun.qakhadelivery.screens.voucher.VoucherFragment
@@ -115,7 +115,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View, OnOrderDone {
         textViewPriceDiscount.text = applyVoucherResponse.voucher.discount.toString()
         arguments?.getFloat(BUNDLE_TOTAL).also {
             if (it != null) {
-                val total = it - applyVoucherResponse.subtotal
+                val total = it - applyVoucherResponse.voucher.discount
                 setTotal(total)
             } else {
                 setTotal(applyVoucherResponse.totalAfterDiscount)

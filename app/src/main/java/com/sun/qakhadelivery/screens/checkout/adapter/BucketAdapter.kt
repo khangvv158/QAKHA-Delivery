@@ -1,10 +1,9 @@
-package com.sun.qakhadelivery.screens.orderdetail.adapter
+package com.sun.qakhadelivery.screens.checkout.adapter
 
 import android.view.ViewGroup
 import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.BucketItem
-import com.sun.qakhadelivery.widget.recyclerview.item.CartItem
 import com.sun.qakhadelivery.widget.recyclerview.viewholder.BucketViewHolder
 
 class BucketAdapter : CustomRecyclerView.Adapter<BucketViewHolder>(arrayListOf()) {
