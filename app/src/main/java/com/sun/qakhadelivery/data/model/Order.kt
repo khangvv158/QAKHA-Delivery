@@ -10,8 +10,11 @@ import kotlinx.android.parcel.Parcelize
 data class Order(
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
+    @SerializedName("image") val image: Image,
     @SerializedName("phone_number") val phone_number: String,
     @SerializedName("address") val address: String,
+    @SerializedName("latitude") val latitude: Float = 0f,
+    @SerializedName("longitude") val longitude: Float = 0f,
     @SerializedName("delivery_time") val delivery_time: String,
     @SerializedName("subtotal") val subtotal: Float,
     @SerializedName("discount") val discount: Float = DEFAULT_FLOAT,

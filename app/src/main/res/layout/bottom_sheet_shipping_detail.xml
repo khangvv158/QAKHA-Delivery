@@ -45,6 +45,7 @@
                     app:shapeAppearanceOverlay="@style/circleImageView" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/callImageView"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/ic_call"
@@ -363,7 +364,6 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:maxLines="1"
-                    android:textColor="@color/ColorRedBrick"
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintBottom_toBottomOf="@+id/textViewTileSubtotal"
                     app:layout_constraintEnd_toStartOf="@+id/textViewUnit1"
