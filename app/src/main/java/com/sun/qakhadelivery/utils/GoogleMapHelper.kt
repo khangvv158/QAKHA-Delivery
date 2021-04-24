@@ -10,6 +10,10 @@ import com.sun.qakhadelivery.R
 
 class GoogleMapHelper {
 
+    fun getPartnerMarkerOptions(position: LatLng) : MarkerOptions {
+        return getMarkerOptions(R.drawable.ic_marker_store,position)
+    }
+
     fun buildCameraUpdate(latLng: LatLng): CameraUpdate {
         val cameraPosition = CameraPosition.Builder()
             .target(latLng)

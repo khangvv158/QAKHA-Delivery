@@ -28,6 +28,7 @@ import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.address.AddressFragment
 import com.sun.qakhadelivery.screens.orderdetail.adapter.BucketAdapter
+import com.sun.qakhadelivery.screens.shippingdetail.OnOrderDone
 import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment
 import com.sun.qakhadelivery.screens.voucher.VoucherFragment
 import com.sun.qakhadelivery.utils.Constants.DEFAULT_STRING
@@ -43,7 +44,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class CheckoutFragment : Fragment(), CheckoutContract.View {
+class CheckoutFragment : Fragment(), CheckoutContract.View, OnOrderDone {
 
     private val adapter: BucketAdapter by lazy {
         BucketAdapter()
@@ -167,7 +168,13 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
 
     override fun onSuccessCreateOrder(orderResponse: OrderResponse) {
         enableInteraction()
-        addFragmentSlideAnim(ShippingDetailFragment.newInstance(orderResponse), R.id.containerView)
+        addFragmentSlideAnim(ShippingDetailFragment.newInstance(orderResponse).apply {
+            registerOnOrderDone(this@CheckoutFragment)
+        }, R.id.containerView)
+    }
+
+    override fun onOrderDone() {
+        parentFragmentManager.popBackStack()
     }
 
     override fun onErrorGetUser(exception: String) {
