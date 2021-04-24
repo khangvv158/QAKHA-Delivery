@@ -42,7 +42,7 @@ class SignUpFragment : Fragment(), SignUpContract.View {
 
     override fun onSignUpSuccess() {
         clearEditText()
-        addFragmentBackStack(ActivatedFragment.newInstance(),R.id.containerView)
+        addFragmentBackStack(ActivatedFragment.newInstance(), R.id.containerView)
         loadingProgress.gone()
     }
 
@@ -113,6 +113,9 @@ class SignUpFragment : Fragment(), SignUpContract.View {
         }
         handleEventsAfterTextChanged()
         handleEventsKeyBoard()
+        activateTextView.setOnClickListener {
+            addFragmentBackStack(ActivatedFragment.newInstance(), R.id.containerView)
+        }
     }
 
     private fun handleEventsAfterTextChanged() {

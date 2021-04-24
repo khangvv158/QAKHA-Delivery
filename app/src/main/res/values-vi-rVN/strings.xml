@@ -167,4 +167,5 @@
     <string name="content_activate_failure">Mã kích hoạt không hợp lệ. Vui lòng kiểm tra và thử lại.</string>
     <string name="content_activate_success">Tài khoản này đã được kích hoạt. Bạn có thể đăng nhập QAKHA Delivery</string>
     <string name="activate_account">Kích hoạt tài khoản</string>
+    <string name="account_not_activated">Tài khoản chưa kích hoạt ?</string>
 </resources>

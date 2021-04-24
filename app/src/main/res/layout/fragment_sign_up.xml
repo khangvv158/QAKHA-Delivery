@@ -188,6 +188,20 @@
             android:inputType="phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/activateTextView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/account_not_activated"
+        android:fontFamily="@font/sf_compact_display_medium"
+        app:layout_constraintDimensionRatio="139:20"
+        app:layout_constraintEnd_toEndOf="@+id/phoneNumberTextInputLayout"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/phoneNumberTextInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberTextInputLayout"
+        app:layout_constraintWidth_percent="0.4" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/signUpButton"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
