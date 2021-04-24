@@ -28,6 +28,7 @@ import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.address.AddressFragment
 import com.sun.qakhadelivery.screens.orderdetail.adapter.BucketAdapter
+import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment
 import com.sun.qakhadelivery.screens.voucher.VoucherFragment
 import com.sun.qakhadelivery.utils.Constants.DEFAULT_STRING
 import com.sun.qakhadelivery.utils.IPositiveNegativeListener
@@ -166,6 +167,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
 
     override fun onSuccessCreateOrder(orderResponse: OrderResponse) {
         enableInteraction()
+        addFragmentSlideAnim(ShippingDetailFragment.newInstance(orderResponse), R.id.containerView)
     }
 
     override fun onErrorGetUser(exception: String) {
