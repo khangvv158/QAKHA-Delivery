@@ -17,7 +17,7 @@ interface OrderAPI {
 
     @GET("orders/vouchers")
     fun showVoucher(
-        @Query(Constants.PARTNER_ID) partnerId: Int,
+        @Query("partner_id") partnerId: Int,
         @Header(Constants.AUTHORIZATION) token: String?
     ): Observable<MutableList<Voucher>>
 
@@ -44,4 +44,7 @@ interface OrderAPI {
         @Body distanceRequest: DistanceRequest,
         @Header(Constants.AUTHORIZATION) token: String?
     ): Observable<DistanceResponse>
+
+    @POST("orders/coins_user")
+    fun getCoins(@Header(Constants.AUTHORIZATION) token: String?)
 }
