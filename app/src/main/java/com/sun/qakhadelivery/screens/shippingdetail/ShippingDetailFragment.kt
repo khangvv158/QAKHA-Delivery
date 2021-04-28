@@ -4,18 +4,17 @@ import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.app.NotificationCompat
-import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
@@ -31,6 +30,7 @@ import com.sun.qakhadelivery.data.repository.DriverFirebaseRepositoryImpl
 import com.sun.qakhadelivery.data.repository.OrderFirebaseRepositoryImpl
 import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
 import com.sun.qakhadelivery.extensions.makeText
+import com.sun.qakhadelivery.screens.orderdetail.adapter.OrderAdapter
 import com.sun.qakhadelivery.utils.GoogleMapHelper
 import com.sun.qakhadelivery.utils.LatLngInterpolator
 import com.sun.qakhadelivery.utils.MarkerAnimationHelper
@@ -40,7 +40,6 @@ import kotlinx.android.synthetic.main.fragment_shipping_detail.*
 class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
 
     private lateinit var googleMap: GoogleMap
-    private lateinit var orderResponse: OrderResponse
     private lateinit var notificationManager: NotificationManager
     private lateinit var userClusterManager: ClusterManager<UserCluster>
     private lateinit var userRenderer: UserRenderer
@@ -50,20 +49,12 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
             DriverFirebaseRepositoryImpl.getInstance()
         )
     }
-    private val googleMapHelper by lazy {
-        GoogleMapHelper()
-    }
+    private val orderAdapter by lazy { OrderAdapter() }
+    private val googleMapHelper by lazy { GoogleMapHelper() }
     private var animateCameraFirst = true
     private var markerDriver: Marker? = null
     private var markerPartner: Marker? = null
     private var onOrderDone: OnOrderDone? = null
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        arguments?.getParcelable<OrderResponse>(BUNDLE_ORDER_RESPONSE)?.let {
-            orderResponse = it
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,7 +67,6 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        presenter.setView(this)
         MapsInitializer.initialize(requireContext())
         mapFragment?.getMapAsync {
             setUpGoogleMap(it)
@@ -84,8 +74,26 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        presenter.setView(this)
+        isOrderShipping()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        onOrderDone = null
+    }
+
     override fun isOrderShippingByDriverSuccess() {
-        presenter.fetchLocationByDriver(orderResponse.order.driver_id)
+        arguments?.getParcelable<OrderResponse>(BUNDLE_ORDER_RESPONSE)?.let {
+            presenter.fetchLocationByDriver(it.order.driver_id)
+        }
     }
 
     override fun isOrderShippingByDriverDone() {
@@ -140,7 +148,6 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
     private fun setUpGoogleMap(map: GoogleMap) {
         googleMap = map
         initCluster()
-        isOrderShipping()
         handleEvents()
     }
 
@@ -148,24 +155,27 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
         userClusterManager = ClusterManager(requireContext(), googleMap)
         userRenderer = UserRenderer(requireContext(), googleMap, userClusterManager)
         userClusterManager.renderer = userRenderer
-        userClusterManager.addItem(
-            UserCluster(
-                orderResponse.order.name,
-                orderResponse.userGPS.latitude,
-                orderResponse.userGPS.longitude,
-                orderResponse.order.image
-            )
-        )
-        if (markerPartner == null) {
-            markerPartner = googleMap.addMarker(
-                googleMapHelper.getPartnerMarkerOptions(
-                    LatLng(
-                        orderResponse.partner.latitude.toDouble(),
-                        orderResponse.partner.longitude.toDouble()
-                    )
+        arguments?.getParcelable<OrderResponse>(BUNDLE_ORDER_RESPONSE)?.let { orderResponse ->
+            userClusterManager.addItem(
+                UserCluster(
+                    orderResponse.order.name,
+                    orderResponse.userGPS.latitude,
+                    orderResponse.userGPS.longitude,
+                    orderResponse.order.image
                 )
             )
+            if (markerPartner == null) {
+                markerPartner = googleMap.addMarker(
+                    googleMapHelper.getPartnerMarkerOptions(
+                        LatLng(
+                            orderResponse.partner.latitude.toDouble(),
+                            orderResponse.partner.longitude.toDouble()
+                        )
+                    )
+                )
+            }
         }
+
     }
 
     fun registerOnOrderDone(onOrderDone: OnOrderDone) {
@@ -173,48 +183,64 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
     }
 
     private fun isOrderShipping() {
-        orderResponse.apply {
-            presenter.isOrderShippingByDriver(order.id, order.driver_id)
+        arguments?.getParcelable<OrderResponse>(BUNDLE_ORDER_RESPONSE)?.let {
+            presenter.isOrderShippingByDriver(it.order.id, it.order.driver_id)
         }
     }
 
     private fun handleEvents() {
         callImageView.setOnClickListener {
-            startActivity(
-                Intent(
-                    Intent.ACTION_DIAL,
-                    Uri.parse("tel:${orderResponse.driverNearest.phone_number}")
+            arguments?.getParcelable<OrderResponse>(BUNDLE_ORDER_RESPONSE)?.let {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_DIAL,
+                        Uri.parse("tel:${it.driverNearest.phone_number}")
+                    )
                 )
-            )
+            }
         }
         imageViewBack.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
         callImageView.setOnClickListener {
-            startActivity(
-                Intent(
-                    Intent.ACTION_DIAL,
-                    Uri.parse("tel:${orderResponse.driverNearest.phone_number}")
+            arguments?.getParcelable<OrderResponse>(BUNDLE_ORDER_RESPONSE)?.let {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_DIAL,
+                        Uri.parse("tel:${it.driverNearest.phone_number}")
+                    )
                 )
-            )
+            }
         }
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    parentFragmentManager.popBackStack()
+                }
+            })
     }
 
 
     private fun initViewsBottomSheet() {
-        Glide.with(requireContext()).load(orderResponse.driverNearest.image.imageUrl)
-            .into(imageViewAvatarDriver)
-        textViewNameDriver.text = orderResponse.driverNearest.name
-        textViewLicensePlateDriver.text = orderResponse.driverNearest.license_plate
-        addressTextView.text = orderResponse.order.address
-        userNameTextView.text = orderResponse.order.name
-        textViewDateOrder.text = orderResponse.order.delivery_time
-        phoneNumberTextView.text = orderResponse.order.phone_number
-        textViewNamePartner.text = orderResponse.partner.name
-        textViewPriceSubtotal.text = orderResponse.order.subtotal.toString()
-        textViewPriceShippingFee.text = orderResponse.order.shipping_fee.toString()
-        textViewPriceDiscount.text = orderResponse.order.discount.toString()
-        textViewPriceTotal.text = orderResponse.order.total.toString()
+        arguments?.getParcelable<OrderResponse>(BUNDLE_ORDER_RESPONSE)?.let { orderResponse ->
+            Glide.with(requireContext()).load(orderResponse.driverNearest.image.imageUrl)
+                .into(imageViewAvatarDriver)
+            textViewNameDriver.text = orderResponse.driverNearest.name
+            textViewLicensePlateDriver.text = orderResponse.driverNearest.license_plate
+            addressTextView.text = orderResponse.order.address
+            userNameTextView.text = orderResponse.order.name
+            phoneNumberTextView.text = orderResponse.order.phone_number
+            textViewNamePartner.text = orderResponse.partner.name
+            textViewPriceSubtotal.text = orderResponse.order.subtotal.toString()
+            textViewPriceShippingFee.text = orderResponse.order.shipping_fee.toString()
+            textViewPriceDiscount.text = orderResponse.order.discount.toString()
+            textViewPriceTotal.text = orderResponse.order.total.toString()
+            recyclerViewBucket.apply {
+                adapter = orderAdapter
+                orderAdapter.updateOrderDetails(orderResponse.order_details)
+            }
+        }
     }
 
     private fun createNotificationOrderDone(): Notification {
@@ -249,7 +275,7 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
                 NotificationManager.IMPORTANCE_HIGH
             )
             notificationManager =
-                activity?.getSystemService(NotificationManager::class.java) as NotificationManager
+                context?.getSystemService(NotificationManager::class.java) as NotificationManager
             notificationManager.createNotificationChannel(serviceChannel)
         }
     }
@@ -258,10 +284,10 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
 
         const val NOTIFICATION_ORDER_ID = 2
         const val CHANNEL_ORDER_ID = "CHANNEL_ORDER_ID"
-        private const val BUNDLE_ORDER_RESPONSE = "BUNDLE_ORDER_RESPONSE"
+        const val BUNDLE_ORDER_RESPONSE = "BUNDLE_ORDER_RESPONSE"
 
-        fun newInstance(orderResponse: OrderResponse) = ShippingDetailFragment().apply {
-            arguments = bundleOf(BUNDLE_ORDER_RESPONSE to orderResponse)
+        fun newInstance(bundle: Bundle) = ShippingDetailFragment().apply {
+            arguments = bundle
         }
     }
 }

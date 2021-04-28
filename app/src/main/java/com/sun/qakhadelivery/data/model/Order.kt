@@ -15,7 +15,6 @@ data class Order(
     @SerializedName("address") val address: String,
     @SerializedName("latitude") val latitude: Float = 0f,
     @SerializedName("longitude") val longitude: Float = 0f,
-    @SerializedName("delivery_time") val delivery_time: String,
     @SerializedName("subtotal") val subtotal: Float,
     @SerializedName("discount") val discount: Float = DEFAULT_FLOAT,
     @SerializedName("shipping_fee") val shipping_fee: Float,

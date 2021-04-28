@@ -6,7 +6,7 @@ import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.HistoryItem
 import com.sun.qakhadelivery.widget.recyclerview.viewholder.HistoryViewHolder
 
-class HistoryAdapter : CustomRecyclerView.Adapter<HistoryViewHolder>(arrayListOf()) {
+open class HistoryAdapter : CustomRecyclerView.Adapter<HistoryViewHolder>(arrayListOf()) {
 
     private var onClickItem: ((HistoryResponse) -> Unit)? = null
 
@@ -21,7 +21,7 @@ class HistoryAdapter : CustomRecyclerView.Adapter<HistoryViewHolder>(arrayListOf
         }
     }
 
-    fun updateData(history: MutableList<HistoryResponse>) {
+    open fun updateData(history: MutableList<HistoryResponse>) {
         updateItems(history.map {
             HistoryItem(it)
         })

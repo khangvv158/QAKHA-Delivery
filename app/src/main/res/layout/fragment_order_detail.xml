@@ -481,17 +481,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/timeDeliveryTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_compact_display_regular"
-                    android:textColor="@color/colorDustyGray"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView24"
-                    app:layout_constraintEnd_toEndOf="@+id/nameDriverTextView"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView24"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/nameDriverTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -524,17 +513,6 @@
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView13"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView13" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView24"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/sf_compact_display_regular"
-                    android:text="@string/time"
-                    android:textColor="@color/colorDustyGray"
-                    app:layout_constraintStart_toStartOf="@+id/appCompatTextView16"
-                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView16" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView16"

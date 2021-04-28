@@ -63,17 +63,14 @@ class HistoryFragment : Fragment(), HistoryContract.View {
 
     private fun handleEvent() {
         historyAdapter.setOnItemClick {
-            addFragmentBackStack(OrderDetailFragment.newInstance(
+            parentFragment?.addFragmentBackStack(OrderDetailFragment.newInstance(
                 Bundle().apply {
                     putParcelable(BUNDLE_HISTORY, it)
                 }
             ), R.id.containerView)
         }
         refreshLayout.setOnRefreshListener {
-            presenter.run {
-                setView(this@HistoryFragment)
-                presenter.getHistory()
-            }
+            presenter.getHistory()
         }
     }
 

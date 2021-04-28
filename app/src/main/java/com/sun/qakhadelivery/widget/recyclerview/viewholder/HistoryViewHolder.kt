@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.source.remote.schema.response.HistoryResponse
+import com.sun.qakhadelivery.extensions.setOnSafeClickListener
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.HistoryItem
 import kotlinx.android.synthetic.main.item_layout_order.view.*
@@ -26,7 +27,7 @@ class HistoryViewHolder(viewGroup: ViewGroup) :
         items: MutableList<HistoryItem>,
         listener: (HistoryResponse) -> Unit
     ) {
-        itemView.setOnClickListener {
+        itemView.setOnSafeClickListener(2000) {
             listener(items[adapterPosition].history)
         }
     }

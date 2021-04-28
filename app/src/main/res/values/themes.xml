@@ -38,4 +38,8 @@
     <style name="circleProgress" parent="AppTheme">
         <item name="colorAccent">@color/colorCarrotOrange</item>
     </style>
+
+    <style name="circleDialogProgress" parent="AppTheme">
+        <item name="colorAccent">@color/colorAltoGray</item>
+    </style>
 </resources>

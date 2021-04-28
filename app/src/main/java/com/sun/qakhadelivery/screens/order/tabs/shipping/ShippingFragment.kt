@@ -1,34 +1,37 @@
 package com.sun.qakhadelivery.screens.order.tabs.shipping
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
-import com.sun.qakhadelivery.data.model.Event
-import com.sun.qakhadelivery.data.model.Order
+import com.sun.qakhadelivery.data.repository.ShippingRepositoryImpl
+import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
+import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.data.source.remote.schema.response.HistoryResponse
+import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
+import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
 import com.sun.qakhadelivery.screens.order.tabs.shipping.adapter.ShippingAdapter
+import com.sun.qakhadelivery.screens.shippingdetail.OnOrderDone
+import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment
+import kotlinx.android.synthetic.main.fragment_history.*
 import kotlinx.android.synthetic.main.fragment_shipping.*
-import org.greenrobot.eventbus.EventBus
-import org.greenrobot.eventbus.Subscribe
-import org.greenrobot.eventbus.ThreadMode
+import kotlinx.android.synthetic.main.fragment_shipping.refreshLayout
 
-class ShippingFragment : Fragment() {
+class ShippingFragment : Fragment(), ShippingContract.View, OnOrderDone {
 
     private val shippingAdapter: ShippingAdapter by lazy {
         ShippingAdapter()
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        EventBus.getDefault().register(this)
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        EventBus.getDefault().unregister(this)
+    private val presenter by lazy {
+        ShippingPresenter(
+            TokenRepositoryImpl.getInstance(
+                SharedPrefsImpl.getInstance(requireContext())
+            ),
+            ShippingRepositoryImpl.getInstance()
+        )
     }
 
     override fun onCreateView(
@@ -41,23 +44,63 @@ class ShippingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
-        initData()
+        handleEvent()
+    }
+
+    private fun handleEvent() {
+        shippingAdapter.setOnItemClick {
+            presenter.trackingOrder(it.id)
+        }
+        refreshLayout.setOnRefreshListener {
+            presenter.getShipping()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        presenter.run {
+            setView(this@ShippingFragment)
+            getShipping()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
+
+    override fun onSuccessGetShipping(shipping: MutableList<HistoryResponse>) {
+        shippingAdapter.updateData(shipping)
+        refreshLayout.isRefreshing = false
+    }
+
+    override fun onSuccessTrackingOrder(orderResponse: OrderResponse) {
+        parentFragment?.addFragmentSlideAnim(ShippingDetailFragment.newInstance(Bundle().apply {
+            putParcelable(ShippingDetailFragment.BUNDLE_ORDER_RESPONSE, orderResponse)
+        }).apply {
+            registerOnOrderDone(this@ShippingFragment)
+        }, R.id.containerView)
+    }
+
+    override fun onErrorGetShipping(exception: String) {
+        refreshLayout.isRefreshing = false
+    }
+
+    override fun onErrorTrackingOrder(exception: String) {
+        Toast.makeText(
+            context,
+            getString(R.string.query_shipper_error),
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onOrderDone() {
+        presenter.getShipping()
+        refreshLayout.isRefreshing = true
     }
 
     private fun initRecyclerView() {
         recyclerViewShipping.adapter = shippingAdapter
-    }
-
-    private fun initData() {
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    fun onRecyclerViewShippingClick(event: Event<Order>) {
-        event.apply {
-            if (keyEvent == ShippingAdapter.EVENT_SHIPPING) {
-                //no-op
-            }
-        }
     }
 
     companion object {
