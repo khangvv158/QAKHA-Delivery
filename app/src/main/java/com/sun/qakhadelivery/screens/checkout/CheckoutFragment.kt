@@ -7,9 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.*
 import com.sun.qakhadelivery.data.repository.CartRepositoryImpl
@@ -28,14 +28,15 @@ import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.address.AddressFragment
 import com.sun.qakhadelivery.screens.checkout.adapter.BucketAdapter
-import com.sun.qakhadelivery.screens.shippingdetail.OnOrderDone
 import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment
+import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment.Companion.BUNDLE_ORDER_RESPONSE
 import com.sun.qakhadelivery.screens.voucher.VoucherFragment
 import com.sun.qakhadelivery.utils.Constants.DEFAULT_STRING
 import com.sun.qakhadelivery.utils.IPositiveNegativeListener
 import com.sun.qakhadelivery.utils.LocationHelper
 import com.sun.qakhadelivery.widget.recyclerview.item.ChoiceVoucherState
 import com.sun.qakhadelivery.widget.recyclerview.item.VoucherItem
+import com.sun.qakhadelivery.widget.view.DialogQueryShipping
 import kotlinx.android.synthetic.main.fragment_cart.*
 import kotlinx.android.synthetic.main.fragment_checkout.*
 import kotlinx.android.synthetic.main.fragment_checkout.loadingProgress
@@ -44,7 +45,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 
-class CheckoutFragment : Fragment(), CheckoutContract.View, OnOrderDone {
+class CheckoutFragment : Fragment(), CheckoutContract.View {
 
     private val adapter: BucketAdapter by lazy {
         BucketAdapter()
@@ -59,6 +60,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View, OnOrderDone {
             UserRepositoryImpl.getInstance()
         )
     }
+    private val dialogQueryShipping by lazy { DialogQueryShipping() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -167,14 +169,11 @@ class CheckoutFragment : Fragment(), CheckoutContract.View, OnOrderDone {
     }
 
     override fun onSuccessCreateOrder(orderResponse: OrderResponse) {
-        enableInteraction()
-        addFragmentSlideAnim(ShippingDetailFragment.newInstance(orderResponse).apply {
-            registerOnOrderDone(this@CheckoutFragment)
-        }, R.id.containerView)
-    }
-
-    override fun onOrderDone() {
-        parentFragmentManager.popBackStack()
+        dialogQueryShipping.dismiss()
+        parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        addFragmentSlideAnim(ShippingDetailFragment.newInstance(Bundle().apply {
+            putParcelable(BUNDLE_ORDER_RESPONSE,orderResponse)
+        }), R.id.containerView)
     }
 
     override fun onErrorGetUser(exception: String) {
@@ -203,7 +202,8 @@ class CheckoutFragment : Fragment(), CheckoutContract.View, OnOrderDone {
     }
 
     override fun onErrorCreateOrder(exception: String) {
-        enableInteraction()
+        makeText(exception)
+        dialogQueryShipping.dismiss()
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -299,20 +299,15 @@ class CheckoutFragment : Fragment(), CheckoutContract.View, OnOrderDone {
 
     private fun createOrderWithTypeCheckout(type: String) {
         arguments?.run {
-            if (getParcelable<Address>(BUNDLE_ADDRESS) == null) {
-                Toast.makeText(
-                    context,
-                    getString(R.string.notification_choose_address),
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+            if (getParcelable<Address>(BUNDLE_ADDRESS) == null)
+                makeText(getString(R.string.notification_choose_address))
             getParcelable<Partner>(BUNDLE_PARTNER)?.let { partner ->
                 getParcelable<User>(BUNDLE_USER)?.let { user ->
                     getParcelable<Address>(BUNDLE_ADDRESS)?.let { address ->
                         getParcelable<DistanceResponse>(BUNDLE_DISTANCE)?.let { distance ->
                             OrderRequest(user, address, partner, distance, type).also {
                                 presenter.createOrder(it)
-                                disableInteraction()
+                                dialogQueryShipping.show(childFragmentManager, null)
                             }
                         }
                     }

@@ -192,4 +192,6 @@
     <string name="building_qakha_delivery_system">Building QAKHA Delivery System</string>
     <string name="department_of_information_technology_duy_tan_university">Department Of Information Technology, Duy Tan University</string>
     <string name="contact_us">Contact us</string>
+    <string name="query_shipper">Looking for a delivery …</string>
+    <string name="query_shipper_error">Could not find the delivery man</string>
 </resources>

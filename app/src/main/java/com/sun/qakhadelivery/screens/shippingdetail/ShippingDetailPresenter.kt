@@ -64,6 +64,7 @@ class ShippingDetailPresenter(
     }
 
     override fun onStop() {
+        view = null
     }
 
     override fun setView(view: ShippingDetailContract.View?) {

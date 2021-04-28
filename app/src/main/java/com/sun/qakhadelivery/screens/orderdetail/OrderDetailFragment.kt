@@ -55,6 +55,11 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
+
     override fun onSuccessOrderDetails(orderDetailsResponse: OrderDetailsResponse) {
         orderDetailsResponse.run {
             totalTextView.text = order.total.toString()
@@ -68,7 +73,6 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
             shippingFeeTextView.text = order.shipping_fee.toString()
             priceDiscountTextView.text = order.discount.toString()
             priceTotalTextView.text = order.total.toString()
-            timeDeliveryTextView.text = order.delivery_time
             adapter.updateOrderDetails(orderDetails)
         }
     }

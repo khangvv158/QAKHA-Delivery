@@ -1,10 +1,10 @@
 package com.sun.qakhadelivery.screens.order
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.screens.order.adapter.OrderPagerAdapter
 import com.sun.qakhadelivery.screens.order.tabs.history.HistoryFragment
@@ -14,12 +14,12 @@ import kotlinx.android.synthetic.main.fragment_order.*
 class OrderFragment : Fragment() {
 
     private val orderPagerAdapter: OrderPagerAdapter by lazy {
-        OrderPagerAdapter(parentFragmentManager, requireContext())
+        OrderPagerAdapter(childFragmentManager, requireContext())
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_order, container, false)
     }
