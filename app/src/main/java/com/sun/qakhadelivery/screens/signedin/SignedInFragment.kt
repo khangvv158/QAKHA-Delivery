@@ -14,6 +14,9 @@ import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.extensions.loadUrl
 import com.sun.qakhadelivery.screens.address.AddressFragment
+import com.sun.qakhadelivery.screens.navigate.about.AboutFragment
+import com.sun.qakhadelivery.screens.navigate.helpcenter.HelpCenterFragment
+import com.sun.qakhadelivery.screens.navigate.setting.SettingFragment
 import kotlinx.android.synthetic.main.fragment_signed_in.*
 
 class SignedInFragment : Fragment(), SignedInContract.View {
@@ -79,16 +82,17 @@ class SignedInFragment : Fragment(), SignedInContract.View {
         }
         navProfile.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.payItemMenu -> {
-                }
                 R.id.addressItemMenu -> navigateAddress()
-                R.id.inviteFriendsItemMenu -> {
-                }
-                R.id.helpCenterItemMenu -> {
-                }
+                R.id.aboutItemMenu -> navigateToFragment(AboutFragment.newInstance())
+                R.id.settingsItemMenu -> navigateToFragment(SettingFragment.newInstance())
+                R.id.helpCenterItemMenu -> navigateToFragment(HelpCenterFragment.newInstance())
             }
             true
         }
+    }
+
+    private fun navigateToFragment(fragment: Fragment) {
+        addFragmentBackStack(fragment, R.id.containerView)
     }
 
     private fun navigateAddress() {

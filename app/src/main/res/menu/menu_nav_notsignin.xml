@@ -2,10 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:id="@+id/groupProfile">
         <item
-            android:id="@+id/payItemMenu"
-            android:icon="@drawable/ic_pay"
-            android:title="@string/pay" />
-        <item
             android:id="@+id/addressItemMenu"
             android:icon="@drawable/ic_address"
             android:title="@string/address" />
@@ -13,20 +9,12 @@
 
     <group android:id="@+id/groupCenter">
         <item
-            android:id="@+id/inviteFriendsItemMenu"
-            android:icon="@drawable/ic_people"
-            android:title="@string/invite_friends" />
-        <item
             android:id="@+id/helpCenterItemMenu"
             android:icon="@drawable/ic_help"
             android:title="@string/help_center" />
     </group>
 
     <group android:id="@+id/groupApplication">
-        <item
-            android:id="@+id/userPolicyItemMenu"
-            android:icon="@drawable/ic_help"
-            android:title="@string/user_policy" />
         <item
             android:id="@+id/settingsItemMenu"
             android:icon="@drawable/ic_setting"

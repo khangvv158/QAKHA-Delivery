@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.screens.signin.OnSignInSuccessListener
 import com.sun.qakhadelivery.screens.signin.SignInFragment
 import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
+import com.sun.qakhadelivery.screens.navigate.about.AboutFragment
+import com.sun.qakhadelivery.screens.navigate.setting.SettingFragment
 import kotlinx.android.synthetic.main.fragment_not_sign_in.*
 
 class NotSignInFragment : Fragment(), OnSignInSuccessListener {
@@ -16,8 +19,8 @@ class NotSignInFragment : Fragment(), OnSignInSuccessListener {
     private var onSignInSuccessListener: OnSignInSuccessListener? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_not_sign_in, container, false)
     }
@@ -46,13 +49,17 @@ class NotSignInFragment : Fragment(), OnSignInSuccessListener {
         }
         navMe.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.payItemMenu -> navigateSignIn()
                 R.id.addressItemMenu -> navigateSignIn()
-                R.id.inviteFriendsItemMenu -> navigateSignIn()
                 R.id.helpCenterItemMenu -> navigateSignIn()
+                R.id.settingsItemMenu -> navigateToFragment(SettingFragment.newInstance())
+                R.id.aboutItemMenu -> navigateToFragment(AboutFragment.newInstance())
             }
             true
         }
+    }
+
+    private fun navigateToFragment(fragment: Fragment) {
+        addFragmentBackStack(fragment, R.id.containerView)
     }
 
     private fun navigateSignIn() {
