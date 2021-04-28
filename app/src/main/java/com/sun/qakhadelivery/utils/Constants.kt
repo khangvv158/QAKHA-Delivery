@@ -6,7 +6,7 @@ object Constants {
     const val DEFAULT_FLOAT = 0f
     const val DEFAULT_STRING = ""
     const val SPACE_STRING = " "
-    const val BASE_URL = "https://cadee23312b6.ngrok.io/api/v1/"
+    const val BASE_URL = "https://8be170897a46.ngrok.io/api/v1/"
     const val TOKEN_TYPE = "Bearer "
     const val CONTENT_TYPE = "Content-Type"
     const val CONTENT_TYPE_VALUE = "application/json"
@@ -21,4 +21,6 @@ object Constants {
     const val ORDER = "order"
     const val SHIPPING = "shipping"
     const val LOCATION = "location"
+    const val LANG_VI = "vi"
+    const val LANG_EN = "en"
 }

@@ -188,4 +188,8 @@
     <string name="payment_method">Payment method</string>
     <string name="driver">Driver</string>
     <string name="time">Time</string>
+    <string name="about_application">About application</string>
+    <string name="building_qakha_delivery_system">Building QAKHA Delivery System</string>
+    <string name="department_of_information_technology_duy_tan_university">Department Of Information Technology, Duy Tan University</string>
+    <string name="contact_us">Contact us</string>
 </resources>

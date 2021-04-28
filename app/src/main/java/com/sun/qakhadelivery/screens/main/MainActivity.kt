@@ -1,9 +1,12 @@
 package com.sun.qakhadelivery.screens.main
 
 import android.content.Context
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Rect
 import android.os.Bundle
 import android.os.Handler
+import android.util.DisplayMetrics
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
@@ -12,18 +15,32 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.data.repository.LanguageRepositoryImpl
+import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.extensions.addFragment
 import com.sun.qakhadelivery.screens.container.ContainerFragment
+import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainContract.View {
 
+    private val presenter by lazy {
+        MainPresenter(
+            LanguageRepositoryImpl.getInstance(SharedPrefsImpl.getInstance(baseContext))
+        )
+    }
     private var doubleBackPressed = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        presenter.setView(this)
+        presenter.onSetupLanguage()
         setFlags()
         initViews()
+    }
+
+    override fun onSetupLanguageSuccess(langCode: String) {
+        setAppLocale(langCode)
     }
 
     override fun onBackPressed() {
@@ -76,5 +93,13 @@ class MainActivity : AppCompatActivity() {
         val inputMethodManager =
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun setAppLocale(localeCode: String) {
+        val resources: Resources = resources
+        val dm: DisplayMetrics = resources.displayMetrics
+        val config: Configuration = resources.configuration
+        config.setLocale(Locale(localeCode.toLowerCase()))
+        resources.updateConfiguration(config, dm)
     }
 }
