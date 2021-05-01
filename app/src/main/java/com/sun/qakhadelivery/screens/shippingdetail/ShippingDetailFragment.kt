@@ -29,7 +29,9 @@ import com.sun.qakhadelivery.data.model.DriverFirebase
 import com.sun.qakhadelivery.data.repository.DriverFirebaseRepositoryImpl
 import com.sun.qakhadelivery.data.repository.OrderFirebaseRepositoryImpl
 import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
+import com.sun.qakhadelivery.extensions.addFragmentFadeAnim
 import com.sun.qakhadelivery.extensions.makeText
+import com.sun.qakhadelivery.screens.feedback.driver.DriverFeedbackFragment
 import com.sun.qakhadelivery.screens.orderdetail.adapter.OrderAdapter
 import com.sun.qakhadelivery.utils.GoogleMapHelper
 import com.sun.qakhadelivery.utils.LatLngInterpolator
@@ -103,6 +105,15 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
         notificationManager.notify(NOTIFICATION_ORDER_ID, createNotificationOrderDone())
         onOrderDone?.onOrderDone()
         parentFragmentManager.popBackStack()
+        arguments?.getParcelable<OrderResponse>(BUNDLE_ORDER_RESPONSE)?.let {
+            addFragmentFadeAnim(
+                DriverFeedbackFragment.newInstance(
+                    it.driverNearest,
+                    it.order.id,
+                    it.partner
+                ), R.id.containerView
+            )
+        }
     }
 
     override fun fetchLocationByDriverSuccess(driverFirebase: DriverFirebase) {
@@ -175,7 +186,6 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
                 )
             }
         }
-
     }
 
     fun registerOnOrderDone(onOrderDone: OnOrderDone) {

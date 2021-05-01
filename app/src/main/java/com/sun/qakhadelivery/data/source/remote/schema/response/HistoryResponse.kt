@@ -28,7 +28,7 @@ data class HistoryResponse(
     @SerializedName("partner") val partner: Partner
 ) : Parcelable {
 
-    fun isRated(): Boolean {
+    fun rate(): Boolean {
         return rateStatus == "rate"
     }
 }

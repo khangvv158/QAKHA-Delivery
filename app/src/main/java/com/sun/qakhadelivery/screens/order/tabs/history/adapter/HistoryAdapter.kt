@@ -15,8 +15,12 @@ open class HistoryAdapter : CustomRecyclerView.Adapter<HistoryViewHolder>(arrayL
         viewType: Int
     ): CustomRecyclerView.ViewHolder<*> {
         return HistoryViewHolder(parent).apply {
-            registerOnClickItem(getItems<HistoryItem>().toMutableList()) {
-                onClickItem?.let { func -> func(it) }
+            registerOnClickItem {
+                onClickItem?.let { func ->
+                    getItemPosition<HistoryItem>(it)?.let { item ->
+                        func(item.history)
+                    }
+                }
             }
         }
     }

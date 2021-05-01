@@ -24,11 +24,10 @@ class HistoryViewHolder(viewGroup: ViewGroup) :
     }
 
     fun registerOnClickItem(
-        items: MutableList<HistoryItem>,
-        listener: (HistoryResponse) -> Unit
+        listener: (Int) -> Unit
     ) {
         itemView.setOnSafeClickListener(2000) {
-            listener(items[adapterPosition].history)
+            listener(adapterPosition)
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.data.model.Refresh
 import com.sun.qakhadelivery.data.repository.ShippingRepositoryImpl
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
@@ -19,6 +20,9 @@ import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment
 import kotlinx.android.synthetic.main.fragment_history.*
 import kotlinx.android.synthetic.main.fragment_shipping.*
 import kotlinx.android.synthetic.main.fragment_shipping.refreshLayout
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class ShippingFragment : Fragment(), ShippingContract.View, OnOrderDone {
 
@@ -62,11 +66,13 @@ class ShippingFragment : Fragment(), ShippingContract.View, OnOrderDone {
             setView(this@ShippingFragment)
             getShipping()
         }
+        EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
         super.onStop()
         presenter.onStop()
+        EventBus.getDefault().unregister(this)
     }
 
     override fun onSuccessGetShipping(shipping: MutableList<HistoryResponse>) {
@@ -97,6 +103,14 @@ class ShippingFragment : Fragment(), ShippingContract.View, OnOrderDone {
     override fun onOrderDone() {
         presenter.getShipping()
         refreshLayout.isRefreshing = true
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
+    fun onLoadRefresh(refresh: Refresh) {
+        refresh.message {
+            refreshLayout.isRefreshing = true
+            presenter.getShipping()
+        }
     }
 
     private fun initRecyclerView() {

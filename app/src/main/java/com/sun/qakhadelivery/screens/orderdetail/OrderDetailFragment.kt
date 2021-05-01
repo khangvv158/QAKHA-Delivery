@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.data.repository.FeedbackRepositoryImpl
 import com.sun.qakhadelivery.data.repository.HistoryRepositoryImpl
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.response.HistoryResponse
 import com.sun.qakhadelivery.data.source.remote.schema.response.OrderDetailsResponse
-import com.sun.qakhadelivery.extensions.gone
+import com.sun.qakhadelivery.data.source.remote.schema.response.RateDriver
+import com.sun.qakhadelivery.extensions.*
+import com.sun.qakhadelivery.screens.feedback.driver.DriverFeedbackFragment
+import com.sun.qakhadelivery.screens.feedback.partner.PartnerFeedbackFragment
 import com.sun.qakhadelivery.screens.order.tabs.history.HistoryFragment.Companion.BUNDLE_HISTORY
 import com.sun.qakhadelivery.screens.orderdetail.adapter.OrderAdapter
 import kotlinx.android.synthetic.main.fragment_order_detail.*
@@ -24,7 +28,8 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
             HistoryRepositoryImpl.getInstance(),
             TokenRepositoryImpl.getInstance(
                 SharedPrefsImpl.getInstance(requireContext())
-            )
+            ),
+            FeedbackRepositoryImpl.getInstance()
         )
     }
 
@@ -51,7 +56,7 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
             nameDriverTextView.text = it.driver.name
             namePartnerTextView.text = it.partner.name
             namePartnerHighTextView.text = it.partner.name
-            if (!it.isRated()) buttonFeedback.gone()
+            presenter.checkDriverFeedback(it.id)
         }
     }
 
@@ -77,7 +82,42 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
         }
     }
 
+    override fun onSuccessCheckDriverFeedback(rateDriver: RateDriver) {
+        var isPartner = false
+        arguments?.getParcelable<HistoryResponse>(BUNDLE_HISTORY)?.let { history ->
+            if (history.rate() && rateDriver.rate) {
+                buttonFeedback.show()
+                isPartner = true
+            } else if (history.rate() && !rateDriver.rate) {
+                buttonFeedback.show()
+            }
+            buttonFeedback.setOnSafeClickListener {
+                parentFragmentManager.popBackStack()
+                if (isPartner) {
+                    addFragmentFadeAnim(
+                        PartnerFeedbackFragment.newInstance(
+                            history.id,
+                            history.partner.apply { id = history.partnerId }),
+                        R.id.containerView
+                    )
+                } else {
+                    addFragmentFadeAnim(
+                        DriverFeedbackFragment.newInstance(
+                            history.driver.apply { id = history.driverId },
+                            history.id,
+                            history.partner.apply { id = history.partnerId }
+                        ), R.id.containerView
+                    )
+                }
+            }
+        }
+    }
+
     override fun onErrorOrderDetails(exception: String) = Unit
+
+    override fun onErrorCheckDriverFeedback(exception: String) {
+        makeText(exception)
+    }
 
     private fun initView() {
         recyclerViewBucket.adapter = adapter

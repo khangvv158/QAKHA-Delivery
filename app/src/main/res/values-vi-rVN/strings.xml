@@ -187,4 +187,10 @@
     <string name="current_password">Mật khẩu hiện tại</string>
     <string name="change_password_successfully">Thay đổi mật khẩu thành công</string>
     <string name="current_password_dont_match">Mật khẩu hiện tại không chính xác</string>
+    <string name="share_feedback">Chia sẻ đánh già của bạn</string>
+    <string name="rate_driver">Đánh giá Tài xế</string>
+    <string name="send">Gửi</string>
+    <string name="rate_shop">Đánh giá Quán và Món</string>
+    <string name="rate_success">Đánh giá thành công</string>
+    <string name="rate_error">Đánh giá không thành công</string>
 </resources>

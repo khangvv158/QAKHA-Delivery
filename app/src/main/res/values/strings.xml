@@ -199,4 +199,12 @@
     <string name="current_password">Current password</string>
     <string name="change_password_successfully">Change password successfully</string>
     <string name="current_password_dont_match">Current password don\'t match</string>
+    <string name="share_feedback">Sharing your feedback</string>
+    <string name="rate_driver">Feedback Driver</string>
+    <string name="send">Send</string>
+    <string name="default_text_feedback" translatable="false">/500</string>
+    <string name="zero" translatable="false">0</string>
+    <string name="rate_shop">Rate Shop and Item</string>
+    <string name="rate_success">Feedback success</string>
+    <string name="rate_error">Feedback error</string>
 </resources>
