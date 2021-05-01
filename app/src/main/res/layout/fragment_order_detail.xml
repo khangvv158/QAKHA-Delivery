@@ -536,6 +536,7 @@
                 android:textSize="@dimen/sp_14"
                 app:backgroundTint="@color/colorCarrotOrange"
                 app:cornerRadius="@dimen/dp_10"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="200:33"
                 app:layout_constraintEnd_toEndOf="parent"

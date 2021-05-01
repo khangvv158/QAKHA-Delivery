@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Partner(
-    @SerializedName("id") val id: Int,
+    @SerializedName("id") var id: Int,
     @SerializedName("name") val name: String = DEFAULT_STRING,
     @SerializedName("address") val address: String = DEFAULT_STRING,
     @SerializedName("image") val image: Image,
