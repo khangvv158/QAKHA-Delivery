@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.LanguageRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.extensions.addFragmentFadeAnim
 import com.sun.qakhadelivery.extensions.makeText
+import com.sun.qakhadelivery.screens.navigate.setting.changepassword.ChangePasswordFragment
 import com.sun.qakhadelivery.utils.Constants
 import kotlinx.android.synthetic.main.fragment_setting.*
 
@@ -61,6 +63,10 @@ class SettingFragment : Fragment(), SettingContract.View {
             when (it.itemId) {
                 R.id.langVi -> presenter.setLanguage(LANG_CODE_VI)
                 R.id.langEn -> presenter.setLanguage(LANG_CODE_EN)
+                R.id.changePassword -> addFragmentFadeAnim(
+                    ChangePasswordFragment.newInstance(),
+                    R.id.containerView
+                )
             }
             true
         }
