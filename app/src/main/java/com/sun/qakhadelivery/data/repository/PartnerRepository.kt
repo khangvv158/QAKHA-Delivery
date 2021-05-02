@@ -5,7 +5,9 @@ import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.source.remote.PartnerApi
 import com.sun.qakhadelivery.data.source.remote.RetrofitClient
+import com.sun.qakhadelivery.data.source.remote.schema.request.LocationRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.TypeRequest
+import com.sun.qakhadelivery.data.source.remote.schema.response.PartnerResponse
 import io.reactivex.rxjava3.core.Observable
 
 interface PartnerRepository {
@@ -17,6 +19,12 @@ interface PartnerRepository {
     fun getPartnersByIdType(idType: Int): Observable<MutableList<Partner>>
 
     fun getFeedbackByIdPartner(idPartner: Int): Observable<Feedback>
+
+    fun getSuggestPartnerNearby(locationRequest: LocationRequest): Observable<MutableList<Partner>>
+
+    fun getSuggestPartnerBestRated(): Observable<MutableList<Partner>>
+
+    fun getPartnerById(idPartner: Int): Observable<PartnerResponse>
 }
 
 class PartnerRepositoryImpl : PartnerRepository {
@@ -32,6 +40,13 @@ class PartnerRepositoryImpl : PartnerRepository {
 
     override fun getFeedbackByIdPartner(idPartner: Int): Observable<Feedback> =
         client.getFeedbackByIdPartner(idPartner)
+
+    override fun getSuggestPartnerNearby(locationRequest: LocationRequest): Observable<MutableList<Partner>> =
+        client.getSuggestPartnerNearby(locationRequest)
+
+    override fun getSuggestPartnerBestRated() = client.getSuggestPartnerBestRated()
+
+    override fun getPartnerById(idPartner: Int) = client.getPartnerById(idPartner)
 
     companion object {
 

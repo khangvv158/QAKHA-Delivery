@@ -117,7 +117,7 @@ class PartnerFragment : Fragment(), PartnerContract.View {
 
     private fun initData() {
         arguments?.getParcelable<Partner>(HomeFragment.BUNDLE_PARTNER)?.let {
-            partnerImageView.loadUrl(it.image.imageUrl)
+            it.image?.let { image -> partnerImageView.loadUrl(image.imageUrl) }
             titlePartnerTextView.text = it.name
             ratePartnerTextView.text = it.rate.toString()
             statusTextView.text = it.status

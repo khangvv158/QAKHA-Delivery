@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
 import android.provider.Settings
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
+import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.screens.home.adapter.QueryPartnerPageAdapter
 import com.sun.qakhadelivery.screens.home.adapter.SliderAdapter
 import com.sun.qakhadelivery.screens.home.adapter.TypePartnerAdapter
@@ -30,7 +32,6 @@ import com.sun.qakhadelivery.screens.home.adapter.TypePartnerRecyclerViewOnClick
 import com.sun.qakhadelivery.screens.home.tabs.all.AllFragment
 import com.sun.qakhadelivery.screens.home.tabs.bestrated.BestRatedFragment
 import com.sun.qakhadelivery.screens.home.tabs.nearby.NearbyFragment
-import com.sun.qakhadelivery.screens.home.tabs.topsales.TopSaleFragment
 import com.sun.qakhadelivery.screens.main.MainActivity
 import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.utils.IPositiveNegativeListener
@@ -127,6 +128,13 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
         locationProviderClient.lastLocation.addOnSuccessListener {
             try {
                 currentLatLng = LatLng(it.latitude, it.longitude)
+                EventBus.getDefault().post(currentLatLng)
+                val addresses: List<Address> = geo.getFromLocation(it.latitude, it.longitude, 1)
+                if (addresses.isNotEmpty()) {
+                    addressTextView.text =  addresses[0].getAddressLine(0)
+                } else {
+                    makeText(getString(R.string.waiting_for_location))
+                }
                 Log.e("location ", currentLatLng.toString())
             } catch (e: Exception) {
             }
@@ -214,7 +222,6 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
             adapter = queryPartnerAdapter.apply {
                 addFragment(AllFragment.newInstance())
                 addFragment(NearbyFragment.newInstance())
-                addFragment(TopSaleFragment.newInstance())
                 addFragment(BestRatedFragment.newInstance())
             }
         }
@@ -227,7 +234,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     companion object {
         const val MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 4869
         const val BUNDLE_PARTNER = "BUNDLE_PARTNER"
-        private const val OFF_SCREEN_PAGE_LIMIT = 4
+        private const val OFF_SCREEN_PAGE_LIMIT = 2
 
         fun newInstance() = HomeFragment()
     }
