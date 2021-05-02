@@ -17,6 +17,7 @@ import com.sun.qakhadelivery.screens.address.AddressFragment
 import com.sun.qakhadelivery.screens.navigate.about.AboutFragment
 import com.sun.qakhadelivery.screens.navigate.helpcenter.HelpCenterFragment
 import com.sun.qakhadelivery.screens.navigate.setting.SettingFragment
+import com.sun.qakhadelivery.screens.profile.ProfileFragment
 import kotlinx.android.synthetic.main.fragment_signed_in.*
 
 class SignedInFragment : Fragment(), SignedInContract.View {
@@ -82,7 +83,8 @@ class SignedInFragment : Fragment(), SignedInContract.View {
         }
         navProfile.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.addressItemMenu -> navigateAddress()
+                R.id.userInfoItemMenu -> navigateToFragment(ProfileFragment.newInstance())
+                R.id.addressItemMenu -> navigateToFragment(AddressFragment.newInstance())
                 R.id.aboutItemMenu -> navigateToFragment(AboutFragment.newInstance())
                 R.id.settingsItemMenu -> navigateToFragment(SettingFragment.newInstance())
                 R.id.helpCenterItemMenu -> navigateToFragment(HelpCenterFragment.newInstance())
@@ -93,10 +95,6 @@ class SignedInFragment : Fragment(), SignedInContract.View {
 
     private fun navigateToFragment(fragment: Fragment) {
         addFragmentBackStack(fragment, R.id.containerView)
-    }
-
-    private fun navigateAddress() {
-        addFragmentBackStack(AddressFragment.newInstance(), R.id.containerView)
     }
 
     companion object {

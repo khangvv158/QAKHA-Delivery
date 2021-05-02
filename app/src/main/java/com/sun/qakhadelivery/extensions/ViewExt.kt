@@ -37,3 +37,14 @@ fun View.setOnSafeClickListener(interval: Int = 1000, func: (View) -> Unit) {
         func(it)
     }
 }
+
+fun View.setOnSafeClickListener(interval: Int = 1000, listener: View.OnClickListener) {
+    var timeLeft = 0L
+    setOnClickListener {
+        if (SystemClock.elapsedRealtime() - timeLeft < interval) {
+            return@setOnClickListener
+        }
+        timeLeft = SystemClock.elapsedRealtime()
+        listener.onClick(it)
+    }
+}

@@ -49,6 +49,7 @@ class NotSignInFragment : Fragment(), OnSignInSuccessListener {
         }
         navMe.setNavigationItemSelectedListener {
             when (it.itemId) {
+                R.id.userInfoItemMenu -> navigateSignIn()
                 R.id.addressItemMenu -> navigateSignIn()
                 R.id.helpCenterItemMenu -> navigateSignIn()
                 R.id.settingsItemMenu -> navigateToFragment(SettingFragment.newInstance())

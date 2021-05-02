@@ -78,7 +78,7 @@
     <string name="keep_social_distancing_leave_your_order_on_the_doorstep">Keep social distancing, leave your order on the doorstep</string>
     <string name="find_item">Find item</string>
     <string name="add_cart">ADD TO CART</string>
-    <string name="save">save</string>
+    <string name="save">Save</string>
     <string name="reset_password">Reset Password</string>
     <string name="invalid_field">Field is invalid</string>
     <string name="empty_field">"TextField must not be empty"</string>
