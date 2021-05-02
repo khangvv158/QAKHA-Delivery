@@ -18,6 +18,7 @@
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView18"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:fontFamily="@font/sf_compact_display_medium"
@@ -37,48 +38,32 @@
                 android:id="@+id/addressTextView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/dp_4"
                 android:ellipsize="end"
                 android:fontFamily="@font/sf_compact_display_medium"
                 android:gravity="center|left"
                 android:maxLines="1"
-                android:text="Đà Nẵng"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_18"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="103:20"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.152"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35"
-                app:layout_constraintWidth_percent="0.3" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@drawable/ic_next"
-                android:backgroundTint="@color/colorWhite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="7:11"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintDimensionRatio="350:25"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/addressTextView"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.375"
-                app:layout_constraintWidth_percent="0.02" />
+                app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView18"
+                app:layout_constraintWidth_percent="0.85" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp_2"
                 android:background="@drawable/ic_address"
                 android:backgroundTint="@color/colorWhite"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="12:12"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.039"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.35"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/appCompatTextView18"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView18"
                 app:layout_constraintWidth_percent="0.05" />
 
             <SearchView

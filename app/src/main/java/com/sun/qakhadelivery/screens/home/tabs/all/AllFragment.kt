@@ -13,7 +13,7 @@ import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
 import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.extensions.gone
 import com.sun.qakhadelivery.extensions.show
-import com.sun.qakhadelivery.screens.home.tabs.all.adapter.AllPartnerAdapter
+import com.sun.qakhadelivery.screens.home.tabs.all.adapter.PartnerAdapter
 import com.sun.qakhadelivery.screens.partner.PartnerFragment
 import com.sun.qakhadelivery.screens.partner.PartnerFragment.Companion.BUNDLE_PARTNER
 import com.sun.qakhadelivery.utils.Constants
@@ -27,8 +27,8 @@ class AllFragment : Fragment(),
     AllContract.View,
     OnItemRecyclerViewClickListener<Partner> {
 
-    private val adapter: AllPartnerAdapter by lazy {
-        AllPartnerAdapter()
+    private val adapter: PartnerAdapter by lazy {
+        PartnerAdapter()
     }
     private val presenter by lazy {
         AllPresenter(PartnerRepositoryImpl())
@@ -90,7 +90,7 @@ class AllFragment : Fragment(),
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     fun eventBusGetTypePartner(typePartner: TypePartner) {
         if (typePartner.id != Constants.ID_PARTNER_ALL) {
             presenter.getPartnersByIdType(typePartner.id)

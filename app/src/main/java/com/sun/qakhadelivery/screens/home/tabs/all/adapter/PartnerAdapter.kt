@@ -7,7 +7,7 @@ import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.PartnerItem
 import com.sun.qakhadelivery.widget.recyclerview.viewholder.PartnerViewHolder
 
-class AllPartnerAdapter : CustomRecyclerView.Adapter<PartnerViewHolder>(arrayListOf()) {
+class PartnerAdapter : CustomRecyclerView.Adapter<PartnerViewHolder>(arrayListOf()) {
 
     private var listener: OnItemRecyclerViewClickListener<Partner>? = null
 

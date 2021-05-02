@@ -11,7 +11,7 @@ data class Partner(
     @SerializedName("id") var id: Int,
     @SerializedName("name") val name: String = DEFAULT_STRING,
     @SerializedName("address") val address: String = DEFAULT_STRING,
-    @SerializedName("image") val image: Image,
+    @SerializedName("image") val image: Image?,
     @SerializedName("rate") val rate: Float = DEFAULT_FLOAT,
     @SerializedName("phoneNumber") val phoneNumber: String = DEFAULT_STRING,
     @SerializedName("email") val email: String = DEFAULT_STRING,
@@ -20,6 +20,8 @@ data class Partner(
     @SerializedName("status") val status: String = DEFAULT_STRING,
     @SerializedName("latitude") val latitude: Float = DEFAULT_FLOAT,
     @SerializedName("longitude") val longitude: Float = DEFAULT_FLOAT,
+    @SerializedName("distance") val distance: Float = DEFAULT_FLOAT,
+    @SerializedName("average_point") val avgPoint: Float = DEFAULT_FLOAT,
     @SerializedName("categories") val categories: MutableList<Category>
 ) : Parcelable {
 

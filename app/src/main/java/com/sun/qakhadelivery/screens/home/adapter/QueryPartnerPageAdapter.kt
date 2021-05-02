@@ -8,7 +8,6 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.screens.home.tabs.all.AllFragment
 import com.sun.qakhadelivery.screens.home.tabs.bestrated.BestRatedFragment
 import com.sun.qakhadelivery.screens.home.tabs.nearby.NearbyFragment
-import com.sun.qakhadelivery.screens.home.tabs.topsales.TopSaleFragment
 import com.sun.qakhadelivery.utils.Constants
 
 class QueryPartnerPageAdapter(
@@ -27,7 +26,6 @@ class QueryPartnerPageAdapter(
         return when (fragments[position]::class.java.simpleName) {
             AllFragment::class.java.simpleName -> context.getString(R.string.all)
             NearbyFragment::class.java.simpleName -> context.getString(R.string.nearby)
-            TopSaleFragment::class.java.simpleName -> context.getString(R.string.top_sales)
             BestRatedFragment::class.java.simpleName -> context.getString(R.string.best_rated)
             else -> Constants.SPACE_STRING
         }
