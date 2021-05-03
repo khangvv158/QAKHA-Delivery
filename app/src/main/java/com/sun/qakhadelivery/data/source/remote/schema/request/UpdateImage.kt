@@ -1,10 +1,10 @@
-package com.sun.qakhadelivery.data.model
+package com.sun.qakhadelivery.data.source.remote.schema.request
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Image(
-    @SerializedName("url") val imageUrl: String?
+data class UpdateImage(
+    @SerializedName("image") val image: String
 ) : Parcelable

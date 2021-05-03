@@ -193,4 +193,9 @@
     <string name="rate_shop">Đánh giá Quán và Món</string>
     <string name="rate_success">Đánh giá thành công</string>
     <string name="rate_error">Đánh giá không thành công</string>
+    <string name="update_username_success">Cập nhật tên thành công</string>
+    <string name="update_email_success">Thay đổi email thành công</string>
+    <string name="update_phone_success">Cập nhật số điện thoại thành công</string>
+    <string name="change_email">Thay đổi Email</string>
+    <string name="verify">Xác thực</string>
 </resources>

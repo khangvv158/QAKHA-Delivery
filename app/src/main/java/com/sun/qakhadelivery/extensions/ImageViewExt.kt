@@ -4,7 +4,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.sun.qakhadelivery.R
 
-fun ImageView.loadUrl(url: String) {
+fun ImageView.loadUrl(url: String?) {
     Glide.with(this)
         .load(url)
         .centerCrop()
