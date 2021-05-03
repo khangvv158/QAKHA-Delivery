@@ -2,10 +2,10 @@ package com.sun.qakhadelivery.screens.home.tabs.bestrated
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
@@ -66,11 +66,7 @@ class BestRatedFragment : Fragment(), BestRatedContract.View,
 
     override fun getPartnerByIdSuccess(partnerResponse: PartnerResponse) {
         parentFragment?.addFragmentBackStack(
-            PartnerFragment.newInstance().apply {
-                arguments = Bundle().apply {
-                    putParcelable(PartnerFragment.BUNDLE_PARTNER, partnerResponse.partner)
-                }
-            },
+            PartnerFragment.newInstance(partnerResponse),
             R.id.containerView
         )
     }

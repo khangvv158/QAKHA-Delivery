@@ -10,12 +10,12 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
+import com.sun.qakhadelivery.data.source.remote.schema.response.PartnerResponse
 import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.extensions.gone
 import com.sun.qakhadelivery.extensions.show
 import com.sun.qakhadelivery.screens.home.tabs.all.adapter.PartnerAdapter
 import com.sun.qakhadelivery.screens.partner.PartnerFragment
-import com.sun.qakhadelivery.screens.partner.PartnerFragment.Companion.BUNDLE_PARTNER
 import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_all.*
@@ -71,9 +71,20 @@ class AllFragment : Fragment(),
         loadingProgress.gone()
     }
 
-    override fun onSuccessGetPartnersById(partners: MutableList<Partner>) {
+    override fun onSuccessGetPartnersByIdType(partners: MutableList<Partner>) {
         loadingProgress.gone()
         adapter.updateData(partners)
+    }
+
+    override fun onSuccessGetPartnerById(partnerResponse: PartnerResponse) {
+        parentFragment?.addFragmentBackStack(
+            PartnerFragment.newInstance(partnerResponse),
+            R.id.containerView
+        )
+    }
+
+    override fun onErrorGetPartnerById(exception: String) {
+        loadingProgress.gone()
     }
 
     private fun initViews() {
@@ -102,17 +113,14 @@ class AllFragment : Fragment(),
     }
 
     override fun onItemClickListener(item: Partner?) {
-        parentFragment?.addFragmentBackStack(
-            PartnerFragment.newInstance().apply {
-                arguments = Bundle().apply {
-                    putParcelable(BUNDLE_PARTNER, item)
-                }
-            },
-            R.id.containerView
-        )
+        if (item != null) {
+            presenter.getPartnerById(item.id)
+        }
     }
 
     companion object {
+        private const val BUNDLE_PARTNER_RESPONSE = "BUNDLE_PARTNER_RESPONSE"
+
         fun newInstance() = AllFragment()
     }
 }

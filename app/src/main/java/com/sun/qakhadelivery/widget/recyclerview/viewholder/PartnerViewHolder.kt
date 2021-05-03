@@ -19,7 +19,6 @@ class PartnerViewHolder(viewGroup: ViewGroup) :
             item.partner.image?.let { imageViewPartner.loadUrl(it.imageUrl) }
             textViewNamePartner?.text = item.partner.name
             textViewAddressPartner?.text = item.partner.address
-            textViewRatePartner?.text = item.partner.rate.toString()
             if (item.partner.distance != Constants.DEFAULT_FLOAT) {
                 textViewKilometer.text = item.partner.distance.toString()
             }
@@ -30,7 +29,7 @@ class PartnerViewHolder(viewGroup: ViewGroup) :
     }
 
     fun registerItemViewHolderListener(listener: (Int) -> Unit) {
-        itemView.setOnSafeClickListener {
+        itemView.setOnSafeClickListener(2000) {
             listener(adapterPosition)
         }
     }
