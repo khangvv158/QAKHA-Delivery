@@ -1,6 +1,7 @@
 package com.sun.qakhadelivery.screens.home.tabs.all
 
 import com.sun.qakhadelivery.data.model.Partner
+import com.sun.qakhadelivery.data.source.remote.schema.response.PartnerResponse
 import com.sun.qakhadelivery.utils.BasePresenter
 
 interface AllContract {
@@ -10,6 +11,8 @@ interface AllContract {
         fun getPartners()
 
         fun getPartnersByIdType(idType: Int)
+
+        fun getPartnerById(id: Int)
     }
 
     interface View {
@@ -18,6 +21,10 @@ interface AllContract {
 
         fun onErrorGetPartners(exception: String)
 
-        fun onSuccessGetPartnersById(partners: MutableList<Partner>)
+        fun onSuccessGetPartnersByIdType(partners: MutableList<Partner>)
+
+        fun onSuccessGetPartnerById(partnerResponse: PartnerResponse)
+
+        fun onErrorGetPartnerById(exception: String)
     }
 }

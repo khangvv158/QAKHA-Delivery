@@ -2,10 +2,10 @@ package com.sun.qakhadelivery.screens.home.tabs.nearby
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.model.LatLng
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
@@ -69,11 +69,7 @@ class NearbyFragment : Fragment(), NearbyContract.View, OnItemRecyclerViewClickL
 
     override fun getPartnerByIdSuccess(partnerResponse: PartnerResponse) {
         parentFragment?.addFragmentBackStack(
-            PartnerFragment.newInstance().apply {
-                arguments = Bundle().apply {
-                    putParcelable(PartnerFragment.BUNDLE_PARTNER, partnerResponse.partner)
-                }
-            },
+            PartnerFragment.newInstance(partnerResponse),
             R.id.containerView
         )
     }

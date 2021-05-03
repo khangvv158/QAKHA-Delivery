@@ -19,6 +19,7 @@ import com.sun.qakhadelivery.data.repository.CartRepositoryImpl
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
+import com.sun.qakhadelivery.data.source.remote.schema.response.PartnerResponse
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.cart.CartFragment
 import com.sun.qakhadelivery.screens.home.HomeFragment
@@ -119,8 +120,10 @@ class PartnerFragment : Fragment(), PartnerContract.View {
         arguments?.getParcelable<Partner>(HomeFragment.BUNDLE_PARTNER)?.let {
             it.image?.let { image -> partnerImageView.loadUrl(image.imageUrl) }
             titlePartnerTextView.text = it.name
-            ratePartnerTextView.text = it.rate.toString()
             statusTextView.text = it.status
+        }
+        arguments?.getParcelable<PartnerResponse>(BUNDLE_PARTNER_RESPONSE)?.let {
+            ratePartnerTextView.text = it.avgPoint.toString()
         }
         cartBottomSheet.arguments = arguments
     }
@@ -243,8 +246,14 @@ class PartnerFragment : Fragment(), PartnerContract.View {
 
     companion object {
         const val BUNDLE_PARTNER = "BUNDLE_PARTNER"
+        private const val BUNDLE_PARTNER_RESPONSE = "BUNDLE_PARTNER_RESPONSE"
         private const val OFF_SCREEN_PAGE_LIMIT = 3
 
-        fun newInstance() = PartnerFragment()
+        fun newInstance(partnerResponse: PartnerResponse) = PartnerFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(BUNDLE_PARTNER, partnerResponse.partner)
+                putParcelable(BUNDLE_PARTNER_RESPONSE, partnerResponse)
+            }
+        }
     }
 }
