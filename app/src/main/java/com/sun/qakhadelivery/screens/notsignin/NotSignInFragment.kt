@@ -12,6 +12,7 @@ import com.sun.qakhadelivery.screens.signin.SignInFragment
 import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
 import com.sun.qakhadelivery.screens.navigate.about.AboutFragment
 import com.sun.qakhadelivery.screens.navigate.setting.SettingFragment
+import com.sun.qakhadelivery.screens.navigate.settingnotsign.SettingNotSignFragment
 import kotlinx.android.synthetic.main.fragment_not_sign_in.*
 
 class NotSignInFragment : Fragment(), OnSignInSuccessListener {
@@ -52,7 +53,7 @@ class NotSignInFragment : Fragment(), OnSignInSuccessListener {
                 R.id.userInfoItemMenu -> navigateSignIn()
                 R.id.addressItemMenu -> navigateSignIn()
                 R.id.helpCenterItemMenu -> navigateSignIn()
-                R.id.settingsItemMenu -> navigateToFragment(SettingFragment.newInstance())
+                R.id.settingsItemMenu -> navigateToFragment(SettingNotSignFragment.newInstance())
                 R.id.aboutItemMenu -> navigateToFragment(AboutFragment.newInstance())
             }
             true

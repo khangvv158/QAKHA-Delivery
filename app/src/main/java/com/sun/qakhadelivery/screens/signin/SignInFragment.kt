@@ -15,6 +15,7 @@ import com.sun.qakhadelivery.screens.signup.SignUpFragment
 import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
 import com.sun.qakhadelivery.extensions.hideKeyboard
+import com.sun.qakhadelivery.extensions.makeText
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 class SignInFragment : Fragment(), SignInContract.View {
@@ -95,6 +96,12 @@ class SignInFragment : Fragment(), SignInContract.View {
         }
         forgotPasswordTextView.setOnClickListener {
             addFragmentSlideAnim(ForgotPasswordFragment.newInstance(), R.id.containerView)
+        }
+        imageViewLoginGoogle.setOnClickListener {
+            makeText(getString(R.string.coming_soon))
+        }
+        imageViewLoginFacebook.setOnClickListener {
+            makeText(getString(R.string.coming_soon))
         }
     }
 

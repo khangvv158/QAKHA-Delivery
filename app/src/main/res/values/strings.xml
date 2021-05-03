@@ -212,4 +212,5 @@
     <string name="update_phone_success">Change phone number success</string>
     <string name="change_email">Change Email</string>
     <string name="verify">Verify</string>
+    <string name="coming_soon">Coming soon</string>
 </resources>
