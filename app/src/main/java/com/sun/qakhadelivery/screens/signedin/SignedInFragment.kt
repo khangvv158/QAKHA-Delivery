@@ -1,24 +1,28 @@
 package com.sun.qakhadelivery.screens.signedin
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.data.model.Refresh
 import com.sun.qakhadelivery.data.model.User
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.repository.UserRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.extensions.addFragmentBackStack
-import com.sun.qakhadelivery.extensions.loadUrl
+import com.sun.qakhadelivery.extensions.loadAvatarUrl
+import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.screens.address.AddressFragment
 import com.sun.qakhadelivery.screens.navigate.about.AboutFragment
 import com.sun.qakhadelivery.screens.navigate.helpcenter.HelpCenterFragment
 import com.sun.qakhadelivery.screens.navigate.setting.SettingFragment
 import com.sun.qakhadelivery.screens.profile.ProfileFragment
 import kotlinx.android.synthetic.main.fragment_signed_in.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class SignedInFragment : Fragment(), SignedInContract.View {
 
@@ -46,8 +50,18 @@ class SignedInFragment : Fragment(), SignedInContract.View {
         handleEvents()
     }
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
     override fun onGetUserSuccess(user: User) {
-        user.image?.imageUrl?.let { imageViewAvatar.loadUrl(it) }
+        imageViewAvatar.loadAvatarUrl(user.image.imageUrl)
         textViewName.text = user.name
     }
 
@@ -61,7 +75,14 @@ class SignedInFragment : Fragment(), SignedInContract.View {
     }
 
     override fun onError(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+        makeText(message)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onRefresh(refresh: Refresh) {
+        refresh.message(ProfileFragment::class.java, this::class.java) {
+            presenter.getUser()
+        }
     }
 
     override fun onDestroy() {

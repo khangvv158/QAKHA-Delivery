@@ -199,4 +199,6 @@
     <string name="change_email">Thay đổi Email</string>
     <string name="verify">Xác thực</string>
     <string name="coming_soon">Sắp ra mắt</string>
+    <string name="update_image_success">Thay đổi ảnh thành công</string>
+    <string name="permission_denied">Quyền truy cập bộ nhớ bị từ chối</string>
 </resources>

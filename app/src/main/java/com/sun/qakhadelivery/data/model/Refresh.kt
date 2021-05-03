@@ -11,6 +11,12 @@ data class Refresh(
         }
     }
 
+    fun message(from: Class<*>, to: Class<*>, result: (Refresh) -> Unit) {
+        if (this.to.simpleName == to.simpleName && this.from.simpleName == from.simpleName) {
+            result(this)
+        }
+    }
+
     fun message(result: (Refresh) -> Unit) {
         result(this)
     }
