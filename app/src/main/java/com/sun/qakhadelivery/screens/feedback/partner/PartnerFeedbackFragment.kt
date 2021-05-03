@@ -67,7 +67,7 @@ class PartnerFeedbackFragment : Fragment(), PartnerFeedbackContact.View {
 
     private fun initViews() {
         arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
-            avatarCircleImageView.loadUrl(it.image.imageUrl)
+            it.image?.let { image -> avatarCircleImageView.loadUrl(image.imageUrl) }
             nameShopTextView.text = it.name
         }
     }

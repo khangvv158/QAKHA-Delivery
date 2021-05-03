@@ -198,4 +198,5 @@
     <string name="update_phone_success">Cập nhật số điện thoại thành công</string>
     <string name="change_email">Thay đổi Email</string>
     <string name="verify">Xác thực</string>
+    <string name="coming_soon">Sắp ra mắt</string>
 </resources>
