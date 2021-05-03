@@ -55,7 +55,7 @@ class ContainerFragment : Fragment() {
 
     @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     fun onLoadRefresh(refresh: Refresh) {
-        refresh.message {
+        refresh.message(this::class.java) {
             bottomNavigationView.menu.forEachIndexed { index, item ->
                 if (item.itemId == R.id.item_menu_nav_order) {
                     containerViewPager.currentItem = index

@@ -28,6 +28,7 @@ import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.address.AddressFragment
 import com.sun.qakhadelivery.screens.checkout.adapter.BucketAdapter
+import com.sun.qakhadelivery.screens.container.ContainerFragment
 import com.sun.qakhadelivery.screens.order.tabs.shipping.ShippingFragment
 import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment
 import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment.Companion.BUNDLE_ORDER_RESPONSE
@@ -175,9 +176,10 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         addFragmentSlideAnim(ShippingDetailFragment.newInstance(Bundle().apply {
             putParcelable(BUNDLE_ORDER_RESPONSE, orderResponse)
         }), R.id.containerView)
-        EventBus.getDefault().postSticky(
-            Refresh(this::class.java, ShippingFragment::class.java)
-        )
+        EventBus.getDefault().run {
+            post(Refresh(this::class.java, ShippingFragment::class.java))
+            post(Refresh(this::class.java, ContainerFragment::class.java))
+        }
     }
 
     override fun onErrorGetUser(exception: String) {

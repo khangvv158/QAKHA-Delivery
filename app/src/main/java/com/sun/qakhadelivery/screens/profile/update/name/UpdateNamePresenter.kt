@@ -4,7 +4,7 @@ import com.google.gson.Gson
 import com.sun.qakhadelivery.data.repository.TokenRepository
 import com.sun.qakhadelivery.data.repository.UserRepository
 import com.sun.qakhadelivery.data.source.remote.schema.request.UpdateUsername
-import com.sun.qakhadelivery.data.source.remote.schema.response.MessageResponse
+import com.sun.qakhadelivery.data.source.remote.schema.response.MessageArrayResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -30,8 +30,8 @@ class UpdateNamePresenter(
                         view?.onErrorUsername(
                             Gson().fromJson(
                                 it.response()?.errorBody()?.string(),
-                                MessageResponse::class.java
-                            ).message
+                                MessageArrayResponse::class.java
+                            ).message.first()
                         )
                     } catch (e: Exception) {
                         view?.onErrorUsername(it.localizedMessage)

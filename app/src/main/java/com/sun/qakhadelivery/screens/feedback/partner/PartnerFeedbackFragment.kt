@@ -17,7 +17,7 @@ import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.request.RatePartnerRequest
 import com.sun.qakhadelivery.data.source.remote.schema.response.RatePartnerResponse
-import com.sun.qakhadelivery.extensions.loadUrl
+import com.sun.qakhadelivery.extensions.loadAvatarUrl
 import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.extensions.setOnSafeClickListener
 import com.sun.qakhadelivery.screens.order.tabs.history.HistoryFragment
@@ -67,7 +67,7 @@ class PartnerFeedbackFragment : Fragment(), PartnerFeedbackContact.View {
 
     private fun initViews() {
         arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
-            it.image?.let { image -> avatarCircleImageView.loadUrl(image.imageUrl) }
+            avatarCircleImageView.loadAvatarUrl(it.image?.imageUrl)
             nameShopTextView.text = it.name
         }
     }

@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.sun.qakhadelivery.data.repository.TokenRepository
 import com.sun.qakhadelivery.data.repository.UserRepository
 import com.sun.qakhadelivery.data.source.remote.schema.request.UpdatePhone
+import com.sun.qakhadelivery.data.source.remote.schema.response.MessageArrayResponse
 import com.sun.qakhadelivery.data.source.remote.schema.response.MessageResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -30,8 +31,8 @@ class UpdatePhonePresenter(
                         view?.onErrorPhone(
                             Gson().fromJson(
                                 it.response()?.errorBody()?.string(),
-                                MessageResponse::class.java
-                            ).message
+                                MessageArrayResponse::class.java
+                            ).message.first()
                         )
                     } catch (e: Exception) {
                         view?.onErrorPhone(it.localizedMessage)

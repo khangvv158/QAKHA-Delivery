@@ -1,21 +1,35 @@
 package com.sun.qakhadelivery.screens.profile
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Refresh
 import com.sun.qakhadelivery.data.model.User
+import com.sun.qakhadelivery.data.repository.CloudRepositoryImpl
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.repository.UserRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.data.source.remote.schema.request.UpdateImage
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.profile.update.email.UpdateEmailFragment
 import com.sun.qakhadelivery.screens.profile.update.name.UpdateNameFragment
 import com.sun.qakhadelivery.screens.profile.update.phone.UpdatePhoneFragment
+import com.sun.qakhadelivery.screens.signedin.SignedInFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -28,7 +42,8 @@ class ProfileFragment : Fragment(), ProfileContract.View, View.OnClickListener {
             TokenRepositoryImpl.getInstance(
                 SharedPrefsImpl.getInstance(requireContext())
             ),
-            UserRepositoryImpl.getInstance()
+            UserRepositoryImpl.getInstance(),
+            CloudRepositoryImpl.getInstance(requireContext())
         )
     }
 
@@ -61,7 +76,7 @@ class ProfileFragment : Fragment(), ProfileContract.View, View.OnClickListener {
     }
 
     override fun onSuccessUser(user: User) {
-        avatarCircleImageView.loadUrl(user.image.imageUrl)
+        avatarCircleImageView.loadAvatarUrl(user.image.imageUrl)
         nameNavigateView.setDescribe(user.name)
         phoneNumberNavigateView.setDescribe(user.phoneNumber)
         emailNavigateView.setDescribe(user.email)
@@ -71,9 +86,62 @@ class ProfileFragment : Fragment(), ProfileContract.View, View.OnClickListener {
         enableInteraction()
     }
 
+    override fun onSuccessUploadImage(url: String) {
+        presenter.updateImage(UpdateImage(url))
+    }
+
+    override fun onSuccessUpdateImage(user: User) {
+        makeText(getString(R.string.update_image_success))
+        avatarCircleImageView.loadAvatarUrl(user.image.imageUrl)
+        EventBus.getDefault().post(Refresh(this::class.java, SignedInFragment::class.java))
+        enableInteraction()
+    }
+
     override fun onErrorUser(exception: String) {
         enableInteraction()
         makeText(exception)
+    }
+
+    override fun onErrorUploadImage(exception: String) {
+        enableInteraction()
+        makeText(exception)
+    }
+
+    override fun onErrorUpdateImage(exception: String) {
+        enableInteraction()
+        makeText(exception)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        val filePath = data?.data?.let { getRealPathFromUri(it) }
+        if (requestCode == PICK_IMAGE && resultCode == AppCompatActivity.RESULT_OK) {
+            try {
+                filePath?.let {
+                    presenter.uploadImage(it)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                accessTheGallery()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.permission_denied),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -87,6 +155,7 @@ class ProfileFragment : Fragment(), ProfileContract.View, View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.avatarLayout -> {
+                requestPermission()
             }
             R.id.nameNavigateView -> {
                 addFragmentSlideAnim(
@@ -129,8 +198,45 @@ class ProfileFragment : Fragment(), ProfileContract.View, View.OnClickListener {
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
 
+    private fun requestPermission() {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            accessTheGallery()
+        } else {
+            ActivityCompat.requestPermissions(
+                activity as Activity, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                PERMISSION_CODE
+            )
+        }
+    }
+
+    private fun accessTheGallery() {
+        val intent = Intent().apply {
+            action = Intent.ACTION_PICK
+            type = "image/*"
+        }
+        startActivityForResult(intent, PICK_IMAGE)
+    }
+
+    private fun getRealPathFromUri(imageUri: Uri): String? {
+        val cursor: Cursor? =
+            requireContext().contentResolver?.query(imageUri, null, null, null, null)
+        return if (cursor == null) {
+            imageUri.path
+        } else {
+            cursor.moveToFirst()
+            val idx: Int = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+            cursor.getString(idx)
+        }
+    }
+
     companion object {
         private const val BUNDLE_USER = "BUNDLE_USER"
+        private const val PERMISSION_CODE = 1
+        private const val PICK_IMAGE = 1
 
         fun newInstance() = ProfileFragment()
     }
