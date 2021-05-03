@@ -207,4 +207,9 @@
     <string name="rate_shop">Rate Shop and Item</string>
     <string name="rate_success">Feedback success</string>
     <string name="rate_error">Feedback error</string>
+    <string name="update_username_success">Change username success</string>
+    <string name="update_email_success">Change email successfully</string>
+    <string name="update_phone_success">Change phone number success</string>
+    <string name="change_email">Change Email</string>
+    <string name="verify">Verify</string>
 </resources>
