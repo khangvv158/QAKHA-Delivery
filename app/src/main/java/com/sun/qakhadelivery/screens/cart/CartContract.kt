@@ -19,6 +19,8 @@ interface CartContract {
         fun removeCart(removeCartRequest: RemoveCartRequest, products: MutableList<Product>)
 
         fun clearCart(partnerId: Int)
+
+        fun checkCartEmpty(partnerId: Int)
     }
 
     interface View {
@@ -40,5 +42,11 @@ interface CartContract {
         fun onErrorClearCart(exception: String)
 
         fun onUpdateTotalPrice(total: Float)
+
+        fun onCartNotEmpty()
+
+        fun onCartEmpty()
+
+        fun onErrorCheckEmpty(exception: String)
     }
 }

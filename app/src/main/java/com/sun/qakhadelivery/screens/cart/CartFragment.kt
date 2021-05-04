@@ -16,9 +16,9 @@ import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
 import com.sun.qakhadelivery.extensions.*
+import com.sun.qakhadelivery.screens.cart.adapter.CartAdapter
 import com.sun.qakhadelivery.screens.checkout.CheckoutFragment
 import com.sun.qakhadelivery.screens.partner.PartnerFragment.Companion.BUNDLE_PARTNER
-import com.sun.qakhadelivery.screens.cart.adapter.CartAdapter
 import kotlinx.android.synthetic.main.fragment_cart.*
 
 class CartFragment : BottomSheetDialogFragment(),
@@ -106,6 +106,26 @@ class CartFragment : BottomSheetDialogFragment(),
         totalTextView?.text = total.toString()
     }
 
+    override fun onCartNotEmpty() {
+        dismiss()
+        parentFragment?.addFragmentBackStack(
+            CheckoutFragment.newInstance(arguments),
+            R.id.containerView
+        )
+    }
+
+    override fun onCartEmpty() {
+        enableInteraction()
+        makeText(getString(R.string.cart_changed))
+        cartAdapter.clearProducts()
+        dismiss()
+    }
+
+    override fun onErrorCheckEmpty(exception: String) {
+        enableInteraction()
+        makeText(exception)
+    }
+
     fun setOnCallback(callbackCart: CallbackCart) {
         this.callbackCart = callbackCart
     }
@@ -122,11 +142,10 @@ class CartFragment : BottomSheetDialogFragment(),
             }
         }
         checkoutButton.setOnSafeClickListener {
-            dismiss()
-            parentFragment?.addFragmentBackStack(
-                CheckoutFragment.newInstance(arguments),
-                R.id.containerView
-            )
+            arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
+                presenter.checkCartEmpty(it.id)
+            }
+            disableInteraction()
         }
         arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
             cartAdapter.setOnClickCartListener(object :

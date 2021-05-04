@@ -217,4 +217,5 @@
     <string name="permission_denied">Permission denied</string>
     <string name="content_email_sign_in">Email is not exists. Please sign up !!</string>
     <string name="content_password_sign_in">Sign in failed</string>
+    <string name="cart_changed">Cart has been changed</string>
 </resources>
