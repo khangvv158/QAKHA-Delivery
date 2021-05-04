@@ -11,4 +11,5 @@ data class User(
     @SerializedName("image") val image: Image,
     @SerializedName("phone_number") val phoneNumber: String,
     @SerializedName("role") val role: String?,
+    @SerializedName("coins") val coin: Float,
 ) : Parcelable

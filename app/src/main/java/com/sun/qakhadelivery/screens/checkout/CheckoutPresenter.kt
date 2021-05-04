@@ -1,5 +1,6 @@
 package com.sun.qakhadelivery.screens.checkout
 
+import com.google.gson.Gson
 import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.data.model.Product
 import com.sun.qakhadelivery.data.repository.CartRepository
@@ -10,9 +11,11 @@ import com.sun.qakhadelivery.data.source.remote.schema.request.ApplyVoucher
 import com.sun.qakhadelivery.data.source.remote.schema.request.DistanceRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.OrderRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.VoucherCancel
+import com.sun.qakhadelivery.data.source.remote.schema.response.MessageResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import retrofit2.HttpException
 
 class CheckoutPresenter(
     private val cartRepository: CartRepository,
@@ -39,7 +42,18 @@ class CheckoutPresenter(
             .subscribe({
                 view?.onSuccessGetCart(it)
             }, {
-                view?.onErrorGetCart(it.message.toString())
+                if (it is HttpException) {
+                    try {
+                        view?.onErrorGetCart(
+                            Gson().fromJson(
+                                it.response()?.errorBody()?.string(),
+                                MessageResponse::class.java
+                            ).message
+                        )
+                    } catch (e: Exception) {
+                        view?.onErrorGetCart(it.localizedMessage)
+                    }
+                }
             })
         compositeDisposable.add(disposable)
     }
@@ -51,7 +65,18 @@ class CheckoutPresenter(
             .subscribe({
                 view?.onSuccessApplyVoucher(it)
             }, {
-                view?.onErrorApplyVoucher(it.message.toString())
+                if (it is HttpException) {
+                    try {
+                        view?.onErrorApplyVoucher(
+                            Gson().fromJson(
+                                it.response()?.errorBody()?.string(),
+                                MessageResponse::class.java
+                            ).message
+                        )
+                    } catch (e: Exception) {
+                        view?.onErrorApplyVoucher(it.localizedMessage)
+                    }
+                }
             })
         compositeDisposable.add(disposable)
     }
@@ -63,7 +88,18 @@ class CheckoutPresenter(
             .subscribe({
                 view?.onSuccessCancelVouchers(it)
             }, {
-                view?.onErrorCancelVouchers(it.message.toString())
+                if (it is HttpException) {
+                    try {
+                        view?.onErrorCancelVouchers(
+                            Gson().fromJson(
+                                it.response()?.errorBody()?.string(),
+                                MessageResponse::class.java
+                            ).message
+                        )
+                    } catch (e: Exception) {
+                        view?.onErrorCancelVouchers(it.localizedMessage)
+                    }
+                }
             })
         compositeDisposable.add(disposable)
     }
@@ -75,7 +111,18 @@ class CheckoutPresenter(
             .subscribe({
                 view?.onSuccessGetVouchers(it)
             }, {
-                view?.onErrorGetVouchers(it.message.toString())
+                if (it is HttpException) {
+                    try {
+                        view?.onErrorGetVouchers(
+                            Gson().fromJson(
+                                it.response()?.errorBody()?.string(),
+                                MessageResponse::class.java
+                            ).message
+                        )
+                    } catch (e: Exception) {
+                        view?.onErrorGetVouchers(it.localizedMessage)
+                    }
+                }
             })
         compositeDisposable.add(disposable)
     }
@@ -87,7 +134,18 @@ class CheckoutPresenter(
             .subscribe({
                 view?.onSuccessGetUser(it)
             }, {
-                view?.onErrorGetVouchers(it.message.toString())
+                if (it is HttpException) {
+                    try {
+                        view?.onErrorGetUser(
+                            Gson().fromJson(
+                                it.response()?.errorBody()?.string(),
+                                MessageResponse::class.java
+                            ).message
+                        )
+                    } catch (e: Exception) {
+                        view?.onErrorGetUser(it.localizedMessage)
+                    }
+                }
             })
         compositeDisposable.add(disposable)
     }
@@ -102,7 +160,18 @@ class CheckoutPresenter(
             .subscribe({
                 view?.onSuccessDistance(it)
             }, {
-                view?.onErrorCalculatorDistance(it.message.toString())
+                if (it is HttpException) {
+                    try {
+                        view?.onErrorCalculatorDistance(
+                            Gson().fromJson(
+                                it.response()?.errorBody()?.string(),
+                                MessageResponse::class.java
+                            ).message
+                        )
+                    } catch (e: Exception) {
+                        view?.onErrorCalculatorDistance(it.localizedMessage)
+                    }
+                }
             })
         compositeDisposable.add(disposable)
     }
@@ -117,7 +186,18 @@ class CheckoutPresenter(
             .subscribe({
                 view?.onSuccessCreateOrder(it)
             }, {
-                view?.onErrorCreateOrder(it.message.toString())
+                if (it is HttpException) {
+                    try {
+                        view?.onErrorCreateOrder(
+                            Gson().fromJson(
+                                it.response()?.errorBody()?.string(),
+                                MessageResponse::class.java
+                            ).message
+                        )
+                    } catch (e: Exception) {
+                        view?.onErrorCreateOrder(it.localizedMessage)
+                    }
+                }
             })
         compositeDisposable.add(disposable)
     }

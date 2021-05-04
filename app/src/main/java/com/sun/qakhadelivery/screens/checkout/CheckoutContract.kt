@@ -1,9 +1,6 @@
 package com.sun.qakhadelivery.screens.checkout
 
-import com.sun.qakhadelivery.data.model.Cart
-import com.sun.qakhadelivery.data.model.Product
-import com.sun.qakhadelivery.data.model.User
-import com.sun.qakhadelivery.data.model.Voucher
+import com.sun.qakhadelivery.data.model.*
 import com.sun.qakhadelivery.data.source.remote.schema.request.ApplyVoucher
 import com.sun.qakhadelivery.data.source.remote.schema.request.DistanceRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.OrderRequest

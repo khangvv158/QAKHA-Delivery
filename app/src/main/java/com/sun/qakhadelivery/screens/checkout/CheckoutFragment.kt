@@ -33,7 +33,9 @@ import com.sun.qakhadelivery.screens.order.tabs.shipping.ShippingFragment
 import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment
 import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment.Companion.BUNDLE_ORDER_RESPONSE
 import com.sun.qakhadelivery.screens.voucher.VoucherFragment
+import com.sun.qakhadelivery.utils.Constants.DEFAULT_FLOAT
 import com.sun.qakhadelivery.utils.Constants.DEFAULT_STRING
+import com.sun.qakhadelivery.utils.Constants.NOT_EXISTS
 import com.sun.qakhadelivery.utils.IPositiveNegativeListener
 import com.sun.qakhadelivery.utils.LocationHelper
 import com.sun.qakhadelivery.widget.recyclerview.item.ChoiceVoucherState
@@ -148,10 +150,14 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         enableInteraction()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onSuccessGetUser(user: User) {
         userNameTextView.text = user.name
         phoneNumberTextView.text = user.phoneNumber
         arguments?.putParcelable(BUNDLE_USER, user)
+        coinsRadioButton.text = getString(R.string.coins) +
+                if (user.coin == DEFAULT_FLOAT) ": ${getString(R.string.zero)}"
+                else ": ${user.coin}"
         enableInteraction()
     }
 
@@ -184,27 +190,33 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
 
     override fun onErrorGetUser(exception: String) {
         enableInteraction()
+        makeText(exception)
     }
 
     override fun onErrorGetVouchers(exception: String) {
         enableInteraction()
+        makeText(exception)
     }
 
     override fun onErrorGetCart(exception: String) {
         enableInteraction()
+        makeText(exception)
     }
 
     override fun onErrorApplyVoucher(exception: String) {
         arguments?.putParcelable(BUNDLE_VOUCHER, null)
         enableInteraction()
+        makeText(exception)
     }
 
     override fun onErrorCancelVouchers(exception: String) {
         enableInteraction()
+        makeText(exception)
     }
 
     override fun onErrorCalculatorDistance(exception: String) {
         enableInteraction()
+        makeText(exception)
     }
 
     override fun onErrorCreateOrder(exception: String) {
@@ -289,15 +301,20 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
                 showDialogRequireAddress()
             }
         }
+        var idChecked = NOT_EXISTS
         paymentGroupRadio.setOnCheckedChangeListener { _, checkedId ->
-            placeOrderCardView.setOnSafeClickListener {
-                when (checkedId) {
-                    R.id.cashRadioButton -> {
-                        createOrderWithTypeCheckout(TypeCheckout.CASH.value)
-                    }
-                    R.id.coinsRadioButton -> {
-                        createOrderWithTypeCheckout(TypeCheckout.COINS.value)
-                    }
+            idChecked = checkedId
+        }
+        placeOrderCardView.setOnSafeClickListener {
+            when (idChecked) {
+                R.id.cashRadioButton -> {
+                    createOrderWithTypeCheckout(TypeCheckout.CASH.value)
+                }
+                R.id.coinsRadioButton -> {
+                    createOrderWithTypeCheckout(TypeCheckout.COINS.value)
+                }
+                else -> {
+                    makeText(getString(R.string.please_select_payment))
                 }
             }
         }
