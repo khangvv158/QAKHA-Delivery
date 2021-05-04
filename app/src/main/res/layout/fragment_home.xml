@@ -66,15 +66,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView18"
                 app:layout_constraintWidth_percent="0.05" />
 
-            <SearchView
+            <androidx.cardview.widget.CardView
                 android:id="@+id/searchView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/background_search"
-                android:closeIcon="@android:color/transparent"
-                android:iconifiedByDefault="true"
-                android:searchIcon="@drawable/ic_search"
-                android:theme="@style/ThemeOverlay.search"
+                app:cardCornerRadius="@dimen/dp_10"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="379:45"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -82,7 +79,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.9"
-                app:layout_constraintWidth_percent="0.92" />
+                app:layout_constraintWidth_percent="0.92">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:src="@drawable/ic_search"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintDimensionRatio="20:25"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.045"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_percent="0.077" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

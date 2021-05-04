@@ -21,7 +21,7 @@ class SignedInPresenter(
             .subscribe({
                 view?.onGetUserSuccess(it)
             }, {
-                view?.onError(it.localizedMessage)
+                view?.onGetUserFailure()
             })
         compositeDisposable.add(disposable)
     }
