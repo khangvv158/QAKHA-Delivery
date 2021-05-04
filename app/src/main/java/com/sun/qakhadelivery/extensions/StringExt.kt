@@ -1,5 +1,7 @@
 package com.sun.qakhadelivery.extensions
 
+import android.text.TextUtils
+import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,4 +46,37 @@ fun String.validWithPattern(pattern: Pattern): Boolean {
 
 fun String.validWithRegex(regex: String): Boolean {
     return Pattern.compile(regex).matcher(this).find()
+}
+
+
+fun String.currencyVn(): String {
+    val format = DecimalFormat("#,##0.00")
+    format.currency = Currency.getInstance(Locale.US)
+    var price = if (!TextUtils.isEmpty(this)) this else "0"
+    price = price.trim { it <= ' ' }
+    price = format.format(price.toDouble())
+    price = price.replace(",".toRegex(), "\\.")
+    if (price.endsWith(".00")) {
+        val centsIndex = price.lastIndexOf(".00")
+        if (centsIndex != -1) {
+            price = price.substring(0, centsIndex)
+        }
+    }
+    return String.format("%s đ", price)
+}
+
+fun String.discountCurrencyVn(): String {
+    val format = DecimalFormat("#,##0.00")
+    format.currency = Currency.getInstance(Locale.US)
+    var price = if (!TextUtils.isEmpty(this)) this else "0"
+    price = price.trim { it <= ' ' }
+    price = format.format(price.toDouble())
+    price = price.replace(",".toRegex(), "\\.")
+    if (price.endsWith(".00")) {
+        val centsIndex = price.lastIndexOf(".00")
+        if (centsIndex != -1) {
+            price = price.substring(0, centsIndex)
+        }
+    }
+    return String.format("- %s đ", price)
 }

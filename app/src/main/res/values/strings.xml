@@ -219,4 +219,8 @@
     <string name="content_password_sign_in">Sign in failed</string>
     <string name="cart_changed">Cart has been changed</string>
     <string name="please_select_payment">Please select a payment method</string>
+    <string name="price">Price:</string>
+    <string name="description">Description:</string>
+    <string name="please_login_again">Please login again</string>
+    <string name="discount_currency" translatable="false">- %s đ</string>
 </resources>

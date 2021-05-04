@@ -67,17 +67,17 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
 
     override fun onSuccessOrderDetails(orderDetailsResponse: OrderDetailsResponse) {
         orderDetailsResponse.run {
-            totalTextView.text = order.total.toString()
+            totalTextView.text = order.total.toString().currencyVn()
             paymentTextView.text = order.type_checkout
             usernameTextView.text = order.name
             phoneNumberTextView.text = order.phone_number
             addressTextView.text = order.address
             statusOrderTextView.text = order.status
             orderIdTextView.text = order.id.toString()
-            priceSubtotaTtextView.text = order.subtotal.toString()
-            shippingFeeTextView.text = order.shipping_fee.toString()
-            priceDiscountTextView.text = order.discount.toString()
-            priceTotalTextView.text = order.total.toString()
+            priceSubtotaTtextView.text = order.subtotal.toString().currencyVn()
+            shippingFeeTextView.text = order.shipping_fee.toString().currencyVn()
+            priceDiscountTextView.text = order.discount.toString().discountCurrencyVn()
+            priceTotalTextView.text = order.total.toString().currencyVn()
             adapter.updateOrderDetails(orderDetails)
         }
     }

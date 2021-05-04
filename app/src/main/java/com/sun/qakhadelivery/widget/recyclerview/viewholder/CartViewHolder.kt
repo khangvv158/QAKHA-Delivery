@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
+import com.sun.qakhadelivery.extensions.currencyVn
 import com.sun.qakhadelivery.extensions.loadUrl
 import com.sun.qakhadelivery.utils.Constants.DEFAULT_QUANTITY
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
@@ -20,7 +21,7 @@ class CartViewHolder(viewGroup: ViewGroup) :
             productImageView.loadUrl(item.cart.product.image.imageUrl)
             titleProductTextView.text = item.cart.product.name
             describeProductTextView.text = item.cart.product.description
-            priceProductTextView.text = item.cart.product.price.toString()
+            priceProductTextView.text = item.cart.product.price.toString().currencyVn()
             quantityTextView.text = item.cart.quantity.toString()
         }
     }

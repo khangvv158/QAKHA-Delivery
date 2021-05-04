@@ -107,7 +107,7 @@ class CartFragment : BottomSheetDialogFragment(),
     }
 
     override fun onUpdateTotalPrice(total: Float) {
-        totalTextView?.text = total.toString()
+        totalTextView?.text = total.toString().currencyVn()
     }
 
     override fun onCartNotEmpty() {

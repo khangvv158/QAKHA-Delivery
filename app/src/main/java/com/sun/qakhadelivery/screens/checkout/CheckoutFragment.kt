@@ -48,6 +48,7 @@ import kotlinx.android.synthetic.main.item_layout_voucher.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.lang.String.format
 
 class CheckoutFragment : Fragment(), CheckoutContract.View {
 
@@ -118,7 +119,9 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
 
     override fun onSuccessApplyVoucher(applyVoucherResponse: ApplyVoucherResponse) {
         voucherEditText.setText(applyVoucherResponse.voucher.code)
-        textViewPriceDiscount.text = applyVoucherResponse.voucher.discount.toString()
+        textViewPriceDiscount.text = applyVoucherResponse
+            .voucher
+            .discount.toString().currencyVn().discountCurrencyVn()
         arguments?.getFloat(BUNDLE_TOTAL).also {
             if (it != null) {
                 val total = it - applyVoucherResponse.voucher.discount
@@ -141,7 +144,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
     }
 
     override fun onUpdateTotalPrice(total: Float) {
-        textViewPriceSubtotal.text = total.toString()
+        textViewPriceSubtotal.text = total.toString().currencyVn()
         arguments?.putFloat(BUNDLE_TOTAL, total)
     }
 
@@ -163,7 +166,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
 
     @SuppressLint("SetTextI18n")
     override fun onSuccessDistance(distanceResponse: DistanceResponse) {
-        priceShippingFeeTextView.text = distanceResponse.shipping_fee.toString()
+        priceShippingFeeTextView.text = distanceResponse.shipping_fee.toString().currencyVn()
         distanceTextView.text = "(${distanceResponse.distance} ${getString(R.string.distance)})"
         arguments?.run {
             getFloat(BUNDLE_TOTAL).let {
@@ -369,8 +372,8 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
     }
 
     private fun setTotal(total: Float) {
-        totalPlaceOrderTextView.text = total.toString()
-        textViewPriceTotal.text = total.toString()
+        totalPlaceOrderTextView.text = total.toString().currencyVn()
+        textViewPriceTotal.text = total.toString().currencyVn()
     }
 
     companion object {

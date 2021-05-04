@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundApplication"
+    android:clickable="true"
     android:focusable="true"
     android:focusableInTouchMode="true">
 
@@ -221,7 +222,7 @@
                     android:id="@+id/appCompatTextView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginStart="@dimen/dp_10"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:text="@string/payment"
                     android:textSize="@dimen/sp_18"
@@ -285,32 +286,20 @@
 
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewUnit4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_compact_display_medium"
-                    android:text="@string/vnd"
-                    android:textSize="@dimen/sp_16"
-                    app:layout_constraintBottom_toBottomOf="@+id/textViewPriceTotal"
-                    app:layout_constraintEnd_toEndOf="@+id/textViewUnit3"
-                    app:layout_constraintTop_toTopOf="@+id/textViewPriceTotal" />
-
-                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewPriceTotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintBottom_toBottomOf="@+id/totalPriceTextView"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewUnit4"
-                    app:layout_constraintTop_toTopOf="@+id/totalPriceTextView"/>
+                    app:layout_constraintEnd_toEndOf="@+id/textViewPriceDiscount"
+                    app:layout_constraintTop_toTopOf="@+id/totalPriceTextView" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/totalPriceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginEnd="@dimen/dp_10"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:text="@string/total"
                     android:textSize="@dimen/sp_18"
@@ -323,95 +312,44 @@
                     android:id="@+id/textViewPriceSubtotal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/dp_10"
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:maxLines="1"
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintBottom_toBottomOf="@+id/textViewTileSubtotal"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewUnit1"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.989"
                     app:layout_constraintStart_toEndOf="@+id/textViewTileSubtotal"
                     app:layout_constraintTop_toTopOf="@+id/textViewTileSubtotal"
                     app:layout_constraintVertical_bias="0.335" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewUnit1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:fontFamily="@font/sf_compact_display_medium"
-                    android:text="@string/vnd"
-                    android:textSize="@dimen/sp_16"
-                    app:layout_constraintBottom_toBottomOf="@+id/textViewPriceSubtotal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textViewPriceSubtotal"
-                    app:layout_constraintVertical_bias="1.0" />
-
-                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/priceShippingFeeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:maxLines="1"
                     android:textSize="@dimen/sp_14"
                     app:layout_constraintBottom_toBottomOf="@+id/distanceTextView"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewUnit2"
+                    app:layout_constraintEnd_toEndOf="@+id/textViewPriceSubtotal"
                     app:layout_constraintTop_toTopOf="@+id/distanceTextView"
-                    app:layout_constraintVertical_bias="1.0" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewUnit2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_compact_display_medium"
-                    android:text="@string/vnd"
-                    android:textSize="@dimen/sp_14"
-                    app:layout_constraintBottom_toBottomOf="@+id/priceShippingFeeTextView"
-                    app:layout_constraintEnd_toEndOf="@+id/textViewUnit1"
-                    app:layout_constraintTop_toTopOf="@+id/priceShippingFeeTextView" />
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewPriceDiscount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:maxLines="1"
                     android:textSize="@dimen/sp_14"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView11"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewUnit3"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView11"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewUnit3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_compact_display_medium"
-                    android:text="@string/vnd"
-                    android:textSize="@dimen/sp_14"
-                    app:layout_constraintBottom_toBottomOf="@+id/textViewPriceDiscount"
-                    app:layout_constraintEnd_toEndOf="@+id/textViewUnit2"
-                    app:layout_constraintTop_toTopOf="@+id/textViewPriceDiscount"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:fontFamily="@font/sf_compact_display_medium"
-                    android:text="@string/minus"
-                    android:textSize="@dimen/sp_14"
                     app:layout_constraintBottom_toBottomOf="@+id/textViewTitleDiscount"
-                    app:layout_constraintEnd_toStartOf="@+id/textViewPriceDiscount"
+                    app:layout_constraintEnd_toEndOf="@+id/priceShippingFeeTextView"
                     app:layout_constraintTop_toTopOf="@+id/textViewTitleDiscount"
                     app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -504,25 +442,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/dp_10"
-                        android:layout_toStartOf="@+id/currencyPlaceOrderTextView"
                         android:gravity="center_vertical"
                         android:textColor="@color/colorWhite"
                         android:textSize="@dimen/sp_18"
                         app:layout_constraintBottom_toBottomOf="@+id/placeOrderTextView"
-                        app:layout_constraintEnd_toStartOf="@+id/currencyPlaceOrderTextView"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/placeOrderTextView" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/currencyPlaceOrderTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/dp_10"
-                        android:text="@string/label_currency"
-                        android:textColor="@color/colorWhite"
-                        android:textSize="@dimen/sp_18"
-                        app:layout_constraintBottom_toBottomOf="@+id/totalPlaceOrderTextView"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/totalPlaceOrderTextView" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

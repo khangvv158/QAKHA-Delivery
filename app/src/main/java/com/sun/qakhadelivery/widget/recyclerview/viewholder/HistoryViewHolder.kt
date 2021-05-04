@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
-import com.sun.qakhadelivery.data.source.remote.schema.response.HistoryResponse
+import com.sun.qakhadelivery.extensions.currencyVn
 import com.sun.qakhadelivery.extensions.setOnSafeClickListener
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.HistoryItem
@@ -18,7 +18,7 @@ class HistoryViewHolder(viewGroup: ViewGroup) :
             textViewIdOrder.text = item.history.id.toString()
             namePartnerHighTextView.text = item.history.partner.name
             textViewAddressPartner.text = item.history.partner.address
-            textViewPrice.text = item.history.total.toString()
+            textViewPrice.text = item.history.total.toString().currencyVn()
             textViewStatus.text = item.history.status
         }
     }
