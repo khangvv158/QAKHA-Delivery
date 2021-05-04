@@ -44,7 +44,4 @@ interface OrderAPI {
         @Body distanceRequest: DistanceRequest,
         @Header(Constants.AUTHORIZATION) token: String?
     ): Observable<DistanceResponse>
-
-    @POST("orders/coins_user")
-    fun getCoins(@Header(Constants.AUTHORIZATION) token: String?)
 }

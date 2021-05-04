@@ -91,10 +91,10 @@ class ProfileFragment : Fragment(), ProfileContract.View, View.OnClickListener {
     }
 
     override fun onSuccessUpdateImage(user: User) {
-        makeText(getString(R.string.update_image_success))
         avatarCircleImageView.loadAvatarUrl(user.image.imageUrl)
         EventBus.getDefault().post(Refresh(this::class.java, SignedInFragment::class.java))
         enableInteraction()
+        makeText(getString(R.string.update_image_success))
     }
 
     override fun onErrorUser(exception: String) {

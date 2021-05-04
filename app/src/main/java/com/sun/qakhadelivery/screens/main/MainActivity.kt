@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
     override fun onBackPressed() {
         if (supportFragmentManager.backStackEntryCount > 0) {
+            window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             super.onBackPressed()
         } else if (!doubleBackPressed) {
             this.doubleBackPressed = true

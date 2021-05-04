@@ -88,18 +88,22 @@ class CartFragment : BottomSheetDialogFragment(),
 
     override fun onErrorGetCart(exception: String) {
         enableInteraction()
+        makeText(exception)
     }
 
     override fun onErrorUpdateCart(exception: String) {
         enableInteraction()
+        makeText(exception)
     }
 
     override fun onErrorRemoveCart(exception: String) {
         enableInteraction()
+        makeText(exception)
     }
 
     override fun onErrorClearCart(exception: String) {
         enableInteraction()
+        makeText(exception)
     }
 
     override fun onUpdateTotalPrice(total: Float) {
@@ -116,9 +120,9 @@ class CartFragment : BottomSheetDialogFragment(),
 
     override fun onCartEmpty() {
         enableInteraction()
-        makeText(getString(R.string.cart_changed))
         cartAdapter.clearProducts()
         dismiss()
+        makeText(getString(R.string.cart_changed))
     }
 
     override fun onErrorCheckEmpty(exception: String) {
