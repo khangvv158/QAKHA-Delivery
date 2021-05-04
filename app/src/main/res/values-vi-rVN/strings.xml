@@ -203,4 +203,5 @@
     <string name="permission_denied">Quyền truy cập bộ nhớ bị từ chối</string>
     <string name="content_email_sign_in">Email không tồn tại. Hãy đăng ký</string>
     <string name="content_password_sign_in">Đăng nhập không thành công</string>
+    <string name="cart_changed">Giỏ hàng đã bị thay đổi</string>
 </resources>
