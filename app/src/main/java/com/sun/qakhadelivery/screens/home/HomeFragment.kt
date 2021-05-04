@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
+import com.sun.qakhadelivery.extensions.addFragmentFadeAnim
 import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.screens.home.adapter.QueryPartnerPageAdapter
 import com.sun.qakhadelivery.screens.home.adapter.SliderAdapter
@@ -33,6 +34,7 @@ import com.sun.qakhadelivery.screens.home.tabs.all.AllFragment
 import com.sun.qakhadelivery.screens.home.tabs.bestrated.BestRatedFragment
 import com.sun.qakhadelivery.screens.home.tabs.nearby.NearbyFragment
 import com.sun.qakhadelivery.screens.main.MainActivity
+import com.sun.qakhadelivery.screens.search.SearchFragment
 import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.utils.IPositiveNegativeListener
 import com.sun.qakhadelivery.utils.LocationHelper
@@ -41,6 +43,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.greenrobot.eventbus.EventBus
 import java.util.*
+
 
 class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnClickListener {
 
@@ -131,7 +134,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
                 EventBus.getDefault().post(currentLatLng)
                 val addresses: List<Address> = geo.getFromLocation(it.latitude, it.longitude, 1)
                 if (addresses.isNotEmpty()) {
-                    addressTextView.text =  addresses[0].getAddressLine(0)
+                    addressTextView.text = addresses[0].getAddressLine(0)
                 } else {
                     makeText(getString(R.string.waiting_for_location))
                 }
@@ -189,6 +192,9 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
         indicatorView.updateIndicatorCounts(viewPagerSlider.indicatorCount)
         viewPagerSlider.onIndicatorProgress = { selectingPosition, progress ->
             indicatorView.onPageScrolled(selectingPosition, progress)
+        }
+        searchView.setOnClickListener {
+            addFragmentFadeAnim(SearchFragment.newInstance(), R.id.containerView)
         }
     }
 
