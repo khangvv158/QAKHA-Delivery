@@ -21,6 +21,7 @@ class SignedInPresenter(
             .subscribe({
                 view?.onGetUserSuccess(it)
             }, {
+                tokenRepository.clearToken()
                 view?.onGetUserFailure()
             })
         compositeDisposable.add(disposable)

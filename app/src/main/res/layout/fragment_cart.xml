@@ -93,19 +93,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/currencyTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_5"
-                android:fontFamily="@font/sf_compact_display_medium"
-                android:text="@string/label_currency"
-                android:textColor="@color/colorCarrotOrange"
-                android:textSize="@dimen/sp_16"
-                app:layout_constraintBottom_toBottomOf="@+id/totalTextView"
-                app:layout_constraintStart_toEndOf="@+id/totalTextView"
-                app:layout_constraintTop_toTopOf="@+id/totalTextView" />
-
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/checkoutButton"
                 android:layout_width="wrap_content"
@@ -118,10 +105,10 @@
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/sp_14"
-                app:layout_constraintBottom_toBottomOf="@+id/currencyTextView"
+                app:layout_constraintBottom_toBottomOf="@+id/totalTextView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.64"
-                app:layout_constraintTop_toTopOf="@+id/currencyTextView" />
+                app:layout_constraintTop_toTopOf="@+id/totalTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

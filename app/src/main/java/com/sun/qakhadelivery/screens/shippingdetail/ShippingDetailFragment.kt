@@ -30,6 +30,8 @@ import com.sun.qakhadelivery.data.repository.DriverFirebaseRepositoryImpl
 import com.sun.qakhadelivery.data.repository.OrderFirebaseRepositoryImpl
 import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
 import com.sun.qakhadelivery.extensions.addFragmentFadeAnim
+import com.sun.qakhadelivery.extensions.currencyVn
+import com.sun.qakhadelivery.extensions.discountCurrencyVn
 import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.screens.feedback.driver.DriverFeedbackFragment
 import com.sun.qakhadelivery.screens.orderdetail.adapter.OrderAdapter
@@ -242,10 +244,10 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
             userNameTextView.text = orderResponse.order.name
             phoneNumberTextView.text = orderResponse.order.phone_number
             textViewNamePartner.text = orderResponse.partner.name
-            textViewPriceSubtotal.text = orderResponse.order.subtotal.toString()
-            textViewPriceShippingFee.text = orderResponse.order.shipping_fee.toString()
-            textViewPriceDiscount.text = orderResponse.order.discount.toString()
-            textViewPriceTotal.text = orderResponse.order.total.toString()
+            textViewPriceSubtotal.text = orderResponse.order.subtotal.toString().currencyVn()
+            textViewPriceShippingFee.text = orderResponse.order.shipping_fee.toString().currencyVn()
+            textViewPriceDiscount.text = orderResponse.order.discount.toString().discountCurrencyVn()
+            textViewPriceTotal.text = orderResponse.order.total.toString().currencyVn()
             recyclerViewBucket.apply {
                 adapter = orderAdapter
                 orderAdapter.updateOrderDetails(orderResponse.order_details)

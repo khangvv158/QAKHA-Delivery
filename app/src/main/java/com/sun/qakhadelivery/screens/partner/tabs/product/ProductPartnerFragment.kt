@@ -13,6 +13,7 @@ import com.sun.qakhadelivery.screens.partner.tabs.product.adapter.CategoriesAdap
 import com.sun.qakhadelivery.screens.signin.SignInFragment
 import com.sun.qakhadelivery.utils.UserUtils
 import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
+import com.sun.qakhadelivery.screens.product.ProductFragment
 import kotlinx.android.synthetic.main.fragment_product_order.*
 
 class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
@@ -60,6 +61,12 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
                     R.id.containerView
                 )
             })
+        }
+        adapter.setOnClickItemRecyclerView {
+            parentFragment?.addFragmentSlideAnim(
+                ProductFragment.newInstance(it),
+                R.id.containerView
+            )
         }
     }
 

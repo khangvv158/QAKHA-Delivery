@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Refresh
@@ -66,6 +67,7 @@ class SignedInFragment : Fragment(), SignedInContract.View {
     }
 
     override fun onGetUserFailure() {
+        makeText(getString(R.string.please_login_again))
         onGetUserFailureListener?.onGetUserError()
     }
 

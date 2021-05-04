@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.extensions.currencyVn
 import com.sun.qakhadelivery.extensions.loadUrl
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.OrderItem
@@ -23,7 +24,7 @@ class OrderViewHolder(viewGroup: ViewGroup) :
             )
             textViewNameProduct?.text = item.details.product.name
             textViewQuantityProduct?.text = item.details.quantity.toString()
-            textViewPriceProduct?.text = item.details.price.toString()
+            textViewPriceProduct?.text = item.details.price.toString().currencyVn()
         }
     }
 

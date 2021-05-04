@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.extensions.currencyVn
 import com.sun.qakhadelivery.extensions.loadUrl
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.BucketItem
@@ -17,7 +18,7 @@ class BucketViewHolder(viewGroup: ViewGroup) :
             imageViewProduct?.loadUrl(item.cart.product.image.imageUrl)
             textViewNameProduct?.text = item.cart.product.name
             textViewQuantityProduct?.text = item.cart.quantity.toString()
-            textViewPriceProduct?.text = item.cart.product.price.toString()
+            textViewPriceProduct?.text = item.cart.product.price.toString().currencyVn()
         }
     }
 

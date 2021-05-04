@@ -104,18 +104,6 @@
             app:layout_constraintVertical_bias="0.045"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/sf_compact_display_medium"
-            android:gravity="center|left"
-            android:text="@string/label_currency"
-            android:textSize="@dimen/sp_12"
-            android:layout_marginStart="@dimen/dp_5"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewPrice"
-            app:layout_constraintStart_toEndOf="@+id/textViewPrice"
-            app:layout_constraintTop_toTopOf="@+id/textViewPrice" />
-
-        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewIdOrder"
             android:layout_width="0dp"
             android:layout_height="0dp"

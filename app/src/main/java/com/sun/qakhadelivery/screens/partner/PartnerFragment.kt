@@ -170,12 +170,16 @@ class PartnerFragment : Fragment(), PartnerContract.View {
         setFragmentResultListener(ProductPartnerFragment.KEY_REQUEST_PARTNER) { _, bundle ->
             bundle.getParcelable<Product>(ProductPartnerFragment.BUNDLE_PRODUCT)
                 ?.let { product ->
-                    arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
-                        val products = it.categories
-                            .flatMap { category -> category.products }
-                            .toMutableList()
-                        updateOrInsertCart(product, products)
-                    }
+                    UserUtils.workWithSignIn(requireContext(), {
+                        arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
+                            val products = it.categories
+                                .flatMap { category -> category.products }
+                                .toMutableList()
+                            updateOrInsertCart(product, products)
+                        }
+                    }, {
+                        addFragmentSlideAnim(SignInFragment.newInstance(), R.id.containerView)
+                    })
                 }
         }
         activity?.onBackPressedDispatcher?.addCallback(
