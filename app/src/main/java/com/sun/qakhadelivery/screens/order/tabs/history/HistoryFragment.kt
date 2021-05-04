@@ -66,7 +66,6 @@ class HistoryFragment : Fragment(), HistoryContract.View {
     }
 
     override fun onErrorGetHistory(exception: String) {
-        makeText(exception)
         refreshLayout.isRefreshing = false
     }
 

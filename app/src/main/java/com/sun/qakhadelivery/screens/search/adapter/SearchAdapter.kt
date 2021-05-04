@@ -89,7 +89,6 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ViewHolder>(), Filterab
                 partner.image?.let { imageViewPartner.loadUrl(it.imageUrl) }
                 textViewNamePartner?.text = partner.name
                 textViewAddressPartner?.text = partner.address
-                textViewRatePartner?.text = partner.rate.toString()
                 if (partner.distance != Constants.DEFAULT_FLOAT) {
                     textViewKilometer.text = partner.distance.toString()
                 }

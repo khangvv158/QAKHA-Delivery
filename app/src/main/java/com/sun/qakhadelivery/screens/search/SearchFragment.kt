@@ -5,13 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
+import com.sun.qakhadelivery.data.source.remote.schema.response.PartnerResponse
+import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.extensions.back
+import com.sun.qakhadelivery.extensions.hideKeyboard
 import com.sun.qakhadelivery.extensions.makeText
+import com.sun.qakhadelivery.screens.partner.PartnerFragment
 import com.sun.qakhadelivery.screens.search.adapter.SearchAdapter
 import com.sun.qakhadelivery.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_search.*
@@ -45,12 +48,20 @@ class SearchFragment : Fragment(), SearchContract.View, OnItemRecyclerViewClickL
         searchAdapter.updateData(partners)
     }
 
+    override fun getPartnerByIdSuccess(partnerResponse: PartnerResponse) {
+        addFragmentBackStack(
+            PartnerFragment.newInstance(partnerResponse),
+            R.id.containerView
+        )
+    }
+
     override fun onError(message: String) {
         makeText(message)
     }
 
     override fun onItemClickListener(item: Partner?) {
-
+        hideKeyboard()
+        item?.let { presenter.getPartnerById(it.id) }
     }
 
     private fun initData() {
