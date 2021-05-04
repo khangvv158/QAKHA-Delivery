@@ -64,7 +64,7 @@ class NearbyFragment : Fragment(), NearbyContract.View, OnItemRecyclerViewClickL
 
     override fun getSuggestPartnerNearbySuccess(partners: MutableList<Partner>) {
         partnerAdapter.updateData(partners)
-        loadingProgress.gone()
+        loadingProgress?.gone()
     }
 
     override fun getPartnerByIdSuccess(partnerResponse: PartnerResponse) {
@@ -75,7 +75,6 @@ class NearbyFragment : Fragment(), NearbyContract.View, OnItemRecyclerViewClickL
     }
 
     override fun onError(message: String) {
-        makeText(message)
         loadingProgress?.gone()
     }
 
