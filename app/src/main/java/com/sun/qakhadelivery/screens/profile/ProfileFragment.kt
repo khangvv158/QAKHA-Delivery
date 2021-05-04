@@ -76,7 +76,7 @@ class ProfileFragment : Fragment(), ProfileContract.View, View.OnClickListener {
     }
 
     override fun onSuccessUser(user: User) {
-        avatarCircleImageView.loadAvatarUrl(user.image.imageUrl)
+        avatarCircleImageView.loadUrl(user.image.imageUrl)
         nameNavigateView.setDescribe(user.name)
         phoneNumberNavigateView.setDescribe(user.phoneNumber)
         emailNavigateView.setDescribe(user.email)
@@ -183,6 +183,9 @@ class ProfileFragment : Fragment(), ProfileContract.View, View.OnClickListener {
         nameNavigateView.setOnSafeClickListener(listener = this)
         phoneNumberNavigateView.setOnSafeClickListener(listener = this)
         emailNavigateView.setOnSafeClickListener(listener = this)
+        imageViewBack.setOnClickListener {
+            back()
+        }
     }
 
     private fun disableInteraction() {
