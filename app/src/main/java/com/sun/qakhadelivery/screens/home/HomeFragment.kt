@@ -83,16 +83,6 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
         initTabLayout()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewPagerSlider.resumeAutoScroll()
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewPagerSlider.pauseAutoScroll()
-    }
-
     override fun onItemClickListener(typePartner: TypePartner) {
         EventBus.getDefault().post(typePartner)
     }
