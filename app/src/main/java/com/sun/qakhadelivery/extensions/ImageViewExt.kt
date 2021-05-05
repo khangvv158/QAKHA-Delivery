@@ -17,7 +17,8 @@ fun ImageView.loadUrl(url: String? = Constants.SPACE_STRING) {
 fun ImageView.loadAvatarUrl(url: String?) {
     Picasso.get()
         .load(url)
-        .resize(width, height)
+        .centerCrop()
+        .error(R.drawable.ic_placehoder_product)
         .placeholder(R.drawable.ic_placehoder_product)
         .into(this)
 }
