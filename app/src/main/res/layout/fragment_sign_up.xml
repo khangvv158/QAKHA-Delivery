@@ -200,15 +200,18 @@
             android:layout_width="@dimen/dp_250"
             android:layout_height="@dimen/dp_50"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="@dimen/dp_40"
             android:text="@string/title_continue"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/sp_18"
             app:backgroundTint="@color/colorCarrotOrange"
             app:cornerRadius="@dimen/dp_10"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/activateTextView" />
+            app:layout_constraintTop_toBottomOf="@+id/activateTextView"
+            app:layout_constraintVertical_bias="0.25" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
