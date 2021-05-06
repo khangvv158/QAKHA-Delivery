@@ -223,4 +223,6 @@
     <string name="description">Description:</string>
     <string name="please_login_again">Please login again</string>
     <string name="discount_currency" translatable="false">- %s đ</string>
+    <string name="distance_currency_checkout" translatable="false">(%s Km)</string>
+    <string name="show_coins" translatable="false">Coins: %s</string>
 </resources>

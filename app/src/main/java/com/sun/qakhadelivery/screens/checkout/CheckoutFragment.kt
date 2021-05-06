@@ -1,6 +1,5 @@
 package com.sun.qakhadelivery.screens.checkout
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
@@ -48,7 +47,6 @@ import kotlinx.android.synthetic.main.item_layout_voucher.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import java.lang.String.format
 
 class CheckoutFragment : Fragment(), CheckoutContract.View {
 
@@ -119,32 +117,25 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
 
     override fun onSuccessApplyVoucher(applyVoucherResponse: ApplyVoucherResponse) {
         voucherEditText.setText(applyVoucherResponse.voucher.code)
-        textViewPriceDiscount.text = applyVoucherResponse
-            .voucher
-            .discount.toString().currencyVn().discountCurrencyVn()
-        arguments?.getFloat(BUNDLE_TOTAL).also {
-            if (it != null) {
-                val total = it - applyVoucherResponse.voucher.discount
-                setTotal(total)
-            } else {
-                setTotal(applyVoucherResponse.totalAfterDiscount)
-            }
+        textViewPriceDiscount.text = applyVoucherResponse.voucher
+            .discount.toString().discountCurrencyVn()
+        arguments?.getParcelable<DistanceResponse>(BUNDLE_DISTANCE)?.run {
+            setTotal(shipping_fee + applyVoucherResponse.totalAfterDiscount)
         }
         enableInteraction()
     }
 
     override fun onSuccessCancelVouchers(cancelVoucherResponse: CancelVoucherResponse) {
-        textViewPriceDiscount.text = DEFAULT_STRING
-        voucherEditText.setText(DEFAULT_STRING)
-        arguments?.run {
-            setTotal(getFloat(BUNDLE_TOTAL))
-            putParcelable(BUNDLE_VOUCHER, null)
+        clearVoucher()
+        arguments?.getParcelable<DistanceResponse>(BUNDLE_DISTANCE)?.run {
+            setTotal(cancelVoucherResponse.subtotal + shipping_fee)
         }
         enableInteraction()
     }
 
     override fun onUpdateTotalPrice(total: Float) {
         textViewPriceSubtotal.text = total.toString().currencyVn()
+        setTotal(total)
         arguments?.putFloat(BUNDLE_TOTAL, total)
     }
 
@@ -153,27 +144,27 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         enableInteraction()
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onSuccessGetUser(user: User) {
         userNameTextView.text = user.name
         phoneNumberTextView.text = user.phoneNumber
         arguments?.putParcelable(BUNDLE_USER, user)
-        coinsRadioButton.text = getString(R.string.coins) +
-                if (user.coin == DEFAULT_FLOAT) ": ${getString(R.string.zero)}"
-                else ": ${user.coin}"
+        coinsRadioButton.text = String.format(
+            getString(R.string.show_coins),
+            if (user.coin == DEFAULT_FLOAT) getString(R.string.zero)
+            else user.coin
+        )
         enableInteraction()
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onSuccessDistance(distanceResponse: DistanceResponse) {
         priceShippingFeeTextView.text = distanceResponse.shipping_fee.toString().currencyVn()
-        distanceTextView.text = "(${distanceResponse.distance} ${getString(R.string.distance)})"
+        distanceTextView.text = String.format(
+            getString(R.string.distance_currency_checkout),
+            distanceResponse.distance
+        )
         arguments?.run {
-            getFloat(BUNDLE_TOTAL).let {
-                val total = distanceResponse.shipping_fee + it
-                setTotal(total)
-                putFloat(BUNDLE_TOTAL, total)
-            }
+            val totalDistance = distanceResponse.shipping_fee + getFloat(BUNDLE_TOTAL)
+            setTotal(totalDistance)
             putParcelable(BUNDLE_DISTANCE, distanceResponse)
         }
         enableInteraction()
@@ -213,6 +204,9 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
     }
 
     override fun onErrorCancelVouchers(exception: String) {
+        arguments?.getParcelable<VoucherItem>(BUNDLE_VOUCHER)?.let {
+            it.state = ChoiceVoucherState.SELECT
+        }
         enableInteraction()
         makeText(exception)
     }
@@ -250,13 +244,27 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageAddress(address: Address) {
         addressTextView.text = address.name
+        clearVoucher()
         arguments?.run {
             putParcelable(BUNDLE_ADDRESS, address)
             getParcelable<Partner>(BUNDLE_PARTNER)?.let {
                 presenter.calculatorDistance(
-                    distanceRequest = DistanceRequest(it.id, address.latitude, address.longitude)
+                    DistanceRequest(
+                        it.id,
+                        address.latitude,
+                        address.longitude
+                    )
                 )
+                presenter.getVouchers(it.id)
             }
+        }
+    }
+
+    private fun clearVoucher() {
+        arguments?.run {
+            voucherEditText.text?.clear()
+            textViewPriceDiscount.text = DEFAULT_STRING
+            putParcelable(BUNDLE_VOUCHER, null)
         }
     }
 
@@ -282,7 +290,13 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
             parentFragmentManager.popBackStack()
         }
         voucherEditText.setOnClickListener {
-            addFragmentBackStack(VoucherFragment.newInstance(arguments), R.id.containerView)
+            arguments?.getParcelable<Address>(BUNDLE_ADDRESS).let {
+                if (it != null) {
+                    addFragmentBackStack(VoucherFragment.newInstance(arguments), R.id.containerView)
+                } else {
+                    makeText(getString(R.string.notification_choose_address))
+                }
+            }
         }
         activity?.onBackPressedDispatcher?.addCallback(
             viewLifecycleOwner,

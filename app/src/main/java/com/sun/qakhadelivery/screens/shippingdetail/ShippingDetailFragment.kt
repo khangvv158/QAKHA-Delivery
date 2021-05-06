@@ -112,7 +112,7 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
                 DriverFeedbackFragment.newInstance(
                     it.driverNearest,
                     it.order.id,
-                    it.partner
+                    it.partner.apply { id = it.order.partner_id }
                 ), R.id.containerView
             )
         }
@@ -246,7 +246,8 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
             textViewNamePartner.text = orderResponse.partner.name
             textViewPriceSubtotal.text = orderResponse.order.subtotal.toString().currencyVn()
             textViewPriceShippingFee.text = orderResponse.order.shipping_fee.toString().currencyVn()
-            textViewPriceDiscount.text = orderResponse.order.discount.toString().discountCurrencyVn()
+            textViewPriceDiscount.text =
+                orderResponse.order.discount.toString().discountCurrencyVn()
             textViewPriceTotal.text = orderResponse.order.total.toString().currencyVn()
             recyclerViewBucket.apply {
                 adapter = orderAdapter

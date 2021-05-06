@@ -11,8 +11,8 @@ data class Voucher(
     @SerializedName("code") val code: String,
     @SerializedName("discount") val discount: Float,
     @SerializedName("condition") val condition: Float,
-    @SerializedName("expiry_date") val expiryDate: Date,
+    @SerializedName("expiry_date") val expiryDate: String,
     @SerializedName("usage_limit") val usageLimit: Int,
     @SerializedName("description") val description: String,
-    @SerializedName("partner_id") val partnerId: String
+    @SerializedName("partner_id") val partnerId: Int
 ) : Parcelable
