@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundApplication"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".screens.voucher.VoucherFragment">
 
     <com.google.android.material.appbar.AppBarLayout
