@@ -52,7 +52,7 @@
             app:boxCornerRadiusBottomStart="@dimen/dp_10"
             app:boxCornerRadiusTopEnd="@dimen/dp_10"
             app:boxCornerRadiusTopStart="@dimen/dp_10"
-            app:layout_constraintDimensionRatio="331:80"
+            app:layout_constraintDimensionRatio="331:90"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewIllustration"
@@ -139,6 +139,7 @@
             android:textColor="@color/colorCarrotOrange"
             android:textSize="@dimen/sp_24"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textViewTitleOne"
             app:layout_constraintStart_toStartOf="@+id/textViewTitleOne"
             app:layout_constraintTop_toBottomOf="@+id/textViewTitleOne" />

@@ -4,12 +4,15 @@ import android.annotation.SuppressLint
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
@@ -45,6 +48,9 @@ class ChooseAddressFragment : Fragment(), ChooseAddressContract.View {
     private var positionClickable = LatLng(0.0, 0.0)
     private var addressUser: com.sun.qakhadelivery.data.model.Address? = null
     private var onChooseAddressListener: OnChooseAddressListener? = null
+    private val locationProviderClient: FusedLocationProviderClient by lazy {
+        LocationServices.getFusedLocationProviderClient(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -96,6 +102,7 @@ class ChooseAddressFragment : Fragment(), ChooseAddressContract.View {
         this.onChooseAddressListener = onChooseAddressListener
     }
 
+    @SuppressLint("MissingPermission")
     private fun initViews() {
         presenter.setView(this)
         arguments?.getParcelable<com.sun.qakhadelivery.data.model.Address>(BUNDLE_TYPE_CALL_API)
@@ -110,6 +117,26 @@ class ChooseAddressFragment : Fragment(), ChooseAddressContract.View {
                     if (markerFlagLocation == null) {
                         markerFlagLocation =
                             googleMap.addMarker(googleMapHelper.getNormalMarkerOptions(position))
+                    }
+                }
+                if (addressUser == null) {
+                    locationProviderClient.lastLocation.addOnSuccessListener {
+                        try {
+                            positionClickable = LatLng(it.latitude, it.longitude)
+                            val addresses: List<Address> =
+                                geo.getFromLocation(it.latitude, it.longitude, 1)
+                            if (addresses.isNotEmpty()) {
+                                nameAddressEditText.setText(
+                                    addresses[0].getAddressLine(0),
+                                    TextView.BufferType.EDITABLE
+                                )
+                                animateCamera(positionClickable)
+                            } else {
+                                makeText(getString(R.string.waiting_for_location))
+                            }
+                            Log.e("location ", positionClickable.toString())
+                        } catch (e: Exception) {
+                        }
                     }
                 }
             }

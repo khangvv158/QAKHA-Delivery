@@ -61,7 +61,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="441:510"
+        app:layout_constraintDimensionRatio="441:400"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/colorWhite"
+        android:background="@color/colorBackgroundApplication"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -95,17 +95,25 @@
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/nameAddressEditText"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:inputType="textImeMultiLine"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="378:53"
+            android:layout_marginTop="@dimen/dp_24"
+            android:background="@color/colorWhite"
+            android:fontFamily="@font/sf_compact_display_regular"
+            android:gravity="top|start"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine"
+            android:maxLength="500"
+            android:maxLines="5"
+            android:padding="@dimen/dp_15"
+            android:scrollHorizontally="false"
+            android:textSize="@dimen/sp_14"
+            app:layout_constraintDimensionRatio="378:100"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.468"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.282"
-            app:layout_constraintWidth_percent="0.92" />
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView"
+            app:layout_constraintWidth_percent="0.9" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonSave"
@@ -120,10 +128,11 @@
             app:cornerRadius="@dimen/dp_10"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="250:46"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.883"
+            app:layout_constraintEnd_toEndOf="@+id/nameAddressEditText"
+            app:layout_constraintHorizontal_bias="0.487"
+            app:layout_constraintStart_toStartOf="@+id/nameAddressEditText"
+            app:layout_constraintTop_toBottomOf="@+id/nameAddressEditText"
+            app:layout_constraintVertical_bias="0.319"
             app:layout_constraintWidth_percent="0.8" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
