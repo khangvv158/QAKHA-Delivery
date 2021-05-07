@@ -1,14 +1,8 @@
 package com.sun.qakhadelivery.data.source.remote
 
 import com.sun.qakhadelivery.data.model.Voucher
-import com.sun.qakhadelivery.data.source.remote.schema.request.ApplyVoucher
-import com.sun.qakhadelivery.data.source.remote.schema.request.DistanceRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.OrderRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.VoucherCancel
-import com.sun.qakhadelivery.data.source.remote.schema.response.ApplyVoucherResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.CancelVoucherResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.DistanceResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
+import com.sun.qakhadelivery.data.source.remote.schema.request.*
+import com.sun.qakhadelivery.data.source.remote.schema.response.*
 import com.sun.qakhadelivery.utils.Constants
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.*
@@ -22,8 +16,14 @@ interface OrderAPI {
     ): Observable<MutableList<Voucher>>
 
     @POST("orders/voucher")
-    fun applyVoucher(
-        @Body applyVoucher: ApplyVoucher,
+    fun applyVoucherTotal(
+        @Body voucherTotal: VoucherTotal,
+        @Header(Constants.AUTHORIZATION) token: String?
+    ): Observable<ApplyVoucherResponse>
+
+    @POST("orders/voucher")
+    fun applyVoucherDistance(
+        @Body voucherDistance: VoucherDistance,
         @Header(Constants.AUTHORIZATION) token: String?
     ): Observable<ApplyVoucherResponse>
 
@@ -36,6 +36,12 @@ interface OrderAPI {
     @POST("orders")
     fun createOrder(
         @Body orderRequest: OrderRequest,
+        @Header(Constants.AUTHORIZATION) token: String?
+    ): Observable<OrderResponse>
+
+    @POST("orders")
+    fun createOrderWithVoucher(
+        @Body orderVoucherRequest: OrderVoucherRequest,
         @Header(Constants.AUTHORIZATION) token: String?
     ): Observable<OrderResponse>
 

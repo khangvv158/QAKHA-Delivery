@@ -16,6 +16,7 @@ import com.sun.qakhadelivery.data.repository.FeedbackRepositoryImpl
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.request.RatePartnerRequest
+import com.sun.qakhadelivery.data.source.remote.schema.response.PartnerHistory
 import com.sun.qakhadelivery.data.source.remote.schema.response.RatePartnerResponse
 import com.sun.qakhadelivery.extensions.loadUrl
 import com.sun.qakhadelivery.extensions.makeText
@@ -66,7 +67,7 @@ class PartnerFeedbackFragment : Fragment(), PartnerFeedbackContact.View {
     }
 
     private fun initViews() {
-        arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
+        arguments?.getParcelable<PartnerHistory>(BUNDLE_PARTNER)?.let {
             avatarCircleImageView.loadUrl(it.image?.imageUrl)
             nameShopTextView.text = it.name
         }
@@ -102,7 +103,7 @@ class PartnerFeedbackFragment : Fragment(), PartnerFeedbackContact.View {
             }
             buttonFeedback.setOnSafeClickListener {
                 arguments?.getInt(BUNDLE_ORDER_ID)?.let { orderId ->
-                    arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let { partner ->
+                    arguments?.getParcelable<PartnerHistory>(BUNDLE_PARTNER)?.let { partner ->
                         presenter.feedbackPartner(
                             RatePartnerRequest(
                                 orderId,
@@ -123,7 +124,7 @@ class PartnerFeedbackFragment : Fragment(), PartnerFeedbackContact.View {
 
         fun newInstance(
             orderId: Int,
-            partner: Partner
+            partner: PartnerHistory
         ): PartnerFeedbackFragment {
             return PartnerFeedbackFragment().apply {
                 arguments = Bundle().apply {

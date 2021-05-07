@@ -1,14 +1,11 @@
 package com.sun.qakhadelivery.screens.checkout
 
-import com.sun.qakhadelivery.data.model.*
-import com.sun.qakhadelivery.data.source.remote.schema.request.ApplyVoucher
-import com.sun.qakhadelivery.data.source.remote.schema.request.DistanceRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.OrderRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.VoucherCancel
-import com.sun.qakhadelivery.data.source.remote.schema.response.ApplyVoucherResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.CancelVoucherResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.DistanceResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
+import com.sun.qakhadelivery.data.model.Cart
+import com.sun.qakhadelivery.data.model.Product
+import com.sun.qakhadelivery.data.model.User
+import com.sun.qakhadelivery.data.model.Voucher
+import com.sun.qakhadelivery.data.source.remote.schema.request.*
+import com.sun.qakhadelivery.data.source.remote.schema.response.*
 import com.sun.qakhadelivery.utils.BasePresenter
 
 interface CheckoutContract {
@@ -33,6 +30,8 @@ interface CheckoutContract {
 
         fun onSuccessCreateOrder(orderResponse: OrderResponse)
 
+        fun onSuccessCreateOrderWithVoucher(orderResponse: OrderResponse)
+
         fun onErrorGetUser(exception: String)
 
         fun onErrorApplyVoucher(exception: String)
@@ -44,13 +43,15 @@ interface CheckoutContract {
         fun onErrorCalculatorDistance(exception: String)
 
         fun onErrorCreateOrder(exception: String)
+
+        fun onErrorCreateOrderWithVoucher(exception: String)
     }
 
     interface Presenter : BasePresenter<View> {
 
         fun getCart(partnerId: Int, products: MutableList<Product>)
 
-        fun applyVoucher(applyVoucher: ApplyVoucher)
+        fun applyVoucherTotal(voucherTotal: VoucherTotal)
 
         fun cancelVoucher(voucherCancel: VoucherCancel)
 
@@ -61,5 +62,9 @@ interface CheckoutContract {
         fun calculatorDistance(distanceRequest: DistanceRequest)
 
         fun createOrder(orderRequest: OrderRequest)
+
+        fun createOrderWithVoucher(orderVoucherRequest: OrderVoucherRequest)
+
+        fun applyVoucherDistance(voucherDistance: VoucherDistance)
     }
 }

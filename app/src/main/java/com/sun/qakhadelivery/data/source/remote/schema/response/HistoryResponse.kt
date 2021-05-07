@@ -25,7 +25,7 @@ data class HistoryResponse(
     @SerializedName("voucher_id") val voucherId: Int?,
     @SerializedName("partner_id") val partnerId: Int,
     @SerializedName("driver") val driver: DriverNearest,
-    @SerializedName("partner") val partner: Partner
+    @SerializedName("partner") val partner: PartnerHistory
 ) : Parcelable {
 
     fun rate(): Boolean {

@@ -112,7 +112,7 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
                 DriverFeedbackFragment.newInstance(
                     it.driverNearest,
                     it.order.id,
-                    it.partner.apply { id = it.order.partner_id }
+                    it.partner.toPartnerHistory().apply { id = it.order.partner_id }
                 ), R.id.containerView
             )
         }

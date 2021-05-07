@@ -17,6 +17,7 @@ import com.sun.qakhadelivery.data.repository.FeedbackRepositoryImpl
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.request.RateDriverRequest
+import com.sun.qakhadelivery.data.source.remote.schema.response.PartnerHistory
 import com.sun.qakhadelivery.data.source.remote.schema.response.RateDriverResponse
 import com.sun.qakhadelivery.extensions.addFragmentFadeAnim
 import com.sun.qakhadelivery.extensions.loadUrl
@@ -57,7 +58,7 @@ class DriverFeedbackFragment : Fragment(), DriverFeedbackContact.View {
             Refresh(this::class.java, HistoryFragment::class.java)
         )
         parentFragmentManager.popBackStack()
-        arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
+        arguments?.getParcelable<PartnerHistory>(BUNDLE_PARTNER)?.let {
             addFragmentFadeAnim(
                 PartnerFeedbackFragment.newInstance(
                     rateDriverResponse.orderId,
@@ -141,7 +142,7 @@ class DriverFeedbackFragment : Fragment(), DriverFeedbackContact.View {
         fun newInstance(
             driver: DriverNearest,
             orderId: Int,
-            partner: Partner
+            partner: PartnerHistory
         ): DriverFeedbackFragment {
             return DriverFeedbackFragment().apply {
                 arguments = Bundle().apply {
