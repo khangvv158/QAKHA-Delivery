@@ -130,6 +130,7 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
     }
 
     companion object {
+
         fun newInstance(bundle: Bundle) = OrderDetailFragment().apply {
             arguments = bundle
         }

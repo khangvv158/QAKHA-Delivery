@@ -1,8 +1,11 @@
 package com.sun.qakhadelivery.data.source.remote.schema.request
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
-data class ApplyVoucher(
+@Parcelize
+data class VoucherTotal(
     @SerializedName("code") val code: String,
     @SerializedName("partner_id") val partner_id: Int
-)
+) : Parcelable

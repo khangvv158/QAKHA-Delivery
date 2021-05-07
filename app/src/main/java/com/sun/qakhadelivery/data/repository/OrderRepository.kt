@@ -3,21 +3,23 @@ package com.sun.qakhadelivery.data.repository
 import com.sun.qakhadelivery.data.model.Voucher
 import com.sun.qakhadelivery.data.source.remote.OrderAPI
 import com.sun.qakhadelivery.data.source.remote.RetrofitClient
-import com.sun.qakhadelivery.data.source.remote.schema.request.ApplyVoucher
-import com.sun.qakhadelivery.data.source.remote.schema.request.DistanceRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.OrderRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.VoucherCancel
-import com.sun.qakhadelivery.data.source.remote.schema.response.ApplyVoucherResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.CancelVoucherResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.DistanceResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
+import com.sun.qakhadelivery.data.source.remote.schema.request.*
+import com.sun.qakhadelivery.data.source.remote.schema.response.*
 import io.reactivex.rxjava3.core.Observable
 
 interface OrderRepository {
 
     fun showVoucher(partnerId: Int, token: String): Observable<MutableList<Voucher>>
 
-    fun applyVoucher(apply: ApplyVoucher, token: String): Observable<ApplyVoucherResponse>
+    fun applyVoucherTotal(
+        voucherTotal: VoucherTotal,
+        token: String
+    ): Observable<ApplyVoucherResponse>
+
+    fun applyVoucherDistance(
+        voucherDistance: VoucherDistance,
+        token: String
+    ): Observable<ApplyVoucherResponse>
 
     fun cancelVoucher(
         VoucherCancel: VoucherCancel,
@@ -25,6 +27,11 @@ interface OrderRepository {
     ): Observable<CancelVoucherResponse>
 
     fun createOrder(orderRequest: OrderRequest, token: String): Observable<OrderResponse>
+
+    fun createOrderWithVoucher(
+        orderVoucherRequest: OrderVoucherRequest,
+        token: String
+    ): Observable<OrderResponse>
 
     fun calculateDistance(
         distanceRequest: DistanceRequest,
@@ -43,11 +50,18 @@ class OrderRepositoryImpl private constructor() : OrderRepository {
         return client.showVoucher(partnerId, token)
     }
 
-    override fun applyVoucher(
-        apply: ApplyVoucher,
+    override fun applyVoucherTotal(
+        voucherTotal: VoucherTotal,
         token: String
     ): Observable<ApplyVoucherResponse> {
-        return client.applyVoucher(apply, token)
+        return client.applyVoucherTotal(voucherTotal, token)
+    }
+
+    override fun applyVoucherDistance(
+        voucherDistance: VoucherDistance,
+        token: String
+    ): Observable<ApplyVoucherResponse> {
+        return client.applyVoucherDistance(voucherDistance, token)
     }
 
     override fun cancelVoucher(
@@ -59,6 +73,13 @@ class OrderRepositoryImpl private constructor() : OrderRepository {
 
     override fun createOrder(orderRequest: OrderRequest, token: String): Observable<OrderResponse> {
         return client.createOrder(orderRequest, token)
+    }
+
+    override fun createOrderWithVoucher(
+        orderVoucherRequest: OrderVoucherRequest,
+        token: String
+    ): Observable<OrderResponse> {
+        return client.createOrderWithVoucher(orderVoucherRequest, token)
     }
 
     override fun calculateDistance(

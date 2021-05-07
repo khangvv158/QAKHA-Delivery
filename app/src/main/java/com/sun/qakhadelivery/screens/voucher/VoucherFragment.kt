@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Voucher
+import com.sun.qakhadelivery.data.source.remote.schema.response.DistanceResponse
+import com.sun.qakhadelivery.screens.checkout.CheckoutFragment.Companion.BUNDLE_DISTANCE
 import com.sun.qakhadelivery.screens.checkout.CheckoutFragment.Companion.BUNDLE_TOTAL
 import com.sun.qakhadelivery.screens.checkout.CheckoutFragment.Companion.BUNDLE_VOUCHER
 import com.sun.qakhadelivery.screens.checkout.CheckoutFragment.Companion.BUNDLE_VOUCHERS
@@ -40,9 +42,11 @@ class VoucherFragment : Fragment() {
     private fun initViews() {
         voucherRecyclerView.adapter = adapter
         arguments?.run {
-            getParcelableArrayList<Voucher>(BUNDLE_VOUCHERS)?.let {
+            getParcelableArrayList<Voucher>(BUNDLE_VOUCHERS)?.let { vouchers ->
                 getFloat(BUNDLE_TOTAL).let { total ->
-                    adapter.updateDataWithCondition(it, total)
+                    getParcelable<DistanceResponse>(BUNDLE_DISTANCE)?.let { distance ->
+                        adapter.updateDataWithCondition(vouchers, total, distance)
+                    }
                 }
             }
             getParcelable<VoucherItem>(BUNDLE_VOUCHER)?.let {

@@ -7,11 +7,9 @@ import com.sun.qakhadelivery.data.repository.CartRepository
 import com.sun.qakhadelivery.data.repository.OrderRepository
 import com.sun.qakhadelivery.data.repository.TokenRepository
 import com.sun.qakhadelivery.data.repository.UserRepositoryImpl
-import com.sun.qakhadelivery.data.source.remote.schema.request.ApplyVoucher
-import com.sun.qakhadelivery.data.source.remote.schema.request.DistanceRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.OrderRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.VoucherCancel
+import com.sun.qakhadelivery.data.source.remote.schema.request.*
 import com.sun.qakhadelivery.data.source.remote.schema.response.MessageResponse
+import com.sun.qakhadelivery.data.source.remote.schema.response.OrderVoucherRequest
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -58,8 +56,8 @@ class CheckoutPresenter(
         compositeDisposable.add(disposable)
     }
 
-    override fun applyVoucher(applyVoucher: ApplyVoucher) {
-        val disposable = orderRepository.applyVoucher(applyVoucher, tokenRepository.getToken())
+    override fun applyVoucherTotal(voucherTotal: VoucherTotal) {
+        val disposable = orderRepository.applyVoucherTotal(voucherTotal, tokenRepository.getToken())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -202,6 +200,55 @@ class CheckoutPresenter(
         compositeDisposable.add(disposable)
     }
 
+    override fun createOrderWithVoucher(orderVoucherRequest: OrderVoucherRequest) {
+        val disposable = orderRepository.createOrderWithVoucher(
+            orderVoucherRequest,
+            tokenRepository.getToken()
+        )
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                view?.onSuccessCreateOrder(it)
+            }, {
+                if (it is HttpException) {
+                    try {
+                        view?.onErrorCreateOrder(
+                            Gson().fromJson(
+                                it.response()?.errorBody()?.string(),
+                                MessageResponse::class.java
+                            ).message
+                        )
+                    } catch (e: Exception) {
+                        view?.onErrorCreateOrder(it.localizedMessage)
+                    }
+                }
+            })
+        compositeDisposable.add(disposable)
+    }
+
+    override fun applyVoucherDistance(voucherDistance: VoucherDistance) {
+        val disposable =
+            orderRepository.applyVoucherDistance(voucherDistance, tokenRepository.getToken())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    view?.onSuccessApplyVoucher(it)
+                }, {
+                    if (it is HttpException) {
+                        try {
+                            view?.onErrorApplyVoucher(
+                                Gson().fromJson(
+                                    it.response()?.errorBody()?.string(),
+                                    MessageResponse::class.java
+                                ).message
+                            )
+                        } catch (e: Exception) {
+                            view?.onErrorApplyVoucher(it.localizedMessage)
+                        }
+                    }
+                })
+        compositeDisposable.add(disposable)
+    }
 
     override fun onStart() = Unit
 

@@ -16,14 +16,8 @@ import com.sun.qakhadelivery.data.repository.OrderRepositoryImpl
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.repository.UserRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
-import com.sun.qakhadelivery.data.source.remote.schema.request.ApplyVoucher
-import com.sun.qakhadelivery.data.source.remote.schema.request.DistanceRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.OrderRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.VoucherCancel
-import com.sun.qakhadelivery.data.source.remote.schema.response.ApplyVoucherResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.CancelVoucherResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.DistanceResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.OrderResponse
+import com.sun.qakhadelivery.data.source.remote.schema.request.*
+import com.sun.qakhadelivery.data.source.remote.schema.response.*
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.address.AddressFragment
 import com.sun.qakhadelivery.screens.checkout.adapter.BucketAdapter
@@ -182,6 +176,18 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         }
     }
 
+    override fun onSuccessCreateOrderWithVoucher(orderResponse: OrderResponse) {
+        dialogQueryShipping.dismiss()
+        parentFragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        addFragmentSlideAnim(ShippingDetailFragment.newInstance(Bundle().apply {
+            putParcelable(BUNDLE_ORDER_RESPONSE, orderResponse)
+        }), R.id.containerView)
+        EventBus.getDefault().run {
+            post(Refresh(this::class.java, ShippingFragment::class.java))
+            post(Refresh(this::class.java, ContainerFragment::class.java))
+        }
+    }
+
     override fun onErrorGetUser(exception: String) {
         enableInteraction()
         makeText(exception)
@@ -221,13 +227,35 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         dialogQueryShipping.dismiss()
     }
 
+    override fun onErrorCreateOrderWithVoucher(exception: String) {
+        makeText(exception)
+        dialogQueryShipping.dismiss()
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onMessageVoucher(voucherItem: VoucherItem) {
         if (voucherItem.state == ChoiceVoucherState.SELECT) {
             arguments?.run {
-                getParcelable<Partner>(BUNDLE_PARTNER)?.let {
-                    presenter.applyVoucher(ApplyVoucher(voucherItem.voucher.code, it.id))
-                    disableInteraction()
+                getParcelable<Partner>(BUNDLE_PARTNER)?.let { partner ->
+                    getParcelable<DistanceResponse>(BUNDLE_DISTANCE)?.let { distance ->
+                        if (voucherItem.voucher.distanceCondition == null) {
+                            presenter.applyVoucherTotal(
+                                VoucherTotal(
+                                    voucherItem.voucher.code,
+                                    partner.id
+                                )
+                            )
+                        } else {
+                            presenter.applyVoucherDistance(
+                                VoucherDistance(
+                                    voucherItem.voucher.code,
+                                    partner.id,
+                                    distance.distance
+                                )
+                            )
+                        }
+                        disableInteraction()
+                    }
                 }
                 putParcelable(BUNDLE_VOUCHER, voucherItem)
             }
@@ -345,10 +373,27 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
                 getParcelable<User>(BUNDLE_USER)?.let { user ->
                     getParcelable<Address>(BUNDLE_ADDRESS)?.let { address ->
                         getParcelable<DistanceResponse>(BUNDLE_DISTANCE)?.let { distance ->
-                            OrderRequest(user, address, partner, distance, type).also {
-                                presenter.createOrder(it)
-                                dialogQueryShipping.show(childFragmentManager, null)
-                            }
+                            arguments?.getParcelable<VoucherItem>(BUNDLE_VOUCHER)
+                                .let { voucherItem ->
+                                    if (voucherItem != null) {
+                                        OrderVoucherRequest(
+                                            user,
+                                            address,
+                                            partner,
+                                            distance,
+                                            type,
+                                            voucherItem.voucher
+                                        ).also {
+                                            presenter.createOrderWithVoucher(it)
+                                            dialogQueryShipping.show(childFragmentManager, null)
+                                        }
+                                    } else {
+                                        OrderRequest(user, address, partner, distance, type).also {
+                                            presenter.createOrder(it)
+                                            dialogQueryShipping.show(childFragmentManager, null)
+                                        }
+                                    }
+                                }
                         }
                     }
                 }

@@ -2,6 +2,7 @@ package com.sun.qakhadelivery.screens.voucher.adapter
 
 import android.view.ViewGroup
 import com.sun.qakhadelivery.data.model.Voucher
+import com.sun.qakhadelivery.data.source.remote.schema.response.DistanceResponse
 import com.sun.qakhadelivery.utils.Constants.NOT_EXISTS
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.VoucherItem
@@ -26,11 +27,26 @@ class VoucherAdapter : CustomRecyclerView.Adapter<VoucherViewHolder>(arrayListOf
         }
     }
 
-    fun updateDataWithCondition(vouchers: MutableList<Voucher>, total: Float) {
+    fun updateDataWithCondition(
+        vouchers: MutableList<Voucher>,
+        total: Float,
+        distance: DistanceResponse
+    ) {
         clearItems()
         vouchers.map {
             VoucherItem(it).apply {
-                if (total >= voucher.condition) condition = true
+                if (voucher.condition == null) {
+                    if (voucher.distanceCondition != null && distance.distance <= voucher.distanceCondition) {
+                        condition = true
+                    }
+                } else {
+                    if (voucher.distanceCondition != null
+                        && distance.distance <= voucher.distanceCondition
+                        && total >= voucher.condition
+                    ) {
+                        condition = true
+                    } else if (total >= voucher.condition) condition = true
+                }
             }
         }.also {
             addItems(it)
