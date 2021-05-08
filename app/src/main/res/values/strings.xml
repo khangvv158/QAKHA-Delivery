@@ -225,4 +225,5 @@
     <string name="discount_currency" translatable="false">- %s đ</string>
     <string name="distance_currency_checkout" translatable="false">(%s Km)</string>
     <string name="show_coins" translatable="false">Coins: %s</string>
+    <string name="content_activated">Your account has not been activated. Please check your email for the activation code</string>
 </resources>
