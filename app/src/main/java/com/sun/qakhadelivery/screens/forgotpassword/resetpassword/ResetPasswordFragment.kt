@@ -14,7 +14,6 @@ import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.utils.Regex
 import com.sun.qakhadelivery.extensions.validWithRegex
 import kotlinx.android.synthetic.main.fragment_reset_password.*
-import kotlinx.android.synthetic.main.fragment_reset_password.imageViewBack
 
 class ResetPasswordFragment : Fragment(), ResetPasswordContract.View {
 

@@ -12,6 +12,7 @@ import com.sun.qakhadelivery.extensions.validWithRegex
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.extensions.addFragmentFadeAnim
 import com.sun.qakhadelivery.screens.forgotpassword.resetpassword.ResetPasswordFragment
 import com.sun.qakhadelivery.utils.*
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
@@ -38,7 +39,7 @@ class ForgotPasswordFragment : Fragment(), ForgotPasswordContract.View {
     }
 
     override fun onForgotPasswordSuccess(email: String) {
-        replaceFragment(ResetPasswordFragment.newInstance(email), R.id.containerView)
+        addFragmentFadeAnim(ResetPasswordFragment.newInstance(email), R.id.containerView)
     }
 
     override fun onForgotPasswordFailure() {

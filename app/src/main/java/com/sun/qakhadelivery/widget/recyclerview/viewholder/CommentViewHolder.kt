@@ -14,7 +14,7 @@ class CommentViewHolder(viewGroup: ViewGroup) :
 
     override fun bind(item: CommentItem) {
         with(itemView) {
-            item.comment.user.image?.imageUrl?.let { avatarImageView.loadUrl(it) }
+            avatarImageView.loadUrl(item.comment.user.image?.imageUrl)
             nameTextView?.text = item.comment.user.name
             contentTextView.text = item.comment.content
             ratingBar.rating = item.comment.point.toFloat()

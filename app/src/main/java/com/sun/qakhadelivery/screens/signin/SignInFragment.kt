@@ -57,6 +57,9 @@ class SignInFragment : Fragment(), SignInContract.View {
             emailTextInputLayout.error = Constants.SPACE_STRING
             passwordTextInputLayout.error = getString(R.string.content_password_sign_in)
         }
+        if (message == "Your account has not been activated. Please check your email for the activation code.")
+            emailTextInputLayout.error = Constants.SPACE_STRING
+        passwordTextInputLayout.error = getString(R.string.content_activated)
     }
 
     override fun onError(message: String) {

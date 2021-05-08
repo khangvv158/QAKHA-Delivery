@@ -208,4 +208,5 @@
     <string name="price">Giá:</string>
     <string name="description">Mô tả:</string>
     <string name="please_login_again">Xin vui lòng đăng nhập lại</string>
+    <string name="content_activated">Tài khoản của bạn chưa được kích hoạt. Vui lòng kiểm tra email của bạn để biết mã kích hoạt</string>
 </resources>
