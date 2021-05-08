@@ -49,17 +49,18 @@ class SignInFragment : Fragment(), SignInContract.View {
 
     override fun onSignInFailure(message: String) {
         message
-        if (message == "Email is not exists. Please sign up !!"){
+        if (message == "Email is not exists. Please sign up !!") {
             emailTextInputLayout.error = getString(R.string.content_email_sign_in)
             passwordTextInputLayout.error = Constants.SPACE_STRING
         }
-        if (message == "Sign in failed"){
+        if (message == "Sign in failed") {
             emailTextInputLayout.error = Constants.SPACE_STRING
             passwordTextInputLayout.error = getString(R.string.content_password_sign_in)
         }
-        if (message == "Your account has not been activated. Please check your email for the activation code.")
+        if (message == "Your account has not been activated. Please check your email for the activation code."){
             emailTextInputLayout.error = Constants.SPACE_STRING
-        passwordTextInputLayout.error = getString(R.string.content_activated)
+            passwordTextInputLayout.error = getString(R.string.content_activated)
+        }
     }
 
     override fun onError(message: String) {
