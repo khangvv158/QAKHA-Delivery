@@ -61,6 +61,20 @@
                     app:layout_constraintWidth_percent="0.06" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/helpImageView"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginRight="@dimen/dp_20"
+                    android:background="@drawable/ic_help"
+                    android:backgroundTint="@color/colorGray_light"
+                    app:layout_constraintBottom_toBottomOf="@+id/callImageView"
+                    app:layout_constraintDimensionRatio="24:24"
+                    app:layout_constraintEnd_toStartOf="@+id/callImageView"
+                    app:layout_constraintTop_toTopOf="@+id/callImageView"
+                    app:layout_constraintVertical_bias="0.635"
+                    app:layout_constraintWidth_percent="0.06" />
+
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/ic_scroll_bar"

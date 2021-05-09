@@ -211,6 +211,14 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
                 )
             }
         }
+        helpImageView.setOnClickListener {
+            startActivity(
+                Intent(
+                    Intent.ACTION_DIAL,
+                    Uri.parse("tel:0378365756")
+                )
+            )
+        }
         imageViewBack.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
