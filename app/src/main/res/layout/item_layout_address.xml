@@ -2,24 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_70"
+    android:layout_height="@dimen/_50sdp"
     android:foreground="?attr/selectableItemBackground">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageView"
-        android:layout_width="@dimen/dp_25"
-        android:layout_height="@dimen/dp_25"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_20"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_16sdp"
         android:background="@drawable/ic_address" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/addressTextView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/_45sdp"
+        android:textSize="@dimen/_12sdp"
         android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginStart="@dimen/_10sdp"
         android:layout_toStartOf="@+id/editAddressTextView"
         android:layout_toEndOf="@+id/imageView"
         android:ellipsize="end"
@@ -31,9 +32,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_margin="@dimen/dp_10"
+        android:layout_margin="@dimen/_10sdp"
         android:text="@string/edit"
         android:textColor="@color/colorAzureRadianceBlue"
-        android:textSize="@dimen/sp_16"
+        android:textSize="@dimen/_12sdp"
         app:textAllCaps="true" />
 </RelativeLayout>

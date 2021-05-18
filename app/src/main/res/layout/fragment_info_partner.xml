@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/dp_10"
+    android:padding="@dimen/_8sdp"
     tools:context=".screens.partner.tabs.information.InfoPartnerFragment">
 
     <fragment
@@ -19,15 +19,15 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
-        app:cardCornerRadius="@dimen/dp_5"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="@+id/map"
         app:layout_constraintTop_toBottomOf="@+id/map">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="@dimen/dp_10">
+            android:padding="@dimen/_10sdp">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView2"
@@ -35,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sf_compact_display_regular"
                 android:text="@string/address"
+                android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +44,8 @@
                 android:id="@+id/addressTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginStart="@dimen/_11sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView2"
                 app:layout_constraintTop_toTopOf="@+id/appCompatTextView2"
@@ -54,9 +56,10 @@
                 android:id="@+id/appCompatTextView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:fontFamily="@font/sf_compact_display_regular"
                 android:text="@string/phone_number"
+                android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView2"
                 app:layout_constraintTop_toBottomOf="@+id/addressTextView" />
@@ -65,7 +68,8 @@
                 android:id="@+id/phonenumberTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginStart="@dimen/_14sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView3"
                 app:layout_constraintTop_toTopOf="@+id/appCompatTextView3" />
@@ -74,9 +78,10 @@
                 android:id="@+id/appCompatTextView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:fontFamily="@font/sf_compact_display_regular"
                 android:text="@string/email"
+                android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
@@ -85,7 +90,8 @@
                 android:id="@+id/emailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginStart="@dimen/_11sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView4"
                 app:layout_constraintTop_toTopOf="@+id/appCompatTextView4" />
@@ -94,9 +100,10 @@
                 android:id="@+id/appCompatTextView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_30"
+                android:layout_marginTop="@dimen/_22sdp"
                 android:fontFamily="@font/sf_compact_display_regular"
                 android:text="@string/time_open"
+                android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4" />
@@ -105,7 +112,8 @@
                 android:id="@+id/timeOpenTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView5"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView5"
                 app:layout_constraintTop_toTopOf="@+id/appCompatTextView5" />
@@ -114,9 +122,10 @@
                 android:id="@+id/appCompatTextView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_50"
+                android:layout_marginStart="@dimen/_40sdp"
                 android:fontFamily="@font/sf_compact_display_regular"
                 android:text="@string/time_close"
+                android:textSize="@dimen/_11sdp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView5"
                 app:layout_constraintStart_toEndOf="@+id/timeOpenTextView"
@@ -127,7 +136,8 @@
                 android:id="@+id/timeCloseTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView8"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView8"
                 app:layout_constraintTop_toTopOf="@+id/appCompatTextView8"

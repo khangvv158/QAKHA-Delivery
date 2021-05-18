@@ -12,9 +12,9 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutTop"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/_35sdp"
         android:layout_alignParentTop="true"
-        android:translationZ="@dimen/dp_5"
+        android:translationZ="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -29,13 +29,13 @@
                 android:background="@drawable/ic_back"
                 app:backgroundTint="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="24:24"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.041"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.457"
-                app:layout_constraintWidth_percent="0.06" />
+                app:layout_constraintWidth_percent="0.09" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
@@ -44,7 +44,7 @@
                 android:gravity="center"
                 android:text="@string/change_email"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/_14sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="150:30"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -58,8 +58,8 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_5"
-        android:padding="@dimen/dp_10"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:padding="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayoutTop">
 
@@ -68,8 +68,8 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:boxCornerRadiusBottomEnd="@dimen/dp_5"
-            app:boxCornerRadiusBottomStart="@dimen/dp_5"
+            app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_5sdp"
             app:boxStrokeColor="@color/colorTransparent"
             app:layout_constraintDimensionRatio="300:65"
             app:layout_constraintHeight_percent="0.07"
@@ -83,6 +83,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/border_circle_text"
                 android:hint="@string/email"
+                android:textSize="@dimen/_14sdp"
                 android:imeOptions="actionDone"
                 android:inputType="text|textNoSuggestions"
                 android:maxLines="1" />
@@ -92,11 +93,12 @@
             android:id="@+id/sendCodeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_5"
+            android:layout_marginStart="@dimen/_5sdp"
             android:backgroundTint="@color/colorFrenchGray"
             android:text="@string/send"
             android:textAllCaps="false"
-            app:cornerRadius="@dimen/dp_5"
+            app:cornerRadius="@dimen/_5sdp"
+            android:textSize="@dimen/_11sdp"
             app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textInputLayout"
@@ -108,10 +110,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_10"
+        android:layout_marginHorizontal="@dimen/_8sdp"
         android:visibility="gone"
-        app:boxCornerRadiusBottomEnd="@dimen/dp_5"
-        app:boxCornerRadiusBottomStart="@dimen/dp_5"
+        app:boxCornerRadiusBottomEnd="@dimen/_5sdp"
+        app:boxCornerRadiusBottomStart="@dimen/_5sdp"
         app:boxStrokeColor="@color/colorTransparent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
@@ -126,7 +128,7 @@
             android:inputType="text|textNoSuggestions"
             android:maxLines="1"
             android:textIsSelectable="true"
-            android:textSize="@dimen/sp_15"
+            android:textSize="@dimen/_12sdp"
             android:textStyle="normal" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -134,13 +136,13 @@
         android:id="@+id/verifyButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/dp_10"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginHorizontal="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:backgroundTint="@color/colorRedPomegranate"
         android:text="@string/verify"
         android:textAllCaps="false"
         android:visibility="gone"
-        app:cornerRadius="@dimen/dp_5"
+        app:cornerRadius="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/verifyTextInputLayout" />
 

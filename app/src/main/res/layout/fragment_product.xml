@@ -24,7 +24,7 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:translationZ="@dimen/dp_10"
+                android:translationZ="@dimen/_8sdp"
                 app:layout_collapseMode="pin">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,7 @@
                         android:id="@+id/backButton"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginVertical="@dimen/dp_11"
+                        android:layout_marginVertical="@dimen/_9sdp"
                         android:background="@drawable/ic_back"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintDimensionRatio="1:1"
@@ -52,9 +52,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/productImageView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintDimensionRatio="411:250"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -72,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
-            android:padding="@dimen/dp_10"
+            android:padding="@dimen/_8sdp"
             app:layout_constraintStart_toStartOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -81,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/sf_compact_display_regular"
                 android:maxLines="2"
-                android:textSize="@dimen/sp_20"
+                android:textSize="@dimen/_16sdp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -90,9 +89,9 @@
                 android:id="@+id/priceLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:text="@string/price"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="@+id/nameProductTextView"
                 app:layout_constraintTop_toBottomOf="@+id/nameProductTextView" />
 
@@ -100,8 +99,8 @@
                 android:id="@+id/priceTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_5"
-                android:textSize="@dimen/sp_13"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/priceLabel"
                 app:layout_constraintStart_toEndOf="@+id/priceLabel"
                 app:layout_constraintTop_toTopOf="@+id/priceLabel" />
@@ -110,9 +109,9 @@
                 android:id="@+id/appCompatTextView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:text="@string/description"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="@+id/priceLabel"
                 app:layout_constraintTop_toBottomOf="@+id/priceLabel" />
 
@@ -120,7 +119,7 @@
                 android:id="@+id/descriptionProductTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:fontFamily="@font/sf_compact_display_regular"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView21"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView21" />

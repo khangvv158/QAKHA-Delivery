@@ -11,41 +11,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/dp_10"
+        android:layout_marginStart="@dimen/_8sdp"
         android:adjustViewBounds="true"
-        android:maxWidth="@dimen/dp_90"
-        android:maxHeight="@dimen/dp_90"
+        android:maxWidth="@dimen/_80sdp"
+        android:maxHeight="@dimen/_80sdp"
         android:scaleType="centerInside"
         app:shapeAppearanceOverlay="@style/circleImageView" />
 
     <TextView
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/_41sdp"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:layout_toRightOf="@id/iconImageView"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_toEndOf="@id/iconImageView"
         android:gravity="center_vertical"
-        android:textSize="@dimen/sp_16"
+        android:textSize="@dimen/_12sdp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/describeTextView"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/_41sdp"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/dp_10"
-        android:layout_toLeftOf="@+id/arrowRightImageView"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_toStartOf="@+id/arrowRightImageView"
         android:gravity="center"
-        android:textSize="@dimen/sp_14" />
+        android:textSize="@dimen/_10sdp" />
 
     <ImageView
         android:id="@+id/arrowRightImageView"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dp_50"
-        android:layout_alignParentRight="true"
+        android:layout_height="@dimen/_41sdp"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/dp_10"
+        android:layout_marginEnd="@dimen/_8sdp"
         android:gravity="center"
         android:src="@drawable/ic_next" />
 </RelativeLayout>

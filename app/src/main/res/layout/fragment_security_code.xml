@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:clickable="true"
-    android:focusable="true"
-    tools:context=".screens.forgotpassword.securitycode.SecurityCodeFragment">
+    android:focusable="true">
 
     <ImageView
         android:id="@+id/imageViewBack"
@@ -21,20 +20,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.032"
-        app:layout_constraintWidth_percent="0.06" />
+        app:layout_constraintWidth_percent="0.09" />
 
     <TextView
         android:id="@+id/textViewTitleFragment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/enter_security_code"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="@dimen/_16sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewBack"
         app:layout_constraintDimensionRatio="133:20"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toEndOf="@+id/imageViewBack"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewBack"
         app:layout_constraintVertical_bias="0.031" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -42,7 +41,7 @@
         android:layout_height="0dp"
         android:gravity="center|left"
         android:text="@string/please_check_your_emails_for_a_message_with_your_code_your_code_is_5_numbers_long"
-        android:textSize="@dimen/sp_16"
+        android:textSize="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="337:60"
         app:layout_constraintEnd_toEndOf="parent"
@@ -69,21 +68,22 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/editTextSecurityCode"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50" />
+            android:textSize="@dimen/_12sdp"
+            android:layout_height="@dimen/_40sdp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/securityCodeButton"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="@dimen/dp_250"
-        android:layout_height="@dimen/dp_60"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_46sdp"
         android:layout_below="@id/editTextLayoutSecurityCode"
         android:layout_centerHorizontal="true"
         android:text="@string/title_continue"
-        android:textSize="@dimen/sp_18"
+        android:textSize="@dimen/_14sdp"
         android:textStyle="bold"
         app:backgroundTint="@color/colorCarrotOrange"
-        app:cornerRadius="@dimen/dp_10"
+        app:cornerRadius="@dimen/_8sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

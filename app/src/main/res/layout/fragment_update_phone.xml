@@ -12,9 +12,9 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutTop"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/_35sdp"
         android:layout_alignParentTop="true"
-        android:translationZ="@dimen/dp_5"
+        android:translationZ="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -35,7 +35,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.457"
-                app:layout_constraintWidth_percent="0.06" />
+                app:layout_constraintWidth_percent="0.09" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
@@ -44,12 +44,11 @@
                 android:gravity="center"
                 android:text="@string/phone_number"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="150:30"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.7"
-                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -59,7 +58,7 @@
         android:id="@+id/textInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/_10sdp"
         android:backgroundTint="@color/colorTransparent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayoutTop">
 
@@ -69,6 +68,7 @@
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
             android:hint="@string/phone_number"
+            android:textSize="@dimen/_14sdp"
             android:inputType="number"
             app:boxBackgroundMode="none" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -77,11 +77,12 @@
         android:id="@+id/sendCodeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_20"
+        android:layout_margin="@dimen/_20sdp"
+        android:textSize="@dimen/_14sdp"
         android:backgroundTint="@color/colorRedPomegranate"
         android:text="@string/save"
         android:textAllCaps="false"
-        app:cornerRadius="@dimen/dp_5"
+        app:cornerRadius="@dimen/_5sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 

@@ -19,13 +19,13 @@
             android:layout_height="0dp"
             android:background="@drawable/ic_back"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="24:24"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.054"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.032"
-            app:layout_constraintWidth_percent="0.06" />
+            app:layout_constraintWidth_percent="0.09" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageViewIllustration"
@@ -46,12 +46,12 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/_16sdp"
             android:hint="@string/enter_your_email"
-            app:boxCornerRadiusBottomEnd="@dimen/dp_10"
-            app:boxCornerRadiusBottomStart="@dimen/dp_10"
-            app:boxCornerRadiusTopEnd="@dimen/dp_10"
-            app:boxCornerRadiusTopStart="@dimen/dp_10"
+            app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_8sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_8sdp"
+            app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:layout_constraintDimensionRatio="331:90"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +61,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_50" />
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_12sdp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -71,10 +72,10 @@
             android:layout_height="0dp"
             android:layout_below="@id/emailTextInputLayout"
             android:hint="@string/enter_your_password"
-            app:boxCornerRadiusBottomEnd="@dimen/dp_10"
-            app:boxCornerRadiusBottomStart="@dimen/dp_10"
-            app:boxCornerRadiusTopEnd="@dimen/dp_10"
-            app:boxCornerRadiusTopStart="@dimen/dp_10"
+            app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
+            app:boxCornerRadiusBottomStart="@dimen/_8sdp"
+            app:boxCornerRadiusTopEnd="@dimen/_8sdp"
+            app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:endIconMode="password_toggle"
             app:errorEnabled="true"
             app:layout_constraintDimensionRatio="331:100"
@@ -86,8 +87,9 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordEditText"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_50"
-                android:inputType="textPassword" />
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textSize="@dimen/_12sdp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -95,6 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/forgot_password"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/passwordTextInputLayout"
             app:layout_constraintHorizontal_bias="0.0"
@@ -107,12 +110,12 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/_8sdp"
             android:text="@string/title_sign_in"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/sp_18"
+            android:textSize="@dimen/_14sdp"
             app:backgroundTint="@color/colorCarrotOrange"
-            app:cornerRadius="@dimen/dp_10"
+            app:cornerRadius="@dimen/_8sdp"
             app:layout_constraintDimensionRatio="280:50"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,8 +126,9 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_30"
+            android:layout_marginTop="@dimen/_24sdp"
             android:text="@string/or_sign_in_with"
+            android:textSize="@dimen/_11sdp"
             app:layout_constraintEnd_toEndOf="@+id/signInButton"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="@+id/signInButton"
@@ -134,10 +138,10 @@
             android:id="@+id/textViewSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/_16sdp"
             android:text="@string/title_sign_up"
             android:textColor="@color/colorCarrotOrange"
-            android:textSize="@dimen/sp_24"
+            android:textSize="@dimen/_20sdp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textViewTitleOne"
@@ -148,17 +152,18 @@
             android:id="@+id/textViewTitleOne"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/_15sdp"
             android:text="@string/don_t_have_an_account"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewLoginGoogle" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageViewLoginGoogle"
-            android:layout_width="41dp"
-            android:layout_height="41dp"
-            android:layout_marginTop="@dimen/dp_30"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_22sdp"
             android:background="@drawable/ic_google"
             android:foreground="?attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
@@ -170,9 +175,9 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageViewLoginFacebook"
-            android:layout_width="41dp"
-            android:layout_height="41dp"
-            android:layout_marginTop="@dimen/dp_30"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginTop="@dimen/_22sdp"
             android:background="@drawable/ic_facebook"
             android:foreground="?attr/selectableItemBackground"
             app:layout_constraintEnd_toEndOf="parent"
