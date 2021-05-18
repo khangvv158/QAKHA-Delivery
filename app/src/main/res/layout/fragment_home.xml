@@ -9,9 +9,9 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutTop"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_160"
+        android:layout_height="@dimen/_140sdp"
         android:background="@color/colorCarrotOrange"
-        android:translationZ="@dimen/dp_5">
+        android:translationZ="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -38,13 +38,13 @@
                 android:id="@+id/addressTextView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginLeft="@dimen/dp_4"
+                android:layout_marginLeft="@dimen/_4sdp"
                 android:ellipsize="end"
                 android:fontFamily="@font/sf_compact_display_medium"
                 android:gravity="center|left"
                 android:maxLines="1"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintDimensionRatio="350:25"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -56,7 +56,7 @@
                 android:id="@+id/appCompatImageView3"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginTop="@dimen/dp_2"
+                android:layout_marginTop="@dimen/_2sdp"
                 android:background="@drawable/ic_address"
                 android:backgroundTint="@color/colorWhite"
                 app:layout_constraintDimensionRatio="12:12"
@@ -71,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/background_search"
-                app:cardCornerRadius="@dimen/dp_10"
+                app:cardCornerRadius="@dimen/_8sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="379:45"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -105,7 +105,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_160"
+        android:layout_marginTop="@dimen/_140sdp"
         android:background="@color/colorWhileSmoke">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
@@ -121,7 +121,7 @@
                     android:id="@+id/viewPagerSlider"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/_8sdp"
                     app:autoScroll="false"
                     app:isInfinite="true"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -148,7 +148,7 @@
                     android:id="@+id/recyclerViewTypePartner"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/_16sdp"
                     android:background="@color/colorWhite"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -163,7 +163,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayoutTypePartner"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="@dimen/_40sdp"
             android:background="@color/colorWhite"
             app:tabIndicatorColor="@color/colorCarrotOrange"
             app:tabSelectedTextColor="@color/colorCarrotOrange"

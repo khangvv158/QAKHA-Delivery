@@ -12,9 +12,9 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutTop"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/_35sdp"
         android:layout_alignParentTop="true"
-        android:translationZ="@dimen/dp_5"
+        android:translationZ="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -35,7 +35,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.457"
-                app:layout_constraintWidth_percent="0.06" />
+                app:layout_constraintWidth_percent="0.09" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
@@ -44,7 +44,7 @@
                 android:gravity="center"
                 android:text="@string/user_information"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="150:30"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/avatarLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_150"
+        android:layout_height="@dimen/_120sdp"
         android:layout_marginTop="8dp"
         android:background="@color/colorWhite"
         app:layout_constraintHeight_percent="0.12"
@@ -67,7 +67,7 @@
             android:id="@+id/avatarCircleImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/_16sdp"
             android:src="@color/colorAlabasterGray"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,10 +80,10 @@
             android:id="@+id/appCompatTextView19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/_8sdp"
             android:text="@string/change_avatar"
             android:textColor="@color/colorPictonBlue"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="@+id/avatarCircleImageView"
             app:layout_constraintHorizontal_bias="0.531"
             app:layout_constraintStart_toStartOf="@+id/avatarCircleImageView"
@@ -94,7 +94,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_1"
+        android:layout_marginTop="@dimen/_1sdp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/avatarLayout">
 
@@ -102,7 +102,7 @@
             android:id="@+id/nameNavigateView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginTop="@dimen/_5sdp"
             android:background="@color/colorWhite"
             app:app_title="@string/username" />
 
@@ -110,7 +110,7 @@
             android:id="@+id/phoneNumberNavigateView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_1"
+            android:layout_marginTop="@dimen/_1sdp"
             android:background="@color/colorWhite"
             app:app_title="@string/phone_number" />
 
@@ -118,7 +118,7 @@
             android:id="@+id/emailNavigateView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_1"
+            android:layout_marginTop="@dimen/_1sdp"
             android:background="@color/colorWhite"
             app:app_title="@string/email" />
     </LinearLayout>

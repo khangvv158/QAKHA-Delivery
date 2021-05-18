@@ -103,4 +103,7 @@ dependencies {
 
     /* Picasso */
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    /* DPS*/
+    implementation 'com.intuit.sdp:sdp-android:1.0.6'
 }

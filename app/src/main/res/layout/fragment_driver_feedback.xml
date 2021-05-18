@@ -12,10 +12,10 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutTop"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/_46sdp"
         android:layout_alignParentTop="true"
         android:background="@color/colorCarrotOrange"
-        android:translationZ="@dimen/dp_5"
+        android:translationZ="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -30,13 +30,13 @@
                 android:background="@drawable/ic_back"
                 app:backgroundTint="@color/colorWhite"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="24:24"
+                app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.041"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.457"
-                app:layout_constraintWidth_percent="0.06" />
+                app:layout_constraintWidth_percent="0.09" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
@@ -45,7 +45,7 @@
                 android:gravity="center"
                 android:text="@string/rate_driver"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/_14sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="150:30"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorWhite"
-        android:padding="@dimen/dp_10"
+        android:padding="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayoutTop">
 
@@ -69,7 +69,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginTop="@dimen/_16sdp"
             android:src="@color/colorAlabasterGray"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -82,9 +82,9 @@
             android:id="@+id/nameDriverTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/_8sdp"
             android:fontFamily="@font/sf_compact_display_medium"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="@+id/avatarCircleImageView"
             app:layout_constraintStart_toStartOf="@+id/avatarCircleImageView"
             app:layout_constraintTop_toBottomOf="@+id/avatarCircleImageView" />
@@ -93,7 +93,7 @@
             android:id="@+id/ratingDriverBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginTop="@dimen/_8sdp"
             android:progressBackgroundTint="@color/colorAltoGray"
             android:stepSize="1"
             android:theme="@style/circleProgress"
@@ -106,7 +106,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginTop="@dimen/_5sdp"
         android:background="@color/colorWhite"
         app:layout_constraintHeight_percent="0.24"
         app:layout_constraintStart_toStartOf="parent"
@@ -123,9 +123,9 @@
             android:imeOptions="actionDone"
             android:inputType="text|textNoSuggestions"
             android:maxLength="500"
-            android:padding="@dimen/dp_5"
+            android:padding="@dimen/_5sdp"
             android:scrollHorizontally="false"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/_10sdp"
             app:layout_constraintHeight_percent="0.85"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -135,6 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/zero"
+            android:textSize="@dimen/_11sdp"
             app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView18"
             app:layout_constraintEnd_toStartOf="@+id/appCompatTextView18"
             app:layout_constraintTop_toTopOf="@+id/appCompatTextView18" />
@@ -143,8 +144,9 @@
             android:id="@+id/appCompatTextView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/_8sdp"
             android:text="@string/default_text_feedback"
+            android:textSize="@dimen/_11sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/feedbackEditText" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -153,7 +155,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/colorWhite"
-        android:padding="@dimen/dp_5"
+        android:padding="@dimen/_5sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.07"
         app:layout_constraintStart_toStartOf="parent">
@@ -166,9 +168,9 @@
             android:enabled="false"
             android:text="@string/send"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/sp_14"
+            android:textSize="@dimen/_11sdp"
             app:backgroundTint="@color/colorAltoGray"
-            app:cornerRadius="@dimen/dp_10"
+            app:cornerRadius="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

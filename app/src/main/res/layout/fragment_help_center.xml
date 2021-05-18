@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:clickable="true"
-    android:translationZ="@dimen/dp_10"
+    android:focusable="true"
+    android:translationZ="10dp"
     tools:context=".screens.navigate.helpcenter.HelpCenterFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
+        android:layout_height="@dimen/_35sdp"
         android:background="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,20 +25,20 @@
 
             <ImageView
                 android:id="@+id/imageViewBack"
-                android:layout_width="@dimen/dp_28"
-                android:layout_height="@dimen/dp_28"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/dp_15"
+                android:layout_marginStart="@dimen/_11sdp"
                 android:src="@drawable/ic_back" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/dp_35"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"
                 android:text="@string/help_center"
-                android:textSize="@dimen/sp_18" />
+                android:textSize="@dimen/_14sdp" />
         </RelativeLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -48,7 +49,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/sf_compact_display_medium"
         android:text="@string/contact_us"
-        android:textSize="@dimen/sp_18"
+        android:textSize="@dimen/_14sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="337:20"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +76,7 @@
         android:id="@+id/gmailImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/dp_50"
+        android:layout_marginStart="@dimen/_50sdp"
         android:src="@drawable/ic_gmail"
         app:layout_constraintBottom_toBottomOf="@+id/callImageView"
         app:layout_constraintDimensionRatio="25:25"

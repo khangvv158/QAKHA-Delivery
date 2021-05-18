@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:clickable="true"
+    android:focusable="true"
     tools:context=".screens.search.SearchFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/_46sdp"
         android:background="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +42,8 @@
                 android:background="@drawable/background_search"
                 android:closeIcon="@android:color/transparent"
                 android:searchIcon="@drawable/ic_search"
-                app:iconifiedByDefault="false"
                 android:theme="@style/ThemeOverlay.search"
+                app:iconifiedByDefault="false"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="380:45"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -60,12 +61,11 @@
         android:id="@+id/searchRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingBottom="@dimen/_16sdp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
-        android:paddingBottom="@dimen/dp_20"
         app:layout_constraintVertical_bias="0.0" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

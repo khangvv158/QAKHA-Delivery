@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Product
 import com.sun.qakhadelivery.extensions.currencyVn
-import com.sun.qakhadelivery.extensions.loadUrl
+import com.sun.qakhadelivery.extensions.loadUrlOrigin
 import kotlinx.android.synthetic.main.fragment_product.*
 
 class ProductFragment : Fragment() {
@@ -34,7 +34,7 @@ class ProductFragment : Fragment() {
 
     private fun initViews() {
         arguments?.getParcelable<Product>(BUNDLE_PRODUCT)?.let {
-            productImageView.loadUrl(it.image.imageUrl)
+            productImageView.loadUrlOrigin(it.image.imageUrl)
             descriptionProductTextView.text = it.description
             priceTextView.text = it.price.toString().currencyVn()
             nameProductTextView.text = it.name

@@ -12,9 +12,9 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutTop"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_60"
+        android:layout_height="@dimen/_35sdp"
         android:layout_alignParentTop="true"
-        android:translationZ="@dimen/dp_5"
+        android:translationZ="@dimen/_5sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -35,7 +35,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.457"
-                app:layout_constraintWidth_percent="0.06" />
+                app:layout_constraintWidth_percent="0.09" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
@@ -44,7 +44,7 @@
                 android:gravity="center"
                 android:text="@string/voucher"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_16"
+                android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintDimensionRatio="150:30"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -57,13 +57,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/_46sdp"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5">
+            android:layout_marginTop="@dimen/_5sdp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -86,20 +86,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="@dimen/dp_5">
+        android:layout_marginBottom="@dimen/_5sdp">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/usageButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/dp_10"
+            android:layout_margin="@dimen/_8sdp"
             android:background="@drawable/border_circle_text"
             android:backgroundTint="@color/colorCarrotOrange"
             android:fontFamily="@font/sf_compact_display_medium"
             android:text="@string/usage"
             android:textAllCaps="false"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/sp_16"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintDimensionRatio="411:50"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.07"

@@ -14,32 +14,32 @@
         <RelativeLayout
             android:id="@+id/avatarLayout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_250"
+            android:layout_height="@dimen/_200sdp"
             android:background="@color/colorWhite">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/avatarCircleImageView"
-                android:layout_width="@dimen/dp_100"
-                android:layout_height="@dimen/dp_100"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dp_70"
+                android:layout_marginTop="@dimen/_50sdp"
                 android:src="@color/colorAlabasterGray"
                 app:shapeAppearanceOverlay="@style/circleImageView" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/authenticationButton"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="@dimen/dp_250"
+                android:layout_width="@dimen/_200sdp"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/avatarCircleImageView"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:text="@string/sign_in_sign_up"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/_10sdp"
                 android:textStyle="bold"
                 app:backgroundTint="@color/colorCarrotOrange"
-                app:cornerRadius="@dimen/dp_10" />
+                app:cornerRadius="@dimen/_8sdp" />
         </RelativeLayout>
 
         <com.google.android.material.navigation.NavigationView
@@ -47,10 +47,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/avatarLayout"
-            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginTop="@dimen/_5sdp"
             android:fitsSystemWindows="false"
             app:elevation="0dp"
-            app:itemIconSize="@dimen/dp_18"
+            app:itemIconSize="@dimen/_14sdp"
             app:menu="@menu/menu_nav_notsignin" />
     </RelativeLayout>
 </ScrollView>
