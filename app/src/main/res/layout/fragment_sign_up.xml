@@ -57,8 +57,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             android:hint="@string/email"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
@@ -66,7 +66,6 @@
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:errorTextAppearance="@style/TextInputLayoutError"
-            app:layout_constraintDimensionRatio="331:90"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageViewIllustration"
@@ -76,16 +75,16 @@
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_12sdp"
                 android:imeOptions="actionGo"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:textSize="@dimen/_12sdp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:hint="@string/password"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
@@ -93,7 +92,6 @@
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:errorTextAppearance="@style/TextInputLayoutError"
-            app:layout_constraintDimensionRatio="331:90"
             app:layout_constraintEnd_toEndOf="@+id/emailTextInputLayout"
             app:layout_constraintStart_toStartOf="@+id/emailTextInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/emailTextInputLayout"
@@ -109,8 +107,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/confirmPasswordTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:hint="@string/confirm_password"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
@@ -118,7 +116,6 @@
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:errorTextAppearance="@style/TextInputLayoutError"
-            app:layout_constraintDimensionRatio="331:90"
             app:layout_constraintEnd_toEndOf="@+id/passwordTextInputLayout"
             app:layout_constraintStart_toStartOf="@+id/passwordTextInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout"
@@ -128,15 +125,15 @@
                 android:id="@+id/confirmPasswordEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_12sdp"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:textSize="@dimen/_12sdp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:hint="@string/name_account"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
@@ -144,7 +141,6 @@
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:errorTextAppearance="@style/TextInputLayoutError"
-            app:layout_constraintDimensionRatio="331:90"
             app:layout_constraintEnd_toEndOf="@+id/confirmPasswordTextInputLayout"
             app:layout_constraintStart_toStartOf="@+id/confirmPasswordTextInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/confirmPasswordTextInputLayout"
@@ -154,15 +150,15 @@
                 android:id="@+id/nameEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_12sdp"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textSize="@dimen/_12sdp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/phoneNumberTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:hint="@string/phone_number"
             app:boxCornerRadiusBottomEnd="@dimen/_8sdp"
@@ -170,7 +166,6 @@
             app:boxCornerRadiusTopEnd="@dimen/_8sdp"
             app:boxCornerRadiusTopStart="@dimen/_8sdp"
             app:errorTextAppearance="@style/TextInputLayoutError"
-            app:layout_constraintDimensionRatio="331:90"
             app:layout_constraintEnd_toEndOf="@+id/nameTextInputLayout"
             app:layout_constraintStart_toStartOf="@+id/nameTextInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/nameTextInputLayout"
@@ -180,8 +175,8 @@
                 android:id="@+id/phoneNumberEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/_12sdp"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:textSize="@dimen/_12sdp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -191,9 +186,9 @@
             android:layout_marginTop="@dimen/_14sdp"
             android:fontFamily="@font/sf_compact_display_medium"
             android:text="@string/account_not_activated"
+            android:textSize="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="@+id/phoneNumberTextInputLayout"
             app:layout_constraintHorizontal_bias="0.0"
-            android:textSize="@dimen/_12sdp"
             app:layout_constraintStart_toStartOf="@+id/phoneNumberTextInputLayout"
             app:layout_constraintTop_toBottomOf="@+id/phoneNumberTextInputLayout" />
 
