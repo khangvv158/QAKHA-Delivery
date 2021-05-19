@@ -1,5 +1,6 @@
 package com.sun.qakhadelivery.extensions
 
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -67,7 +68,10 @@ fun Fragment.hideKeyboard() {
     view?.let { activity?.hideKeyboard(it) }
 }
 
+fun Fragment.showKeyboard(view: View) {
+    view.let { activity?.showKeyboard(view) }
+}
+
 fun Fragment.back() {
     this.parentFragmentManager.popBackStack()
 }
-

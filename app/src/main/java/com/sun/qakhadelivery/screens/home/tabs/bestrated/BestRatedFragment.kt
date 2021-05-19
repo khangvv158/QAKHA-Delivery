@@ -20,6 +20,7 @@ import com.sun.qakhadelivery.screens.partner.PartnerFragment
 import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_best_rated.*
+import kotlinx.android.synthetic.main.fragment_best_rated.loadingProgress
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -61,7 +62,7 @@ class BestRatedFragment : Fragment(), BestRatedContract.View,
 
     override fun getSuggestPartnerBestRatedSuccess(partners: MutableList<Partner>) {
         bestRatedAdapter.updateData(partners)
-        loadingProgress.gone()
+        loadingProgress?.gone()
     }
 
     override fun getPartnerByIdSuccess(partnerResponse: PartnerResponse) {
@@ -73,7 +74,7 @@ class BestRatedFragment : Fragment(), BestRatedContract.View,
 
     override fun onError(message: String) {
         makeText(message)
-        loadingProgress.gone()
+        loadingProgress?.gone()
     }
 
     override fun onItemClickListener(item: Partner?) {
@@ -89,16 +90,15 @@ class BestRatedFragment : Fragment(), BestRatedContract.View,
 
     private fun initData() {
         presenter.getSuggestPartnerBestRated()
-        loadingProgress.show()
+        loadingProgress?.show()
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     fun eventBusGetTypePartner(typePartner: TypePartner) {
         if (typePartner.id != Constants.ID_PARTNER_ALL) {
+            recyclerViewPartnerBestRated.layoutManager?.scrollToPosition(0)
             presenter.getSuggestPartnerBestRated()
-            loadingProgress.show()
-        } else {
-            loadingProgress.show()
+            loadingProgress?.show()
         }
     }
 

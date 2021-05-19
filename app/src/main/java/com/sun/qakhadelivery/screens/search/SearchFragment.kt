@@ -10,10 +10,7 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
 import com.sun.qakhadelivery.data.source.remote.schema.response.PartnerResponse
-import com.sun.qakhadelivery.extensions.addFragmentBackStack
-import com.sun.qakhadelivery.extensions.back
-import com.sun.qakhadelivery.extensions.hideKeyboard
-import com.sun.qakhadelivery.extensions.makeText
+import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.partner.PartnerFragment
 import com.sun.qakhadelivery.screens.search.adapter.SearchAdapter
 import com.sun.qakhadelivery.utils.OnItemRecyclerViewClickListener
@@ -42,6 +39,14 @@ class SearchFragment : Fragment(), SearchContract.View, OnItemRecyclerViewClickL
         initViews()
         initData()
         handleEvents()
+        setupSearch()
+    }
+
+    private fun setupSearch() {
+        with(searchView) {
+            isFocusable = true
+            requestFocus()
+        }
     }
 
     override fun getPartnersSuccess(partners: MutableList<Partner>) {
@@ -77,6 +82,7 @@ class SearchFragment : Fragment(), SearchContract.View, OnItemRecyclerViewClickL
 
     private fun handleEvents() {
         imageViewBack.setOnClickListener {
+            hideKeyboard()
             back()
         }
         searchView.setOnQueryTextListener(object : OnQueryTextListener {
@@ -90,9 +96,15 @@ class SearchFragment : Fragment(), SearchContract.View, OnItemRecyclerViewClickL
                 return false
             }
         })
+        searchView.setOnQueryTextFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                showKeyboard(view.findFocus())
+            }
+        }
     }
 
     companion object {
         fun newInstance() = SearchFragment()
     }
 }
+    

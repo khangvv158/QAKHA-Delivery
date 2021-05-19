@@ -8,11 +8,15 @@ import androidx.core.content.ContextCompat
 import com.afollestad.materialdialogs.MaterialDialog
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.utils.IPositiveNegativeListener
-import com.sun.qakhadelivery.utils.LocationHelper
 
 fun Context.hideKeyboard(view: View) {
     val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun Context.showKeyboard(view: View) {
+    val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.showSoftInput(view,InputMethodManager.SHOW_IMPLICIT)
 }
 
 fun Context.showDialogWithListener(

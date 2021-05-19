@@ -63,16 +63,16 @@ class AllFragment : Fragment(),
     }
 
     override fun onSuccessGetPartners(partners: MutableList<Partner>) {
-        loadingProgress.gone()
+        loadingProgress?.gone()
         adapter.updateData(partners)
     }
 
     override fun onErrorGetPartners(exception: String) {
-        loadingProgress.gone()
+        loadingProgress?.gone()
     }
 
     override fun onSuccessGetPartnersByIdType(partners: MutableList<Partner>) {
-        loadingProgress.gone()
+        loadingProgress?.gone()
         adapter.updateData(partners)
     }
 
@@ -84,7 +84,7 @@ class AllFragment : Fragment(),
     }
 
     override fun onErrorGetPartnerById(exception: String) {
-        loadingProgress.gone()
+        loadingProgress?.gone()
     }
 
     private fun initViews() {
@@ -97,18 +97,20 @@ class AllFragment : Fragment(),
         presenter.run {
             setView(this@AllFragment)
             getPartners()
-            loadingProgress.show()
+            loadingProgress?.show()
         }
     }
 
     @Subscribe(sticky = true, threadMode = ThreadMode.MAIN)
     fun eventBusGetTypePartner(typePartner: TypePartner) {
         if (typePartner.id != Constants.ID_PARTNER_ALL) {
+            recyclerViewPartnerAll.layoutManager?.scrollToPosition(0)
             presenter.getPartnersByIdType(typePartner.id)
-            loadingProgress.show()
+            loadingProgress?.show()
         } else {
+            recyclerViewPartnerAll.layoutManager?.scrollToPosition(0)
             presenter.getPartners()
-            loadingProgress.show()
+            loadingProgress?.show()
         }
     }
 

@@ -15,13 +15,13 @@ import com.sun.qakhadelivery.data.source.remote.schema.request.LocationRequest
 import com.sun.qakhadelivery.data.source.remote.schema.response.PartnerResponse
 import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.extensions.gone
-import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.extensions.show
 import com.sun.qakhadelivery.screens.home.tabs.all.adapter.PartnerAdapter
 import com.sun.qakhadelivery.screens.partner.PartnerFragment
 import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_nearby.*
+import kotlinx.android.synthetic.main.fragment_nearby.loadingProgress
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -100,9 +100,8 @@ class NearbyFragment : Fragment(), NearbyContract.View, OnItemRecyclerViewClickL
                     currentLatLng.longitude.toFloat()
                 )
             )
-            loadingProgress.show()
-        } else {
-            loadingProgress.show()
+            recyclerViewPartnerNearby.layoutManager?.scrollToPosition(0)
+            loadingProgress?.show()
         }
     }
 
@@ -115,7 +114,8 @@ class NearbyFragment : Fragment(), NearbyContract.View, OnItemRecyclerViewClickL
                 currentLatLng.longitude.toFloat()
             )
         )
-        loadingProgress.show()
+        recyclerViewPartnerNearby.layoutManager?.scrollToPosition(0)
+        loadingProgress?.show()
     }
 
     companion object {
