@@ -9,20 +9,17 @@
             android:id="@+id/addressItemMenu"
             android:icon="@drawable/ic_address"
             android:title="@string/address" />
-    </group>
 
-    <group android:id="@+id/groupCenter">
         <item
             android:id="@+id/helpCenterItemMenu"
             android:icon="@drawable/ic_help"
             android:title="@string/help_center" />
-    </group>
 
-    <group android:id="@+id/groupApplication">
         <item
             android:id="@+id/settingsItemMenu"
             android:icon="@drawable/ic_setting"
             android:title="@string/settings" />
+
         <item
             android:id="@+id/aboutItemMenu"
             android:icon="@drawable/ic_about"

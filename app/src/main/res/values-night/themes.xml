@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorPurple_500</item>
         <item name="colorPrimaryVariant">@color/colorPurple_700</item>
@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:forceDarkAllowed">false</item>
     </style>
 
     <style name="circleImageView" parent="AppTheme">
@@ -33,5 +34,13 @@
     <style name="cornerImageView10percent" parent="AppTheme">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">5%</item>
+    </style>
+
+    <style name="circleProgress" parent="AppTheme">
+        <item name="colorAccent">@color/colorCarrotOrange</item>
+    </style>
+
+    <style name="circleDialogProgress" parent="AppTheme">
+        <item name="colorAccent">@color/colorAltoGray</item>
     </style>
 </resources>

@@ -4,5 +4,5 @@ import com.sun.qakhadelivery.data.model.TypePartner
 
 interface TypePartnerRecyclerViewOnClickListener {
 
-    fun onItemClickListener(typePartner: TypePartner)
+    fun onItemClickListener(typePartner: TypePartner, positionSelect: Int)
 }
