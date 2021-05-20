@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.appcompat.widget.SearchView
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.LanguageRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
@@ -71,6 +72,14 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                     if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
                         it.clearFocus()
                         hideKeyboard(it)
+                    }
+                }
+                if (it is SearchView.SearchAutoComplete) {
+                    val viewRect = Rect()
+                    it.getGlobalVisibleRect(viewRect)
+                    if (!viewRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
+                        hideKeyboard(it)
+                        it.clearFocus()
                     }
                 }
             }

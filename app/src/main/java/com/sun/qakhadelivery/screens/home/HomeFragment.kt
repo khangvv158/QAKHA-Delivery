@@ -84,13 +84,13 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     }
 
     override fun onItemClickListener(typePartner: TypePartner, positionSelect: Int) {
+
         typePartnerAdapter.selectTypePartner(positionSelect)
         EventBus.getDefault().post(typePartner)
     }
 
     override fun onGetTypesSuccess(types: MutableList<TypePartner>) {
         typePartnerAdapter.updateData(types)
-
     }
 
     override fun onError(message: String) {
