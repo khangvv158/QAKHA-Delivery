@@ -9,13 +9,12 @@ interface BestRatedContract {
     interface View {
 
         fun getSuggestPartnerBestRatedSuccess(partners: MutableList<Partner>)
-        fun getPartnerByIdSuccess(partnerResponse: PartnerResponse)
+
         fun onError(message: String)
     }
 
     interface Presenter : BasePresenter<View> {
 
         fun getSuggestPartnerBestRated()
-        fun getPartnerById(idPartner: Int)
     }
 }

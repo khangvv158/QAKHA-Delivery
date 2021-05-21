@@ -23,18 +23,6 @@ class NearbyPresenter(private val partnerRepository: PartnerRepository) : Nearby
         compositeDisposable.add(disposable)
     }
 
-    override fun getPartnerById(idPartner: Int) {
-        val disposable = partnerRepository.getPartnerById(idPartner)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                view?.getPartnerByIdSuccess(it)
-            }, {
-                view?.onError(it.localizedMessage)
-            })
-        compositeDisposable.add(disposable)
-    }
-
     override fun onStart() {
     }
 

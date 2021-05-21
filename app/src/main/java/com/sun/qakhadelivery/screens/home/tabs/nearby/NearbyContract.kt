@@ -10,13 +10,12 @@ interface NearbyContract {
     interface View {
 
         fun getSuggestPartnerNearbySuccess(partners: MutableList<Partner>)
-        fun getPartnerByIdSuccess(partnerResponse: PartnerResponse)
+
         fun onError(message: String)
     }
 
     interface Presenter : BasePresenter<View> {
 
         fun getSuggestPartnerNearby(locationRequest: LocationRequest)
-        fun getPartnerById(idPartner: Int)
     }
 }

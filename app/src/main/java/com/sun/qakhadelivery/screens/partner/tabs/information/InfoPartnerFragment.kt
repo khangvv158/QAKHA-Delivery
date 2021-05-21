@@ -4,18 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
-import com.sun.qakhadelivery.screens.partner.PartnerFragment.Companion.BUNDLE_PARTNER
+import com.sun.qakhadelivery.utils.BasePageFragment
 import com.sun.qakhadelivery.utils.GoogleMapHelper
 import kotlinx.android.synthetic.main.fragment_info_partner.*
 
-class InfoPartnerFragment : Fragment() {
+class InfoPartnerFragment : BasePageFragment() {
 
     private lateinit var googleMap: GoogleMap
     private val googleMapHelper by lazy {
@@ -34,12 +33,11 @@ class InfoPartnerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync {
-            setUpGoogleMap(it)
+            googleMap = it
         }
     }
 
-    private fun setUpGoogleMap(map: GoogleMap) {
-        googleMap = map
+    override fun fetchData() {
         initViews()
     }
 
@@ -60,9 +58,12 @@ class InfoPartnerFragment : Fragment() {
     }
 
     companion object {
+        private const val BUNDLE_PARTNER = "BUNDLE_PARTNER"
 
-        fun newInstance(bundle: Bundle?) = InfoPartnerFragment().apply {
-            arguments = bundle
+        fun newInstance(partner: Partner?) = InfoPartnerFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(BUNDLE_PARTNER, partner)
+            }
         }
     }
 }

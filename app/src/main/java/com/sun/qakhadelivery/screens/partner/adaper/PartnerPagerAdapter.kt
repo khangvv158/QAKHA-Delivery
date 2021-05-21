@@ -15,7 +15,7 @@ class PartnerPagerAdapter(
     private val fragments: MutableList<Fragment> = arrayListOf()
 ) : FragmentPagerAdapter(
     manager,
-    BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    BEHAVIOR_SET_USER_VISIBLE_HINT
 ) {
     override fun getCount() = fragments.size
 

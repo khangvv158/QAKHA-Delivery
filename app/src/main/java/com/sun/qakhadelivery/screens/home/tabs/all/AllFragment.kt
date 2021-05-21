@@ -5,17 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
-import com.sun.qakhadelivery.data.source.remote.schema.response.PartnerResponse
-import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.extensions.gone
 import com.sun.qakhadelivery.extensions.show
+import com.sun.qakhadelivery.screens.home.HomeFragment.Companion.BUNDLE_PARTNER
+import com.sun.qakhadelivery.screens.home.HomeFragment.Companion.REQUEST_KEY
 import com.sun.qakhadelivery.screens.home.tabs.all.adapter.PartnerAdapter
-import com.sun.qakhadelivery.screens.partner.PartnerFragment
 import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_all.*
@@ -76,17 +76,6 @@ class AllFragment : Fragment(),
         adapter.updateData(partners)
     }
 
-    override fun onSuccessGetPartnerById(partnerResponse: PartnerResponse) {
-        parentFragment?.addFragmentBackStack(
-            PartnerFragment.newInstance(partnerResponse),
-            R.id.containerView
-        )
-    }
-
-    override fun onErrorGetPartnerById(exception: String) {
-        loadingProgress?.gone()
-    }
-
     private fun initViews() {
         recyclerViewPartnerAll.adapter = adapter.apply {
             registerRecyclerViewListener(this@AllFragment)
@@ -115,13 +104,15 @@ class AllFragment : Fragment(),
     }
 
     override fun onItemClickListener(item: Partner?) {
-        if (item != null) {
-            presenter.getPartnerById(item.id)
+        item?.let {
+            parentFragmentManager.setFragmentResult(
+                REQUEST_KEY,
+                bundleOf(BUNDLE_PARTNER to item)
+            )
         }
     }
 
     companion object {
-        private const val BUNDLE_PARTNER_RESPONSE = "BUNDLE_PARTNER_RESPONSE"
 
         fun newInstance() = AllFragment()
     }

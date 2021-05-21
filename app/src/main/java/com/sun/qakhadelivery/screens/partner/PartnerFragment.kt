@@ -136,9 +136,11 @@ class PartnerFragment : Fragment(), PartnerContract.View {
         partnerViewPager.apply {
             offscreenPageLimit = OFF_SCREEN_PAGE_LIMIT
             adapter = pagerAdapter.apply {
-                addFragment(ProductPartnerFragment.newInstance(arguments))
-                addFragment(ReviewFragment.newInstance(arguments))
-                addFragment(InfoPartnerFragment.newInstance(arguments))
+                arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
+                    addFragment(ProductPartnerFragment.newInstance(it))
+                    addFragment(ReviewFragment.newInstance(it))
+                    addFragment(InfoPartnerFragment.newInstance(it))
+                }
             }
         }
     }
