@@ -4,21 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
-import com.sun.qakhadelivery.screens.home.HomeFragment.Companion.BUNDLE_PARTNER
-import com.sun.qakhadelivery.screens.partner.tabs.product.adapter.CategoriesAdapter
-import com.sun.qakhadelivery.screens.signin.SignInFragment
-import com.sun.qakhadelivery.utils.UserUtils
 import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
+import com.sun.qakhadelivery.screens.partner.tabs.product.adapter.CategoriesAdapter
 import com.sun.qakhadelivery.screens.product.ProductFragment
+import com.sun.qakhadelivery.screens.signin.SignInFragment
+import com.sun.qakhadelivery.utils.BasePageFragment
+import com.sun.qakhadelivery.utils.UserUtils
 import kotlinx.android.synthetic.main.fragment_product_order.*
 
-class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
+class ProductPartnerFragment : BasePageFragment(), ProductPartnerContract.View {
 
-    private val adapter by lazy { CategoriesAdapter() }
+    private val categoriesAdapter by lazy { CategoriesAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,8 +29,11 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        initData()
         handleEvent()
+    }
+
+    override fun fetchData() {
+        initData()
     }
 
     private fun initViews() {
@@ -39,17 +41,22 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
     }
 
     private fun initRecyclerView() {
-        categoryRecyclerView.adapter = adapter
+        categoryRecyclerView.apply {
+            adapter = categoriesAdapter.apply {
+                setHasStableIds(true)
+            }
+            setHasFixedSize(true)
+        }
     }
 
     private fun initData() {
         arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
-            adapter.updateCategory(it.categories)
+            categoriesAdapter.updateCategory(it.categories)
         }
     }
 
     private fun handleEvent() {
-        adapter.setOnClickAddToCart {
+        categoriesAdapter.setOnClickAddToCart {
             UserUtils.workWithSignIn(requireContext(), {
                 parentFragment?.setFragmentResult(KEY_REQUEST_PARTNER,
                     Bundle().apply {
@@ -62,7 +69,7 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
                 )
             })
         }
-        adapter.setOnClickItemRecyclerView {
+        categoriesAdapter.setOnClickItemRecyclerView {
             parentFragment?.addFragmentSlideAnim(
                 ProductFragment.newInstance(it),
                 R.id.containerView
@@ -71,11 +78,14 @@ class ProductPartnerFragment : Fragment(), ProductPartnerContract.View {
     }
 
     companion object {
-        const val BUNDLE_PRODUCT = "EXTRA_PRODUCT"
+        const val BUNDLE_PRODUCT = "BUNDLE_PRODUCT"
+        const val BUNDLE_PARTNER = "BUNDLE_PARTNER"
         const val KEY_REQUEST_PARTNER = "KEY_REQUEST_PARTNER"
 
-        fun newInstance(bundle: Bundle?) = ProductPartnerFragment().apply {
-            arguments = bundle
+        fun newInstance(partner: Partner?) = ProductPartnerFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(BUNDLE_PARTNER, partner)
+            }
         }
     }
 }

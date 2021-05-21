@@ -209,4 +209,7 @@
     <string name="description">Mô tả:</string>
     <string name="please_login_again">Xin vui lòng đăng nhập lại</string>
     <string name="content_activated">Tài khoản của bạn chưa được kích hoạt. Vui lòng kiểm tra email của bạn để biết mã kích hoạt</string>
+    <string name="please_check_merchants">Vui lòng kiểm tra những người bán khác</string>
+    <string name="merchant_not_available">Người bán không có sẵn</string>
+    <string name="back_to_home">Trở về Homepage</string>
 </resources>

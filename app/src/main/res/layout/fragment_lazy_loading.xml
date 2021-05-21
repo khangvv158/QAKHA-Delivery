@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:clickable="true"
+    android:focusable="true"
+    android:padding="@dimen/_10sdp"
+    tools:context=".screens.lazy_partner.LazyPartnerFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/merchantErrorTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/merchant_not_available"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/_16sdp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/pendingImageView"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="@+id/pendingImageView"
+        app:layout_constraintTop_toBottomOf="@+id/pendingImageView" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/descriptionErrorTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="@string/please_check_merchants"
+        android:textSize="@dimen/_11sdp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/merchantErrorTextView"
+        app:layout_constraintStart_toStartOf="@+id/merchantErrorTextView"
+        app:layout_constraintTop_toBottomOf="@+id/merchantErrorTextView" />
+
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/pendingImageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_delivery_pending"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="@string/back_to_home"
+        android:textAllCaps="false"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/descriptionErrorTextView"
+        app:layout_constraintStart_toStartOf="@+id/descriptionErrorTextView"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionErrorTextView" />
+
+    <ProgressBar
+        android:id="@+id/loadingProgress"
+        android:layout_width="59dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:background="@drawable/circle_shape"
+        android:elevation="@dimen/_6sdp"
+        android:theme="@style/circleProgress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

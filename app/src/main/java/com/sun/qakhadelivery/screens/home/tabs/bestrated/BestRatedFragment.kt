@@ -5,18 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
-import com.sun.qakhadelivery.data.source.remote.schema.response.PartnerResponse
-import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.extensions.gone
 import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.extensions.show
+import com.sun.qakhadelivery.screens.home.HomeFragment
 import com.sun.qakhadelivery.screens.home.tabs.all.adapter.PartnerAdapter
-import com.sun.qakhadelivery.screens.partner.PartnerFragment
 import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.utils.OnItemRecyclerViewClickListener
 import kotlinx.android.synthetic.main.fragment_best_rated.*
@@ -65,20 +64,18 @@ class BestRatedFragment : Fragment(), BestRatedContract.View,
         loadingProgress?.gone()
     }
 
-    override fun getPartnerByIdSuccess(partnerResponse: PartnerResponse) {
-        parentFragment?.addFragmentBackStack(
-            PartnerFragment.newInstance(partnerResponse),
-            R.id.containerView
-        )
-    }
-
     override fun onError(message: String) {
         makeText(message)
         loadingProgress?.gone()
     }
 
     override fun onItemClickListener(item: Partner?) {
-        item?.let { presenter.getPartnerById(it.id) }
+        item?.let {
+            parentFragmentManager.setFragmentResult(
+                HomeFragment.REQUEST_KEY,
+                bundleOf(HomeFragment.BUNDLE_PARTNER to item)
+            )
+        }
     }
 
     private fun initViews() {

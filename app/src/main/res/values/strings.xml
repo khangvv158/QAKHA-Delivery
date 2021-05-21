@@ -207,13 +207,13 @@
     <string name="rate_shop">Rate Shop and Item</string>
     <string name="rate_success">Feedback success</string>
     <string name="rate_error">Feedback error</string>
-    <string name="update_username_success">Change username success</string>
-    <string name="update_email_success">Change email successfully</string>
-    <string name="update_phone_success">Change phone number success</string>
+    <string name="update_username_success">Update name successful</string>
+    <string name="update_email_success">Update email successful</string>
+    <string name="update_phone_success">Update phone successful</string>
     <string name="change_email">Change Email</string>
     <string name="verify">Verify</string>
     <string name="coming_soon">Coming soon</string>
-    <string name="update_image_success">Change image success</string>
+    <string name="update_image_success">Update image successful</string>
     <string name="permission_denied">Permission denied</string>
     <string name="content_email_sign_in">Email is not exists. Please sign up !!</string>
     <string name="content_password_sign_in">Sign in failed</string>
@@ -226,4 +226,7 @@
     <string name="distance_currency_checkout" translatable="false">(%s Km)</string>
     <string name="show_coins" translatable="false">Coins: %s</string>
     <string name="content_activated">Your account has not been activated. Please check your email for the activation code</string>
+    <string name="please_check_merchants">Please check out other merchants</string>
+    <string name="merchant_not_available">The merchant is not available</string>
+    <string name="back_to_home">Back to Homepage</string>
 </resources>

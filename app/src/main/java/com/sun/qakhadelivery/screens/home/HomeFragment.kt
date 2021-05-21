@@ -22,10 +22,10 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.TypePartner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
-import com.sun.qakhadelivery.extensions.addFragmentFadeAnim
-import com.sun.qakhadelivery.extensions.makeText
+import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.home.adapter.QueryPartnerPageAdapter
 import com.sun.qakhadelivery.screens.home.adapter.SliderAdapter
 import com.sun.qakhadelivery.screens.home.adapter.TypePartnerAdapter
@@ -33,6 +33,7 @@ import com.sun.qakhadelivery.screens.home.adapter.TypePartnerRecyclerViewOnClick
 import com.sun.qakhadelivery.screens.home.tabs.all.AllFragment
 import com.sun.qakhadelivery.screens.home.tabs.bestrated.BestRatedFragment
 import com.sun.qakhadelivery.screens.home.tabs.nearby.NearbyFragment
+import com.sun.qakhadelivery.screens.lazy_partner.LazyPartnerFragment
 import com.sun.qakhadelivery.screens.main.MainActivity
 import com.sun.qakhadelivery.screens.search.SearchFragment
 import com.sun.qakhadelivery.utils.Constants
@@ -43,7 +44,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import org.greenrobot.eventbus.EventBus
 import java.util.*
-
 
 class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnClickListener {
 
@@ -81,6 +81,15 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
         initTypeData()
         initPagerView()
         initTabLayout()
+        handleEvent()
+    }
+
+    private fun handleEvent() {
+        childFragmentManager.setFragmentResultListener(REQUEST_KEY, this) { _, result ->
+            result.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
+                addFragmentSlideAnim(LazyPartnerFragment.newInstance(it), R.id.containerView)
+            }
+        }
     }
 
     override fun onItemClickListener(typePartner: TypePartner, positionSelect: Int) {
@@ -233,6 +242,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
         const val MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 4869
         const val BUNDLE_PARTNER = "BUNDLE_PARTNER"
         private const val OFF_SCREEN_PAGE_LIMIT = 2
+        const val REQUEST_KEY = "REQUEST_KEY"
 
         fun newInstance() = HomeFragment()
     }

@@ -34,18 +34,6 @@ class AllPresenter(private val partnerRepository: PartnerRepository) : AllContra
         compositeDisposable.add(disposable)
     }
 
-    override fun getPartnerById(id: Int) {
-        val disposable = partnerRepository.getPartnerById(id)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                view?.onSuccessGetPartnerById(it)
-            }, {
-                view?.onErrorGetPartnerById(it.message.toString())
-            })
-        compositeDisposable.add(disposable)
-    }
-
     override fun onStart() = Unit
 
     override fun onStop() {

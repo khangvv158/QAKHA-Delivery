@@ -11,8 +11,6 @@ interface AllContract {
         fun getPartners()
 
         fun getPartnersByIdType(idType: Int)
-
-        fun getPartnerById(id: Int)
     }
 
     interface View {
@@ -22,9 +20,5 @@ interface AllContract {
         fun onErrorGetPartners(exception: String)
 
         fun onSuccessGetPartnersByIdType(partners: MutableList<Partner>)
-
-        fun onSuccessGetPartnerById(partnerResponse: PartnerResponse)
-
-        fun onErrorGetPartnerById(exception: String)
     }
 }
