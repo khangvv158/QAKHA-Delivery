@@ -9,4 +9,11 @@ import kotlinx.android.parcel.Parcelize
 data class DistanceResponse(
     @SerializedName("distance") val distance: Float,
     @SerializedName("shipping_fee") val shipping_fee: Float = DEFAULT_FLOAT,
-) : Parcelable
+) : Parcelable {
+
+    fun isMaxDistance() = distance >= MAX_DISTANCE
+
+    companion object {
+        private const val MAX_DISTANCE = 20F
+    }
+}

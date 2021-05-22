@@ -151,15 +151,30 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
     }
 
     override fun onSuccessDistance(distanceResponse: DistanceResponse) {
-        priceShippingFeeTextView.text = distanceResponse.shipping_fee.toString().currencyVn()
-        distanceTextView.text = String.format(
-            getString(R.string.distance_currency_checkout),
-            distanceResponse.distance
-        )
-        arguments?.run {
-            val totalDistance = distanceResponse.shipping_fee + getFloat(BUNDLE_TOTAL)
-            setTotal(totalDistance)
-            putParcelable(BUNDLE_DISTANCE, distanceResponse)
+        if (!distanceResponse.isMaxDistance()) {
+            priceShippingFeeTextView.text = distanceResponse.shipping_fee.toString().currencyVn()
+            distanceTextView.text = String.format(
+                getString(R.string.distance_currency_checkout),
+                distanceResponse.distance
+            )
+            arguments?.run {
+                val totalDistance = distanceResponse.shipping_fee + getFloat(BUNDLE_TOTAL)
+                setTotal(totalDistance)
+                putParcelable(BUNDLE_DISTANCE, distanceResponse)
+            }
+        } else {
+            addressTextView.text = getString(R.string.choose_address)
+            arguments?.putParcelable(BUNDLE_ADDRESS, null)
+            context?.showDialogWithListener(
+                getString(R.string.notification),
+                getString(R.string.notification_more_than_distance),
+                object : IPositiveNegativeListener {
+
+                    override fun onPositive() {
+                        addFragmentBackStack(AddressFragment.newInstance(), R.id.containerView)
+                    }
+                }, getString(R.string.answer_ok), true
+            )
         }
         enableInteraction()
     }
@@ -274,8 +289,8 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         addressTextView.text = address.name
         clearVoucher()
         arguments?.run {
-            putParcelable(BUNDLE_ADDRESS, address)
             getParcelable<Partner>(BUNDLE_PARTNER)?.let {
+                putParcelable(BUNDLE_ADDRESS, address)
                 presenter.calculatorDistance(
                     DistanceRequest(
                         it.id,
