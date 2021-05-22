@@ -199,6 +199,7 @@ class CartPresenter(
 
     override fun onStop() {
         compositeDisposable.clear()
+        view = null
     }
 
     override fun setView(view: CartContract.View?) {

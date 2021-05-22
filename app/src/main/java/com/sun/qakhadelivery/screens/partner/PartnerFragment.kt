@@ -172,6 +172,10 @@ class PartnerFragment : Fragment(), PartnerContract.View {
         setFragmentResultListener(ProductPartnerFragment.KEY_REQUEST_PARTNER) { _, bundle ->
             bundle.getParcelable<Product>(ProductPartnerFragment.BUNDLE_PRODUCT)
                 ?.let { product ->
+                    if (!product.inStock()) {
+                        makeText(getString(R.string.item_out_of_stock))
+                        return@setFragmentResultListener
+                    }
                     UserUtils.workWithSignIn(requireContext(), {
                         arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
                             val products = it.categories
