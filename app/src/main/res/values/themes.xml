@@ -43,4 +43,8 @@
     <style name="circleDialogProgress" parent="AppTheme">
         <item name="colorAccent">@color/colorAltoGray</item>
     </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
 </resources>
