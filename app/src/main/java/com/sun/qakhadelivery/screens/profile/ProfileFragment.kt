@@ -76,6 +76,7 @@ class ProfileFragment : Fragment(), ProfileContract.View, View.OnClickListener {
     }
 
     override fun onSuccessUser(user: User) {
+        coinNavigateView.setDescribe(user.coin.toString())
         avatarCircleImageView.loadUrl(user.image.imageUrl)
         nameNavigateView.setDescribe(user.name)
         phoneNumberNavigateView.setDescribe(user.phoneNumber)

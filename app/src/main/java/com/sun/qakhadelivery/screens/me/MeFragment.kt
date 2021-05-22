@@ -47,6 +47,8 @@ class MeFragment : Fragment(), MeContract.View,
 
     override fun onGetUserError() {
         navigateNotSignedInFragment()
+        activity?.finish()
+        activity?.startActivity(activity?.intent)
     }
 
     private fun navigateNotSignedInFragment() {
