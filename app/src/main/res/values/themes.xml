@@ -12,7 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:forceDarkAllowed">false</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
+        <item name="android:autofilledHighlight" tools:targetApi="o">@color/colorTransparent</item>
     </style>
 
     <style name="circleImageView" parent="AppTheme">
