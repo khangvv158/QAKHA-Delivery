@@ -16,8 +16,12 @@ class VoucherViewHolder(viewGroup: ViewGroup) :
     override fun bind(item: VoucherItem) {
         with(itemView) {
             descriptionVoucherTextView.text = item.voucher.description
-            expiryDateTextView.text = item.voucher.expiryDate.toString()
-            if (!item.condition) itemView.voucherRadioButton.gone()
+            expiryDateTextView.text = item.voucher.expiryDate
+            if (!item.condition) {
+                imageView.setImageResource(R.color.colorTransparentLittleBlack)
+                voucherLayout.setBackgroundResource(R.color.colorTransparentLittleBlack)
+                voucherRadioButton.gone()
+            }
             voucherRadioButton.isChecked = item.state != ChoiceVoucherState.NORMAL
         }
     }

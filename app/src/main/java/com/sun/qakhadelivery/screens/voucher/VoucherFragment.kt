@@ -20,9 +20,7 @@ import org.greenrobot.eventbus.EventBus
 
 class VoucherFragment : Fragment() {
 
-    private val adapter: VoucherAdapter by lazy {
-        VoucherAdapter()
-    }
+    private val adapter by lazy { VoucherAdapter() }
     private var voucherCurrent: VoucherItem? = null
     private var voucherSelected: VoucherItem? = null
 
