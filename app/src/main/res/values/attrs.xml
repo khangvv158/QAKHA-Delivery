@@ -4,5 +4,6 @@
         <attr name="app_title" format="string" />
         <attr name="app_iconStart" format="reference" />
         <attr name="app_describe" format="string" />
+        <attr name="app_isEndIcon" format="boolean" />
     </declare-styleable>
 </resources>

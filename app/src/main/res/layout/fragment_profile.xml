@@ -12,6 +12,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayoutTop"
         android:layout_width="match_parent"
+        android:background="@color/colorCarrotOrange"
         android:layout_height="@dimen/_35sdp"
         android:layout_alignParentTop="true"
         android:translationZ="5dp"
@@ -99,10 +100,19 @@
         app:layout_constraintTop_toBottomOf="@+id/avatarLayout">
 
         <com.sun.qakhadelivery.widget.view.NavigateView
-            android:id="@+id/nameNavigateView"
+            android:id="@+id/coinNavigateView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
+            android:background="@color/colorWhite"
+            app:app_isEndIcon="false"
+            app:app_title="@string/coins" />
+
+        <com.sun.qakhadelivery.widget.view.NavigateView
+            android:id="@+id/nameNavigateView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_1sdp"
             android:background="@color/colorWhite"
             app:app_title="@string/username" />
 
