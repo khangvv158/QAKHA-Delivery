@@ -59,6 +59,11 @@ class CartFragment : BottomSheetDialogFragment(),
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
+
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         callbackCart?.onUpdateCart(cartAdapter.getCarts())

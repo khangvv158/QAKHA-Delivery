@@ -8,6 +8,7 @@ import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
 import com.sun.qakhadelivery.extensions.currencyVn
 import com.sun.qakhadelivery.extensions.loadUrl
+import com.sun.qakhadelivery.extensions.setOnSafeClickListener
 import com.sun.qakhadelivery.utils.Constants.DEFAULT_QUANTITY
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.CartItem
@@ -31,13 +32,13 @@ class CartViewHolder(viewGroup: ViewGroup) :
         listener: OnClickCartViewHolderListener
     ) {
         with(itemView) {
-            increaseButton.setOnClickListener {
+            increaseButton.setOnSafeClickListener {
                 cartItems[adapterPosition].cart.apply {
                     quantity += DEFAULT_QUANTITY
                     listener.increase(CartRequest(product.id, quantity, partnerId))
                 }
             }
-            decreaseButton.setOnClickListener {
+            decreaseButton.setOnSafeClickListener {
                 cartItems[adapterPosition].cart.apply {
                     if (quantity > 1) {
                         quantity -= DEFAULT_QUANTITY

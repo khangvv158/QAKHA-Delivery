@@ -229,4 +229,5 @@
     <string name="please_check_merchants">Please check out other merchants</string>
     <string name="merchant_not_available">The merchant is not available</string>
     <string name="back_to_home">Back to Homepage</string>
+    <string name="item_out_of_stock">Item is out of stock, Please choose another item</string>
 </resources>
