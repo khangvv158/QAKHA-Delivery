@@ -11,9 +11,13 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.extensions.*
-import com.sun.qakhadelivery.utils.Regex
 import com.sun.qakhadelivery.screens.signup.activated.ActivatedFragment
+import com.sun.qakhadelivery.utils.EditTextObservable
+import com.sun.qakhadelivery.utils.Regex
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import java.util.concurrent.TimeUnit
 
 class SignUpFragment : Fragment(), SignUpContract.View {
 
@@ -119,16 +123,54 @@ class SignUpFragment : Fragment(), SignUpContract.View {
     }
 
     private fun handleEventsAfterTextChanged() {
-        emailEditText.afterTextChanged {
-            if (validateEmail(it)) {
-                presenter.checkEmailIsExist(it)
+        EditTextObservable.fromView(emailEditText)
+            .debounce(1000, TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { text ->
+                validateEmail(text).also { isValid ->
+                    if (isValid) {
+                        presenter.checkEmailIsExist(text)
+                    }
+                }
             }
-        }
-        phoneNumberEditText.afterTextChanged {
-            if (validatePhoneNumber(it)) {
-                presenter.checkPhoneNumberIsExist(it)
+        EditTextObservable.fromView(phoneNumberEditText)
+            .debounce(1000, TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { text ->
+                validatePhoneNumber(text).also { isValid ->
+                    if (isValid) {
+                        presenter.checkPhoneNumberIsExist(text)
+                    }
+                }
             }
-        }
+        EditTextObservable.fromView(passwordEditText)
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { text ->
+                validatePassword(text)
+            }
+        EditTextObservable.fromView(confirmPasswordEditText)
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { text ->
+                validatePasswordConfirmation(text)
+            }
+        EditTextObservable.fromView(nameEditText)
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .distinctUntilChanged()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { text ->
+                validateUsername(text)
+            }
     }
 
     private fun handleEventsKeyBoard() {
