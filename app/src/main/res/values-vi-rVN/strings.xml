@@ -213,4 +213,5 @@
     <string name="merchant_not_available">Người bán không có sẵn</string>
     <string name="back_to_home">Trở về Homepage</string>
     <string name="item_out_of_stock">Món đã hết hàng, Vui lòng chọn món khác</string>
+    <string name="notification_more_than_distance">Địa chỉ hiện tại đã vượt quá 20km. Xin vui lòng chọn địa chỉ khác!</string>
 </resources>
