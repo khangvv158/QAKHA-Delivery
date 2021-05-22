@@ -76,6 +76,7 @@ class SignUpPresenter(private val signRepository: SignRepository) : SignUpContra
 
     override fun onStop() {
         compositeDisposable.clear()
+        view = null
     }
 
     override fun setView(view: SignUpContract.View?) {

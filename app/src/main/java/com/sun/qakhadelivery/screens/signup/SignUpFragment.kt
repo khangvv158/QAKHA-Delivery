@@ -44,6 +44,11 @@ class SignUpFragment : Fragment(), SignUpContract.View {
         handleEvents()
     }
 
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
+
     override fun onSignUpSuccess() {
         clearEditText()
         addFragmentBackStack(ActivatedFragment.newInstance(), R.id.containerView)
