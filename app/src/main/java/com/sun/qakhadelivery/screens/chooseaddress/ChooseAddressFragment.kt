@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapsInitializer
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
@@ -24,14 +26,19 @@ import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.extensions.back
 import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.utils.GoogleMapHelper
+import com.sun.qakhadelivery.utils.LocationHelper
 import kotlinx.android.synthetic.main.fragment_choose_address.*
 import java.util.*
 
 class ChooseAddressFragment : Fragment(), ChooseAddressContract.View {
 
-    private val geo: Geocoder by lazy {
-        Geocoder(requireContext(), Locale.getDefault())
-    }
+    private lateinit var geo: Geocoder
+    private lateinit var googleMap: GoogleMap
+    private lateinit var locationProviderClient: FusedLocationProviderClient
+    private var markerFlagLocation: Marker? = null
+    private var positionClickable = LatLng(0.0, 0.0)
+    private var addressUser: com.sun.qakhadelivery.data.model.Address? = null
+    private var onChooseAddressListener: OnChooseAddressListener? = null
     private val googleMapHelper by lazy {
         GoogleMapHelper()
     }
@@ -42,14 +49,6 @@ class ChooseAddressFragment : Fragment(), ChooseAddressContract.View {
                 SharedPrefsImpl.getInstance(requireContext())
             )
         )
-    }
-    private lateinit var googleMap: GoogleMap
-    private var markerFlagLocation: Marker? = null
-    private var positionClickable = LatLng(0.0, 0.0)
-    private var addressUser: com.sun.qakhadelivery.data.model.Address? = null
-    private var onChooseAddressListener: OnChooseAddressListener? = null
-    private val locationProviderClient: FusedLocationProviderClient by lazy {
-        LocationServices.getFusedLocationProviderClient(requireContext())
     }
 
     override fun onCreateView(
@@ -104,6 +103,8 @@ class ChooseAddressFragment : Fragment(), ChooseAddressContract.View {
 
     @SuppressLint("MissingPermission")
     private fun initViews() {
+        geo = Geocoder(requireContext(), Locale.getDefault())
+        locationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
         presenter.setView(this)
         arguments?.getParcelable<com.sun.qakhadelivery.data.model.Address>(BUNDLE_TYPE_CALL_API)
             .let {
@@ -119,27 +120,28 @@ class ChooseAddressFragment : Fragment(), ChooseAddressContract.View {
                             googleMap.addMarker(googleMapHelper.getNormalMarkerOptions(position))
                     }
                 }
-                if (addressUser == null) {
-                    locationProviderClient.lastLocation.addOnSuccessListener {
-                        try {
-                            positionClickable = LatLng(it.latitude, it.longitude)
-                            val addresses: List<Address> =
-                                geo.getFromLocation(it.latitude, it.longitude, 1)
-                            if (addresses.isNotEmpty()) {
-                                nameAddressEditText.setText(
-                                    addresses[0].getAddressLine(0),
-                                    TextView.BufferType.EDITABLE
-                                )
-                                animateCamera(positionClickable)
-                            } else {
-                                makeText(getString(R.string.waiting_for_location))
-                            }
-                            Log.e("location ", positionClickable.toString())
-                        } catch (e: Exception) {
+            }
+        if (addressUser == null) {
+            Handler().postDelayed({
+                locationProviderClient.lastLocation.addOnSuccessListener { location ->
+                    try {
+                        positionClickable = LatLng(location.latitude, location.longitude)
+                        val addresses: List<Address> =
+                            geo.getFromLocation(location.latitude, location.longitude, 1)
+                        if (addresses.isNotEmpty()) {
+                            nameAddressEditText.setText(
+                                addresses[0].getAddressLine(0),
+                                TextView.BufferType.EDITABLE
+                            )
+                            animateCamera(positionClickable)
+                        } else {
+                            makeText(getString(R.string.waiting_for_location))
                         }
+                    } catch (e: Exception) {
                     }
                 }
-            }
+            },2200)
+        }
     }
 
     private fun handleEvents() {
@@ -190,7 +192,7 @@ class ChooseAddressFragment : Fragment(), ChooseAddressContract.View {
 
     private fun animateCamera(latLng: LatLng) {
         val cameraUpdate = googleMapHelper.buildCameraUpdate(latLng)
-        googleMap.animateCamera(cameraUpdate, 10, null)
+        googleMap.animateCamera(cameraUpdate)
     }
 
     companion object {

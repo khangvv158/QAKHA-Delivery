@@ -156,7 +156,7 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
                 }
             },
             getString(R.string.turn_on),
-            false
+            true
         )
     }
 
