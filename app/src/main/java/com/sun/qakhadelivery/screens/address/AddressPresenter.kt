@@ -27,7 +27,7 @@ class AddressPresenter(
     }
 
     override fun deleteAddress(idAddress: Int) {
-        val disposable = addressRepository.deleteAddress(idAddress,tokenRepository.getToken())
+        val disposable = addressRepository.deleteAddress(idAddress, tokenRepository.getToken())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -42,6 +42,7 @@ class AddressPresenter(
 
     override fun onStop() {
         compositeDisposable.clear()
+        view = null
     }
 
     override fun setView(view: AddressContract.View?) {
