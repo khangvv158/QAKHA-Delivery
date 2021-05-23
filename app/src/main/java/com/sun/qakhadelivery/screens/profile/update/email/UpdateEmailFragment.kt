@@ -1,6 +1,6 @@
 package com.sun.qakhadelivery.screens.profile.update.email
 
-import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -73,15 +73,19 @@ class UpdateEmailFragment : Fragment(), UpdateEmailContract.View {
         emailEditText.disable()
         verifyTextInputLayout.show()
         verifyButton.show()
+        sendCodeButton.backgroundTintList =
+            ColorStateList.valueOf(resources.getColor(R.color.colorGrayBombay))
         countDownTimer = object : CountDownTimer(45000, 1000) {
 
-            @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
-                sendCodeButton?.text = getString(R.string.send) + " (${millisUntilFinished / 1000})"
+                sendCodeButton?.text =
+                    String.format(getString(R.string.send_counter), millisUntilFinished / 1000)
             }
 
             override fun onFinish() {
                 sendCodeButton?.text = getString(R.string.send)
+                sendCodeButton.backgroundTintList =
+                    ColorStateList.valueOf(resources.getColor(R.color.colorRedPomegranate))
                 sendCodeButton?.enable()
             }
         }.start()
@@ -111,6 +115,9 @@ class UpdateEmailFragment : Fragment(), UpdateEmailContract.View {
     }
 
     private fun handleEvents() {
+        imageViewBack.setOnSafeClickListener {
+            parentFragmentManager.popBackStack()
+        }
         EditTextObservable.fromView(emailEditText)
             .debounce(500, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()

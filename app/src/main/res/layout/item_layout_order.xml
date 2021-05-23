@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_120sdp"
     android:layout_marginStart="@dimen/_8sdp"
     android:layout_marginTop="@dimen/_5sdp"
-    android:layout_marginBottom="@dimen/_5sdp"
     android:layout_marginEnd="@dimen/_8sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
     android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="@dimen/_5sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:padding="@dimen/_8sdp"
         android:layout_height="match_parent">
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -19,26 +21,22 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/delivery_illustration"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textViewStatus"
             app:layout_constraintDimensionRatio="85:97"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.031"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.508"
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView14"
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView14"
             app:layout_constraintWidth_percent="0.2"
             app:shapeAppearanceOverlay="@style/cornerImageView10percent" />
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/shapeableImageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="@dimen/_4sdp"
             android:background="@drawable/ic_next"
             app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView10"
             app:layout_constraintDimensionRatio="8:14"
-            app:layout_constraintStart_toEndOf="@+id/appCompatTextView10"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/appCompatTextView10"
-            app:layout_constraintVertical_bias="1.0"
             app:layout_constraintWidth_percent="0.015"
             app:shapeAppearanceOverlay="@style/cornerImageView10percent" />
 
@@ -48,27 +46,25 @@
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/_16sdp"
             android:ellipsize="end"
-            android:textSize="@dimen/_10sdp"
             android:fontFamily="@font/sf_compact_display_medium"
             android:maxLines="1"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/_10sdp"
             app:layout_constraintDimensionRatio="234:24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageViewShipping"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.242"
+            app:layout_constraintTop_toTopOf="@+id/imageViewShipping"
             app:layout_constraintWidth_percent="0.55" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewAddressPartner"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
             android:ellipsize="end"
             android:fontFamily="@font/sf_compact_display_medium"
             android:gravity="start|end"
-            android:layout_marginTop="@dimen/_5sdp"
             android:maxLines="2"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/_9sdp"
             app:layout_constraintStart_toStartOf="@+id/namePartnerHighTextView"
             app:layout_constraintTop_toBottomOf="@+id/namePartnerHighTextView"
@@ -81,10 +77,9 @@
             android:layout_marginStart="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_5sdp"
             android:gravity="start|end"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintDimensionRatio="60:12"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/imageViewShipping"
             app:layout_constraintTop_toBottomOf="@+id/textViewAddressPartner"
             app:layout_constraintWidth_percent="0.25" />
@@ -95,13 +90,10 @@
             android:layout_height="wrap_content"
             android:gravity="start|end"
             android:text="@string/title_food"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.028"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.045"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewIdOrder"
@@ -109,44 +101,32 @@
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/_8sdp"
             android:gravity="start|end"
-            android:textColor="@color/colorGrayChateau"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView14"
-            app:layout_constraintDimensionRatio="100:16"
             app:layout_constraintStart_toEndOf="@+id/appCompatTextView14"
-            app:layout_constraintTop_toTopOf="@+id/appCompatTextView14"
-            app:layout_constraintWidth_percent="0.34" />
+            app:layout_constraintTop_toTopOf="@+id/appCompatTextView14" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/appCompatTextView10"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="start|end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:gravity="center"
             android:text="@string/detail"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="54:15"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.907"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.96"
-            app:layout_constraintWidth_percent="0.14" />
+            app:layout_constraintBottom_toBottomOf="@+id/textViewStatus"
+            app:layout_constraintEnd_toStartOf="@+id/shapeableImageView"
+            app:layout_constraintTop_toTopOf="@+id/textViewStatus" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewStatus"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:textColor="@color/textPrimary"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="70:15"
-            app:layout_constraintEnd_toEndOf="@+id/imageViewShipping"
-            app:layout_constraintHorizontal_bias="0.029"
-            app:layout_constraintStart_toStartOf="@+id/imageViewShipping"
-            app:layout_constraintTop_toBottomOf="@+id/imageViewShipping"
-            app:layout_constraintVertical_bias="0.948"
-            android:layout_marginBottom="@dimen/_5sdp"
-            app:layout_constraintWidth_percent="0.2" />
+            app:layout_constraintStart_toStartOf="@+id/imageViewShipping" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -9,56 +9,49 @@
     android:focusable="true"
     tools:context=".screens.feedback.driver.DriverFeedbackFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appBarLayoutTop"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_46sdp"
+        android:layout_height="@dimen/_35sdp"
         android:layout_alignParentTop="true"
         android:background="@color/colorCarrotOrange"
-        android:translationZ="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewBack"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:background="@drawable/ic_back"
+            app:backgroundTint="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.457"
+            app:layout_constraintWidth_percent="0.07" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageViewBack"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@drawable/ic_back"
-                app:backgroundTint="@color/colorWhite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="1:1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.041"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.457"
-                app:layout_constraintWidth_percent="0.09" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:fontFamily="@font/sf_compact_display_medium"
-                android:gravity="center"
-                android:text="@string/rate_driver"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_14sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="150:30"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.7"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/sf_compact_display_medium"
+            android:gravity="center"
+            android:text="@string/rate_driver"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
         android:background="@color/colorWhite"
         android:padding="@dimen/_8sdp"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,6 +99,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_margin="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@color/colorWhite"
         app:layout_constraintHeight_percent="0.24"
@@ -121,11 +115,11 @@
             android:gravity="top|start"
             android:hint="@string/share_feedback"
             android:imeOptions="actionDone"
-            android:inputType="text|textNoSuggestions"
+            android:inputType="textMultiLine|textNoSuggestions"
             android:maxLength="500"
             android:padding="@dimen/_5sdp"
             android:scrollHorizontally="false"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_14sdp"
             app:layout_constraintHeight_percent="0.85"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -157,7 +151,7 @@
         android:background="@color/colorWhite"
         android:padding="@dimen/_5sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintHeight_percent="0.08"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.button.MaterialButton
@@ -168,9 +162,9 @@
             android:enabled="false"
             android:text="@string/send"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/_11sdp"
+            android:textSize="@dimen/_14sdp"
             app:backgroundTint="@color/colorAltoGray"
-            app:cornerRadius="@dimen/_8sdp"
+            app:cornerRadius="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

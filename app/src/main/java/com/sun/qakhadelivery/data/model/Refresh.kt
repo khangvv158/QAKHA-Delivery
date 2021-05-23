@@ -1,8 +1,11 @@
 package com.sun.qakhadelivery.data.model
 
+import android.os.Bundle
+
 data class Refresh(
     val from: Class<*>,
-    val to: Class<*>
+    val to: Class<*>,
+    var data: Bundle? = null
 ) {
 
     fun message(to: Class<*>, result: (Refresh) -> Unit) {

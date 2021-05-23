@@ -7,49 +7,43 @@
     android:background="@color/colorWhileSmoke"
     tools:context=".screens.orderdetail.OrderDetailFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appBarLayoutTop"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_35sdp"
         android:layout_alignParentTop="true"
-        android:background="@color/colorCarrotOrange"
-        android:translationZ="5dp">
+        android:background="@color/colorCarrotOrange">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewBack"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/ic_back"
+            app:backgroundTint="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="24:24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.041"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.457"
+            app:layout_constraintWidth_percent="0.06" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imageViewBack"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@drawable/ic_back"
-                app:backgroundTint="@color/colorWhite"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="24:24"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.041"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.457"
-                app:layout_constraintWidth_percent="0.06" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:fontFamily="@font/sf_compact_display_bold"
-                android:gravity="center"
-                android:text="@string/order_detail"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_12sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="150:30"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.7"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.appbar.AppBarLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fontFamily="@font/sf_compact_display_medium"
+            android:gravity="center"
+            android:text="@string/order_detail"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="150:30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.7"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -68,8 +62,10 @@
                 android:id="@+id/receiverLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
                 android:background="@color/colorWhite"
                 android:padding="@dimen/_8sdp"
+                android:textColor="@color/textPrimary"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -80,11 +76,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_14sdp"
                     android:fontFamily="@font/sf_compact_display_medium"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView25"
                     app:layout_constraintStart_toEndOf="@+id/appCompatTextView25"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView25"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView25"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView25"
@@ -92,6 +88,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:text="@string/food"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -102,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/sf_compact_display_regular"
-                    android:textColor="@color/colorDustyGray"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView25"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView25" />
@@ -113,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:fontFamily="@font/sf_compact_display_regular"
-                    android:textColor="@color/colorDustyGray"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintStart_toStartOf="@+id/totalTextView"
                     app:layout_constraintTop_toBottomOf="@+id/totalTextView" />
@@ -124,31 +121,30 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:fontFamily="@font/sf_compact_display_regular"
-                    android:textColor="@color/colorDustyGray"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/usernameTextView"
                     app:layout_constraintStart_toEndOf="@+id/usernameTextView"
-                    app:layout_constraintTop_toTopOf="@+id/usernameTextView"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="@+id/usernameTextView" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/paymentTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
                     android:fontFamily="@font/sf_compact_display_regular"
-                    android:textColor="@color/colorDustyGray"
-                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/totalTextView"
                     app:layout_constraintStart_toEndOf="@+id/totalTextView"
-                    app:layout_constraintTop_toTopOf="@+id/totalTextView"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="@+id/totalTextView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/addressLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
                 android:background="@color/colorWhite"
                 android:padding="@dimen/_8sdp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -161,6 +157,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:text="@string/deliver_to"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -173,7 +170,7 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_compact_display_regular"
                     android:maxLines="2"
-                    android:textColor="@color/colorDustyGray"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView33"
@@ -187,7 +184,7 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_compact_display_regular"
                     android:maxLines="1"
-                    android:textColor="@color/colorDustyGray"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/statusLabelTextView"
                     app:layout_constraintStart_toEndOf="@+id/statusLabelTextView"
@@ -202,7 +199,7 @@
                     android:fontFamily="@font/sf_compact_display_regular"
                     android:maxLines="1"
                     android:text="@string/status"
-                    android:textColor="@color/colorDustyGray"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintStart_toStartOf="@+id/addressTextView"
                     app:layout_constraintTop_toBottomOf="@+id/addressTextView" />
@@ -213,17 +210,17 @@
                 android:id="@+id/constraintLayoutInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_margin="@dimen/_5sdp"
                 android:background="@color/colorWhite"
+                android:padding="@dimen/_8sdp"
                 app:layout_constraintTop_toBottomOf="@+id/addressLayout">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/namePartnerHighTextView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:fontFamily="@font/sf_compact_display_medium"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
@@ -233,14 +230,12 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewBucket"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:minHeight="@dimen/_150sdp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_5sdp"
                     android:nestedScrollingEnabled="false"
-                    android:paddingBottom="@dimen/_8sdp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/namePartnerHighTextView"
                     app:layout_constraintTop_toBottomOf="@+id/namePartnerHighTextView" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -248,7 +243,7 @@
                 android:id="@+id/constraintLayoutPayment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_1sdp"
+                android:layout_margin="@dimen/_5sdp"
                 android:background="@color/colorWhite"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -258,9 +253,10 @@
                     android:id="@+id/appCompatTextView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_8sdp"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:text="@string/payment"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_14sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -278,6 +274,7 @@
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:maxLines="1"
                     android:text="@string/subtotal"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView12"
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView12" />
@@ -291,6 +288,7 @@
                     android:fontFamily="@font/sf_compact_display_regular"
                     android:maxLines="1"
                     android:text="@string/shipping_fee"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintStart_toStartOf="@+id/textViewTileSubtotal"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTileSubtotal" />
@@ -302,7 +300,8 @@
                     android:layout_marginStart="@dimen/_5sdp"
                     android:fontFamily="@font/sf_compact_display_regular"
                     android:maxLines="1"
-                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/textViewTitleShippingFee"
                     app:layout_constraintStart_toEndOf="@+id/textViewTitleShippingFee"
                     app:layout_constraintTop_toTopOf="@+id/textViewTitleShippingFee" />
@@ -316,16 +315,17 @@
                     android:fontFamily="@font/sf_compact_display_regular"
                     android:maxLines="1"
                     android:text="@string/discount"
-                    android:textSize="@dimen/_10sdp"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_11sdp"
                     app:layout_constraintStart_toStartOf="@+id/textViewTitleShippingFee"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTitleShippingFee" />
-
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/priceTotalTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/sf_compact_display_medium"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/totalPriceTextView"
                     app:layout_constraintEnd_toEndOf="@+id/priceDiscountTextView"
@@ -335,14 +335,13 @@
                     android:id="@+id/totalPriceTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_80sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:text="@string/total"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_14sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/priceTotalTextView"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleDiscount"
-                    app:layout_constraintVertical_bias="0.333" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewTitleDiscount" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/priceSubtotaTtextView"
@@ -351,6 +350,7 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:maxLines="1"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/textViewTileSubtotal"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -366,6 +366,7 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:maxLines="1"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/distanceTextView"
                     app:layout_constraintEnd_toEndOf="@+id/priceSubtotaTtextView"
@@ -379,97 +380,30 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/sf_compact_display_medium"
                     android:maxLines="1"
+                    android:textColor="@color/textPrimary"
                     android:textSize="@dimen/_10sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/textViewTitleDiscount"
                     app:layout_constraintEnd_toEndOf="@+id/shippingFeeTextView"
-                    app:layout_constraintTop_toTopOf="@+id/textViewTitleDiscount"
-                    app:layout_constraintVertical_bias="0.0" />
+                    app:layout_constraintTop_toTopOf="@+id/textViewTitleDiscount" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/detailsLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_1sdp"
-                android:background="@color/colorWhite"
-                android:padding="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutPayment">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_compact_display_medium"
-                    android:text="@string/order_detail"
-                    android:textSize="@dimen/_14sdp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/nameDriverTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_compact_display_regular"
-                    android:textColor="@color/colorDustyGray"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView16"
-                    app:layout_constraintEnd_toEndOf="@+id/orderIdTextView"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView16"
-                    app:layout_constraintVertical_bias="1.0" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/orderIdTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/sf_compact_display_regular"
-                    android:textColor="@color/colorDustyGray"
-                    app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView20"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonFeedback"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:text="@string/feedback"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/_13sdp"
+                    app:backgroundTint="@color/colorCarrotOrange"
+                    app:cornerRadius="@dimen/_5sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="200:33"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView20"
-                    app:layout_constraintVertical_bias="0.0" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView20"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:fontFamily="@font/sf_compact_display_regular"
-                    android:text="@string/order_id"
-                    android:textColor="@color/colorDustyGray"
-                    android:textSize="@dimen/_10sdp"
-                    app:layout_constraintStart_toStartOf="@+id/appCompatTextView13"
-                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView13" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/appCompatTextView16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:fontFamily="@font/sf_compact_display_regular"
-                    android:text="@string/driver"
-                    android:textColor="@color/colorDustyGray"
-                    app:layout_constraintStart_toStartOf="@+id/appCompatTextView20"
-                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView20" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/totalPriceTextView"
+                    app:layout_constraintWidth_percent="0.7" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/buttonFeedback"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:text="@string/feedback"
-                android:textColor="@color/colorWhite"
-                android:textSize="@dimen/_10sdp"
-                app:backgroundTint="@color/colorCarrotOrange"
-                app:cornerRadius="@dimen/_10sdp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintDimensionRatio="200:33"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailsLayout"
-                app:layout_constraintVertical_bias="0.065"
-                app:layout_constraintWidth_percent="0.7" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </RelativeLayout>

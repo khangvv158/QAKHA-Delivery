@@ -11,9 +11,9 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.SearchView
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.LanguageRepositoryImpl
@@ -66,20 +66,12 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {
             currentFocus?.let {
-                if (it is AppCompatEditText) {
+                if (it is EditText || it is SearchView.SearchAutoComplete) {
                     val outRect = Rect()
                     it.getGlobalVisibleRect(outRect)
                     if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
                         it.clearFocus()
                         hideKeyboard(it)
-                    }
-                }
-                if (it is SearchView.SearchAutoComplete) {
-                    val viewRect = Rect()
-                    it.getGlobalVisibleRect(viewRect)
-                    if (!viewRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
-                        hideKeyboard(it)
-                        it.clearFocus()
                     }
                 }
             }

@@ -187,7 +187,7 @@
     <string name="current_password">Mật khẩu hiện tại</string>
     <string name="change_password_successfully">Thay đổi mật khẩu thành công</string>
     <string name="current_password_dont_match">Mật khẩu hiện tại không chính xác</string>
-    <string name="share_feedback">Chia sẻ đánh già của bạn</string>
+    <string name="share_feedback">Chia sẻ đánh giá của bạn</string>
     <string name="rate_driver">Đánh giá Tài xế</string>
     <string name="send">Gửi</string>
     <string name="rate_shop">Đánh giá Quán và Món</string>
@@ -213,5 +213,9 @@
     <string name="merchant_not_available">Người bán không có sẵn</string>
     <string name="back_to_home">Trở về Homepage</string>
     <string name="item_out_of_stock">Món đã hết hàng, Vui lòng chọn món khác</string>
-    <string name="notification_more_than_distance">Địa chỉ hiện tại đã vượt quá 20km. Xin vui lòng chọn địa chỉ khác!</string>
+    <string name="notification_more_than_distance">Địa chỉ hiện tại đã vượt quá 15km. Xin vui lòng chọn địa chỉ khác!</string>
+    <string name="enter_your_address">Nhập địa chỉ của bạn</string>
+    <string name="usage_limit">Lượt sử dụng:</string>
+    <string name="finding">Tìm kiếm</string>
+    <string name="send_counter">Gửi (%s)</string>
 </resources>

@@ -20,6 +20,7 @@ import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
 import com.sun.qakhadelivery.extensions.makeText
+import com.sun.qakhadelivery.extensions.setOnSafeNavigationItemSelectedListener
 import com.sun.qakhadelivery.extensions.showDialogWithListener
 import com.sun.qakhadelivery.screens.address.adapter.AddressAdapter
 import com.sun.qakhadelivery.screens.address.adapter.AddressAdapterOnClickListener
@@ -123,7 +124,7 @@ class AddressFragment : Fragment(), AddressAdapterOnClickListener, AddressContra
         imageViewBack.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
-        navAddress.setNavigationItemSelectedListener {
+        navAddress.setOnSafeNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.item_menu_nav_address -> navigateChooseAddress(null)
             }
