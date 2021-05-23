@@ -11,9 +11,9 @@ data class DistanceResponse(
     @SerializedName("shipping_fee") val shipping_fee: Float = DEFAULT_FLOAT,
 ) : Parcelable {
 
-    fun isMaxDistance() = distance >= MAX_DISTANCE
+    fun isMaxDistance() = distance > MAX_DISTANCE
 
     companion object {
-        private const val MAX_DISTANCE = 20F
+        private const val MAX_DISTANCE = 15F
     }
 }

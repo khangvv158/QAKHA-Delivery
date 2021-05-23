@@ -251,12 +251,12 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
             addressTextView.text = orderResponse.order.address
             userNameTextView.text = orderResponse.order.name
             phoneNumberTextView.text = orderResponse.order.phone_number
-            textViewNamePartner.text = orderResponse.partner.name
-            textViewPriceSubtotal.text = orderResponse.order.subtotal.toString().currencyVn()
-            textViewPriceShippingFee.text = orderResponse.order.shipping_fee.toString().currencyVn()
-            textViewPriceDiscount.text =
+            namePartnerHighTextView.text = orderResponse.partner.name
+            priceSubtotaTtextView.text = orderResponse.order.subtotal.toString().currencyVn()
+            shippingFeeTextView.text = orderResponse.order.shipping_fee.toString().currencyVn()
+            priceDiscountTextView.text =
                 orderResponse.order.discount.toString().discountCurrencyVn()
-            textViewPriceTotal.text = orderResponse.order.total.toString().currencyVn()
+            priceDiscountTextView.text = orderResponse.order.total.toString().currencyVn()
             recyclerViewBucket.apply {
                 adapter = orderAdapter
                 orderAdapter.updateOrderDetails(orderResponse.order_details)
@@ -307,7 +307,7 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
         const val CHANNEL_ORDER_ID = "CHANNEL_ORDER_ID"
         const val BUNDLE_ORDER_RESPONSE = "BUNDLE_ORDER_RESPONSE"
 
-        fun newInstance(bundle: Bundle) = ShippingDetailFragment().apply {
+        fun newInstance(bundle: Bundle?) = ShippingDetailFragment().apply {
             arguments = bundle
         }
     }

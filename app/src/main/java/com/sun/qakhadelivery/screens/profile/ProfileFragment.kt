@@ -93,7 +93,9 @@ class ProfileFragment : Fragment(), ProfileContract.View, View.OnClickListener {
 
     override fun onSuccessUpdateImage(user: User) {
         avatarCircleImageView.loadAvatarUrl(user.image.imageUrl)
-        EventBus.getDefault().post(Refresh(this::class.java, SignedInFragment::class.java))
+        EventBus.getDefault().post(Refresh(this::class.java, SignedInFragment::class.java).apply {
+            data = Bundle().apply { putString(DATA_AVATAR, user.image.imageUrl) }
+        })
         enableInteraction()
         makeText(getString(R.string.update_image_success))
     }
@@ -238,6 +240,7 @@ class ProfileFragment : Fragment(), ProfileContract.View, View.OnClickListener {
     }
 
     companion object {
+        const val DATA_AVATAR = "AVATAR"
         private const val BUNDLE_USER = "BUNDLE_USER"
         private const val PERMISSION_CODE = 1
         private const val PICK_IMAGE = 1

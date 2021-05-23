@@ -17,6 +17,7 @@ class VoucherViewHolder(viewGroup: ViewGroup) :
         with(itemView) {
             descriptionVoucherTextView.text = item.voucher.description
             expiryDateTextView.text = item.voucher.expiryDate
+            limitVoucherTextView.text = item.voucher.usageLimit.toString()
             if (!item.condition) {
                 imageView.setImageResource(R.color.colorTransparentLittleBlack)
                 voucherLayout.setBackgroundResource(R.color.colorTransparentLittleBlack)

@@ -111,7 +111,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
 
     override fun onSuccessApplyVoucher(applyVoucherResponse: ApplyVoucherResponse) {
         voucherEditText.setText(applyVoucherResponse.voucher.code)
-        textViewPriceDiscount.text = applyVoucherResponse.voucher
+        priceDiscountTextView.text = applyVoucherResponse.voucher
             .discount.toString().discountCurrencyVn()
         arguments?.getParcelable<DistanceResponse>(BUNDLE_DISTANCE)?.run {
             setTotal(shipping_fee + applyVoucherResponse.totalAfterDiscount)
@@ -128,7 +128,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
     }
 
     override fun onUpdateTotalPrice(total: Float) {
-        textViewPriceSubtotal.text = total.toString().currencyVn()
+        priceSubTotalTextView.text = total.toString().currencyVn()
         setTotal(total)
         arguments?.putFloat(BUNDLE_TOTAL, total)
     }
@@ -152,7 +152,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
 
     override fun onSuccessDistance(distanceResponse: DistanceResponse) {
         if (!distanceResponse.isMaxDistance()) {
-            priceShippingFeeTextView.text = distanceResponse.shipping_fee.toString().currencyVn()
+            shippingFeeTextView.text = distanceResponse.shipping_fee.toString().currencyVn()
             distanceTextView.text = String.format(
                 getString(R.string.distance_currency_checkout),
                 distanceResponse.distance
@@ -306,7 +306,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
     private fun clearVoucher() {
         arguments?.run {
             voucherEditText.text?.clear()
-            textViewPriceDiscount.text = DEFAULT_STRING
+            priceDiscountTextView.text = DEFAULT_STRING
             putParcelable(BUNDLE_VOUCHER, null)
         }
     }
@@ -319,7 +319,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
         arguments?.run {
             putParcelable(BUNDLE_VOUCHER, null)
             getParcelable<Partner>(BUNDLE_PARTNER)?.let { partner ->
-                textViewNamePartner.text = partner.name
+                namePartnerHighTextView.text = partner.name
                 presenter.run {
                     setView(this@CheckoutFragment)
                     getCart(partner.id, partner.getProducts())
@@ -447,7 +447,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
 
     private fun setTotal(total: Float) {
         totalPlaceOrderTextView.text = total.toString().currencyVn()
-        textViewPriceTotal.text = total.toString().currencyVn()
+        priceTotalTextView.text = total.toString().currencyVn()
     }
 
     companion object {

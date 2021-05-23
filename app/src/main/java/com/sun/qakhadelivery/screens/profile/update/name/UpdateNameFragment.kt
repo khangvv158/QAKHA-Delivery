@@ -78,6 +78,9 @@ class UpdateNameFragment : Fragment(), UpdateNameContract.View {
     }
 
     private fun handleEvent() {
+        imageViewBack.setOnSafeClickListener {
+            parentFragmentManager.popBackStack()
+        }
         EditTextObservable.fromView(nameEditText)
             .debounce(500, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()

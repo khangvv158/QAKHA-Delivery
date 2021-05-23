@@ -53,7 +53,6 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
                 setView(this@OrderDetailFragment)
                 getOrderDetail(it.id)
             }
-            nameDriverTextView.text = it.driver.name
             namePartnerTextView.text = it.partner.name
             namePartnerHighTextView.text = it.partner.name
             presenter.checkDriverFeedback(it.id)
@@ -73,7 +72,6 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
             phoneNumberTextView.text = order.phone_number
             addressTextView.text = order.address
             statusOrderTextView.text = order.status
-            orderIdTextView.text = order.id.toString()
             priceSubtotaTtextView.text = order.subtotal.toString().currencyVn()
             shippingFeeTextView.text = order.shipping_fee.toString().currencyVn()
             priceDiscountTextView.text = order.discount.toString().discountCurrencyVn()

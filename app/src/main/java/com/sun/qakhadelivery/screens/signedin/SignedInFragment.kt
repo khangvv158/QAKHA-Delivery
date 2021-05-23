@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Refresh
@@ -20,6 +19,7 @@ import com.sun.qakhadelivery.screens.navigate.about.AboutFragment
 import com.sun.qakhadelivery.screens.navigate.helpcenter.HelpCenterFragment
 import com.sun.qakhadelivery.screens.navigate.setting.SettingFragment
 import com.sun.qakhadelivery.screens.profile.ProfileFragment
+import com.sun.qakhadelivery.screens.profile.ProfileFragment.Companion.DATA_AVATAR
 import kotlinx.android.synthetic.main.fragment_signed_in.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -83,7 +83,9 @@ class SignedInFragment : Fragment(), SignedInContract.View {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onRefresh(refresh: Refresh) {
         refresh.message(ProfileFragment::class.java, this::class.java) {
-            presenter.getUser()
+            it.data?.getString(DATA_AVATAR)?.let { url ->
+                imageViewAvatar.loadAvatarUrl(url)
+            }
         }
     }
 

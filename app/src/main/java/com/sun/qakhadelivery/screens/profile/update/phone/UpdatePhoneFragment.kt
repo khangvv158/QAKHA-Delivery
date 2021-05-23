@@ -76,6 +76,9 @@ class UpdatePhoneFragment : Fragment(), UpdatePhoneContract.View {
     }
 
     private fun handleEvents() {
+        imageViewBack.setOnSafeClickListener {
+            parentFragmentManager.popBackStack()
+        }
         EditTextObservable.fromView(phoneNumberEditText)
             .debounce(500, TimeUnit.MILLISECONDS)
             .distinctUntilChanged()

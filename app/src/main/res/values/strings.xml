@@ -120,7 +120,7 @@
     <string name="new_password">New password</string>
     <string name="new_password_confirm">New password confirm</string>
     <string name="to_payment">To Pay</string>
-    <string name="add_voucher">Add Voucher</string>
+    <string name="add_voucher">Using voucher</string>
     <string name="coins" translatable="false">Coins</string>
     <string name="cash">Cash</string>
     <string name="verification_code">Verification code</string>
@@ -142,7 +142,7 @@
     <string name="subtotal">Subtotal</string>
     <string name="total">Total</string>
     <string name="vnd">đ</string>
-    <string name="feedback">feedback</string>
+    <string name="feedback">Feedback</string>
     <string name="enable_gps_service">Enable GPS SERVICE</string>
     <string name="content_location">This app wants to change your device settings use GPS,Wi-Fi and cell networks for your location</string>
     <string name="turn_on">Turn On</string>
@@ -202,7 +202,7 @@
     <string name="share_feedback">Sharing your feedback</string>
     <string name="rate_driver">Feedback Driver</string>
     <string name="send">Send</string>
-    <string name="default_text_feedback" translatable="false">/500</string>
+    <string name="default_text_feedback" translatable="false">/300</string>
     <string name="zero" translatable="false">0</string>
     <string name="rate_shop">Rate Shop and Item</string>
     <string name="rate_success">Feedback success</string>
@@ -230,5 +230,10 @@
     <string name="merchant_not_available">The merchant is not available</string>
     <string name="back_to_home">Back to Homepage</string>
     <string name="item_out_of_stock">Item is out of stock, Please choose another item</string>
-    <string name="notification_more_than_distance">Currently the address is over 20km. Please choose another address !</string>
+    <string name="notification_more_than_distance">Currently the address is over 15km. Please choose another address !</string>
+    <string name="operator_quantity" translatable="false">x</string>
+    <string name="enter_your_address">Enter your address</string>
+    <string name="usage_limit">Usage limit:</string>
+    <string name="finding">Finding</string>
+    <string name="send_counter">Send (%s)</string>
 </resources>

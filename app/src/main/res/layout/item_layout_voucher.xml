@@ -32,10 +32,36 @@
             android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/sf_compact_display_regular"
             android:maxLines="2"
-            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/_11sdp"
+            app:layout_constraintBottom_toTopOf="@+id/appCompatTextView13"
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.54" />
+            app:layout_constraintWidth_percent="0.6" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/appCompatTextView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_2sdp"
+            android:fontFamily="@font/sf_compact_display_regular"
+            android:maxLines="2"
+            android:text="@string/usage_limit"
+            android:textSize="@dimen/_11sdp"
+            app:layout_constraintBottom_toTopOf="@+id/expiryLabelTextView"
+            app:layout_constraintStart_toStartOf="@+id/descriptionVoucherTextView" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/limitVoucherTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:fontFamily="@font/sf_compact_display_regular"
+            android:maxLines="2"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView13"
+            app:layout_constraintStart_toEndOf="@+id/appCompatTextView13"
+            app:layout_constraintTop_toTopOf="@+id/appCompatTextView13" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/expiryLabelTextView"
@@ -45,7 +71,7 @@
             android:text="@string/hsd"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/descriptionVoucherTextView" />
+            app:layout_constraintStart_toStartOf="@+id/appCompatTextView13" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/expiryDateTextView"

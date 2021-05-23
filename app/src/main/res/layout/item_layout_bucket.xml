@@ -3,64 +3,55 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_5sdp"
-    android:foreground="?attr/selectableItemBackground">
+    android:paddingVertical="@dimen/_5sdp">
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/imageViewProduct"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/_65sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="58:44"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_constraintWidth_percent="0.2"
-        app:shapeAppearanceOverlay="@style/cornerImageView10percent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewTitleBonus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="x"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:text="@string/operator_quantity"
+        android:textColor="@color/textPrimary"
         android:textSize="@dimen/_10sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.022"
         app:layout_constraintStart_toEndOf="@+id/imageViewProduct"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.09" />
+        app:layout_constraintTop_toTopOf="@+id/imageViewProduct" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewQuantityProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_3sdp"
+        android:textColor="@color/textPrimary"
         android:textSize="@dimen/_10sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTitleBonus"
         app:layout_constraintStart_toEndOf="@+id/textViewTitleBonus"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewTitleBonus"
         app:layout_constraintVertical_bias="0.095" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewNameProduct"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:layout_marginRight="@dimen/_5sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:ellipsize="end"
         android:maxLines="1"
+        android:textColor="@color/textPrimary"
         android:textSize="@dimen/_10sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewQuantityProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textViewQuantityProduct"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintTop_toTopOf="@+id/textViewQuantityProduct" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewPriceProduct"
@@ -68,11 +59,9 @@
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
+        android:textColor="@color/textPrimary"
         android:textSize="@dimen/_10sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewProduct"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.989"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.833" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNameProduct" />
 </androidx.constraintlayout.widget.ConstraintLayout>

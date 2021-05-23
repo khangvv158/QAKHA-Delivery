@@ -51,7 +51,8 @@
                 app:layout_constraintStart_toEndOf="@+id/imageViewBack"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5"
-                app:layout_constraintWidth_percent="0.8" />
+                app:layout_constraintWidth_percent="0.8"
+                app:queryBackground="@null" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
