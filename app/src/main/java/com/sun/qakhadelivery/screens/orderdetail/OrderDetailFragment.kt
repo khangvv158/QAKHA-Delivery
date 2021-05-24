@@ -4,34 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
-import com.sun.qakhadelivery.data.repository.FeedbackRepositoryImpl
-import com.sun.qakhadelivery.data.repository.HistoryRepositoryImpl
-import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
-import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.data.model.OrderDetailMerge
 import com.sun.qakhadelivery.data.source.remote.schema.response.HistoryResponse
-import com.sun.qakhadelivery.data.source.remote.schema.response.OrderDetailsResponse
 import com.sun.qakhadelivery.data.source.remote.schema.response.RateDriver
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.feedback.driver.DriverFeedbackFragment
 import com.sun.qakhadelivery.screens.feedback.partner.PartnerFeedbackFragment
-import com.sun.qakhadelivery.screens.order.tabs.history.HistoryFragment.Companion.BUNDLE_HISTORY
 import com.sun.qakhadelivery.screens.orderdetail.adapter.OrderAdapter
+import com.sun.qakhadelivery.widget.recyclerview.divider.DividerItemDecorator
 import kotlinx.android.synthetic.main.fragment_order_detail.*
 
 class OrderDetailFragment : Fragment(), OrderDetailContract.View {
 
-    private val adapter by lazy { OrderAdapter() }
-    private val presenter by lazy {
-        OrderDetailPresenter(
-            HistoryRepositoryImpl.getInstance(),
-            TokenRepositoryImpl.getInstance(
-                SharedPrefsImpl.getInstance(requireContext())
-            ),
-            FeedbackRepositoryImpl.getInstance()
-        )
-    }
+    private val orderAdapter by lazy { OrderAdapter() }
+    private val presenter by lazy { OrderDetailPresenter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,14 +38,24 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
 
     override fun onStart() {
         super.onStart()
-        arguments?.getParcelable<HistoryResponse>(BUNDLE_HISTORY)?.let {
-            presenter.run {
-                setView(this@OrderDetailFragment)
-                getOrderDetail(it.id)
-            }
-            namePartnerTextView.text = it.partner.name
-            namePartnerHighTextView.text = it.partner.name
-            presenter.checkDriverFeedback(it.id)
+        arguments?.getParcelable<OrderDetailMerge>(BUNDLE_ORDER_DETAIL)?.let {
+            namePartnerTextView.text = it.historyResponse.partner.name
+            namePartnerHighTextView.text = it.historyResponse.partner.name
+            totalTextView.text = it.orderDetailsResponse.order.total.toString().currencyVn()
+            paymentTextView.text = it.orderDetailsResponse.order.type_checkout
+            usernameTextView.text = it.orderDetailsResponse.order.name
+            phoneNumberTextView.text = it.orderDetailsResponse.order.phone_number
+            addressTextView.text = it.orderDetailsResponse.order.address
+            statusOrderTextView.text = it.orderDetailsResponse.order.status
+            priceSubtotaTtextView.text = it.orderDetailsResponse.order.subtotal.toString()
+                .currencyVn()
+            shippingFeeTextView.text = it.orderDetailsResponse.order.shipping_fee.toString()
+                .currencyVn()
+            priceDiscountTextView.text = it.orderDetailsResponse.order.discount.toString()
+                .discountCurrencyVn()
+            priceTotalTextView.text = it.orderDetailsResponse.order.total.toString().currencyVn()
+            orderAdapter.updateOrderDetails(it.orderDetailsResponse.orderDetails)
+            checkFeedback(it.RateDriver, it.historyResponse)
         }
     }
 
@@ -64,61 +64,42 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
         presenter.onStop()
     }
 
-    override fun onSuccessOrderDetails(orderDetailsResponse: OrderDetailsResponse) {
-        orderDetailsResponse.run {
-            totalTextView.text = order.total.toString().currencyVn()
-            paymentTextView.text = order.type_checkout
-            usernameTextView.text = order.name
-            phoneNumberTextView.text = order.phone_number
-            addressTextView.text = order.address
-            statusOrderTextView.text = order.status
-            priceSubtotaTtextView.text = order.subtotal.toString().currencyVn()
-            shippingFeeTextView.text = order.shipping_fee.toString().currencyVn()
-            priceDiscountTextView.text = order.discount.toString().discountCurrencyVn()
-            priceTotalTextView.text = order.total.toString().currencyVn()
-            adapter.updateOrderDetails(orderDetails)
-        }
-    }
-
-    override fun onSuccessCheckDriverFeedback(rateDriver: RateDriver) {
+    private fun checkFeedback(rateDriver: RateDriver, history: HistoryResponse) {
         var isPartner = false
-        arguments?.getParcelable<HistoryResponse>(BUNDLE_HISTORY)?.let { history ->
-            if (history.rate() && rateDriver.rate) {
-                buttonFeedback.show()
-                isPartner = true
-            } else if (history.rate() && !rateDriver.rate) {
-                buttonFeedback.show()
-            }
-            buttonFeedback.setOnSafeClickListener {
-                parentFragmentManager.popBackStack()
-                if (isPartner) {
-                    addFragmentFadeAnim(
-                        PartnerFeedbackFragment.newInstance(
-                            history.id,
-                            history.partner.apply { id = history.partnerId }),
-                        R.id.containerView
-                    )
-                } else {
-                    addFragmentFadeAnim(
-                        DriverFeedbackFragment.newInstance(
-                            history.driver.apply { id = history.driverId },
-                            history.id,
-                            history.partner.apply { id = history.partnerId }
-                        ), R.id.containerView
-                    )
-                }
+        if (history.rate() && rateDriver.rate) {
+            buttonFeedback.show()
+            isPartner = true
+        } else if (history.rate() && !rateDriver.rate) {
+            buttonFeedback.show()
+        }
+        buttonFeedback.setOnSafeClickListener {
+            parentFragmentManager.popBackStack()
+            if (isPartner) {
+                addFragmentFadeAnim(
+                    PartnerFeedbackFragment.newInstance(
+                        history.id,
+                        history.partner.apply { id = history.partnerId }),
+                    R.id.containerView
+                )
+            } else {
+                addFragmentFadeAnim(
+                    DriverFeedbackFragment.newInstance(
+                        history.driver.apply { id = history.driverId },
+                        history.id,
+                        history.partner.apply { id = history.partnerId }
+                    ), R.id.containerView
+                )
             }
         }
-    }
-
-    override fun onErrorOrderDetails(exception: String) = Unit
-
-    override fun onErrorCheckDriverFeedback(exception: String) {
-        makeText(exception)
     }
 
     private fun initView() {
-        recyclerViewBucket.adapter = adapter
+        recyclerViewBucket.run {
+            adapter = orderAdapter
+            ContextCompat.getDrawable(context, R.drawable.divider)?.let {
+                addItemDecoration(DividerItemDecorator(it))
+            }
+        }
     }
 
     private fun handleEvents() {
@@ -128,9 +109,10 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
     }
 
     companion object {
+        private const val BUNDLE_ORDER_DETAIL = "BUNDLE_ORDER_DETAIL"
 
-        fun newInstance(bundle: Bundle) = OrderDetailFragment().apply {
-            arguments = bundle
+        fun newInstance(orderDetailMerge: OrderDetailMerge) = OrderDetailFragment().apply {
+            arguments = bundleOf(BUNDLE_ORDER_DETAIL to orderDetailMerge)
         }
     }
 }

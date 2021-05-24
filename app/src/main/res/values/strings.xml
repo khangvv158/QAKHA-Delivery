@@ -237,4 +237,7 @@
     <string name="finding">Finding</string>
     <string name="send_counter">Send (%s)</string>
     <string name="subtotal_cart">Subtotal :</string>
+    <string name="order_not_available">The order is not available</string>
+    <string name="please_check_order">Please check again</string>
+    <string name="go_back">Go Back</string>
 </resources>
