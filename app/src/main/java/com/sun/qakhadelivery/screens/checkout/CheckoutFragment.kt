@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.sun.qakhadelivery.R
@@ -31,6 +32,7 @@ import com.sun.qakhadelivery.utils.Constants.DEFAULT_STRING
 import com.sun.qakhadelivery.utils.Constants.NOT_EXISTS
 import com.sun.qakhadelivery.utils.IPositiveNegativeListener
 import com.sun.qakhadelivery.utils.LocationHelper
+import com.sun.qakhadelivery.widget.recyclerview.divider.DividerItemDecorator
 import com.sun.qakhadelivery.widget.recyclerview.item.ChoiceVoucherState
 import com.sun.qakhadelivery.widget.recyclerview.item.VoucherItem
 import com.sun.qakhadelivery.widget.view.DialogQueryShipping
@@ -44,7 +46,7 @@ import org.greenrobot.eventbus.ThreadMode
 
 class CheckoutFragment : Fragment(), CheckoutContract.View {
 
-    private val adapter: BucketAdapter by lazy {
+    private val bucketAdapter: BucketAdapter by lazy {
         BucketAdapter()
     }
     private val presenter: CheckoutPresenter by lazy {
@@ -92,7 +94,7 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
     }
 
     override fun onSuccessGetCart(carts: MutableList<Cart>) {
-        adapter.updateData(carts)
+        bucketAdapter.updateData(carts)
         arguments?.run {
             getParcelable<Partner>(BUNDLE_PARTNER)?.let { partner ->
                 getParcelable<Address>(BUNDLE_ADDRESS)?.let { address ->
@@ -312,7 +314,12 @@ class CheckoutFragment : Fragment(), CheckoutContract.View {
     }
 
     private fun initViews() {
-        recyclerViewBucket.adapter = adapter
+        recyclerViewBucket.run {
+            adapter = bucketAdapter
+            ContextCompat.getDrawable(context, R.drawable.divider)?.let {
+                addItemDecoration(DividerItemDecorator(it))
+            }
+        }
     }
 
     private fun initData() {

@@ -80,7 +80,7 @@
                     android:textSize="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView25"
                     app:layout_constraintStart_toEndOf="@+id/appCompatTextView25"
-                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView25"/>
+                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView25" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/appCompatTextView25"
@@ -245,6 +245,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_5sdp"
                 android:background="@color/colorWhite"
+                android:paddingBottom="@dimen/_5sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayoutInfo">
@@ -395,6 +396,7 @@
                     android:text="@string/feedback"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/_13sdp"
+                    android:visibility="gone"
                     app:backgroundTint="@color/colorCarrotOrange"
                     app:cornerRadius="@dimen/_5sdp"
                     app:layout_constraintBottom_toBottomOf="parent"

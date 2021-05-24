@@ -12,9 +12,8 @@ import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.data.source.remote.schema.response.HistoryResponse
 import com.sun.qakhadelivery.extensions.addFragmentBackStack
-import com.sun.qakhadelivery.extensions.makeText
+import com.sun.qakhadelivery.screens.lazy_order_details.LazyOrderDetailsFragment
 import com.sun.qakhadelivery.screens.order.tabs.history.adapter.HistoryAdapter
-import com.sun.qakhadelivery.screens.orderdetail.OrderDetailFragment
 import kotlinx.android.synthetic.main.fragment_history.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -83,11 +82,9 @@ class HistoryFragment : Fragment(), HistoryContract.View {
 
     private fun handleEvent() {
         historyAdapter.setOnItemClick {
-            parentFragment?.addFragmentBackStack(OrderDetailFragment.newInstance(
-                Bundle().apply {
-                    putParcelable(BUNDLE_HISTORY, it)
-                }
-            ), R.id.containerView)
+            parentFragment?.addFragmentBackStack(
+                LazyOrderDetailsFragment.newInstance(it), R.id.containerView
+            )
         }
         refreshLayout.setOnRefreshListener {
             presenter.getHistory()
@@ -99,7 +96,6 @@ class HistoryFragment : Fragment(), HistoryContract.View {
     }
 
     companion object {
-        const val BUNDLE_HISTORY = "BUNDLE_HISTORY"
 
         fun newInstance() = HistoryFragment()
     }

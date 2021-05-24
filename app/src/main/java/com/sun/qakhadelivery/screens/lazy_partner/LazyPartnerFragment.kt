@@ -51,9 +51,15 @@ class LazyPartnerFragment : Fragment(), LazyPartnerContract.View {
     override fun onErrorGetPartnerById(exception: String) {
         makeText(exception)
         loadingProgress.gone()
-        merchantErrorTextView.show()
+        merchantErrorTextView.run {
+            text = getString(R.string.merchant_not_available)
+            show()
+        }
+        descriptionErrorTextView.run {
+            text = getString(R.string.please_check_merchants)
+            show()
+        }
         pendingImageView.show()
-        descriptionErrorTextView.show()
         buttonBack.show()
     }
 
