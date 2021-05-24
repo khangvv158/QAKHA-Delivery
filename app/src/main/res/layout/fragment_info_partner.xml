@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_8sdp"
+    android:layout_marginTop="@dimen/_5sdp"
+    android:paddingHorizontal="@dimen/_8sdp"
     tools:context=".screens.partner.tabs.information.InfoPartnerFragment">
 
     <fragment
@@ -33,10 +34,10 @@
                 android:id="@+id/appCompatTextView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/sf_compact_display_regular"
+                android:fontFamily="@font/sf_compact_display_medium"
                 android:text="@string/address"
+                android:textColor="@color/textPrimary"
                 android:textSize="@dimen/_11sdp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,6 +46,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_11sdp"
+                android:textColor="@color/colorShipGray"
                 android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView2"
@@ -57,10 +59,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/sf_compact_display_regular"
+                android:fontFamily="@font/sf_compact_display_medium"
                 android:text="@string/phone_number"
+                android:textColor="@color/textPrimary"
                 android:textSize="@dimen/_11sdp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView2"
                 app:layout_constraintTop_toBottomOf="@+id/addressTextView" />
 
@@ -69,6 +71,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_14sdp"
+                android:textColor="@color/colorShipGray"
                 android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView3"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView3"
@@ -79,10 +82,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:fontFamily="@font/sf_compact_display_regular"
+                android:fontFamily="@font/sf_compact_display_medium"
                 android:text="@string/email"
+                android:textColor="@color/textPrimary"
                 android:textSize="@dimen/_11sdp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView3" />
 
@@ -91,6 +94,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_11sdp"
+                android:textColor="@color/colorShipGray"
                 android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView4"
@@ -101,10 +105,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_22sdp"
-                android:fontFamily="@font/sf_compact_display_regular"
+                android:fontFamily="@font/sf_compact_display_medium"
                 android:text="@string/time_open"
+                android:textColor="@color/textPrimary"
                 android:textSize="@dimen/_11sdp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView3"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView4" />
 
@@ -113,35 +117,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
+                android:textColor="@color/colorShipGray"
                 android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView5"
-                app:layout_constraintStart_toEndOf="@+id/appCompatTextView5"
-                app:layout_constraintTop_toTopOf="@+id/appCompatTextView5" />
+                app:layout_constraintStart_toEndOf="@+id/appCompatTextView5" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_40sdp"
-                android:fontFamily="@font/sf_compact_display_regular"
+                android:fontFamily="@font/sf_compact_display_medium"
                 android:text="@string/time_close"
+                android:textColor="@color/textPrimary"
                 android:textSize="@dimen/_11sdp"
-                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView5"
-                app:layout_constraintStart_toEndOf="@+id/timeOpenTextView"
-                app:layout_constraintTop_toTopOf="@+id/appCompatTextView5"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintStart_toEndOf="@+id/timeOpenTextView" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/timeCloseTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
+                android:textColor="@color/colorShipGray"
                 android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView8"
-                app:layout_constraintStart_toEndOf="@+id/appCompatTextView8"
-                app:layout_constraintTop_toTopOf="@+id/appCompatTextView8"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toEndOf="@+id/appCompatTextView8" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

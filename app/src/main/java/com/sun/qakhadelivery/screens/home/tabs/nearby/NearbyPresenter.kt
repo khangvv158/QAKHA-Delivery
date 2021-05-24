@@ -27,6 +27,7 @@ class NearbyPresenter(private val partnerRepository: PartnerRepository) : Nearby
     }
 
     override fun onStop() {
+        view = null
         compositeDisposable.clear()
     }
 

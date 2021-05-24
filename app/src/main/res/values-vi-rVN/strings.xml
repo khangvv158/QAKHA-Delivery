@@ -218,4 +218,5 @@
     <string name="usage_limit">Lượt sử dụng:</string>
     <string name="finding">Tìm kiếm</string>
     <string name="send_counter">Gửi (%s)</string>
+    <string name="subtotal_cart">Tổng phí :</string>
 </resources>

@@ -236,4 +236,5 @@
     <string name="usage_limit">Usage limit:</string>
     <string name="finding">Finding</string>
     <string name="send_counter">Send (%s)</string>
+    <string name="subtotal_cart">Subtotal :</string>
 </resources>

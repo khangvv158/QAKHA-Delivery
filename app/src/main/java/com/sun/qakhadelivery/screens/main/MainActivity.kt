@@ -19,7 +19,9 @@ import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.LanguageRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
 import com.sun.qakhadelivery.extensions.addFragment
+import com.sun.qakhadelivery.extensions.addFragmentBackStack
 import com.sun.qakhadelivery.screens.container.ContainerFragment
+import com.sun.qakhadelivery.screens.shippingdetail.ShippingDetailFragment
 import java.util.*
 
 class MainActivity : AppCompatActivity(), MainContract.View {

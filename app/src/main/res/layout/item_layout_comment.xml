@@ -1,75 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="?attr/selectableItemBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:focusable="true"
-    app:cardUseCompatPadding="true">
+    android:layout_marginVertical="@dimen/_5sdp"
+    android:focusable="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/avatarImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.21" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/avatarImageView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.21" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nameTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_11sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintStart_toEndOf="@+id/avatarImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.54" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/nameTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_11sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintStart_toEndOf="@+id/avatarImageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.54" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contentTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:textSize="@dimen/_8sdp"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+        app:layout_constraintStart_toStartOf="@+id/nameTextView"
+        app:layout_constraintTop_toBottomOf="@+id/nameTextView"
+        app:layout_constraintWidth_percent="0.65" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/contentTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:maxLines="2"
-            android:textSize="@dimen/_8sdp"
-            app:layout_constraintBottom_toTopOf="@+id/ratingBar"
-            app:layout_constraintStart_toStartOf="@+id/nameTextView"
-            app:layout_constraintTop_toBottomOf="@+id/nameTextView"
-            app:layout_constraintWidth_percent="0.65" />
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/ratingBar"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:isIndicator="true"
+        android:progressTint="@color/colorCarrotOrange"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="75:15"
+        app:layout_constraintStart_toStartOf="@+id/contentTextView"
+        app:layout_constraintWidth_percent="0.2" />
 
-        <androidx.appcompat.widget.AppCompatRatingBar
-            android:id="@+id/ratingBar"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:isIndicator="true"
-            android:progressTint="@color/colorCarrotOrange"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="75:15"
-            app:layout_constraintStart_toStartOf="@+id/contentTextView"
-            app:layout_constraintWidth_percent="0.2" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/timeTextView"
-            style="@style/Widget.AppCompat.RatingBar.Small"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textSize="@dimen/_8sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.976"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.898"
-            app:layout_constraintWidth_percent="0.2" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</com.google.android.material.card.MaterialCardView>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/timeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorShipGray"
+        android:textSize="@dimen/_8sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

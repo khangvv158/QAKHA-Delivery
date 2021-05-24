@@ -61,13 +61,18 @@ class NearbyFragment : Fragment(), NearbyContract.View, OnItemRecyclerViewClickL
         initData()
     }
 
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
+
     override fun getSuggestPartnerNearbySuccess(partners: MutableList<Partner>) {
         partnerAdapter.updateData(partners)
         loadingProgress?.gone()
     }
 
     override fun onError(message: String) {
-        loadingProgress.gone()
+        loadingProgress?.gone()
     }
 
     override fun onItemClickListener(item: Partner?) {
