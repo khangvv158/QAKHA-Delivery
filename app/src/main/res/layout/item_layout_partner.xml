@@ -1,118 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_100sdp"
-    android:layout_marginLeft="@dimen/_8sdp"
-    android:layout_marginTop="@dimen/_8sdp"
-    android:layout_marginRight="@dimen/_8sdp"
-    android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="@dimen/_5sdp">
+    android:layout_height="@dimen/_90sdp"
+    android:layout_marginVertical="@dimen/_5sdp"
+    android:background="@color/colorWhite"
+    android:foreground="?attr/selectableItemBackground">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewPartner"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhileSmoke"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.23" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageViewPartner"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@color/colorWhileSmoke"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="100:120"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.23"
-            app:shapeAppearanceOverlay="@style/cornerImageView10percent" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/ic_address"
+        android:backgroundTint="@color/colorCarrotOrange"
+        app:layout_constraintDimensionRatio="10:12"
+        app:layout_constraintStart_toStartOf="@+id/textViewNamePartner"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNamePartner"
+        app:layout_constraintWidth_percent="0.03" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/ic_address"
-            android:backgroundTint="@color/colorCarrotOrange"
-            app:layout_constraintDimensionRatio="10:12"
-            app:layout_constraintEnd_toEndOf="@+id/textViewNamePartner"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textViewNamePartner"
-            app:layout_constraintTop_toBottomOf="@+id/textViewNamePartner"
-            app:layout_constraintWidth_percent="0.03" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewNamePartner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:ellipsize="end"
+        android:fontFamily="@font/sf_compact_display_medium"
+        android:maxLines="1"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewPartner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.55" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewNamePartner"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textSize="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="234:24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.144"
-            app:layout_constraintStart_toEndOf="@+id/imageViewPartner"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.122"
-            app:layout_constraintWidth_percent="0.55" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewKilometer"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewPartner"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewPartner"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintWidth_percent="0.09" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewKilometer"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:gravity="center"
-            android:textSize="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageViewPartner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.975"
-            app:layout_constraintStart_toEndOf="@+id/imageViewPartner"
-            app:layout_constraintTop_toTopOf="@+id/imageViewPartner"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintWidth_percent="0.09" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAddressPartner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:ellipsize="end"
+        android:gravity="start|end"
+        android:maxLines="1"
+        android:textColor="@color/colorShipGray"
+        android:textSize="@dimen/_10sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
+        app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
+        app:layout_constraintTop_toTopOf="@+id/appCompatImageView"
+        app:layout_constraintWidth_percent="0.55" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewAddressPartner"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:ellipsize="end"
-            android:gravity="start|end"
-            android:maxLines="1"
-            android:textSize="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
-            app:layout_constraintDimensionRatio="234:24"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
-            app:layout_constraintTop_toTopOf="@+id/appCompatImageView"
-            app:layout_constraintWidth_percent="0.55" />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageViewRate"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:src="@drawable/ic_star"
+        android:visibility="gone"
+        app:layout_constraintDimensionRatio="10:12"
+        app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
+        app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
+        app:layout_constraintWidth_percent="0.03" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageViewRate"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:src="@drawable/ic_star"
-            android:visibility="gone"
-            app:layout_constraintDimensionRatio="10:12"
-            app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
-            app:layout_constraintHorizontal_bias="0.292"
-            app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView"
-            app:layout_constraintWidth_percent="0.03" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewRatePartner"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:gravity="start|end"
-            android:textSize="@dimen/_10sdp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/appCompatImageViewRate"
-            app:layout_constraintDimensionRatio="20:12"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageViewRate"
-            app:layout_constraintTop_toTopOf="@+id/appCompatImageViewRate"
-            app:layout_constraintWidth_percent="0.09" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewRatePartner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:textColor="@color/colorShipGray"
+        android:textSize="@dimen/_10sdp"
+        android:visibility="gone"
+        app:fontFamily="@font/sf_compact_display_regular"
+        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageViewRate"
+        app:layout_constraintStart_toEndOf="@+id/appCompatImageViewRate"
+        app:layout_constraintTop_toTopOf="@+id/appCompatImageViewRate" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,8 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackgroundApplication">
+        android:background="@color/colorBackgroundApplication"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -24,7 +25,6 @@
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:translationZ="@dimen/_8sdp"
                 app:layout_collapseMode="pin">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,10 +78,10 @@
                 android:id="@+id/nameProductTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/sf_compact_display_regular"
+                android:fontFamily="@font/sf_compact_display_medium"
                 android:maxLines="2"
+                android:textColor="@color/colorShipGray"
                 android:textSize="@dimen/_16sdp"
-                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,7 +90,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/sf_compact_display_regular"
                 android:text="@string/price"
+                android:textColor="@color/colorShipGray"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="@+id/nameProductTextView"
                 app:layout_constraintTop_toBottomOf="@+id/nameProductTextView" />
@@ -100,6 +102,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
+                android:fontFamily="@font/sf_compact_display_regular"
+                android:textColor="@color/textPrimary"
                 android:textSize="@dimen/_11sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/priceLabel"
                 app:layout_constraintStart_toEndOf="@+id/priceLabel"
@@ -110,7 +114,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
+                android:fontFamily="@font/sf_compact_display_regular"
                 android:text="@string/description"
+                android:textColor="@color/colorShipGray"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="@+id/priceLabel"
                 app:layout_constraintTop_toBottomOf="@+id/priceLabel" />
@@ -121,6 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:fontFamily="@font/sf_compact_display_regular"
+                android:textColor="@color/textPrimary"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView21"
                 app:layout_constraintTop_toBottomOf="@+id/appCompatTextView21" />
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView.OnQueryTextListener
+import androidx.core.content.ContextCompat
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.repository.PartnerRepositoryImpl
@@ -14,6 +15,7 @@ import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.partner.PartnerFragment
 import com.sun.qakhadelivery.screens.search.adapter.SearchAdapter
 import com.sun.qakhadelivery.utils.OnItemRecyclerViewClickListener
+import com.sun.qakhadelivery.widget.recyclerview.divider.DividerItemDecorator
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment(), SearchContract.View, OnItemRecyclerViewClickListener<Partner> {
@@ -75,8 +77,13 @@ class SearchFragment : Fragment(), SearchContract.View, OnItemRecyclerViewClickL
 
     private fun initViews() {
         presenter.setView(this)
-        searchRecyclerView.adapter = searchAdapter.apply {
-            registerRecyclerViewListener(this@SearchFragment)
+        searchRecyclerView.run {
+            adapter = searchAdapter.apply {
+                registerRecyclerViewListener(this@SearchFragment)
+            }
+            ContextCompat.getDrawable(context, R.drawable.divider)?.let {
+                addItemDecoration(DividerItemDecorator(it))
+            }
         }
     }
 

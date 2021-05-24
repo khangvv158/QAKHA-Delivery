@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.model.Feedback
 import com.sun.qakhadelivery.data.model.Partner
@@ -12,6 +13,7 @@ import com.sun.qakhadelivery.extensions.makeText
 import com.sun.qakhadelivery.screens.home.HomeFragment.Companion.BUNDLE_PARTNER
 import com.sun.qakhadelivery.screens.partner.tabs.review.adapter.CommentAdapter
 import com.sun.qakhadelivery.utils.BasePageFragment
+import com.sun.qakhadelivery.widget.recyclerview.divider.DividerItemDecorator
 import kotlinx.android.synthetic.main.fragment_review.*
 
 class ReviewFragment : BasePageFragment(), ReviewContract.View {
@@ -54,7 +56,12 @@ class ReviewFragment : BasePageFragment(), ReviewContract.View {
 
     private fun initViews() {
         presenter.setView(this)
-        commentRecyclerView.adapter = commentAdapter
+        commentRecyclerView.apply {
+            adapter = commentAdapter
+            ContextCompat.getDrawable(context, R.drawable.divider)?.let {
+                addItemDecoration(DividerItemDecorator(it))
+            }
+        }
     }
 
     private fun initData() {

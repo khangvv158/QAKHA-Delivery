@@ -53,8 +53,6 @@
                     android:id="@+id/partnerImageView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fitsSystemWindows="true"
-                    android:scaleType="fitXY"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -73,21 +71,21 @@
                         android:id="@+id/titlePartnerTextView"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/sf_compact_display_regular"
+                        android:fontFamily="@font/sf_compact_display_medium"
                         android:maxLines="2"
+                        android:textColor="@color/colorShipGray"
                         android:textSize="@dimen/_16sdp"
-                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintWidth_percent="0.87" />
 
                     <androidx.appcompat.widget.AppCompatImageButton
                         android:id="@+id/starImageButton"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_width="@dimen/_13sdp"
+                        android:layout_height="@dimen/_13sdp"
                         android:layout_marginTop="@dimen/_8sdp"
                         android:background="@drawable/ic_star"
-                        app:layout_constraintDimensionRatio="1:1"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/titlePartnerTextView"
                         app:layout_constraintTop_toBottomOf="@+id/titlePartnerTextView" />
 
@@ -96,17 +94,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_5sdp"
-                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/colorShipGray"
+                        android:textSize="@dimen/_11sdp"
                         app:layout_constraintBottom_toBottomOf="@+id/starImageButton"
-                        app:layout_constraintStart_toEndOf="@+id/starImageButton"
-                        app:layout_constraintTop_toTopOf="@+id/starImageButton" />
+                        app:layout_constraintStart_toEndOf="@+id/starImageButton" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/appCompatTextView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/_41sdp"
+                        android:layout_marginStart="@dimen/_20sdp"
                         android:text="@string/status"
+                        android:textColor="@color/colorShipGray"
                         android:textSize="@dimen/_11sdp"
                         app:layout_constraintBottom_toBottomOf="@+id/ratePartnerTextView"
                         app:layout_constraintStart_toEndOf="@+id/ratePartnerTextView"
@@ -117,11 +116,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/_8sdp"
+                        android:textAllCaps="true"
+                        android:textColor="@color/colorShipGray"
                         android:textSize="@dimen/_11sdp"
                         app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView6"
                         app:layout_constraintStart_toEndOf="@+id/appCompatTextView6"
-                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView6"
-                        app:layout_constraintVertical_bias="1.0" />
+                        app:layout_constraintTop_toTopOf="@+id/appCompatTextView6" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -155,20 +155,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/_11sdp"
-        android:layout_marginBottom="@dimen/_11sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:visibility="gone">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cartFloatButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_margin="@dimen/_1sdp"
             android:backgroundTint="@color/colorCarrotOrange"
-            android:src="@drawable/ic_cart"
-            app:elevation="0dp"
+            app:cardCornerRadius="@dimen/_50sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/colorWhite" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/_24sdp"
+                android:layout_height="@dimen/_24sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_cart"
+                app:tint="@color/colorWhite" />
+        </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/counterCartTextView"
@@ -189,9 +198,9 @@
         android:id="@+id/loadingProgress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="@dimen/_10sdp"
         android:layout_gravity="center"
         android:background="@drawable/circle_shape"
+        android:elevation="@dimen/_10sdp"
         android:theme="@style/circleProgress"
         android:visibility="gone" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
