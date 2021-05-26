@@ -222,4 +222,6 @@
     <string name="order_not_available">Đơn hàng không có sẵn</string>
     <string name="please_check_order">Vui lòng kiểm tra lại</string>
     <string name="go_back">Trở Về</string>
+    <string name="name">Tên</string>
+    <string name="delivery_time">Thời gian giao hàng</string>
 </resources>

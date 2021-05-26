@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,48 +7,57 @@
     android:background="@color/colorWhileSmoke"
     tools:context=".screens.orderdetail.OrderDetailFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/appBarLayoutTop"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_35sdp"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorCarrotOrange">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageViewBack"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/ic_back"
-            app:backgroundTint="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="24:24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.041"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.457"
-            app:layout_constraintWidth_percent="0.06" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/appBarLayoutTop"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorCarrotOrange">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:fontFamily="@font/sf_compact_display_medium"
-            android:gravity="center"
-            android:text="@string/order_detail"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/_14sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="150:30"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewBack"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/ic_back"
+                app:backgroundTint="@color/colorWhite"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="24:24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.041"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.457"
+                app:layout_constraintWidth_percent="0.06" />
 
-    <ScrollView
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/sf_compact_display_medium"
+                android:gravity="center"
+                android:text="@string/order_detail"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/_14sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="150:30"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/appBarLayoutTop"
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:paddingBottom="@dimen/_5sdp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -386,12 +395,88 @@
                     app:layout_constraintBottom_toBottomOf="@+id/textViewTitleDiscount"
                     app:layout_constraintEnd_toEndOf="@+id/shippingFeeTextView"
                     app:layout_constraintTop_toTopOf="@+id/textViewTitleDiscount" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5sdp"
+                android:background="@color/colorWhite"
+                android:padding="@dimen/_8sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayoutPayment">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/driver"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_14sdp"
+                    app:fontFamily="@font/sf_compact_display_medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/avatarCircleImageView"
+                    android:layout_width="@dimen/_45sdp"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:src="@color/colorAlabasterGray"
+                    app:layout_constraintHeight_percent="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/appCompatTextView24"
+                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView24"
+                    app:shapeAppearanceOverlay="@style/circleImageView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:text="@string/name"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_10sdp"
+                    app:fontFamily="@font/sf_compact_display_regular"
+                    app:layout_constraintStart_toEndOf="@+id/avatarCircleImageView"
+                    app:layout_constraintTop_toTopOf="@+id/avatarCircleImageView" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delivery_time"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_10sdp"
+                    app:fontFamily="@font/sf_compact_display_regular"
+                    app:layout_constraintBottom_toBottomOf="@+id/avatarCircleImageView"
+                    app:layout_constraintStart_toStartOf="@+id/appCompatTextView26"
+                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView26" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/nameDriverTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView26"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView26" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/deliveryTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/_10sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView27"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView27" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/buttonFeedback"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:text="@string/feedback"
                     android:textColor="@color/colorWhite"
@@ -400,12 +485,11 @@
                     app:backgroundTint="@color/colorCarrotOrange"
                     app:cornerRadius="@dimen/_5sdp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="200:33"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/totalPriceTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/avatarCircleImageView"
                     app:layout_constraintWidth_percent="0.7" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
-</RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
