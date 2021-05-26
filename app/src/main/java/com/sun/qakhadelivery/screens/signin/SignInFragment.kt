@@ -10,12 +10,10 @@ import android.widget.Toast
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.forgotpassword.ForgotPasswordFragment
 import com.sun.qakhadelivery.screens.signup.SignUpFragment
 import com.sun.qakhadelivery.utils.Constants
-import com.sun.qakhadelivery.extensions.addFragmentSlideAnim
-import com.sun.qakhadelivery.extensions.hideKeyboard
-import com.sun.qakhadelivery.extensions.makeText
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 class SignInFragment : Fragment(), SignInContract.View {
@@ -42,13 +40,19 @@ class SignInFragment : Fragment(), SignInContract.View {
         handleEvents()
     }
 
+    override fun onStop() {
+        presenter.onStop()
+        super.onStop()
+    }
+
     override fun onSignInSuccess() {
+        loadingProgress.hide()
         onSignInSuccessListener?.onSignInSuccess()
         parentFragmentManager.popBackStack()
     }
 
     override fun onSignInFailure(message: String) {
-        message
+        loadingProgress.hide()
         if (message == "Email is not exists. Please sign up !!") {
             emailTextInputLayout.error = getString(R.string.content_email_sign_in)
             passwordTextInputLayout.error = Constants.SPACE_STRING
@@ -57,17 +61,19 @@ class SignInFragment : Fragment(), SignInContract.View {
             emailTextInputLayout.error = Constants.SPACE_STRING
             passwordTextInputLayout.error = getString(R.string.content_password_sign_in)
         }
-        if (message == "Your account has not been activated. Please check your email for the activation code."){
+        if (message == "Your account has not been activated. Please check your email for the activation code.") {
             emailTextInputLayout.error = Constants.SPACE_STRING
             passwordTextInputLayout.error = getString(R.string.content_activated)
         }
     }
 
     override fun onError(message: String) {
+        loadingProgress.hide()
         Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 
     override fun onSignInRoleFailure() {
+        loadingProgress.hide()
         Toast.makeText(
             context,
             getString(R.string.you_cannot_sign_in_with_this_account),
@@ -89,6 +95,7 @@ class SignInFragment : Fragment(), SignInContract.View {
         }
         signInButton.setOnClickListener {
             hideKeyboard()
+            loadingProgress.show()
             presenter.signIn(emailEditText.text.toString(), passwordEditText.text.toString())
         }
 
