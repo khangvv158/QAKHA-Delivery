@@ -240,4 +240,6 @@
     <string name="order_not_available">The order is not available</string>
     <string name="please_check_order">Please check again</string>
     <string name="go_back">Go Back</string>
+    <string name="name">Name</string>
+    <string name="delivery_time">Delivery time</string>
 </resources>

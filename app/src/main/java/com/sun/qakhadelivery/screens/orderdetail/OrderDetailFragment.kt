@@ -56,6 +56,10 @@ class OrderDetailFragment : Fragment(), OrderDetailContract.View {
             priceTotalTextView.text = it.orderDetailsResponse.order.total.toString().currencyVn()
             orderAdapter.updateOrderDetails(it.orderDetailsResponse.orderDetails)
             checkFeedback(it.RateDriver, it.historyResponse)
+            //driver
+            nameDriverTextView.text = it.historyResponse.driver.name
+            deliveryTimeTextView.text = it.orderDetailsResponse.order.deliveryTime
+            avatarCircleImageView.loadUrl(it.historyResponse.driver.image.imageUrl)
         }
     }
 
