@@ -100,14 +100,25 @@ class PartnerFragment : Fragment(), PartnerContract.View {
     }
 
     override fun onErrorGetCart(exception: String) {
+        makeText(exception)
         enableInteraction()
     }
 
     override fun onErrorCreateCart(exception: String) {
+        if (exception == PRODUCT_NOT_FOUND) {
+            makeText(getString(R.string.item_out_of_stock))
+        } else {
+            makeText(exception)
+        }
         enableInteraction()
     }
 
     override fun onErrorUpdateCart(exception: String) {
+        if (exception == PRODUCT_NOT_FOUND) {
+            makeText(getString(R.string.item_out_of_stock))
+        } else {
+            makeText(exception)
+        }
         enableInteraction()
     }
 
@@ -258,6 +269,7 @@ class PartnerFragment : Fragment(), PartnerContract.View {
         const val BUNDLE_PARTNER = "BUNDLE_PARTNER"
         private const val BUNDLE_PARTNER_RESPONSE = "BUNDLE_PARTNER_RESPONSE"
         private const val OFF_SCREEN_PAGE_LIMIT = 3
+        private const val PRODUCT_NOT_FOUND = "Product not found!"
 
         fun newInstance(partnerResponse: PartnerResponse) = PartnerFragment().apply {
             arguments = Bundle().apply {

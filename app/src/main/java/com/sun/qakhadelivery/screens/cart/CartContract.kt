@@ -12,8 +12,6 @@ interface CartContract {
 
         fun getCart(partnerId: Int, products: MutableList<Product>)
 
-        fun createCart(cartRequest: CartRequest, products: MutableList<Product>)
-
         fun updateCart(cartRequest: CartRequest, products: MutableList<Product>)
 
         fun removeCart(removeCartRequest: RemoveCartRequest, products: MutableList<Product>)
@@ -35,7 +33,7 @@ interface CartContract {
 
         fun onErrorGetCart(exception: String)
 
-        fun onErrorUpdateCart(exception: String)
+        fun onErrorUpdateCart(cartRequest: CartRequest, exception: String)
 
         fun onErrorRemoveCart(exception: String)
 

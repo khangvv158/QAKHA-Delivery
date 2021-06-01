@@ -1,8 +1,10 @@
 package com.sun.qakhadelivery.widget.recyclerview.viewholder
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.extensions.currencyVn
 import com.sun.qakhadelivery.extensions.loadUrl
@@ -14,12 +16,16 @@ import kotlinx.android.synthetic.main.item_product_partner.view.*
 class ProductViewHolder(viewGroup: ViewGroup) :
     CustomRecyclerView.ViewHolder<ProductItem>(newInstance(viewGroup)) {
 
+    @SuppressLint("ResourceType", "UseCompatLoadingForColorStateLists")
     override fun bind(item: ProductItem) {
         with(itemView) {
             productImageView.loadUrl(item.product.image.imageUrl)
             titleProductTextView.text = item.product.name
             describeProductTextView.text = item.product.description
             priceProductTextView.text = item.product.price.toString().currencyVn()
+            if(!item.product.inStock()){
+                addToCartButton.backgroundTintList = context.resources.getColorStateList(R.color.colorGrayBombay);
+            }
         }
     }
 

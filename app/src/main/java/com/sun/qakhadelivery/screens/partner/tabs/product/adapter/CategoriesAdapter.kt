@@ -24,10 +24,6 @@ class CategoriesAdapter : CustomRecyclerView.Adapter<CategoriesViewHolder>(mutab
         }
     }
 
-    override fun getItemId(position: Int): Long {
-        return getItems<CategoryItem>()[position].category.id.hashCode().toLong()
-    }
-
     fun updateCategory(categories: MutableList<Category>) {
         categories.map { CategoryItem(it) }.also {
             addItems(it)
