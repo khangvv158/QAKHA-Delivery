@@ -1,13 +1,16 @@
 package com.sun.qakhadelivery.screens.partner
 
+import com.google.gson.Gson
 import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.data.model.Product
 import com.sun.qakhadelivery.data.repository.CartRepository
 import com.sun.qakhadelivery.data.repository.TokenRepository
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
+import com.sun.qakhadelivery.data.source.remote.schema.response.MessageResponse
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import retrofit2.HttpException
 
 class PartnerPresenter(
     private val cartRepository: CartRepository,
@@ -31,7 +34,18 @@ class PartnerPresenter(
                 .subscribe({
                     view?.onSuccessGetCart(it)
                 }, {
-                    view?.onErrorGetCart(it.message.toString())
+                    if (it is HttpException) {
+                        try {
+                            view?.onErrorGetCart(
+                                Gson().fromJson(
+                                    it.response()?.errorBody()?.string(),
+                                    MessageResponse::class.java
+                                ).message
+                            )
+                        } catch (e: Exception) {
+                            view?.onErrorGetCart(it.message.toString())
+                        }
+                    }
                 })
         compositeDisposable.add(disposable)
     }
@@ -50,7 +64,18 @@ class PartnerPresenter(
             .subscribe({
                 view?.onSuccessCreateCart(it)
             }, {
-                view?.onErrorCreateCart(it.message.toString())
+                if (it is HttpException) {
+                    try {
+                        view?.onErrorCreateCart(
+                            Gson().fromJson(
+                                it.response()?.errorBody()?.string(),
+                                MessageResponse::class.java
+                            ).message
+                        )
+                    } catch (e: Exception) {
+                        view?.onErrorGetCart(it.message.toString())
+                    }
+                }
             })
         compositeDisposable.add(disposable)
     }
@@ -69,7 +94,18 @@ class PartnerPresenter(
             .subscribe({
                 view?.onSuccessUpdateCart(it)
             }, {
-                view?.onErrorUpdateCart(it.message.toString())
+                if (it is HttpException) {
+                    try {
+                        view?.onErrorUpdateCart(
+                            Gson().fromJson(
+                                it.response()?.errorBody()?.string(),
+                                MessageResponse::class.java
+                            ).message
+                        )
+                    } catch (e: Exception) {
+                        view?.onErrorGetCart(it.message.toString())
+                    }
+                }
             })
         compositeDisposable.add(disposable)
     }

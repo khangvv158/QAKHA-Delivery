@@ -52,37 +52,6 @@ class CartPresenter(
         compositeDisposable.add(disposable)
     }
 
-    override fun createCart(cartRequest: CartRequest, products: MutableList<Product>) {
-        val disposable = cartRepository.createCart(cartRequest, tokenRepository.getToken())
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .map { cartResponses ->
-                view?.onUpdateTotalPrice(cartResponses.total)
-                cartResponses.products.mapNotNull { response ->
-                    products.find { response.productId == it.id }?.let { products ->
-                        Cart(products, response.quantity, response.partnerId)
-                    }
-                }.toMutableList()
-            }
-            .subscribe({
-                view?.onSuccessUpdateCart(it)
-            }, {
-                if (it is HttpException) {
-                    try {
-                        view?.onErrorUpdateCart(
-                            Gson().fromJson(
-                                it.response()?.errorBody()?.string(),
-                                MessageResponse::class.java
-                            ).message
-                        )
-                    } catch (e: Exception) {
-                        view?.onErrorUpdateCart(it.message.toString())
-                    }
-                }
-            })
-        compositeDisposable.add(disposable)
-    }
-
     override fun updateCart(cartRequest: CartRequest, products: MutableList<Product>) {
         val disposable = cartRepository.updateCart(cartRequest, tokenRepository.getToken())
             .subscribeOn(Schedulers.io())
@@ -101,13 +70,14 @@ class CartPresenter(
                 if (it is HttpException) {
                     try {
                         view?.onErrorUpdateCart(
+                            cartRequest,
                             Gson().fromJson(
                                 it.response()?.errorBody()?.string(),
                                 MessageResponse::class.java
                             ).message
                         )
                     } catch (e: Exception) {
-                        view?.onErrorUpdateCart(it.message.toString())
+                        view?.onErrorUpdateCart(cartRequest, it.message.toString())
                     }
                 }
             })

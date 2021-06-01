@@ -13,7 +13,6 @@ import com.sun.qakhadelivery.widget.recyclerview.divider.DividerItemDecorator
 import com.sun.qakhadelivery.widget.recyclerview.item.CategoryItem
 import kotlinx.android.synthetic.main.item_layout_category.view.*
 
-
 class CategoriesViewHolder(viewGroup: ViewGroup) :
     CustomRecyclerView.ViewHolder<CategoryItem>(newInstance(viewGroup)) {
 

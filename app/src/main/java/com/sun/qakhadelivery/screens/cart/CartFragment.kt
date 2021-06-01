@@ -96,9 +96,14 @@ class CartFragment : BottomSheetDialogFragment(),
         makeText(exception)
     }
 
-    override fun onErrorUpdateCart(exception: String) {
+    override fun onErrorUpdateCart(cartRequest: CartRequest, exception: String) {
+        if (exception == PRODUCT_NOT_FOUND) {
+            presenter.clearCart(cartRequest.partner_id)
+            makeText(getString(R.string.item_out_of_stock))
+        } else {
+            makeText(exception)
+        }
         enableInteraction()
-        makeText(exception)
     }
 
     override fun onErrorRemoveCart(exception: String) {
@@ -224,6 +229,7 @@ class CartFragment : BottomSheetDialogFragment(),
     }
 
     companion object {
+        private const val PRODUCT_NOT_FOUND = "Product not found!"
 
         fun newInstance() = CartFragment()
     }

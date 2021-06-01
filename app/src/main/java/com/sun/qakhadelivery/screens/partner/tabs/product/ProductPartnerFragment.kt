@@ -50,9 +50,7 @@ class ProductPartnerFragment : BasePageFragment(), ProductPartnerContract.View,
 
     private fun initRecyclerView() {
         categoryRecyclerView.apply {
-            adapter = categoriesAdapter.apply {
-                setHasStableIds(true)
-            }
+            adapter = categoriesAdapter
             setHasFixedSize(true)
         }
     }
