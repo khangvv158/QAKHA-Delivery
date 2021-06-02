@@ -1,6 +1,5 @@
 package com.sun.qakhadelivery.screens.shippingdetail
 
-import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -18,28 +17,18 @@ class ShippingDetailPresenter(
     private var view: ShippingDetailContract.View? = null
 
     override fun isOrderShippingByDriver(idOrder: Int, idDriver: Int) {
-        orderFirebaseRepository.listenerOrder(idDriver, object : ChildEventListener {
-            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                snapshot.getValue(OrderFirebase::class.java)?.let {
-                    if (idOrder == it.idOrder) {
+        orderFirebaseRepository.listenerOrder(idDriver, object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.getValue(OrderFirebase::class.java).let {
+                    if (idOrder == it?.idOrder) {
                         view?.isOrderShippingByDriverSuccess()
                     }
-                }
-            }
-
-            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-            }
-
-            override fun onChildRemoved(snapshot: DataSnapshot) {
-                //check logic
-                snapshot.getValue(OrderFirebase::class.java)?.let {
-                    if (idOrder == it.idOrder) {
+                    if (it == null) {
                         view?.isOrderShippingByDriverDone()
                     }
                 }
             }
-
-            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) = Unit
 
             override fun onCancelled(error: DatabaseError) {
                 view?.onError(error.message)
