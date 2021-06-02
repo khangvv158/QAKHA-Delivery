@@ -45,16 +45,35 @@ class UserRenderer(
 
     override fun onClusterItemRendered(clusterItem: UserCluster, marker: Marker) {
         super.onClusterItemRendered(clusterItem, marker)
-        Glide.with(context).asBitmap().load(clusterItem.image?.imageUrl)
-            .into(object : CustomTarget<Bitmap>(90, 90) {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    imageView.setImageBitmap(resource)
-                    val icon = iconGenerator.makeIcon()
-                    marker.setIcon(BitmapDescriptorFactory.fromBitmap(icon))
-                }
+        if (clusterItem.image != null) {
+            Glide.with(context).asBitmap().load(clusterItem.image.imageUrl)
+                .into(object : CustomTarget<Bitmap>(90, 90) {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        imageView.setImageBitmap(resource)
+                        val icon = iconGenerator.makeIcon()
+                        marker.setIcon(BitmapDescriptorFactory.fromBitmap(icon))
+                    }
 
-                override fun onLoadCleared(placeholder: Drawable?) = Unit
-            })
+                    override fun onLoadCleared(placeholder: Drawable?) = Unit
+                })
+        } else {
+            Glide.with(context).asBitmap().load(R.drawable.ic_user)
+                .into(object : CustomTarget<Bitmap>(90, 90) {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        imageView.setImageBitmap(resource)
+                        val icon = iconGenerator.makeIcon()
+                        marker.setIcon(BitmapDescriptorFactory.fromBitmap(icon))
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) = Unit
+                })
+        }
     }
 
     override fun shouldRenderAsCluster(cluster: Cluster<UserCluster>): Boolean {
