@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="@dimen/_140sdp"
+    app:behavior_peekHeight="@dimen/_150sdp"
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <androidx.core.widget.NestedScrollView
