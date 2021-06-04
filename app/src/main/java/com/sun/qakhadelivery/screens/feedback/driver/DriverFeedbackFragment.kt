@@ -132,6 +132,9 @@ class DriverFeedbackFragment : Fragment(), DriverFeedbackContact.View {
                 }
             }
         }
+        imageViewBack.setOnSafeClickListener {
+            parentFragmentManager.popBackStack()
+        }
     }
 
     companion object {

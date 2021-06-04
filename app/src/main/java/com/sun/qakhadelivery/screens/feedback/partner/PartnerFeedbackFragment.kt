@@ -10,7 +10,6 @@ import android.widget.RatingBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
-import com.sun.qakhadelivery.data.model.Partner
 import com.sun.qakhadelivery.data.model.Refresh
 import com.sun.qakhadelivery.data.repository.FeedbackRepositoryImpl
 import com.sun.qakhadelivery.data.repository.TokenRepositoryImpl
@@ -115,6 +114,9 @@ class PartnerFeedbackFragment : Fragment(), PartnerFeedbackContact.View {
                     }
                 }
             }
+        }
+        imageViewBack.setOnSafeClickListener {
+            parentFragmentManager.popBackStack()
         }
     }
 

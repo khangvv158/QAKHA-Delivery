@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundApplication"
     android:clickable="true"
-    android:focusable="true"
-    tools:context=".screens.feedback.driver.DriverFeedbackFragment">
+    android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/appBarLayoutTop"
@@ -115,7 +114,7 @@
             android:gravity="top|start"
             android:hint="@string/share_feedback"
             android:imeOptions="actionDone"
-            android:inputType="textMultiLine|textNoSuggestions"
+            android:inputType="text|textNoSuggestions"
             android:maxLength="500"
             android:padding="@dimen/_5sdp"
             android:scrollHorizontally="false"

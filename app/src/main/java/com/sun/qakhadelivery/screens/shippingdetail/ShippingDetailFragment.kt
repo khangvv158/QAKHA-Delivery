@@ -256,7 +256,7 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
             shippingFeeTextView.text = orderResponse.order.shipping_fee.toString().currencyVn()
             priceDiscountTextView.text =
                 orderResponse.order.discount.toString().discountCurrencyVn()
-            priceDiscountTextView.text = orderResponse.order.total.toString().currencyVn()
+            priceTotalTextView.text = orderResponse.order.total.toString().currencyVn()
             recyclerViewBucket.apply {
                 adapter = orderAdapter
                 orderAdapter.updateOrderDetails(orderResponse.order_details)
