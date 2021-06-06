@@ -243,4 +243,5 @@
     <string name="name">Name</string>
     <string name="delivery_time">Delivery time</string>
     <string name="shop_close">The shop is closed, please come back later</string>
+    <string name="search">Search</string>
 </resources>

@@ -27,6 +27,7 @@ class ActivatedPresenter(private val signRepository: SignRepository) : Activated
 
     override fun onStop() {
         compositeDisposable.clear()
+        view = null
     }
 
     override fun setView(view: ActivatedContract.View?) {

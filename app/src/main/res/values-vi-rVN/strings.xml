@@ -225,4 +225,5 @@
     <string name="name">Tên</string>
     <string name="delivery_time">Thời gian giao hàng</string>
     <string name="shop_close">Quán đã đóng cửa vui lòng quay lại sau</string>
+    <string name="search">Tìm kiếm</string>
 </resources>

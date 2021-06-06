@@ -18,6 +18,7 @@ class ActivatedFragment : Fragment(), ActivatedContract.View {
             SignRepositoryImpl.getInstance(SharedPrefsImpl.getInstance(requireContext()))
         )
     }
+    private var activated: (() -> Unit)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,13 +33,28 @@ class ActivatedFragment : Fragment(), ActivatedContract.View {
         handleEvents()
     }
 
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        activated = null
+    }
+
     override fun onActivateAccountSuccess() {
         makeText(getString(R.string.content_activate_success))
         parentFragmentManager.popBackStack()
+        activated?.invoke()
     }
 
     override fun onActivateAccountFailure() {
         makeText(getString(R.string.content_activate_failure))
+    }
+
+    fun setOnListenerActivated(activated: () -> Unit) {
+        this.activated = activated
     }
 
     private fun initViews() {

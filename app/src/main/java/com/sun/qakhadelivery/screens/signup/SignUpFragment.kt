@@ -51,7 +51,11 @@ class SignUpFragment : Fragment(), SignUpContract.View {
 
     override fun onSignUpSuccess() {
         clearEditText()
-        addFragmentBackStack(ActivatedFragment.newInstance(), R.id.containerView)
+        addFragmentBackStack(ActivatedFragment.newInstance().apply {
+            setOnListenerActivated {
+                parentFragmentManager.popBackStack()
+            }
+        }, R.id.containerView)
         loadingProgress.gone()
     }
 
