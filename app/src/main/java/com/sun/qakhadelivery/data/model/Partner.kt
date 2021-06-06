@@ -28,4 +28,6 @@ data class Partner(
     fun getProducts(): MutableList<Product> {
         return categories.flatMap { category -> category.products }.toMutableList()
     }
+
+    fun isClose() = status == "close"
 }

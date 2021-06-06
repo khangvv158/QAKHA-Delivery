@@ -4,12 +4,12 @@ import android.view.ViewGroup
 import com.sun.qakhadelivery.data.model.Cart
 import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
 import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
+import com.sun.qakhadelivery.utils.Constants.DEFAULT_QUANTITY
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.CartItem
 import com.sun.qakhadelivery.widget.recyclerview.viewholder.CartViewHolder
 
-class CartAdapter : CustomRecyclerView.Adapter<CartViewHolder>(arrayListOf()),
-    CartViewHolder.OnClickCartViewHolderListener {
+class CartAdapter : CustomRecyclerView.Adapter<CartViewHolder>(arrayListOf()) {
 
     private var listener: OnClickCartListener.CartListener? = null
 
@@ -18,20 +18,27 @@ class CartAdapter : CustomRecyclerView.Adapter<CartViewHolder>(arrayListOf()),
         viewType: Int
     ): CustomRecyclerView.ViewHolder<*> {
         return CartViewHolder(parent).apply {
-            setOnClickListener(getItems<CartItem>().toMutableList(), this@CartAdapter)
+            setOnClickListener(object : CartViewHolder.OnClickCartViewHolderListener {
+
+                override fun increase(position: Int) {
+                    getItems<CartItem>()[adapterPosition].cart.apply {
+                        quantity += DEFAULT_QUANTITY
+                        listener?.increase(CartRequest(product.id, quantity, partnerId))
+                    }
+                }
+
+                override fun decrease(position: Int) {
+                    getItems<CartItem>()[adapterPosition].cart.apply {
+                        if (quantity > 1) {
+                            quantity -= DEFAULT_QUANTITY
+                            listener?.decrease(CartRequest(product.id, quantity, partnerId))
+                        } else {
+                            listener?.remove(RemoveCartRequest(product.id, partnerId))
+                        }
+                    }
+                }
+            })
         }
-    }
-
-    override fun increase(cartRequest: CartRequest) {
-        listener?.increase(cartRequest)
-    }
-
-    override fun decrease(cartRequest: CartRequest) {
-        listener?.decrease(cartRequest)
-    }
-
-    override fun remove(removeCartRequest: RemoveCartRequest) {
-        listener?.remove(removeCartRequest)
     }
 
     fun updateProducts(carts: MutableList<Cart>) {
