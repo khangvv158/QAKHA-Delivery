@@ -4,12 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.sun.qakhadelivery.R
-import com.sun.qakhadelivery.data.source.remote.schema.request.CartRequest
-import com.sun.qakhadelivery.data.source.remote.schema.request.RemoveCartRequest
 import com.sun.qakhadelivery.extensions.currencyVn
 import com.sun.qakhadelivery.extensions.loadUrl
 import com.sun.qakhadelivery.extensions.setOnSafeClickListener
-import com.sun.qakhadelivery.utils.Constants.DEFAULT_QUANTITY
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.CartItem
 import kotlinx.android.synthetic.main.item_product_cart.view.*
@@ -27,37 +24,22 @@ class CartViewHolder(viewGroup: ViewGroup) :
         }
     }
 
-    fun setOnClickListener(
-        cartItems: MutableList<CartItem>,
-        listener: OnClickCartViewHolderListener
-    ) {
+    fun setOnClickListener(listener: OnClickCartViewHolderListener) {
         with(itemView) {
             increaseButton.setOnSafeClickListener {
-                cartItems[adapterPosition].cart.apply {
-                    quantity += DEFAULT_QUANTITY
-                    listener.increase(CartRequest(product.id, quantity, partnerId))
-                }
+                listener.increase(adapterPosition)
             }
             decreaseButton.setOnSafeClickListener {
-                cartItems[adapterPosition].cart.apply {
-                    if (quantity > 1) {
-                        quantity -= DEFAULT_QUANTITY
-                        listener.decrease(CartRequest(product.id, quantity, partnerId))
-                    } else {
-                        listener.remove(RemoveCartRequest(product.id, partnerId))
-                    }
-                }
+                listener.decrease(adapterPosition)
             }
         }
     }
 
     interface OnClickCartViewHolderListener {
 
-        fun increase(cartRequest: CartRequest)
+        fun increase(position: Int)
 
-        fun decrease(cartRequest: CartRequest)
-
-        fun remove(removeCartRequest: RemoveCartRequest)
+        fun decrease(position: Int)
     }
 
     companion object {

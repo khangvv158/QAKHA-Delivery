@@ -71,7 +71,7 @@ class PartnerFragment : Fragment(), PartnerContract.View {
         presenter.setView(this@PartnerFragment)
         UserUtils.workWithSignIn(requireContext()) {
             arguments?.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
-                presenter.getCart(it.id, it.getProducts())
+                if (!it.isClose()) presenter.getCart(it.id, it.getProducts())
             }
         }
     }
@@ -105,19 +105,23 @@ class PartnerFragment : Fragment(), PartnerContract.View {
     }
 
     override fun onErrorCreateCart(exception: String) {
-        if (exception == PRODUCT_NOT_FOUND) {
-            makeText(getString(R.string.item_out_of_stock))
-        } else {
-            makeText(exception)
+        when (exception) {
+            PRODUCT_NOT_FOUND -> makeText(getString(R.string.item_out_of_stock))
+            PARTNER_NOT_FOUND -> makeText(getString(R.string.shop_close))
+            else -> {
+                makeText(exception)
+            }
         }
         enableInteraction()
     }
 
     override fun onErrorUpdateCart(exception: String) {
-        if (exception == PRODUCT_NOT_FOUND) {
-            makeText(getString(R.string.item_out_of_stock))
-        } else {
-            makeText(exception)
+        when (exception) {
+            PRODUCT_NOT_FOUND -> makeText(getString(R.string.item_out_of_stock))
+            PARTNER_NOT_FOUND -> makeText(getString(R.string.shop_close))
+            else -> {
+                makeText(exception)
+            }
         }
         enableInteraction()
     }
@@ -132,6 +136,17 @@ class PartnerFragment : Fragment(), PartnerContract.View {
             it.image?.let { image -> partnerImageView.loadUrlOrigin(image.imageUrl) }
             titlePartnerTextView.text = it.name
             statusTextView.text = it.status
+            if (it.isClose()) {
+                context?.showDialogWithListener(
+                    getString(R.string.notification),
+                    getString(R.string.shop_close),
+                    object : IPositiveNegativeListener {
+                        override fun onPositive() {
+                            parentFragmentManager.popBackStack()
+                        }
+                    }, getString(R.string.go_back), false
+                )
+            }
         }
         arguments?.getParcelable<PartnerResponse>(BUNDLE_PARTNER_RESPONSE)?.let {
             ratePartnerTextView.text = it.avgPoint.toString()
@@ -270,6 +285,7 @@ class PartnerFragment : Fragment(), PartnerContract.View {
         private const val BUNDLE_PARTNER_RESPONSE = "BUNDLE_PARTNER_RESPONSE"
         private const val OFF_SCREEN_PAGE_LIMIT = 3
         private const val PRODUCT_NOT_FOUND = "Product not found!"
+        private const val PARTNER_NOT_FOUND = "Partner not found!"
 
         fun newInstance(partnerResponse: PartnerResponse) = PartnerFragment().apply {
             arguments = Bundle().apply {

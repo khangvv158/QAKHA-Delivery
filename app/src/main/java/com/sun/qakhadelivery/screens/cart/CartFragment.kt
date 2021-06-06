@@ -93,15 +93,26 @@ class CartFragment : BottomSheetDialogFragment(),
 
     override fun onErrorGetCart(exception: String) {
         enableInteraction()
-        makeText(exception)
+        when (exception) {
+            PRODUCT_NOT_FOUND -> {
+                makeText(getString(R.string.item_out_of_stock))
+            }
+            PARTNER_NOT_FOUND -> makeText(getString(R.string.shop_close))
+            else -> {
+                makeText(exception)
+            }
+        }
     }
 
     override fun onErrorUpdateCart(cartRequest: CartRequest, exception: String) {
-        if (exception == PRODUCT_NOT_FOUND) {
-            presenter.clearCart(cartRequest.partner_id)
-            makeText(getString(R.string.item_out_of_stock))
-        } else {
-            makeText(exception)
+        when (exception) {
+            PRODUCT_NOT_FOUND -> {
+                makeText(getString(R.string.item_out_of_stock))
+            }
+            PARTNER_NOT_FOUND -> makeText(getString(R.string.shop_close))
+            else -> {
+                makeText(exception)
+            }
         }
         enableInteraction()
     }
@@ -136,8 +147,16 @@ class CartFragment : BottomSheetDialogFragment(),
     }
 
     override fun onErrorCheckEmpty(exception: String) {
+        when (exception) {
+            PRODUCT_NOT_FOUND -> {
+                makeText(getString(R.string.item_out_of_stock))
+            }
+            PARTNER_NOT_FOUND -> makeText(getString(R.string.shop_close))
+            else -> {
+                makeText(exception)
+            }
+        }
         enableInteraction()
-        makeText(exception)
     }
 
     fun setOnCallback(callbackCart: CallbackCart) {
@@ -230,6 +249,7 @@ class CartFragment : BottomSheetDialogFragment(),
 
     companion object {
         private const val PRODUCT_NOT_FOUND = "Product not found!"
+        private const val PARTNER_NOT_FOUND = "Partner not found!"
 
         fun newInstance() = CartFragment()
     }

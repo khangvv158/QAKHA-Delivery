@@ -75,6 +75,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailEditText"
                 android:layout_width="match_parent"
+                android:inputType="text|textNoSuggestions"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/_12sdp" />
         </com.google.android.material.textfield.TextInputLayout>
