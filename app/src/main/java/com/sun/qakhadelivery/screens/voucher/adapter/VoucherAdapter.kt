@@ -39,13 +39,15 @@ class VoucherAdapter : CustomRecyclerView.Adapter<VoucherViewHolder>(arrayListOf
                     if (voucher.distanceCondition != null && distance.distance <= voucher.distanceCondition) {
                         condition = true
                     }
+                } else if (voucher.distanceCondition == null && total >= voucher.condition) {
+                    condition = true
                 } else {
                     if (voucher.distanceCondition != null
                         && distance.distance <= voucher.distanceCondition
                         && total >= voucher.condition
                     ) {
                         condition = true
-                    } else if (total >= voucher.condition) condition = true
+                    }
                 }
             }
         }.also {
