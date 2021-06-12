@@ -1,5 +1,6 @@
 package com.sun.qakhadelivery.screens.signup
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,19 +9,23 @@ import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.sun.qakhadelivery.R
+import com.sun.qakhadelivery.data.model.Event
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.data.source.remote.schema.request.EmailRequest
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.signup.activated.ActivatedFragment
-import com.sun.qakhadelivery.screens.signup.activated.ActivatedSuccessListener
 import com.sun.qakhadelivery.utils.EditTextObservable
 import com.sun.qakhadelivery.utils.Regex
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.util.concurrent.TimeUnit
 
-class SignUpFragment : Fragment(), SignUpContract.View, ActivatedSuccessListener {
+class SignUpFragment : Fragment(), SignUpContract.View {
 
     private val presenter by lazy {
         SignUpPresenter(
@@ -31,6 +36,17 @@ class SignUpFragment : Fragment(), SignUpContract.View, ActivatedSuccessListener
     }
     private var emailIsExist = false
     private var phoneNumberIsExist = false
+    private var emailRequest: EmailRequest? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onDetach() {
+        EventBus.getDefault().unregister(this)
+        super.onDetach()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,17 +66,23 @@ class SignUpFragment : Fragment(), SignUpContract.View, ActivatedSuccessListener
         presenter.onStop()
     }
 
-    override fun onActivatedSuccess() {
-        makeText(getString(R.string.content_activate_success))
-        clearEditText()
-        parentFragmentManager.popBackStack()
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onEventBusActivateSuccess(event: Event<String>) {
+        if (event.keyEvent == ActivatedFragment.EVENT_ACTIVATE_SUCCESS) {
+            parentFragmentManager.popBackStack()
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onEventBusFresh(event: Event<String>) {
+        if (event.keyEvent == ActivatedFragment.EVENT_BUS_FRESH) {
+            parentFragmentManager.popBackStack()
+        }
     }
 
     override fun onSignUpSuccess() {
+        addFragmentBackStack(ActivatedFragment.newInstance(emailRequest), R.id.containerView)
         clearEditText()
-        addFragmentBackStack(ActivatedFragment.newInstance().apply {
-            registerListener(this@SignUpFragment)
-        }, R.id.containerView)
         loadingProgress.gone()
     }
 
@@ -121,6 +143,7 @@ class SignUpFragment : Fragment(), SignUpContract.View, ActivatedSuccessListener
                     phoneNumberEditText.text.toString(),
                     nameEditText.text.toString()
                 )
+                emailRequest = EmailRequest(emailEditText.text.toString())
                 emailIsExist = false
                 phoneNumberIsExist = false
                 loadingProgress.show()
@@ -131,11 +154,6 @@ class SignUpFragment : Fragment(), SignUpContract.View, ActivatedSuccessListener
         }
         handleEventsAfterTextChanged()
         handleEventsKeyBoard()
-        activateTextView.setOnClickListener {
-            addFragmentBackStack(ActivatedFragment.newInstance().apply {
-                registerListener(this@SignUpFragment)
-            }, R.id.containerView)
-        }
     }
 
     private fun handleEventsAfterTextChanged() {

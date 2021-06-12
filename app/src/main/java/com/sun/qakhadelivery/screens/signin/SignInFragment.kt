@@ -10,9 +10,11 @@ import android.widget.Toast
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
+import com.sun.qakhadelivery.data.source.remote.schema.request.EmailRequest
 import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.forgotpassword.ForgotPasswordFragment
 import com.sun.qakhadelivery.screens.signup.SignUpFragment
+import com.sun.qakhadelivery.screens.signup.activated.ActivatedFragment
 import com.sun.qakhadelivery.utils.Constants
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 
@@ -26,6 +28,7 @@ class SignInFragment : Fragment(), SignInContract.View {
         )
     }
     private var onSignInSuccessListener: OnSignInSuccessListener? = null
+    private var emailRequest: EmailRequest? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,8 +65,10 @@ class SignInFragment : Fragment(), SignInContract.View {
             passwordTextInputLayout.error = getString(R.string.content_password_sign_in)
         }
         if (message == "Your account has not been activated. Please check your email for the activation code.") {
-            emailTextInputLayout.error = Constants.SPACE_STRING
-            passwordTextInputLayout.error = getString(R.string.content_activated)
+            addFragmentSlideAnim(
+                ActivatedFragment.newInstance(emailRequest),
+                R.id.containerView
+            )
         }
     }
 
@@ -96,6 +101,9 @@ class SignInFragment : Fragment(), SignInContract.View {
         signInButton.setOnClickListener {
             hideKeyboard()
             loadingProgress.show()
+            if (emailEditText.text.toString().isNotBlank()) {
+                emailRequest = EmailRequest(emailEditText.text.toString())
+            }
             presenter.signIn(emailEditText.text.toString(), passwordEditText.text.toString())
         }
 

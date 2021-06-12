@@ -34,6 +34,8 @@ interface SignRepository {
     fun resetPasswordByVerificationCode(resetPasswordRequest: ResetPasswordRequest): Observable<MessageResponse>
 
     fun activateAccount(activateRequest: ActivateRequest): Observable<MessageResponse>
+
+    fun resendCodeActivate(emailRequest: EmailRequest): Observable<MessageResponse>
 }
 
 class SignRepositoryImpl private constructor(
@@ -52,7 +54,7 @@ class SignRepositoryImpl private constructor(
                 password
             )
         ).doOnNext {
-                sharedPrefs.put(SharedPrefsKey.TOKEN_KEY, it)
+            sharedPrefs.put(SharedPrefsKey.TOKEN_KEY, it)
         }
 
     override fun signUp(
@@ -87,6 +89,9 @@ class SignRepositoryImpl private constructor(
 
     override fun activateAccount(activateRequest: ActivateRequest): Observable<MessageResponse> =
         client.activateAccount(activateRequest)
+
+    override fun resendCodeActivate(emailRequest: EmailRequest): Observable<MessageResponse> =
+        client.resendCodeActivate(emailRequest)
 
     companion object {
 

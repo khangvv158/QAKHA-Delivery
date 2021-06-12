@@ -10,9 +10,8 @@ import androidx.core.os.bundleOf
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
-import com.sun.qakhadelivery.extensions.makeText
+import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.utils.Regex
-import com.sun.qakhadelivery.extensions.validWithRegex
 import kotlinx.android.synthetic.main.fragment_reset_password.*
 
 class ResetPasswordFragment : Fragment(), ResetPasswordContract.View {
@@ -22,6 +21,7 @@ class ResetPasswordFragment : Fragment(), ResetPasswordContract.View {
                 SharedPrefsImpl.getInstance(requireContext())
         ))
     }
+    private var resetPasswordSuccess: ResetPasswordSuccess? = null
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -37,11 +37,14 @@ class ResetPasswordFragment : Fragment(), ResetPasswordContract.View {
     }
 
     override fun onResetPasswordSuccess() {
+        progressBar.gone()
         Toast.makeText(context, getString(R.string.create_a_new_password_successfully), Toast.LENGTH_LONG).show()
+        resetPasswordSuccess?.onResetPasswordSuccess()
         parentFragmentManager.popBackStack()
     }
 
     override fun onResetPasswordFailure() {
+        progressBar.gone()
         Toast.makeText(
                 context,
                 getString(R.string.code_not_valid_or_expired_try_generating_a_new_code),
@@ -49,11 +52,17 @@ class ResetPasswordFragment : Fragment(), ResetPasswordContract.View {
         ).show()
     }
 
+    fun registerListener(resetPasswordSuccess: ResetPasswordSuccess) {
+        this.resetPasswordSuccess = resetPasswordSuccess
+    }
+
     override fun onGeneratingCodeSuccess() {
+        progressBar.gone()
         makeText(getString(R.string.generating_code))
     }
 
     override fun onGeneratingCodeFailure() {
+        progressBar.gone()
     }
 
     private fun handleEvents() {
@@ -66,13 +75,15 @@ class ResetPasswordFragment : Fragment(), ResetPasswordContract.View {
                     editTextVerificationCode.text.toString()
             )
             if (validatePassword && validateVerificationCode) {
+                progressBar.show()
                 presenter.resetPassword(
                         editTextNewPassword.text.toString(),
                         editTextVerificationCode.text.toString().trim()
                 )
             }
         }
-        textViewGeneratingCode.setOnClickListener {
+        textViewGeneratingCode.setOnSafeClickListener {
+            progressBar.show()
             arguments?.getString(BUNDLE_EMAIL)?.let {
                 presenter.generatingCode(it)
             }
