@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.os.Handler
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -93,7 +94,6 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     }
 
     override fun onItemClickListener(typePartner: TypePartner, positionSelect: Int) {
-
         typePartnerAdapter.selectTypePartner(positionSelect)
         EventBus.getDefault().post(typePartner)
     }
@@ -129,20 +129,23 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
         }
         if (LocationHelper.isLocationProviderEnabled(requireContext()))
             showDialogEnableGPS()
-        locationProviderClient.lastLocation.addOnSuccessListener {
-            try {
-                currentLatLng = LatLng(it.latitude, it.longitude)
-                EventBus.getDefault().post(currentLatLng)
-                val addresses: List<Address> = geo.getFromLocation(it.latitude, it.longitude, 1)
-                if (addresses.isNotEmpty()) {
-                    addressTextView.text = addresses[0].getAddressLine(0)
-                } else {
-                    makeText(getString(R.string.waiting_for_location))
+        Handler().postDelayed({
+            locationProviderClient.lastLocation.addOnSuccessListener {
+                try {
+                    currentLatLng = LatLng(it.latitude, it.longitude)
+                    EventBus.getDefault().post(currentLatLng)
+                    val addresses: List<Address> = geo.getFromLocation(it.latitude, it.longitude, 1)
+                    if (addresses.isNotEmpty()) {
+                        addressTextView.text = addresses[0].getAddressLine(0)
+                    } else {
+                        makeText(getString(R.string.waiting_for_location))
+                    }
+                    Log.e("location ", currentLatLng.toString())
+                } catch (e: Exception) {
+                    Log.e("Exception ", e.toString())
                 }
-                Log.e("location ", currentLatLng.toString())
-            } catch (e: Exception) {
             }
-        }
+        }, 2200)
     }
 
     private fun showDialogEnableGPS() {
