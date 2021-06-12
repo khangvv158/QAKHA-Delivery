@@ -1,5 +1,6 @@
 package com.sun.qakhadelivery.widget.recyclerview.viewholder
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,21 +12,25 @@ import com.sun.qakhadelivery.utils.Constants
 import com.sun.qakhadelivery.widget.recyclerview.CustomRecyclerView
 import com.sun.qakhadelivery.widget.recyclerview.item.PartnerItem
 import kotlinx.android.synthetic.main.item_layout_partner.view.*
+import java.math.BigDecimal
+import java.math.RoundingMode
 
 class PartnerViewHolder(viewGroup: ViewGroup) :
     CustomRecyclerView.ViewHolder<PartnerItem>(newInstance(viewGroup)) {
 
+    @SuppressLint("SetTextI18n")
     override fun bind(item: PartnerItem) {
         with(itemView) {
             item.partner.image?.let { imageViewPartner.loadUrl(it.imageUrl) }
             textViewNamePartner?.text = item.partner.name
             textViewAddressPartner?.text = item.partner.address
             if (item.partner.distance != Constants.DEFAULT_FLOAT) {
-                textViewKilometer.text = String.format("%s Km",item.partner.distance)
+                textViewKilometer.text = String.format("%s Km", item.partner.distance)
                 textViewKilometer.show()
             }
             if (item.partner.avgPoint != Constants.DEFAULT_FLOAT) {
-                textViewRatePartner.text = item.partner.avgPoint.toString()
+                textViewRatePartner.text = BigDecimal(item.partner.avgPoint.toString()).setScale(1, RoundingMode.HALF_EVEN)
+                    .toString()
                 appCompatImageViewRate.show()
                 textViewRatePartner.show()
             }

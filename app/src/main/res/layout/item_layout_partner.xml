@@ -50,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:gravity="center"
         android:textSize="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewPartner"
