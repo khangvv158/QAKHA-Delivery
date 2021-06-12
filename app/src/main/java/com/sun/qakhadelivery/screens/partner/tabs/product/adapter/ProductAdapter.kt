@@ -29,8 +29,8 @@ class ProductAdapter : CustomRecyclerView.Adapter<ProductViewHolder>(mutableList
     }
 
     fun updateProduct(products: List<Product>) {
-        addItems(products.map {
-            ProductItem(it)
+        addItems(products.mapNotNull {
+            if (it.productNotAvailable()) null else ProductItem(it)
         })
     }
 

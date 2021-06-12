@@ -2,6 +2,8 @@ package com.sun.qakhadelivery.data.model
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.sun.qakhadelivery.data.model.ProductStatus.DISABLE
+import com.sun.qakhadelivery.data.model.ProductStatus.IN_STOCK
 import com.sun.qakhadelivery.utils.Constants.DEFAULT_FLOAT
 import com.sun.qakhadelivery.utils.Constants.DEFAULT_STRING
 import kotlinx.android.parcel.Parcelize
@@ -17,5 +19,13 @@ data class Product(
     @SerializedName("image") val image: Image
 ) : Parcelable {
 
-    fun inStock() = status == "in_stock"
+    fun inStock() = status == IN_STOCK
+
+    fun productNotAvailable() = status == DISABLE
+}
+
+object ProductStatus {
+    const val IN_STOCK = "in_stock"
+    const val OUT_OF_STOCK = "out_of_stock"
+    const val DISABLE = "disabled"
 }
