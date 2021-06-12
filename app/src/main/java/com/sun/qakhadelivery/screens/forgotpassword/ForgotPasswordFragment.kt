@@ -6,28 +6,28 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.sun.qakhadelivery.extensions.hideKeyboard
-import com.sun.qakhadelivery.extensions.replaceFragment
-import com.sun.qakhadelivery.extensions.validWithRegex
 import com.sun.qakhadelivery.R
 import com.sun.qakhadelivery.data.repository.SignRepositoryImpl
 import com.sun.qakhadelivery.data.source.local.sharedprefs.SharedPrefsImpl
-import com.sun.qakhadelivery.extensions.addFragmentFadeAnim
+import com.sun.qakhadelivery.extensions.*
 import com.sun.qakhadelivery.screens.forgotpassword.resetpassword.ResetPasswordFragment
+import com.sun.qakhadelivery.screens.forgotpassword.resetpassword.ResetPasswordSuccess
 import com.sun.qakhadelivery.utils.*
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
 
-class ForgotPasswordFragment : Fragment(), ForgotPasswordContract.View {
+class ForgotPasswordFragment : Fragment(), ForgotPasswordContract.View, ResetPasswordSuccess {
 
     private val presenter by lazy {
-        ForgotPasswordPresenter(SignRepositoryImpl.getInstance(
+        ForgotPasswordPresenter(
+            SignRepositoryImpl.getInstance(
                 SharedPrefsImpl.getInstance(requireContext())
-        ))
+            )
+        )
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_forgot_password, container, false)
     }
@@ -38,15 +38,25 @@ class ForgotPasswordFragment : Fragment(), ForgotPasswordContract.View {
         handleEvents()
     }
 
+    override fun onResetPasswordSuccess() {
+        parentFragmentManager.popBackStack()
+    }
+
     override fun onForgotPasswordSuccess(email: String) {
-        addFragmentFadeAnim(ResetPasswordFragment.newInstance(email), R.id.containerView)
+        progressBar.gone()
+        addFragmentFadeAnim(ResetPasswordFragment.newInstance(email).apply {
+            registerListener(this@ForgotPasswordFragment)
+        }, R.id.containerView)
     }
 
     override fun onForgotPasswordFailure() {
-        emailEditTextLayout.error = getString(R.string.email_address_not_found_please_check_and_try_again)
+        progressBar.gone()
+        emailEditTextLayout.error =
+            getString(R.string.email_address_not_found_please_check_and_try_again)
     }
 
     override fun onError(message: String) {
+        progressBar.gone()
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 
@@ -68,9 +78,10 @@ class ForgotPasswordFragment : Fragment(), ForgotPasswordContract.View {
             hideKeyboard()
             parentFragmentManager.popBackStack()
         }
-        forgotPasswordButton.setOnClickListener {
+        forgotPasswordButton.setOnSafeClickListener {
             val validateEmail = validateEmail(emailEditText.text.toString())
             if (validateEmail) {
+                progressBar.show()
                 presenter.forgotPassword(emailEditText.text.toString())
             }
         }

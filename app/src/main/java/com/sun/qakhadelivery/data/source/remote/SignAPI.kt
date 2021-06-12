@@ -33,4 +33,7 @@ interface SignAPI {
     fun activateAccount(
         @Body activateRequest: ActivateRequest
     ): Observable<MessageResponse>
+
+    @POST("user/confirmation")
+    fun resendCodeActivate(@Body emailRequest: EmailRequest): Observable<MessageResponse>
 }
