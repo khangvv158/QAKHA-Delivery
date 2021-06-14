@@ -36,6 +36,7 @@ class SignedInPresenter(
 
     override fun onStop() {
         compositeDisposable.clear()
+        view = null
     }
 
     override fun setView(view: SignedInContract.View?) {

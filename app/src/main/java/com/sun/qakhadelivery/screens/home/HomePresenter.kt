@@ -12,13 +12,13 @@ class HomePresenter(private val partnerRepository: PartnerRepository) : HomeCont
 
     override fun getTypes() {
         val disposable = partnerRepository.getTypes()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({
-                    view?.onGetTypesSuccess(it)
-                }, {
-                    view?.onError(it.localizedMessage)
-                })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                view?.onGetTypesSuccess(it)
+            }, {
+                view?.onError(it.localizedMessage)
+            })
         compositeDisposable.add(disposable)
     }
 
@@ -26,6 +26,7 @@ class HomePresenter(private val partnerRepository: PartnerRepository) : HomeCont
 
     override fun onStop() {
         compositeDisposable.clear()
+        view = null
     }
 
     override fun setView(view: HomeContract.View?) {

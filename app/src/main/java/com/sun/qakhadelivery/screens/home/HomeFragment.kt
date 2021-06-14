@@ -85,6 +85,16 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
         handleEvent()
     }
 
+    override fun onStart() {
+        super.onStart()
+        presenter.setView(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
+
     private fun handleEvent() {
         childFragmentManager.setFragmentResultListener(REQUEST_KEY, this) { _, result ->
             result.getParcelable<Partner>(BUNDLE_PARTNER)?.let {
@@ -164,7 +174,6 @@ class HomeFragment : Fragment(), HomeContract.View, TypePartnerRecyclerViewOnCli
     }
 
     private fun initSliderView() {
-        presenter.setView(this@HomeFragment)
         initSliderData()
         sliderAdapter = SliderAdapter(requireContext(), dataSlider, true)
         with(viewPagerSlider) {
