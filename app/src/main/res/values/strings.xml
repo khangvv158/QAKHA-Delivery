@@ -243,4 +243,5 @@
     <string name="name">Name</string>
     <string name="delivery_time">Delivery time</string>
     <string name="shop_close">The shop is closed, please come back later</string>
+    <string name="content_locked_account">Your account has been locked !!</string>
 </resources>
