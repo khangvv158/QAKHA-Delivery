@@ -64,6 +64,13 @@ class SignInFragment : Fragment(), SignInContract.View {
             emailTextInputLayout.error = Constants.SPACE_STRING
             passwordTextInputLayout.error = getString(R.string.content_password_sign_in)
         }
+        if (message == "Your account has been locked !!") {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.content_locked_account),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
         if (message == "Your account has not been activated. Please check your email for the activation code.") {
             addFragmentSlideAnim(
                 ActivatedFragment.newInstance(emailRequest),
