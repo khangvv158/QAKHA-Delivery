@@ -46,18 +46,19 @@ class SignedInFragment : Fragment(), SignedInContract.View {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter.setView(this)
         initViews()
         handleEvents()
     }
 
     override fun onStart() {
         super.onStart()
+        presenter.setView(this)
         EventBus.getDefault().register(this)
     }
 
     override fun onStop() {
         super.onStop()
+        presenter.onStop()
         EventBus.getDefault().unregister(this)
     }
 
