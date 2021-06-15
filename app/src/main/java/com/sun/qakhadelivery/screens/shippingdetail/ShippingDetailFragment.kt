@@ -215,7 +215,7 @@ class ShippingDetailFragment : Fragment(), ShippingDetailContract.View {
             startActivity(
                 Intent(
                     Intent.ACTION_DIAL,
-                    Uri.parse("tel:0378365756")
+                    Uri.parse("tel:0396355253")
                 )
             )
         }
