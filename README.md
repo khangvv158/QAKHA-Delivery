@@ -1,7 +1,5 @@
 # QAKHA-Delivery
 The application allows users to easily find and view information about nearby food stores and support door-to-door delivery for customers
-
-Review
 ![home](https://user-images.githubusercontent.com/68292470/122323664-a7d53300-cf51-11eb-8a50-f1ccdbe4a7e1.jpg)
 ![shop](https://user-images.githubusercontent.com/68292470/122323763-ce936980-cf51-11eb-8eb3-be012dd605be.jpg)
 ![cart](https://user-images.githubusercontent.com/68292470/122323945-229e4e00-cf52-11eb-9390-16b8b0838088.jpg)
